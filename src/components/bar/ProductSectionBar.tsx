@@ -1,5 +1,5 @@
 import React from 'react'
-import TypoGraphy from '../TypoGraphy'
+import TypoGraphy from '../common/HeadingTypo'
 import Timmer from '../Timmer'
 import { MoveLeft, MoveRight } from 'lucide-react'
 
