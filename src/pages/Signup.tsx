@@ -8,7 +8,7 @@ const Signup = () => {
   return (
     <div className='flex justify-around mt-10'>
         <img className='w-[45%]' src="https://www.pngitem.com/pimgs/m/161-1619213_e-commerce-graphic-mobile-e-commerce-transparent-png.png" alt="" />
-        <div className='flex flex-col w-[35%]'>
+        <div className='flex flex-col max-w-[35%] w-full'>
             <TypoGraphy className='text-2xl' >Create an Account</TypoGraphy>
             <ParaTypo className='mt-2'>Enter your details below</ParaTypo>
             <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Name'/>

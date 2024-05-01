@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 interface paraProps extends React.AllHTMLAttributes<HTMLParagraphElement>{
     children:string
-    className:string
+    className?:string
 }
 
 const ParaTypo = React.forwardRef<HTMLParagraphElement,paraProps>(({children,className,...props},ref) => {

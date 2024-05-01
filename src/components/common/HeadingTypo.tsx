@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 interface typoProps extends React.AllHTMLAttributes<HTMLHeadingElement>{
     children:string
-    className:string
+    className?:string
 }
 
 const HeadingTypo = React.forwardRef<HTMLHeadingElement,typoProps>(({children,className},ref) => {

@@ -5,7 +5,7 @@ import ProductCard from "../components/ProductCard";
 import Button from "../components/common/Button";
 import ProductSectionBar from "../components/bar/ProductSectionBar";
 import CategoryCard from "../components/CategoryCard";
-import { TabletSmartphone } from "lucide-react";
+import { Heart, TabletSmartphone } from "lucide-react";
 
 const Home = () => {
   return (
@@ -17,6 +17,7 @@ const Home = () => {
       <ProductSectionBar heading="Flash Sales" />
       <section className="flex flex-col  items-center mt-5">
         <div className="flex gap-x-3">
+          <ProductCard icon={<Heart strokeWidth={1.5} size={30} className="bg-white rounded-full p-1"/>} />
           <ProductCard />
           <ProductCard />
           <ProductCard />

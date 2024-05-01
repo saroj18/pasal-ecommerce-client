@@ -6,3 +6,8 @@
   margin-inline: auto;
   max-width: 1300px;
 }
+
+.cart:hover .position{
+  top: 0px;
+  transition: all 0.3s;
+}

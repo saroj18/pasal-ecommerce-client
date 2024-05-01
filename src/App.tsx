@@ -1,11 +1,13 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './layout/Layout'
-import ErrorPage from './pages/ErrorPage'
 import Home from './pages/Home'
 import './index.css'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Wishlist from './pages/Wishlist'
+import Error from './pages/Error'
+import Cart from './pages/Cart'
 
 const App = () => {
 
@@ -13,7 +15,7 @@ const App = () => {
   {
     path:'/',
     element:<Layout/>,
-    errorElement:<ErrorPage/>,
+    errorElement:<Error/>,
     children:[
       {
         path:'/',
@@ -26,6 +28,14 @@ const App = () => {
       {
         path:'/signup',
         element:<Signup/>
+      },
+      {
+        path:'/wishlist',
+        element:<Wishlist/>
+      },
+      {
+        path:'/cart',
+        element:<Cart/>
       },
     ]
   }
