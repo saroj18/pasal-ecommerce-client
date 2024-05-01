@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type buttonProps={
+interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     children:string | React.ReactNode
     className?:string
 }
 
-const Button = ({children,className}:buttonProps) => {
+const Button = ({children,className,...props}:buttonProps) => {
   return (
-    <button className={twMerge('cursor-pointer rounded-sm outline-none',className)}>{children}</button>
+    <button {...props} className={twMerge('cursor-pointer rounded-sm outline-none',className)}>{children}</button>
   )
 }
 

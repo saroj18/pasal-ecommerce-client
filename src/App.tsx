@@ -8,6 +8,7 @@ import Signup from './pages/Signup'
 import Wishlist from './pages/Wishlist'
 import Error from './pages/Error'
 import Cart from './pages/Cart'
+import ProductDetails from './pages/ProductDetails'
 
 const App = () => {
 
@@ -36,6 +37,10 @@ const App = () => {
       {
         path:'/cart',
         element:<Cart/>
+      },
+      {
+        path:'/details',
+        element:<ProductDetails/>
       },
     ]
   }
