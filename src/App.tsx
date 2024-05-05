@@ -9,6 +9,11 @@ import Wishlist from './pages/Wishlist'
 import Error from './pages/Error'
 import Cart from './pages/Cart'
 import ProductDetails from './pages/ProductDetails'
+import Account from './pages/account/Account'
+import AccountLayout from './pages/account/AccountLayout'
+import MyProfile from './pages/account/page/MyProfile'
+import AddressBook from './pages/account/component/AddressBook'
+import MyReview from './pages/account/page/MyReview'
 
 const App = () => {
 
@@ -41,6 +46,28 @@ const App = () => {
       {
         path:'/details',
         element:<ProductDetails/>
+      },
+      {
+        path:'/account',
+        element:<AccountLayout/>,
+        children:[
+          {
+            path:'/account',
+            element:<Account/>
+          },
+          {
+            path:'/account/myprofile',
+            element:<MyProfile/>
+          },
+          {
+            path:'/account/addressbook',
+            element:<AddressBook/>
+          },
+          {
+            path:'/account/myreview',
+            element:<MyReview/>
+          },
+        ]
       },
     ]
   }

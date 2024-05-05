@@ -3,8 +3,11 @@ import ParaTypo from '../components/common/ParaTypo'
 import Input from '../components/common/Input'
 import Button from '../components/common/Button'
 import HeadingTypo from '../components/common/HeadingTypo'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+  const navigate=useNavigate()
   return (
     <div className='flex justify-around mt-10'>
         <img className='w-[45%]' src="https://www.pngitem.com/pimgs/m/161-1619213_e-commerce-graphic-mobile-e-commerce-transparent-png.png" alt="" />
@@ -16,7 +19,7 @@ const Login = () => {
             <Button className='w-full bg-red-500 text-white py-3 rounded-md mt-5'>Create Account</Button>
             <Button className='w-full border-neutral-500 border-2 py-3 rounded-md mt-3'>Sign up with Google</Button>
             <div className='flex items-center gap-x-3 mt-4 justify-center'>
-            <ParaTypo className='text-center'>Not account </ParaTypo> <span className='cursor-pointer underline'>Sign up</span>
+            <ParaTypo className='text-center'>Not account </ParaTypo> <span onClick={()=>navigate('/signup')} className='cursor-pointer underline'>Sign up</span>
             <ParaTypo className='underline text-blue-500 cursor-pointer'>forgot password</ParaTypo>
             </div>
         </div>

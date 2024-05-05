@@ -6,11 +6,12 @@ import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 import ProductSectionBar from "../components/bar/ProductSectionBar";
 import ProductCard from "../components/ProductCard";
+import { HeaderBar } from "./Wishlist";
 
 const ProductDetails = () => {
   return (
     <>
-      <div className="flex gap-x-10 mt-8">
+      <div className="flex gap-x-10 mt-8 mb-10 border-b-2 pb-3">
         <div className="border-2 border-red-500">
           <img
             className="w-[80%]"
@@ -90,8 +91,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-
-      <ProductSectionBar option={false} heading="For You" />
+<HeaderBar heading="For You" btnText="See More"/>
       <div className="flex gap-x-3">
         <ProductCard />
         <ProductCard />

@@ -9,7 +9,7 @@ type barProps = {
   btnText: string;
 };
 
-const HeaderBar = ({ heading, btnText }: barProps) => {
+export const HeaderBar = ({ heading, btnText }: barProps) => {
   return (
     <div className="flex justify-between items-center my-4">
       <HeadingTypo className="text-xl">{heading}</HeadingTypo>

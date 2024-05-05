@@ -53,7 +53,7 @@ const Navbar = () => {
           />
         </div>
         <div className="flex gap-x-6">
-          <Heart className="cursor-pointer" opacity={0.7} />
+          <Heart onClick={()=>navigate('/wishlist')} className="cursor-pointer" opacity={0.7} />
           <ShoppingCart onClick={()=>navigate('/cart')} className="cursor-pointer" opacity={0.7} />
           <div className="relative">
             <User
