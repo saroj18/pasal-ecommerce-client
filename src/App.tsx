@@ -18,6 +18,8 @@ import SellerSignUp from './seller/pages/SellerSignUp'
 import SellerLogin from './seller/pages/SellerLogin'
 import VerifyYourself from './seller/pages/VerifyYourself'
 import './CSS/style.css'
+import SellerLayout from './seller/dashboard/SellerLayout'
+import Dashboard from './seller/dashboard/pages/Dashboard'
 
 const App = () => {
 
@@ -88,6 +90,16 @@ const App = () => {
     path:'/otp',
     element:<VerifyYourself/>
   },
+  {
+    path:'/dashboard',
+    element:<SellerLayout/>,
+    children:[
+      {
+        path:'/dashboard',
+        element:<Dashboard/>
+      }
+    ]
+  }
   ])
   return (
     <>
