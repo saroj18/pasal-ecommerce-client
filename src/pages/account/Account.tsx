@@ -7,7 +7,7 @@ import RecentOrders from './component/RecentOrders'
 
 const Account = () => {
   return (
-    <div className='bg-gray-50 p-2'>
+    <div className=' p-2'>
       <HeadingTypo className='my-4 text-2xl'>Manage My Account</HeadingTypo>
       <div className='grid grid-cols-3 items-center gap-x-3 shadow-md mb-6'>
         <PersonalProfile/>

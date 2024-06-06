@@ -1,0 +1,6 @@
+.verify{
+    background-image: url('../assets/background.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}

@@ -11,7 +11,7 @@ const SideBar = () => {
             <Link to={'/account/addressbook'}><li className='cursor-pointer'>Address Book</li></Link>
         </ul>
         <Link to={'/account/myreview'}><HeadingTypo className='text-lg cursor-pointer my-1'>My Reviews</HeadingTypo></Link>
-        <HeadingTypo className='text-lg cursor-pointer my-1'>Sell On Pasal</HeadingTypo>
+        <Link to={'/sellersignup'}><HeadingTypo className='text-lg cursor-pointer my-1'>Sell On Pasal</HeadingTypo></Link>
     </aside>
   )
 }

@@ -14,6 +14,10 @@ import AccountLayout from './pages/account/AccountLayout'
 import MyProfile from './pages/account/page/MyProfile'
 import AddressBook from './pages/account/component/AddressBook'
 import MyReview from './pages/account/page/MyReview'
+import SellerSignUp from './seller/pages/SellerSignUp'
+import SellerLogin from './seller/pages/SellerLogin'
+import VerifyYourself from './seller/pages/VerifyYourself'
+import './CSS/style.css'
 
 const App = () => {
 
@@ -69,8 +73,21 @@ const App = () => {
           },
         ]
       },
+      
     ]
-  }
+  },
+  {
+    path:'/sellersignup',
+    element:<SellerSignUp/>
+  },
+  {
+    path:'/sellerlogin',
+    element:<SellerLogin/>
+  },
+  {
+    path:'/otp',
+    element:<VerifyYourself/>
+  },
   ])
   return (
     <>

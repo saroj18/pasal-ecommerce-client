@@ -1,6 +1,6 @@
 import React from "react";
 import HeadingTypo from "../components/common/HeadingTypo";
-import { Heart, Star } from "lucide-react";
+import { BaggageClaim, Heart, Star } from "lucide-react";
 import ParaTypo from "../components/common/ParaTypo";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -12,7 +12,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className="flex gap-x-10 mt-8 mb-10 border-b-2 pb-3">
-        <div className="border-2 border-red-500">
+        <div className="border-2 border-gray-500 rounded-md shadow-md">
           <img
             className="w-[80%]"
             src="https://purepng.com/public/uploads/large/purepng.com-refrigeratorrefrigeratorfridgeiceboxrefrigeratoryfreezer-1701528368818jyb9k.png"
@@ -82,8 +82,12 @@ const ProductDetails = () => {
                 +
               </ParaTypo>
             </div>
-            <Button className="bg-red-500 text-white py-2 px-4 mx-4">
+            <Button className="bg-red-500 rounded-md text-white py-2 px-4 mx-4">
               Buy Now
+            </Button>
+            <Button className="bg-red-500 rounded-md text-white py-2 px-4 mr-4 flex gap-x-2">
+             Add to Cart
+             <BaggageClaim strokeWidth={1} />
             </Button>
             <div className="border-2 border-gray-500 p-1 rounded-md cursor-pointer">
               <Heart strokeWidth={1.2} />

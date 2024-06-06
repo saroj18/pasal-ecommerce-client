@@ -1,18 +1,19 @@
 import React from 'react'
-import TypoGraphy from '../components/common/HeadingTypo'
 import ParaTypo from '../components/common/ParaTypo'
 import Input from '../components/common/Input'
 import Button from '../components/common/Button'
 import { useNavigate } from 'react-router-dom'
+import HeadingTypo from '../components/common/HeadingTypo'
+import ecommerseImage from '../assets/ecommerseImage.webp'
 
 const Signup = () => {
 
   const navigate=useNavigate()
   return (
     <div className='flex justify-around mt-10'>
-        <img className='w-[45%]' src="https://www.pngitem.com/pimgs/m/161-1619213_e-commerce-graphic-mobile-e-commerce-transparent-png.png" alt="" />
+        <img className='w-[45%]' src={ecommerseImage} alt="" />
         <div className='flex flex-col max-w-[35%] w-full'>
-            <TypoGraphy className='text-2xl' >Create an Account</TypoGraphy>
+            <HeadingTypo className='text-2xl' >Create an Account</HeadingTypo>
             <ParaTypo className='mt-2'>Enter your details below</ParaTypo>
             <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Name'/>
             <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Email'/>

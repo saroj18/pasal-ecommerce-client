@@ -11,6 +11,7 @@ import {
   StarIcon,
   User,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type dropdownProps = {
   className: string;
@@ -19,7 +20,6 @@ type dropdownProps = {
 const AccountDropdown = ({ className }: dropdownProps) => {
   return (
     <div
-    onClick={(e)=>e.stopPropagation()}
       className={twMerge(
         "border-2 border-gray-500 rounded-md w-[250px] bg-white",
         className
@@ -27,7 +27,7 @@ const AccountDropdown = ({ className }: dropdownProps) => {
     >
       <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
         <User opacity={0.6}/>
-        <ParaTypo className="">Manage My Account</ParaTypo>
+        <Link to={'/account'}><ParaTypo className="">Manage My Account</ParaTypo></Link>
       </div>
       <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
         <ShoppingBag opacity={0.6}/>

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../common/Input";
 import { Heart, Search, ShoppingCart, User } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
+import logo from '../../assets/logo.jpg'
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
@@ -26,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center container">
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZRM_lRbBpez6mI1ZDq5eMBGJXCYej4SEeEpQAKwdAOA&s"
+        src={logo}
         className="w-[80px]"
         alt=""
       />

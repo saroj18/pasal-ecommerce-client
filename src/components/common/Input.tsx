@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  type: "text" | "number" | "password";
+  type: "text" | "number" | "password" | "file";
   placeholder?:string
 };
 

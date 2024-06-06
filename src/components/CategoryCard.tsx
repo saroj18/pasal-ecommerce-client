@@ -1,4 +1,3 @@
-import { TabletSmartphone } from 'lucide-react'
 import React from 'react'
 
 type categoryProps={

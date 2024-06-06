@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HeadingTypo from '../../../components/common/HeadingTypo'
 import ParaTypo from '../../../components/common/ParaTypo'
 import Button from '../../../components/common/Button'
+import ReviewHistory from './ReviewHistory'
 
 
 const ReviewComponent=()=>{
@@ -19,15 +20,32 @@ const ReviewComponent=()=>{
 }
 
 const MyReview = () => {
+
+    const[reviewSwitch,setReviewSwitch]=useState<string>('review')
+
+    const reviewHandler=()=>{
+        setReviewSwitch('review')
+    }
+
+    const reviewHistoryHandler=()=>{
+        setReviewSwitch('reviewhistory')
+    }
   return (
     <div className='w-full p-2'>
         <HeadingTypo className='my-5 text-2xl'>My Reviews</HeadingTypo>
-
-        <div>
-            <ReviewComponent/>
-            <ReviewComponent/>
-            <ReviewComponent/>
+        <div className='flex gap-x-5 border-2 border-gray-100 rounded-md p-2 shadow-md'>
+            <ParaTypo onClick={reviewHandler} className={`cursor-pointer ${reviewSwitch=='review' ? 'text-red-500':''}`}>To Review</ParaTypo>
+            <ParaTypo onClick={reviewHistoryHandler} className={`cursor-pointer ${reviewSwitch=='reviewhistory' ? 'text-red-500':''}`}>History</ParaTypo>
         </div>
+
+        {reviewSwitch=='review' && <div>
+            <ReviewComponent/>
+            <ReviewComponent/>
+            <ReviewComponent/>
+        </div>}
+        {
+            reviewSwitch=='reviewhistory' && <ReviewHistory/>
+        }
     </div>
   )
 }
