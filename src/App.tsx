@@ -20,6 +20,7 @@ import VerifyYourself from './seller/pages/VerifyYourself'
 import './CSS/style.css'
 import SellerLayout from './seller/dashboard/SellerLayout'
 import Dashboard from './seller/dashboard/pages/Dashboard'
+import Product from './seller/dashboard/pages/Product'
 
 const App = () => {
 
@@ -97,7 +98,11 @@ const App = () => {
       {
         path:'/dashboard',
         element:<Dashboard/>
-      }
+      },
+      {
+        path:'product',
+        element:<Product/>
+      },
     ]
   }
   ])

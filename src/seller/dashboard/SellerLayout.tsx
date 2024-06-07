@@ -6,7 +6,9 @@ const SellerLayout = () => {
   return (
     <div className='flex h-[100vh]'>
     <SideBar/>
+    <div className='px-7 py-5 w-full bg-gray-50'>
     <Outlet/>
+    </div>
     </div>
   )
 }

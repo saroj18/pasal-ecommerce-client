@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { Heart, Search, ShoppingCart, User } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
 import logo from '../../assets/logo.jpg'
+import SearchBox from "../common/Search";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
@@ -41,18 +42,7 @@ const Navbar = () => {
         })}
       </ul>
       <div className="flex items-center  w-[35%] ">
-        <div className="relative w-full">
-          <Input
-            className="w-[90%]"
-            type="text"
-            placeholder="what are you looking for?"
-          />
-          <Search
-            opacity={0.3}
-            size={22}
-            className="absolute left-[80%] top-2"
-          />
-        </div>
+        <SearchBox className="w-full"/>
         <div className="flex gap-x-6">
           <Heart onClick={()=>navigate('/wishlist')} className="cursor-pointer" opacity={0.7} />
           <ShoppingCart onClick={()=>navigate('/cart')} className="cursor-pointer" opacity={0.7} />

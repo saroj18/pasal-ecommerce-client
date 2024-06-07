@@ -9,12 +9,12 @@ type listProps={
 export const dashboardList:listProps[]=[
     {
         name:'Dashboard',
-        url:'/',
-        icon:<LayoutDashboard/>
+        url:'/dashboard',
+        icon:<LayoutDashboard/>,
     },
     {
         name:'Product',
-        url:'/product',
+        url:'/dashboard/product',
         icon:<ShoppingBasket />
     },
     {

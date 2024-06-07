@@ -8,7 +8,7 @@ interface typoProps extends React.AllHTMLAttributes<HTMLHeadingElement>{
 
 const HeadingTypo = React.forwardRef<HTMLHeadingElement,typoProps>(({children,className},ref) => {
   return (
-    <h1 ref={ref} className={twMerge("font-semibold",className)}>{children}</h1>
+    <h1 ref={ref} className={twMerge("font-poppins",className)}>{children}</h1>
   )
 })
 
