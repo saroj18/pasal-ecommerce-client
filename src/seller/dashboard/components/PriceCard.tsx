@@ -17,16 +17,15 @@ const PriceCard = () => {
       <div className="grow">
         <HeadingTypo className="text-2xl font-semibold mb-2">Discount</HeadingTypo>
         <div className="flex flex-col">
-          <Input className="h-[50px]" placeholder="enter price" type="text" />
+          <Input className="h-[50px]" placeholder="enter discount(%)" type="text" />
         </div>
       </div>
       <div className="grow">
         <HeadingTypo className="text-2xl font-semibold mb-2">Stock</HeadingTypo>
-        <Select className="w-full h-[50px] text-xl">
-            <Option value="">Select Stock</Option>
-            <Option value="outofstock">OutOf Stock</Option>
-            <Option value="instock">In Stock</Option>
-        </Select>
+        <div className="flex flex-col">
+          <Input className="h-[50px]" placeholder="enter stock" type="text" />
+        </div>
+        
       </div>
     </div>
   );

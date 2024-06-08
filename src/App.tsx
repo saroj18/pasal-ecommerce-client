@@ -19,8 +19,10 @@ import SellerLogin from './seller/pages/SellerLogin'
 import VerifyYourself from './seller/pages/VerifyYourself'
 import './CSS/style.css'
 import SellerLayout from './seller/dashboard/SellerLayout'
-import Dashboard from './seller/dashboard/pages/Dashboard'
-import Product from './seller/dashboard/pages/Product'
+import Dashboard from './seller/dashboard/pages/dashboard/Dashboard'
+import Product from './seller/dashboard/pages/product/Product'
+import Inventory from './seller/dashboard/pages/inventory/Inventory'
+import Order from './seller/dashboard/pages/order/Order'
 
 const App = () => {
 
@@ -102,6 +104,14 @@ const App = () => {
       {
         path:'product',
         element:<Product/>
+      },
+      {
+        path:'inventory',
+        element:<Inventory/>
+      },
+      {
+        path:'order',
+        element:<Order/>
       },
     ]
   }

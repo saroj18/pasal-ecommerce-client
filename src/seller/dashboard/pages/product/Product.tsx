@@ -1,14 +1,14 @@
 import React from "react";
-import HeadingTypo from "../../../components/common/HeadingTypo";
-import ParaTypo from "../../../components/common/ParaTypo";
-import ProductInfo from "../components/ProductInfo";
-import ProductImage from "../components/ProductImage";
-import CategoryCard from "../components/CategoryCard";
-import PriceCard from "../components/PriceCard";
-import SearchBox from "../../../components/common/Search";
-import jacket from "../../../assets/jacket.png";
+import HeadingTypo from "../../../../components/common/HeadingTypo";
+import ParaTypo from "../../../../components/common/ParaTypo";
+import ProductInfo from "../../components/ProductInfo";
+import ProductImage from "../../components/ProductImage";
+import CategoryCard from "../../components/CategoryCard";
+import PriceCard from "../../components/PriceCard";
+import SearchBox from "../../../../components/common/Search";
+import jacket from "../../../../assets/jacket.png";
 import { Edit, Layers, Trash } from "lucide-react";
-
+import Button from "../../../../components/common/Button";
 const Product = () => {
   return (
     <div className="w-full ">
@@ -27,6 +27,7 @@ const Product = () => {
           <PriceCard />
         </div>
       </div>
+      <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">Save</Button>
 
       <div className="relative flex items-center justify-between my-4">
         <div>
@@ -39,7 +40,7 @@ const Product = () => {
       </div>
       <hr />
 
-      <div className="bg-white">
+      <div className="bg-white ">
         <table className="w-full text-center rounded-md shadow-md">
             <thead>
           <tr className="border-2 border-gray-300">
@@ -66,9 +67,10 @@ const Product = () => {
               <td>22</td>
               <td>20</td>
               <td>2024-03-11</td>
-              <td className="flex justify-between items-center px-5">
+              <td className="flex justify-around items-center px-5">
                 <Trash strokeWidth={0.9} className="cursor-pointer"/>
                 <Edit strokeWidth={0.9} className="cursor-pointer"/>
+                <Layers color="red" strokeWidth={0.9} className="cursor-pointer"/>
               </td>
             </tr>
             <tr className="border-2 border-gray-300 text-xl">
@@ -82,9 +84,10 @@ const Product = () => {
               <td>22</td>
               <td>20</td>
               <td>2024-03-11</td>
-              <td className="flex justify-between items-center px-5">
+              <td className="flex justify-around items-center px-5">
                 <Trash strokeWidth={0.9} className="cursor-pointer"/>
                 <Edit strokeWidth={0.9} className="cursor-pointer"/>
+                <Layers color="green" strokeWidth={0.9} className="cursor-pointer"/>
               </td>
             </tr>
           </tbody>

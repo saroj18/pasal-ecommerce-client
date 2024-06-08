@@ -13,6 +13,8 @@ const ProductInfo = () => {
             <Input className='h-[50px]' placeholder='enter your product name' type='text'/>
             <Label className='opacity-75'>Input Your Product's Description</Label>
             <TextArea className='rounded-md'/>
+            <Label className='opacity-75'>Input Your Product's Brand</Label>
+            <Input className='h-[50px]' placeholder='enter your product brand' type='text'/>
         </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import FilterBar from "../components/FilterBar";
-import AmountCard from "../components/AmountCard";
+import FilterBar from "../../components/FilterBar";
+import AmountCard from "../../components/AmountCard";
 import { Line } from "react-chartjs-2";
 import dayjs from "dayjs";
 import {
@@ -12,9 +12,9 @@ import {
   PointElement,
   scales,
 } from "chart.js";
-import HeadingTypo from "../../../components/common/HeadingTypo";
-import MostSellingProductCard from "../components/MostSellingProductCard";
-import jacket from '../../../assets/jacket.png'
+import HeadingTypo from "../../../../components/common/HeadingTypo";
+import MostSellingProductCard from "../../components/MostSellingProductCard";
+import jacket from '../../../../assets/jacket.png'
 
 const labels = [];
 let date = dayjs();
