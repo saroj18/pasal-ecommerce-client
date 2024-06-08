@@ -25,6 +25,9 @@ import Inventory from './seller/dashboard/pages/inventory/Inventory'
 import Order from './seller/dashboard/pages/order/Order'
 import Review from './seller/dashboard/pages/review/Review'
 import 'reactjs-popup/dist/index.css';
+import Analytics from './seller/dashboard/pages/analytics/Analytics'
+import Costumer from './seller/dashboard/pages/delevery/Delevery'
+import Delevery from './seller/dashboard/pages/delevery/Delevery'
 
 
 const App = () => {
@@ -119,6 +122,14 @@ const App = () => {
       {
         path:'review',
         element:<Review/>
+      },
+      {
+        path:'analytics',
+        element:<Analytics/>
+      },
+      {
+        path:'delevery',
+        element:<Delevery/>
       },
     ]
   }
