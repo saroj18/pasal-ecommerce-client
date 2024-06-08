@@ -28,6 +28,7 @@ import 'reactjs-popup/dist/index.css';
 import Analytics from './seller/dashboard/pages/analytics/Analytics'
 import Costumer from './seller/dashboard/pages/delevery/Delevery'
 import Delevery from './seller/dashboard/pages/delevery/Delevery'
+import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
 
 
 const App = () => {
@@ -130,6 +131,10 @@ const App = () => {
       {
         path:'delevery',
         element:<Delevery/>
+      },
+      {
+        path:'delevery-person',
+        element:<DeleveryPerson/>
       },
     ]
   }
