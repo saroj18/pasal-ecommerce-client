@@ -23,6 +23,9 @@ import Dashboard from './seller/dashboard/pages/dashboard/Dashboard'
 import Product from './seller/dashboard/pages/product/Product'
 import Inventory from './seller/dashboard/pages/inventory/Inventory'
 import Order from './seller/dashboard/pages/order/Order'
+import Review from './seller/dashboard/pages/review/Review'
+import 'reactjs-popup/dist/index.css';
+
 
 const App = () => {
 
@@ -112,6 +115,10 @@ const App = () => {
       {
         path:'order',
         element:<Order/>
+      },
+      {
+        path:'review',
+        element:<Review/>
       },
     ]
   }

@@ -29,7 +29,7 @@ export const dashboardList:listProps[]=[
     },
     {
         name:'Review',
-        url:'/review',
+        url:'/dashboard/review',
         icon:<Star />
     },
     {
