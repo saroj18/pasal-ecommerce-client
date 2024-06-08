@@ -121,7 +121,7 @@ const Dashboard = () => {
       </div>
       <HeadingTypo className="text-2xl my-8">Recent Orders</HeadingTypo>
       <table className="w-full text-center">
-        <thead className="text-xl">
+        <thead>
           <tr>
             <th className="p-4">Product</th>
             <th className="p-4">Customer</th>
@@ -132,21 +132,21 @@ const Dashboard = () => {
         </thead>
         <tbody>
           <tr className="border-b-2 border-t-2 ">
-            <td className="p-2 flex items-center justify-center gap-x-2"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
+            <td className="p-2 flex items-center justify-center gap-x-2 flex-col"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
             <td className="p-2">John Doe</td>
             <td className="p-2">4892308534997</td>
             <td className="p-2">27 June 2035</td>
             <td className="p-2">Pending</td>
           </tr>
           <tr className="border-b-2 border-t-2 ">
-            <td className="p-2 flex items-center justify-center gap-x-2"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
+            <td className="p-2 flex items-center justify-center gap-x-2 flex-col"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
             <td className="p-2">John Doe</td>
             <td className="p-2">4892308534997</td>
             <td className="p-2">27 June 2035</td>
             <td className="p-2">Pending</td>
           </tr>
           <tr className="border-b-2 border-t-2 ">
-            <td className="p-2 flex items-center justify-center gap-x-2"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
+            <td className="p-2 flex items-center justify-center gap-x-2 flex-col"> <img className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1" src={jacket}/> Leather Jacket</td>
             <td className="p-2">John Doe</td>
             <td className="p-2">4892308534997</td>
             <td className="p-2">27 June 2035</td>

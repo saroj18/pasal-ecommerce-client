@@ -44,14 +44,14 @@ const Product = () => {
         <table className="w-full text-center rounded-md shadow-md">
             <thead>
           <tr className="border-2 border-gray-300">
-              <th className="p-3 text-xl">Product</th>
-              <th className="p-3 text-xl">Price</th>
-              <th className="p-3 text-xl">Brand</th>
-              <th className="p-3 text-xl">Category</th>
-              <th className="p-3 text-xl">Review</th>
-              <th className="p-3 text-xl">Total Sale</th>
-              <th className="p-3 text-xl">Added Date</th>
-              <th className="p-3 text-xl">Action</th>
+              <th className="p-3">Product</th>
+              <th className="p-3">Price</th>
+              <th className="p-3">Brand</th>
+              <th className="p-3">Category</th>
+              <th className="p-3">Review</th>
+              <th className="p-3">Total Sale</th>
+              <th className="p-3">Added Date</th>
+              <th className="p-3">Action</th>
           </tr>
             </thead>
 
