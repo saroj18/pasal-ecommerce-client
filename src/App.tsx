@@ -1,19 +1,19 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Layout from './layout/Layout'
-import Home from './pages/Home'
+import Layout from './customer/CustomerLayout'
+import Home from './customer/pages/Home'
 import './index.css'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Wishlist from './pages/Wishlist'
-import Error from './pages/Error'
-import Cart from './pages/Cart'
-import ProductDetails from './pages/ProductDetails'
-import Account from './pages/account/Account'
-import AccountLayout from './pages/account/AccountLayout'
-import MyProfile from './pages/account/page/MyProfile'
-import AddressBook from './pages/account/component/AddressBook'
-import MyReview from './pages/account/page/MyReview'
+import Login from './customer/pages/Login'
+import Signup from './customer/pages/Signup'
+import Wishlist from './customer/pages/Wishlist'
+import Error from './customer/pages/Error'
+import Cart from './customer/pages/Cart'
+import ProductDetails from './customer/pages/ProductDetails'
+import Account from './customer/pages/account/Account'
+import AccountLayout from './customer/pages/account/AccountLayout'
+import MyProfile from './customer/pages/account/page/MyProfile'
+import AddressBook from './customer/pages/account/component/AddressBook'
+import MyReview from './customer/pages/account/page/MyReview'
 import SellerSignUp from './seller/pages/SellerSignUp'
 import SellerLogin from './seller/pages/SellerLogin'
 import VerifyYourself from './seller/pages/VerifyYourself'
@@ -30,6 +30,7 @@ import Costumer from './seller/dashboard/pages/delevery/Delevery'
 import Delevery from './seller/dashboard/pages/delevery/Delevery'
 import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
 import Customer from './seller/dashboard/pages/customer/Customer'
+import EditProfile from './customer/pages/account/page/EditProfile'
 
 
 const App = () => {
@@ -73,15 +74,19 @@ const App = () => {
             element:<Account/>
           },
           {
-            path:'/account/myprofile',
+            path:'myprofile',
             element:<MyProfile/>
           },
           {
-            path:'/account/addressbook',
+            path:'editprofile',
+            element:<EditProfile/>
+          },
+          {
+            path:'addressbook',
             element:<AddressBook/>
           },
           {
-            path:'/account/myreview',
+            path:'myreview',
             element:<MyReview/>
           },
         ]

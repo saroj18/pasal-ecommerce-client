@@ -90,7 +90,7 @@ const AddDeleveryPerson = () => {
             let input =
               ele.type == "select" ? (
                 <div key={index} className="flex flex-col">
-                  <Label className="text-xl my-1">{ele.lable}</Label>
+                  <Label className=" my-1">{ele.lable}</Label>
                   <Select className="h-[50px]">
                     {ele.options?.map((ele, index) => {
                       return <Option value={ele.value}>{ele.children}</Option>;
