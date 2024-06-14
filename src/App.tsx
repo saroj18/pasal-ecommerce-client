@@ -31,6 +31,8 @@ import Delevery from './seller/dashboard/pages/delevery/Delevery'
 import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
 import Customer from './seller/dashboard/pages/customer/Customer'
 import EditProfile from './customer/pages/account/page/EditProfile'
+import AllProducts from './customer/pages/AllProducts'
+import MyOrder from './customer/pages/MyOrder'
 
 
 const App = () => {
@@ -56,6 +58,14 @@ const App = () => {
       {
         path:'/wishlist',
         element:<Wishlist/>
+      },
+      {
+        path:'/myorder',
+        element:<MyOrder/>
+      },
+      {
+        path:'/allproducts',
+        element:<AllProducts/>
       },
       {
         path:'/cart',

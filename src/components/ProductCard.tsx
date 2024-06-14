@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import React from "react";
 import Button from "./common/Button";
+import computer from '../../public/computer.png'
 
 type cardProps = {
   hideBtn?: string;
@@ -9,9 +10,9 @@ type cardProps = {
 
 const ProductCard = ({ hideBtn = "Add to cart", icon }: cardProps) => {
   return (
-    <div>
+    <div className="shadow-md">
       <div className="bg-gray-100 overflow-hidden cursor-pointer cart relative">
-        <img src="https://pngimg.com/d/monitor_PNG101653.png" alt="" />
+        <img src={computer} alt="" />
         <Button className="w-full bg-black text-white py-3 relative top-14 position">
           {hideBtn}
         </Button>
