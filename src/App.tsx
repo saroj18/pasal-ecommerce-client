@@ -33,6 +33,7 @@ import Customer from './seller/dashboard/pages/customer/Customer'
 import EditProfile from './customer/pages/account/page/EditProfile'
 import AllProducts from './customer/pages/AllProducts'
 import MyOrder from './customer/pages/MyOrder'
+import Notification from './seller/dashboard/pages/notification/Notification'
 
 
 const App = () => {
@@ -155,6 +156,10 @@ const App = () => {
       {
         path:'delevery-person',
         element:<DeleveryPerson/>
+      },
+      {
+        path:'notification',
+        element:<Notification/>
       },
     ]
   }

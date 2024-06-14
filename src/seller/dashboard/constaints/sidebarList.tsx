@@ -1,4 +1,4 @@
-import {BookHeart, DollarSign, HelpCircle, Layers, LayoutDashboard, LineChart, ListOrdered, MoveDiagonal, PersonStanding, Settings, ShoppingBasket, Star, Truck, User} from 'lucide-react'
+import {Bell, BookHeart, DollarSign, HelpCircle, Layers, LayoutDashboard, LineChart, ListOrdered, MoveDiagonal, PersonStanding, Settings, ShoppingBasket, Star, Truck, User} from 'lucide-react'
 
 type listProps={
     name:string
@@ -48,9 +48,9 @@ export const dashboardList:listProps[]=[
         icon:<User />
     },
     {
-        name:'Analytics',
-        url:'/dashboard/analytics',
-        icon:<LineChart />
+        name:'Notification',
+        url:'/dashboard/notification',
+        icon:<Bell />
     }
 ]
 
