@@ -34,6 +34,7 @@ import Notification from './seller/dashboard/pages/notification/Notification'
 import EditProfile from './customer/pages/account/page/EditProfile'
 import AllProducts from './customer/pages/AllProducts'
 import MyOrder from './customer/pages/MyOrder'
+import Notification from './seller/dashboard/pages/notification/Notification'
 
 
 const App = () => {
