@@ -1,16 +1,16 @@
-import React from 'react'
-import SideBar from './components/SideBar'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import SideBar from "./components/SideBar";
+import { Outlet } from "react-router-dom";
 
 const SellerLayout = () => {
   return (
-    <div className='flex h-[100vh]'>
-    <SideBar/>
-    <div className='px-7 py-5 w-full bg-gray-50'>
-    <Outlet/>
+    <div className="flex max-h-fit">
+      <SideBar />
+      <div className="px-7 py-3 w-full bg-gray-50">
+        <Outlet />
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default SellerLayout
+export default SellerLayout;

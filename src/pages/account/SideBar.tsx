@@ -12,6 +12,7 @@ const SideBar = () => {
         </ul>
         <Link to={'/account/myreview'}><HeadingTypo className='text-lg cursor-pointer my-1'>My Reviews</HeadingTypo></Link>
         <Link to={'/sellersignup'}><HeadingTypo className='text-lg cursor-pointer my-1'>Sell On Pasal</HeadingTypo></Link>
+        <Link to={'/delevery-staff'}><HeadingTypo className='text-lg cursor-pointer my-1'>Delevery Staff</HeadingTypo></Link>
     </aside>
   )
 }

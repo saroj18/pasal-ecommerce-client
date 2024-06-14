@@ -17,9 +17,10 @@ type dropdownProps = {
   className: string;
 };
 
-const AccountDropdown = ({ className }: dropdownProps) => {
+const AccountDropdown = React.forwardRef<HTMLDivElement,dropdownProps>(({ className },ref) => {
   return (
     <div
+    ref={ref}
       className={twMerge(
         "border-2 border-gray-500 rounded-md w-[250px] bg-white",
         className
@@ -47,6 +48,6 @@ const AccountDropdown = ({ className }: dropdownProps) => {
       </div>
     </div>
   );
-};
+})
 
 export default AccountDropdown;

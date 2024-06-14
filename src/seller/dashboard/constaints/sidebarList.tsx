@@ -43,15 +43,15 @@ export const dashboardList:listProps[]=[
         icon:<PersonStanding />
     },
     {
+        name:'Customer',
+        url:'/dashboard/customer',
+        icon:<User />
+    },
+    {
         name:'Analytics',
         url:'/dashboard/analytics',
         icon:<LineChart />
-    },
-    {
-        name:'Others',
-        url:'/other',
-        icon:<BookHeart />
-    },
+    }
 ]
 
 export const accountList:listProps[]=[

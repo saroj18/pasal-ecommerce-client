@@ -29,6 +29,7 @@ import Analytics from './seller/dashboard/pages/analytics/Analytics'
 import Costumer from './seller/dashboard/pages/delevery/Delevery'
 import Delevery from './seller/dashboard/pages/delevery/Delevery'
 import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
+import Customer from './seller/dashboard/pages/customer/Customer'
 
 
 const App = () => {
@@ -131,6 +132,10 @@ const App = () => {
       {
         path:'delevery',
         element:<Delevery/>
+      },
+      {
+        path:'customer',
+        element:<Customer/>
       },
       {
         path:'delevery-person',

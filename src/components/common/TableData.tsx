@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
-export const TableData = ({children,className}:{children:React.ReactNode,className:string}) => {
-  return (
-    <td className={className}>{children}</td>
-  )
-}
+export const TableData = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+  tableDataStyle?: string;
+}) => {
+  return <td className={className}>{children}</td>;
+};
 
-export default TableData
+export default TableData;

@@ -34,6 +34,7 @@ const DeleveryPerson = () => {
             <th className="p-2">Gender</th>
             <th className="p-2">Joined On</th>
             <th className="p-2">Phone</th>
+            <th className="p-2">Status</th>
           </tr>
         </thead>
 
@@ -56,6 +57,7 @@ const DeleveryPerson = () => {
                   <td className="p-3">Male</td>
                   <td className="p-3">2024-01-22</td>
                   <td className="p-3">9876545676</td>
+                  <td className="p-3">On Leave</td>
                 </tr>
               );
             })}

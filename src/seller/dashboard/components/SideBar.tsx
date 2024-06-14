@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <aside
       style={sideBar ? { maxWidth: "250px" } : { maxWidth: "80px" }}
-      className="w-full transition-all sticky  max-h-full overflow-y-scroll overflow-x-hidden border-2 border-gray-500  shadow-md font-poppins p-3"
+      className="w-full h-[100vh] max-h-[100%] border-b-0 transition-all sticky top-0 left-0  overflow-y-scroll overflow-x-hidden border-2 border-gray-500  shadow-md font-poppins p-3"
     >
       <div className="flex justify-between  items-center">
         {sideBar && <img className="h-[40px]" src={logo} alt="" />}

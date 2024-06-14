@@ -1,11 +1,22 @@
-import React from 'react'
+import { twMerge } from "tailwind-merge";
 
-export const TableHead = ({children,className}:{children:React.ReactNode,className?:string}) => {
+const TableHead = ({
+  tableHeadData,
+  className,
+}: {
+  tableHeadData: string[];
+  className?: string;
+  tableHeadStyle?:string
+}) => {
   return (
-    <thead className={className}>{children}</thead>
-  )
-}
-export const TableHeadData=({children,className}:{children:string,className:string})=>{
-    return <th className={className}>{children}</th>
-}
+    <thead>
+      <tr className={'sticky top-0 left-0 bg-white border-t-2'+className}>
+        {tableHeadData.map((ele, index) => {
+          return <th className={'p-2'} key={index}>{ele}</th>;
+        })}
+      </tr>
+    </thead>
+  );
+};
 
+export default TableHead;
