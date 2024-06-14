@@ -9,23 +9,36 @@ const PriceCard = () => {
   return (
     <div className="grow flex gap-x-2 border-2 border-gray-300 rounded-md p-3">
       <div className="grow">
-        <HeadingTypo className="text-2xl font-semibold mb-2">Price</HeadingTypo>
+        <Label className="text-2xl font-semibold mb-2">Price</Label>
         <div className="flex flex-col">
           <Input className="h-[50px]" placeholder="enter price" type="text" />
         </div>
       </div>
       <div className="grow">
-        <HeadingTypo className="text-2xl font-semibold mb-2">Discount</HeadingTypo>
+        <Label className="text-2xl font-semibold mb-2">
+          Discount
+        </Label>
         <div className="flex flex-col">
-          <Input className="h-[50px]" placeholder="enter discount(%)" type="text" />
+          <Input
+            className="h-[50px]"
+            placeholder="enter discount(%)"
+            type="text"
+          />
         </div>
       </div>
       <div className="grow">
-        <HeadingTypo className="text-2xl font-semibold mb-2">Stock</HeadingTypo>
+        <Label className="text-2xl font-semibold mb-2">Stock</Label>
         <div className="flex flex-col">
           <Input className="h-[50px]" placeholder="enter stock" type="text" />
         </div>
-        
+      </div>
+      <div>
+      <Label className="text-2xl font-semibold mb-2">Barganing</Label>
+      <Select className="h-[50px]">
+        <Option defaultChecked value="">Select Option</Option>
+        <Option value="enable">Enable</Option>
+        <Option value="disable">Disable</Option>
+      </Select>
       </div>
     </div>
   );

@@ -30,6 +30,7 @@ import Costumer from './seller/dashboard/pages/delevery/Delevery'
 import Delevery from './seller/dashboard/pages/delevery/Delevery'
 import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
 import Customer from './seller/dashboard/pages/customer/Customer'
+import Notification from './seller/dashboard/pages/notification/Notification'
 
 
 const App = () => {
@@ -140,6 +141,10 @@ const App = () => {
       {
         path:'delevery-person',
         element:<DeleveryPerson/>
+      },
+      {
+        path:'notification',
+        element:<Notification/>
       },
     ]
   }
