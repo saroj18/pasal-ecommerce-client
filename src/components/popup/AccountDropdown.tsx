@@ -32,7 +32,7 @@ const AccountDropdown = React.forwardRef<HTMLDivElement,dropdownProps>(({ classN
       </div>
       <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
         <ShoppingBag opacity={0.6}/>
-        <ParaTypo className="">My Order</ParaTypo>
+        <Link to={'/myorder'}><ParaTypo className="">My Order</ParaTypo></Link>
       </div>
       <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
         <Delete opacity={0.6}/>

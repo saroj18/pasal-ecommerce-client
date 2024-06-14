@@ -5,7 +5,7 @@ import Button from './common/Button'
 
 const CheckoutBox = () => {
   return (
-    <div className='border-2 border-gray-500 rounded-md w-[40%] p-4'>
+    <div className='rounded-md w-[40%] p-4'>
         <HeadingTypo className='text-2xl'>Cart Total</HeadingTypo>
         <div className='flex items-center justify-between my-2 pb-3 border-b-2'>
             <ParaTypo>SubTotal</ParaTypo>

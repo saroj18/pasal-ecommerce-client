@@ -12,7 +12,7 @@ const Navbar = () => {
   const dropDownRef = useRef<HTMLDivElement>(null);
 
   const popupCloser = (e: MouseEvent) => {
-    if (!dropDownRef.current?.contains(e.target as Node)) {
+    if (!dropDownRef.current?.contains(e.target as Node) || dropDownRef.current?.contains(e.target as Node)) {
       setDropdown(false);
     }
   };
@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center container">
-      <img src={logo} className="w-[80px]" alt="" />
+      <Link to={'/'}><img src={logo} className="w-[80px]" alt="" /></Link>
       <ul className="flex items-center gap-x-7">
         {navList.map((ele, index) => {
           return (
