@@ -8,7 +8,7 @@ interface labelProps extends React.LabelHTMLAttributes<HTMLLabelElement>{
 
 const Label = React.forwardRef<HTMLInputElement,labelProps>(({className,children}) => {
     return (
-      <label className={twMerge(className)} >{children}</label>
+      <label className={twMerge('text-xl',className)} >{children}</label>
     )
   })
 
