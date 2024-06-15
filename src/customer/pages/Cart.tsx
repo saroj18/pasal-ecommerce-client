@@ -3,10 +3,11 @@ import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import CheckoutBox from "../../components/CheckoutBox";
 import Button from "../../components/common/Button";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <>
+    <div className="grid">
     <table className="w-full text-center">
       <thead>
         <tr>
@@ -65,19 +66,12 @@ const Cart = () => {
         
       </tbody>
     </table>
+    <Link className="place-self-end" to={'/checkout'}><Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">Go to Checkout</Button></Link>
 
     <div className="w-fit mx-auto">
     <Button className="bg-red-500 text-white py-2 px-4 rounded-md mt-6 ">Back to Shopping</Button>
     </div>
-
-    <div className="flex items-center justify-between max-w-[1000px] mx-auto mt-10">
-      <div className="flex gap-x-6 items-center w-1/2 ">
-        <Input type="text" className="w-[60%] rounded-none" placeholder="Coupon Code"/>
-        <Button className="bg-red-500  text-white px-5 py-2">Apply Coupon</Button>
-      </div>
-      <CheckoutBox/>
     </div>
-    </>
   );
 };
 

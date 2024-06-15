@@ -34,6 +34,7 @@ import EditProfile from './customer/pages/account/page/EditProfile'
 import AllProducts from './customer/pages/AllProducts'
 import MyOrder from './customer/pages/MyOrder'
 import Notification from './seller/dashboard/pages/notification/Notification'
+import OrderCheckout from './customer/pages/OrderCheckout'
 
 
 const App = () => {
@@ -71,6 +72,10 @@ const App = () => {
       {
         path:'/cart',
         element:<Cart/>
+      },
+      {
+        path:'/checkout',
+        element:<OrderCheckout/>
       },
       {
         path:'/details',
