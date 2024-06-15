@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 const Layout = () => {
   return (
     <>
-      <header className="shadow-sm">
+      <header className="shadow-sm sticky top-0 left-0 z-10 bg-white">
         <OfferBar/>
         <Navbar />
       </header>
