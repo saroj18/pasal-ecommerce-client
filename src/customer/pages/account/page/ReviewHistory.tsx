@@ -4,7 +4,7 @@ import ParaTypo from '../../../../components/common/ParaTypo'
 import Button from '../../../../components/common/Button'
 import { Star, StarIcon, StarOff, ThumbsDown, ThumbsUp } from 'lucide-react'
 
-const ReviewComponent=()=>{
+export const ReviewComponent=()=>{
     return(
         <div className=' rounded-md shadow-md border-2 border-neutral-200 p-2 my-4'>
             <HeadingTypo>Saroj's Store</HeadingTypo>

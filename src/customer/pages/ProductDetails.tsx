@@ -7,6 +7,7 @@ import Button from "../../components/common/Button";
 import ProductSectionBar from "../../components/bar/ProductSectionBar";
 import ProductCard from "../../components/ProductCard";
 import { HeaderBar } from "./Wishlist";
+import ProductDescription from "./account/component/ProductDescription";
 
 const ProductDetails = () => {
   return (
@@ -43,9 +44,9 @@ const ProductDetails = () => {
           <div className="flex gap-x-3">
             <ParaTypo>Colors:</ParaTypo>
             <div className="flex gap-x-2">
-              <ParaTypo className="rounded-full border-2 h-8 w-8 bg-red-500"></ParaTypo>
-              <ParaTypo className="rounded-full border-2 h-8 w-8 bg-blue-500"></ParaTypo>
-              <ParaTypo className="rounded-full border-2 h-8 w-8 bg-green-500"></ParaTypo>
+              <span className="rounded-full border-2 h-8 w-8 bg-red-500"></span>
+              <span className="rounded-full border-2 h-8 w-8 bg-blue-500"></span>
+              <span className="rounded-full border-2 h-8 w-8 bg-green-500"></span>
             </div>
           </div>
           <div className="flex items-center gap-x-4 my-4">
@@ -101,6 +102,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <ProductDescription/>
       <HeaderBar heading="For You" btnText="See More" />
       <div className="flex gap-x-3">
         <ProductCard />
