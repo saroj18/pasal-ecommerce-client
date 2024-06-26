@@ -1,6 +1,6 @@
 import React from 'react'
 
-type textAreaProps={
+interface textAreaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
 className:string
 }
 
