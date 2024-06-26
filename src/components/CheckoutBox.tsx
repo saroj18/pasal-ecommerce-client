@@ -6,6 +6,8 @@ import Input from "./common/Input";
 import Select from "./common/Select";
 import Option from "./common/Option";
 
+
+
 const CheckoutBox = () => {
   const [payment, setPayment] = useState<boolean>(false);
 
@@ -17,7 +19,7 @@ const CheckoutBox = () => {
     }
   };
   return (
-    <div className="rounded-md w-full max-w-[550px] border-2 border-gray-200 shadow-md h-fit p-4 sticky top-[15%] left-0">
+    <div className="rounded-md  border-2 border-gray-200 shadow-md  p-4 ">
       <HeadingTypo className="text-2xl font-semibold">
         Order Summery
       </HeadingTypo>
@@ -59,7 +61,7 @@ const CheckoutBox = () => {
       )}
       <div className="flex items-center gap-x-2">
         <Input
-        onChange={changeHandler}
+          onChange={changeHandler}
           name="payment"
           value={"cash"}
           className="scale-150"
@@ -67,10 +69,18 @@ const CheckoutBox = () => {
         />
         <ParaTypo>Cash On Delevery</ParaTypo>
       </div>
-      <HeadingTypo className="my-3 text-xl font-semibold">Apply Coupen Code</HeadingTypo>
+      <HeadingTypo className="my-3 text-xl font-semibold">
+        Apply Coupen Code
+      </HeadingTypo>
       <div className="flex items-center w-full">
-        <Input className="w-full max-w-[75%] rounded-none h-[50px]" placeholder="enter your COUPEN CODE" type="text"/>
-        <Button className="bg-green-500 grow  text-white px-3 h-[50px] py-2 ">Apply</Button>
+        <Input
+          className="w-full max-w-[75%] rounded-none h-[50px]"
+          placeholder="enter your COUPEN CODE"
+          type="text"
+        />
+        <Button className="bg-green-500 grow  text-white px-3 h-[50px] py-2 ">
+          Apply
+        </Button>
       </div>
       <Button className="w-full bg-red-500 text-white rounded-md py-3 px-5 mt-4">
         Proceed to Checkout
