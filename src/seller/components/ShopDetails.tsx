@@ -14,34 +14,30 @@ const ShopDetails = () => {
         fileInputRef?.current?.click()
     }
   return (
-    <form>
+    <div>
       <HeadingTypo className="text-2xl text-center mb-4">Shop Details</HeadingTypo>
-      <div className="flex gap-4 justify-center">
+      <form className="grid grid-cols-2 gap-x-4 gap-y-2">
         <div className="flex flex-col grow">
           <Label>Shop Name</Label>
-          <Input type="text" className="" placeholder="Enter your email" />
+          <Input type="text" className="h-[50px]" placeholder="Enter your email" />
         </div>
         <div className="flex flex-col grow">
           <Label>Shop Owner Name</Label>
-          <Input type="text" className="" placeholder="Enter your phone" />
+          <Input type="text" className="h-[50px]" placeholder="Enter your phone" />
         </div>
-      </div>
-      <div className="flex gap-4 justify-center">
         <div className="flex flex-col grow">
           <Label>Shop Address</Label>
-          <Input type="text" className="" placeholder="Enter your email" />
+          <Input type="text" className="h-[50px]" placeholder="Enter your email" />
         </div>
         <div className="flex flex-col grow">
           <Label>Pick Exact Address</Label>
-          <Button className="bg-blue-500 text-white py-2 rounded-md">
+          <Button className="bg-blue-500 text-white py-2 rounded-md h-[50px]">
             Click Here for exact Location
           </Button>
         </div>
-      </div>
-      <div className="flex gap-4 justify-center">
         <div className="flex flex-col grow">
           <Label>Shop Category</Label>
-          <Select>
+          <Select className="h-[50px]">
             <Option value="" defaultChecked>
               Select Category
             </Option>
@@ -52,19 +48,19 @@ const ShopDetails = () => {
             <Option value="other">Other</Option>
           </Select>
         </div>
-        <div className="flex flex-col grow">
+        <div className="flex flex-col grow ">
           <Label>Shop Image</Label>
-          <div onClick={clickHandler} className="cursor-pointer border-2 border-gray-500 h-[40px] rounded-md flex justify-center items-center">
+          <div onClick={clickHandler} className="cursor-pointer border-2 border-gray-500 h-[50px] rounded-md flex justify-center items-center">
             <Input ref={fileInputRef} hidden type="file" multiple={false} />
             <p className="opacity-50">Click Here to upload image</p>
           </div>
         </div>
-      </div>
+    </form>
         <div className="border-gray-500 rounded-md border-2 my-2 flex justify-center items-center flex-col">
             <p className="text-center text-xl font-bold my-4">Preview of Shop Image</p>
-            <img className="rounded-md max-w-[50%]" src={shopImage} alt="" />
+            <img className="rounded-md max-w-[40%]" src={shopImage} alt="" />
         </div>
-    </form>
+    </div>
   );
 };
 

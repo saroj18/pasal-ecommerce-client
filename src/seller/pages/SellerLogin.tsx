@@ -1,31 +1,59 @@
-import React from 'react'
-import HeadingTypo from '../../components/common/HeadingTypo'
-import ParaTypo from '../../components/common/ParaTypo'
-import Input from '../../components/common/Input'
-import Button from '../../components/common/Button'
-import { useNavigate } from 'react-router-dom'
-import ecommerseImage from '../../assets/ecommerseImage.webp'
+import React from "react";
+import logo from "../../assets/logo.jpg";
+import ParaTypo from "../../components/common/ParaTypo";
+import Label from "../../components/common/Label";
+import Input from "../../components/common/Input";
+import ecommerce from "../../../src/assets/ecommerseImage.webp";
+import Button from "../../components/common/Button";
+import { useNavigate } from "react-router-dom";
 
 const SellerLogin = () => {
-
-    const navigate=useNavigate()
+  const navigate=useNavigate()
   return (
-    <div className='flex justify-around mt-10'>
-        <img className='w-[45%]' src={ecommerseImage} alt="" />
-        <div className='flex flex-col w-[35%]'>
-            <HeadingTypo className='text-3xl font-bold' >Log in as a Seller</HeadingTypo>
-            <ParaTypo className='mt-2'>Enter your details below</ParaTypo>
-            <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Email'/>
-            <Input type='password' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Password'/>
-            <Button className='w-full bg-red-500 text-white py-3 rounded-md mt-5'>Login</Button>
-            <Button className='w-full border-neutral-500 border-2 py-3 rounded-md mt-3'>Login with Google</Button>
-            <div className='flex items-center gap-x-3 mt-4 justify-center'>
-            <ParaTypo className='text-center'>Not account </ParaTypo> <span onClick={()=>navigate('/sellersignup')} className='cursor-pointer underline'>Sign up</span>
-            <ParaTypo className='underline text-blue-500 cursor-pointer'>forgot password</ParaTypo>
+      <div className="bg-gray-100 h-screen">
+        <div
+        className="flex items-center w-full justify-around  max-w-[70%]  mx-auto border-2 border-gray-200 shadow-md
+    "
+      >
+          <img  src={ecommerce} alt="" />
+        <div className="border-l-2 border-gray-300 rounded-md  max-w-[45%] w-full p-2 ">
+          <div className="my-10">
+            <img className="w-[25%] mx-auto mix-blend-multiply" src={logo} alt="" />
+            <ParaTypo className="text-center">Welcome To</ParaTypo>
+            <ParaTypo className="text-center text-4xl text-blue-500 my-2">Seller Account</ParaTypo>
+          </div>
+          <form action="" className="flex flex-col gap-y-3">
+            <div className="flex flex-col ">
+              <Label className="text-xl">Username</Label>
+              <Input
+                className="h-[50px] w-full"
+                type="text"
+                placeholder="enter your username"
+              />
             </div>
+            
+            <div className="flex flex-col ">
+              <Label className="text-xl">Password</Label>
+              <Input
+                className="h-[50px] w-full"
+                type="text"
+                placeholder="enter your password"
+              />
+            </div>
+            <ParaTypo className="text-right cursor-pointer">
+              Forgot Password
+            </ParaTypo>
+            <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
+              Login as a Seller
+            </Button>
+          </form>
+          <ParaTypo onClick={()=>navigate('/sellersignup')} className="text-center text-blue-500 cursor-pointer my-5">
+            Go to SignUp
+          </ParaTypo>
         </div>
-    </div>
-  )
-}
+      </div>
+      </div>
+  );
+};
 
-export default SellerLogin
+export default SellerLogin;

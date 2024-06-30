@@ -10,7 +10,7 @@ const Login = () => {
 
   const navigate=useNavigate()
   return (
-    <div className='flex justify-around mt-10'>
+    <div className='flex justify-around mt-10 '>
         <img className='w-[45%]' src={ecommerseImage} alt="" />
         <div className='flex flex-col w-[35%]'>
             <HeadingTypo className='text-2xl' >Log in to Exclusive</HeadingTypo>
