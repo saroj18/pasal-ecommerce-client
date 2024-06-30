@@ -112,10 +112,10 @@ const Dashboard = () => {
             Most Selling Products
           </HeadingTypo>
           <div className="shadow-md">
-            <MostSellingProductCard />
-            <MostSellingProductCard />
-            <MostSellingProductCard />
-            <MostSellingProductCard />
+            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
+            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
+            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
+            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
           </div>
         </div>
       </div>

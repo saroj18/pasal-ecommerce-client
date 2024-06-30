@@ -1,6 +1,6 @@
 import {Bell, BookHeart, DollarSign, HelpCircle, Layers, LayoutDashboard, LineChart, ListOrdered, MoveDiagonal, PersonStanding, Settings, ShoppingBasket, Star, Truck, User} from 'lucide-react'
 
-type listProps={
+export type listProps={
     name:string
     url:string
     icon:React.ReactNode

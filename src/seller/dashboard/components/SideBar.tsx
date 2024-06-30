@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import logo from "../../../assets/logo.jpg";
 import { AlignJustify } from "lucide-react";
-import { accountList, dashboardList } from "../constaints/sidebarList";
+import { accountList, dashboardList, listProps } from "../constaints/sidebarList";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
+
+
+type SideBarProps={
+  accountList:listProps[]
+  dashboardList:listProps[]
+}
+
+const SideBar = ({accountList,dashboardList}:SideBarProps) => {
   const [sideBar, setSideBar] = useState<boolean>(true);
   return (
     <aside
