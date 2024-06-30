@@ -36,6 +36,8 @@ import AllProducts from './customer/pages/AllProducts'
 import MyOrder from './customer/pages/MyOrder'
 import Notification from './seller/dashboard/pages/notification/Notification'
 import OrderCheckout from './customer/pages/OrderCheckout'
+import AdminLayout from './admin/AdminLayout'
+import AdminDashboard from './admin/pages/AdminDashboard'
 
 
 const App = () => {
@@ -167,6 +169,16 @@ const App = () => {
         path:'notification',
         element:<Notification/>
       },
+    ]
+  },
+  {
+    path:'/admin',
+    element:<AdminLayout/>,
+    children:[
+      {
+        path:'dashboard',
+        element:<AdminDashboard/>
+      }
     ]
   }
   ])
