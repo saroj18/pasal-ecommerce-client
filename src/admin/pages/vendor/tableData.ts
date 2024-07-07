@@ -1,0 +1,1 @@
+export const tableHeadData=['Id','Vendor','Address','Join On','Owner','Total Sale','Total TurnOver','Action']
