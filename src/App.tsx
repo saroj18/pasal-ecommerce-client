@@ -30,14 +30,17 @@ import Costumer from './seller/dashboard/pages/delevery/Delevery'
 import Delevery from './seller/dashboard/pages/delevery/Delevery'
 import DeleveryPerson from './seller/dashboard/pages/delevery-person/DeleveryPerson'
 import Customer from './seller/dashboard/pages/customer/Customer'
-import Notification from './seller/dashboard/pages/notification/Notification'
 import EditProfile from './customer/pages/account/page/EditProfile'
 import AllProducts from './customer/pages/AllProducts'
 import MyOrder from './customer/pages/MyOrder'
 import Notification from './seller/dashboard/pages/notification/Notification'
 import OrderCheckout from './customer/pages/OrderCheckout'
 import AdminLayout from './admin/AdminLayout'
-import AdminDashboard from './admin/pages/AdminDashboard'
+import AdminDashboard from './admin/pages/dashboard/AdminDashboard'
+import Vendor from './admin/pages/vendor/Vendor'
+import VendorDetails from './admin/pages/vendor/VendorDetails'
+import VenderLayout from './admin/pages/vendor/VenderLayout'
+import VendorAnalytics from './admin/pages/vendor/VendorAnalytics'
 
 
 const App = () => {
@@ -178,7 +181,27 @@ const App = () => {
       {
         path:'dashboard',
         element:<AdminDashboard/>
-      }
+      },
+      {
+        path:'vendor',
+        element:<VenderLayout/>,
+        children:[
+
+          {
+            path:'',
+            element:<Vendor/>
+          },
+          {
+            path:'analytics',
+            element:<VendorAnalytics/>
+          },
+          {
+            path:'vendor-details',
+            element:<VendorDetails/>
+          },
+          
+        ]
+      },
     ]
   }
   ])
