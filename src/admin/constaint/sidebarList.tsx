@@ -8,22 +8,22 @@ export const generalSideBarList=[
     },
     {
         name:'Vendor',
-        url:'vendor',
+        url:'/vendor',
         icon:<Store />
     },
     {
         name:'Delivery',
-        url:'delivery',
+        url:'/delivery',
         icon:<Truck />
     },
     {
         name:'Offers',
-        url:'offer',
+        url:'/offer',
         icon:<HandCoins />
     },
     {
         name:'Revenue',
-        url:'revenue',
+        url:'/revenue',
         icon:<DollarSignIcon />
     },
     {

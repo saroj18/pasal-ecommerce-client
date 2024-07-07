@@ -8,9 +8,7 @@ const AdminLayout = () => {
   return (
     <div className='flex'>
         <SideBar accountList={accountList} dashboardList={generalSideBarList}/>
-        <div className='w-full px-5 bg-gray-50'>
         <Outlet/>
-        </div>
     </div>
   )
 }

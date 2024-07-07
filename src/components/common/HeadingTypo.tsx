@@ -2,7 +2,7 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface typoProps extends React.AllHTMLAttributes<HTMLHeadingElement>{
-    children:React.ReactNode
+    children:string
     className?:string
 }
 
