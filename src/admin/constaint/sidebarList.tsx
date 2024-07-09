@@ -28,17 +28,17 @@ export const generalSideBarList=[
     },
     {
         name:'Analytics',
-        url:'/analytics',
+        url:'analytics',
         icon:<BarChart4 />
     },
     {
         name:'Approve Vendor',
-        url:'/approve',
+        url:'approve',
         icon:<View />
     },
     {
         name:'Notification',
-        url:'/notification',
+        url:'notification',
         icon:<Bell />
     },
 ]

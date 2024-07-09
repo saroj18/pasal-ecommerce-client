@@ -41,6 +41,11 @@ import Vendor from './admin/pages/vendor/Vendor'
 import VendorDetails from './admin/pages/vendor/VendorDetails'
 import VenderLayout from './admin/pages/vendor/VenderLayout'
 import VendorAnalytics from './admin/pages/vendor/VendorAnalytics'
+import DeliveryPage from './admin/pages/delivery/DeliveryPage'
+import VendorApprove from './admin/pages/approve-vender/VendorApprove'
+import AdminAnalytics from './admin/pages/analytics/AdminAnalytics'
+import ApproveVendorLayout from './admin/pages/approve-vender/ApproveVendorLayout'
+import VendorDetail from './admin/pages/approve-vender/VendorDetail'
 
 
 const App = () => {
@@ -201,6 +206,32 @@ const App = () => {
           },
           
         ]
+      },
+      {
+        path:'delivery',
+        element:<DeliveryPage/>
+      },
+      {
+        path:'notification',
+        element:<Notification/>
+      },
+      {
+        path:'approve',
+        element:<ApproveVendorLayout/>,
+        children:[
+          {
+            path:'',
+            element:<VendorApprove/>
+          },
+          {
+            path:'details',
+            element:<VendorDetail/>
+          },
+        ]
+      },
+      {
+        path:'analytics',
+        element:<AdminAnalytics/>
       },
     ]
   }

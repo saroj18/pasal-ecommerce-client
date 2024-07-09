@@ -1,4 +1,4 @@
-export const tableHeadData=['Id','Vendor','Address','Join On','Owner','Total Sale','Total TurnOver','Action']
+export const tableHead:string[]=['Id','Shop Name','Shop Owner','Address','Category','Apply Date','Action','Status']
 
 
 export const shopDetails=[
@@ -19,16 +19,16 @@ export const shopDetails=[
         value:'2003-02-03'
     },
     {
-        label:'Total Sales',
-        value:'543'
+        label:'Citizenship Number',
+        value:'99-03-03'
     },
     {
-        label:'Total TurnOver',
-        value:'Rs 543300'
+        label:'DOB',
+        value:'2001-02-03'
     },
     {
-        label:'Total Products',
-        value:'230'
+        label:'Gender',
+        value:'Male'
     },
     {
         label:'Category',
@@ -47,7 +47,7 @@ export const shopDetails=[
         value:'33532'
     },
     {
-        label:'Status',
-        value:'Active'
+        label:'Exptd. Monthly Turnover',
+        value:'5 Lakhs'
     },
 ]

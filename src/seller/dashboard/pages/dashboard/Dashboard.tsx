@@ -1,67 +1,10 @@
-import React, { useEffect, useRef } from "react";
 import FilterBar from "../../components/FilterBar";
 import AmountCard from "../../components/AmountCard";
-import { Line } from "react-chartjs-2";
-import dayjs from "dayjs";
-import {
-  CategoryScale,
-  Chart,
-  ChartOptions,
-  LineElement,
-  LinearScale,
-  PointElement,
-  scales,
-} from "chart.js";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import MostSellingProductCard from "../../components/MostSellingProductCard";
 import jacket from '../../../../assets/jacket.png'
+import SetChart from "../../../../admin/pages/vendor/SetChart";
 
-const labels = [];
-let date = dayjs();
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement);
-
-for (let i = 0; i < 7; i++) {
-  labels.push(date.format("M-DD"));
-  date = date.add(1, "d");
-}
-
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: " adult",
-      backgroundColor: "blue",
-      borderColor: "blue",
-      data: [4, 2, 3, 4, 5, 6, 7, 8],
-      tension: 0.3,
-    },
-    {
-      label: "children",
-      backgroundColor: "green",
-      borderColor: "green",
-      data: [9, 2, 3, 6, 5, 6, 7, 8],
-      tension: 0.3,
-    },
-    {
-      label: "infants",
-      backgroundColor: "red",
-      borderColor: "red",
-      data: [5, 2, 3, 4, 5, 3, 7, 8],
-      tension: 0.3,
-    },
-  ],
-};
-
-const options = {
-  responsive: true,
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
-  },
-};
 const Dashboard = () => {
   return (
     <div className="w-full  font-poppins">
@@ -103,11 +46,12 @@ const Dashboard = () => {
           actAmount="+2453"
         />
       </div>
-      <div className="flex gap-x-3 mt-6">
-        <div className="grow flex justify-center items-center max-h-[350px] rounded-md border-2 border-gray-500 shadow-md ">
-          <Line data={data} options={options} />
+      <div className="flex gap-x-3 mt-6 ">
+        <div className=" flex justify-center gap-x-4 items-center mx-auto rounded-md shadow-md w-full">
+          <SetChart chartType="line" heading="Total Visit"/>
+          <SetChart chartType="line" heading="Total Order"/>
         </div>
-        <div className="border-2 border-gray-500 rounded-md p-3 max-w-[35%] max-h-[350px] overflow-y-scroll">
+        {/* <div className="border-2 border-gray-500 rounded-md p-3 w-full max-w-[40%] max-h-[350px] overflow-y-scroll">
           <HeadingTypo className="text-xl my-3">
             Most Selling Products
           </HeadingTypo>
@@ -117,7 +61,7 @@ const Dashboard = () => {
             <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
             <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
           </div>
-        </div>
+        </div> */}
       </div>
       <HeadingTypo className="text-2xl my-8">Recent Orders</HeadingTypo>
       <table className="w-full text-center">

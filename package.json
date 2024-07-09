@@ -12,15 +12,18 @@
   "dependencies": {
     "chart.js": "^4.4.3",
     "dayjs": "^1.11.11",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.376.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.23.0",
     "reactjs-popup": "^2.0.6",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

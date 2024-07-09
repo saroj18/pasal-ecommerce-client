@@ -4,3 +4,7 @@
     background-size: cover;
     height: 100vh;
 }
+
+.leaflet-container {
+    height: 100%;
+}

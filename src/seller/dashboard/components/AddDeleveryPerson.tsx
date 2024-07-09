@@ -111,7 +111,7 @@ const AddDeleveryPerson = () => {
           })}
         </form>
         <Button className="bg-red-500 rounded-md px-4 py-2 text-white mt-4">
-          Create
+          Add
         </Button>
       </div>
     </div>
