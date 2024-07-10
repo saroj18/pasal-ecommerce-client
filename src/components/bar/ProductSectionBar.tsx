@@ -11,13 +11,13 @@ type productSectionProps={
 const ProductSectionBar = ({heading,option=true}:productSectionProps) => {
   return (
     <div className="mt-10">
-      <p className="font-semibold text-red-500 text-xl">Today's</p>
+      <p className="font-semibold text-red-500 text-xl text-center lg:text-left">Today's</p>
       <div className="flex items-center justify-between mt-2">
-        <div className="flex items-center w-[40%]  justify-between">
-          <TypoGraphy className="text-4xl">{heading}</TypoGraphy>
+        <div className="flex items-center w-full lg:w-[50%]  justify-between">
+          <TypoGraphy className="text-2xl sm:text-3xl lg:text-4xl lg:m-0 text-center w-fit mx-auto  ">{heading}</TypoGraphy>
           {option && <Timmer />}
         </div>
-       <div className="flex items-center gap-x-3">
+       <div className=" items-center hidden lg:flex gap-x-3">
           <MoveLeft
             size={35}
             className="border-2 bg-neutral-50 cursor-pointer rounded-full p-1"

@@ -11,13 +11,13 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <section className="flex mt-5">
+      <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
         <CategorySideBar />
         <Crousel />
       </section>
       <ProductSectionBar heading="Flash Sales" />
       <section className="flex flex-col  items-center mt-5">
-        <div className="flex gap-x-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-3">
           <ProductCard
             icon={
               <Heart
@@ -39,7 +39,7 @@ const Home = () => {
         </Link>
       </section>
       <ProductSectionBar option={false} heading="Browse By Category" />
-      <div className="flex gap-6 mt-6">
+      <div className="flex flex-wrap gap-3 justify-center my-5">
         <CategoryCard
           icon={<TabletSmartphone size={60} strokeWidth={1} />}
           category="Phones"
@@ -75,7 +75,7 @@ const Home = () => {
       </div>
       <ProductSectionBar option={false} heading="Best Selling Products" />
       <section className="flex flex-col items-center mt-5">
-        <div className="flex gap-x-3 ">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-x-3 ">
           <ProductCard />
           <ProductCard />
           <ProductCard />
@@ -95,7 +95,7 @@ const Home = () => {
       <section>
         <ProductSectionBar option={false} heading="Explore Our Products" />
         <div className="flex flex-col items-center mt-5">
-          <div className="flex gap-x-3 ">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 ">
             <ProductCard />
             <ProductCard />
             <ProductCard />

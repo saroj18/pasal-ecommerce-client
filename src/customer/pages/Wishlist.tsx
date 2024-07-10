@@ -24,7 +24,7 @@ const Wishlist = () => {
   return (
     <div>
       <HeaderBar btnText="See All" heading="Wishlist(4)" />
-      <div className="flex gap-x-3 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 mb-10">
         <ProductCard icon={<Trash strokeWidth={1.5} size={30} className="bg-white rounded-full p-1"/>} />
         <ProductCard />
         <ProductCard />
@@ -33,7 +33,7 @@ const Wishlist = () => {
       </div>
       <hr />
       <HeaderBar btnText="See All" heading="Just for You" />
-      <div className="flex gap-x-3 ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 ">
         <ProductCard />
         <ProductCard />
         <ProductCard />

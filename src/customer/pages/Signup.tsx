@@ -10,9 +10,9 @@ const Signup = () => {
 
   const navigate=useNavigate()
   return (
-    <div className='flex justify-around mt-10'>
-        <img className='w-[45%]' src={ecommerseImage} alt="" />
-        <div className='flex flex-col max-w-[35%] w-full'>
+    <div className='flex justify-around mt-10 gap-3 flex-col w-full sm:max-w-[60%] md:max-w-[70%]  mx-auto  lg:flex-row'>
+        <img className=' w-full mx-auto md:max-w-[50%]' src={ecommerseImage} alt="" />
+        <div className='flex flex-col w-full'>
             <HeadingTypo className='text-2xl' >Create an Account</HeadingTypo>
             <ParaTypo className='mt-2'>Enter your details below</ParaTypo>
             <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Name'/>

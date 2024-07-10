@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <div className="grid">
+    <div className="grid overflow-auto">
     <table className="w-full text-center">
       <thead>
         <tr>
@@ -66,7 +66,7 @@ const Cart = () => {
         
       </tbody>
     </table>
-    <Link className="place-self-end" to={'/checkout'}><Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">Go to Checkout</Button></Link>
+    <Link className="sm:place-self-end place-self-start" to={'/checkout'}><Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">Go to Checkout</Button></Link>
 
     <div className="w-fit mx-auto">
     <Button className="bg-red-500 text-white py-2 px-4 rounded-md mt-6 ">Back to Shopping</Button>

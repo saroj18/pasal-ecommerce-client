@@ -15,9 +15,9 @@ const AddAddressForm = ({setOpen}:formProps) => {
   return (
     <div className="w-full max-w-[700px] border-gray-500 border-2 rounded-md p-3 mb-3 relative">
       <HeadingTypo className="text-2xl mb-4">Add Address</HeadingTypo>
-      <X onClick={()=>setOpen(false)} className="absolute left-[95%] cursor-pointer top-2"/>
+      <X onClick={()=>setOpen(false)} className="absolute left-[93%] cursor-pointer top-2"/>
       <form>
-        <div className=" grid grid-cols-2 gap-y-4 items-center gap-x-3">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-y-4 items-center gap-x-3">
           <div className="flex flex-col">
             <Label>State</Label>
             <Input

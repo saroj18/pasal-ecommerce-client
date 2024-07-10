@@ -12,7 +12,7 @@ import ProductDescription from "./account/component/ProductDescription";
 const ProductDetails = () => {
   return (
     <>
-      <div className="flex gap-x-10 mt-8 mb-10 border-b-2 pb-3">
+      <div className="flex flex-col md:flex-row gap-x-10 mt-8 mb-10 border-b-2 pb-3">
         <div className="border-2 border-gray-500 rounded-md shadow-md">
           <img
             className="w-[80%]"
@@ -69,42 +69,48 @@ const ProductDetails = () => {
               </ParaTypo>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="flex items-center border-gray-500 border-2 h-[40px]">
-              <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
-                -
-              </ParaTypo>
-              <Input
-                className="w-[40px] rounded-none h-[40px]"
-                readOnly
-                type="text"
-              />
-              <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
-                +
-              </ParaTypo>
+          <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
+            <div className="flex gap-x-4">
+              <div className="flex items-center border-gray-500 border-2 h-[40px]">
+                <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
+                  -
+                </ParaTypo>
+                <Input
+                  className="w-[40px] rounded-none h-[40px]"
+                  readOnly
+                  type="text"
+                />
+                <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
+                  +
+                </ParaTypo>
+              </div>
+              <div className="border-2 border-gray-500 p-1 rounded-md flex justify-center items-center cursor-pointer">
+                <Heart strokeWidth={1.2} />
+              </div>
             </div>
-            <Button className="bg-red-500 rounded-md text-white py-2 px-4 mx-4">
-              Buy Now
-            </Button>
-            <Button className="bg-red-500 rounded-md text-white py-2 px-4 mr-4 flex gap-x-2">
-              Add to Cart
-              <BaggageClaim strokeWidth={1} />
-            </Button>
-            <div className="border-2 border-gray-500 p-1 rounded-md cursor-pointer">
-              <Heart strokeWidth={1.2} />
+            <div className=" gap-2 flex flex-col lg:flex-row ">
+              <Button className="bg-red-500  rounded-md text-white py-2 px-4 ">
+                Buy Now
+              </Button>
+              <Button className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2">
+                Add to Cart
+                <BaggageClaim strokeWidth={1} />
+              </Button>
             </div>
           </div>
-          <div className="mt-4 flex gap-x-3">
-          <Button className="bg-green-500 text-white rounded-md px-3 py-2 flex gap-4">
-            Bargaining On Video Call <Video fill="white" color="white" />{" "}
-          </Button>
-          <Button className="rounded-md py-2 px-3 bg-blue-500 text-white flex gap-x-2">Chat with Shop Owner <MessageCircle/> </Button>
+          <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
+            <Button className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4">
+              Bargaining On Video Call <Video fill="white" color="white" />{" "}
+            </Button>
+            <Button className="rounded-md py-2 px-3 justify-center bg-blue-500 text-white flex gap-x-2">
+              Chat with Shop Owner <MessageCircle />{" "}
+            </Button>
           </div>
         </div>
       </div>
-      <ProductDescription/>
+      <ProductDescription />
       <HeaderBar heading="For You" btnText="See More" />
-      <div className="flex gap-x-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-3">
         <ProductCard />
         <ProductCard />
         <ProductCard />

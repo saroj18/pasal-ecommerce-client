@@ -5,9 +5,10 @@ import Input from "../../../../components/common/Input";
 import Select from "../../../../components/common/Select";
 import Option from "../../../../components/common/Option";
 import Button from "../../../../components/common/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
+  const navigate=useNavigate()
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
       <HeadingTypo className="text-3xl my-3">Edit Profile</HeadingTypo>
@@ -49,9 +50,9 @@ const EditProfile = () => {
             <Input className="w-full h-[50px]" placeholder="enter your confirm password" type="password" />
           </div>
       </form>
-      <div className="my-7">
-        <Link to={'/account/myprofile'}><Button className="border-2 bg-red-500 rounded-md text-white px-3 py-2 mx-3">Cancel</Button></Link>
+      <div className="my-7 flex flex-col gap-2 justify-center sm:items-start">
         <Button className="border-2 bg-blue-500 rounded-md text-white px-3 py-2">Save Changes</Button>
+       <Button onClick={()=>navigate('/account/myprofile')} className="border-2 bg-red-500 rounded-md text-white px-3 py-2 mx-3">Cancel</Button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@
 .container{
   margin-inline: auto;
   max-width: 1300px;
+  padding-inline: 15px;
 }
 
 .cart:hover .position{

@@ -44,7 +44,7 @@ const ProductDescription = () => {
           </div>
           <ParaTypo>420 Ratings</ParaTypo>
         </div>
-        <div className="flex w-full gap-x-5">
+        <div className="flex flex-col gap-4 sm:flex-row w-full gap-x-5">
           <div>
             {Array(5)
               .fill(null)
@@ -62,7 +62,7 @@ const ProductDescription = () => {
                 );
               })}
           </div>
-          <div className=" w-full max-w-[40%]">
+          <div className=" w-full sm:max-w-[40%]">
             {Array(5)
               .fill(null)
               .map((_, index) => {

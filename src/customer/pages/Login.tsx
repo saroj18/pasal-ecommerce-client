@@ -10,9 +10,9 @@ const Login = () => {
 
   const navigate=useNavigate()
   return (
-    <div className='flex justify-around mt-10 '>
-        <img className='w-[45%]' src={ecommerseImage} alt="" />
-        <div className='flex flex-col w-[35%]'>
+    <div className='flex justify-around mt-10 flex-col gap-4 md:flex-row lg:max-w-[75%] mx-auto'>
+        <img className='md:max-w-[45%] mx-auto' src={ecommerseImage} alt="" />
+        <div className='flex flex-col w-full'>
             <HeadingTypo className='text-2xl' >Log in to Exclusive</HeadingTypo>
             <ParaTypo className='mt-2'>Enter your details below</ParaTypo>
             <Input type='text' className='border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-4' placeholder='Email'/>

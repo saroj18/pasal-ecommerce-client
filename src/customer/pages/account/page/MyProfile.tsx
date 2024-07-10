@@ -22,14 +22,14 @@ const MyProfile = () => {
   return (
     <div className='w-full p-4 bg-gray-50'>
         <HeadingTypo className='text-2xl my-3'>My Profile</HeadingTypo>
-        <div className='grid grid-cols-3 gap-x-3  gap-y-8 mb-10'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-x-3  gap-y-8 mb-10'>
             <DetailsBox heading='Full Name' data='Saroj Aryal'/>
             <DetailsBox heading='Email Address' data='abc@gmail.com'/>
             <DetailsBox heading='Mobile' data='9876554356'/>
             <DetailsBox heading='BirthDay' data='2002-03-05'/>
             <DetailsBox heading='Gender' data='Male'/>
         </div>
-        <Link to={'/account/editprofile'}><Button className='bg-blue-500 rounded-md text-white px-8 mx-2 py-3'>Edit Profile</Button></Link>
+        <Link to={'/account/editprofile'}><Button className='bg-blue-500 rounded-md text-white px-8 mx-2 py-3 w-full sm:w-fit'>Edit Profile</Button></Link>
     </div>
   )
 }

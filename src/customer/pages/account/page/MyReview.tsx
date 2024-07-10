@@ -18,8 +18,10 @@ import ReviewForm from './ReviewForm'
             <HeadingTypo>Saroj's Store</HeadingTypo>
             <ParaTypo className='text-sm text-gray-400 my-2'>Purchase on 19 Jan 2023</ParaTypo>
             <div className='flex w-fit items-center gap-x-4 border-2 border-gray-200 rounded-md p-3'>
+                <div className='flex flex-col md:flex-row md:items-center'>
                 <img className='w-[100px]' src="https://www.freepnglogos.com/uploads/lcd-png/lcd-png-transparent-lcd-images-pluspng-39.png" alt="" />
-                <ParaTypo>LCD Monitor wiht 43" Display and High Qualit Contrast</ParaTypo>
+                <ParaTypo className='text-sm sm:text-lg' >LCD Monitor wiht 43" Display and High Qualit Contrast</ParaTypo>
+                </div>
                 <Button onClick={clickHandler} className='bg-red-500 text-white px-4 py-2 rounded-md'>Review</Button>
             </div>
         </div>

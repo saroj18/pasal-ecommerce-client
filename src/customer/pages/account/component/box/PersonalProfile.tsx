@@ -6,7 +6,7 @@ import HeadingTypo from '../../../../../components/common/HeadingTypo'
 
 const PersonalProfile = () => {
   return (
-    <div className=' border-2 border-gray-500 rounded-md shadow-sm p-4 h-full'>
+    <div className='grow  border-2 border-gray-500 rounded-md shadow-sm p-4 h-full'>
         <div className='flex items-center gap-x-6 mb-4'>
         <HeadingTypo className='text-xl'>Personal Profile</HeadingTypo>
         <span className='text-blue-500 cursor-pointer'>Edit</span>

@@ -14,7 +14,7 @@ const MyOrder = () => {
     <div className="mt-4">
       <HeadingTypo className="text-3xl">My Orders</HeadingTypo>
       <ParaTypo className="opacity-75">my all orders</ParaTypo>
-      <div className="flex justify-around text-xl border-2 border-gray-400 mt-3 font-bold rounded-full bg-gray-200 gap-x-6 ">
+      <div className="flex text-xs justify-around md:text-xl shadow-md mt-3 font-bold rounded-full bg-gray-100 gap-x-6 ">
         <Button
           onClick={() => clickHandler("shipping")}
           className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${

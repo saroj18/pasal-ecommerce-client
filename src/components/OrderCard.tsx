@@ -12,7 +12,7 @@ const OrderCard = ({
   label: string;
 }) => {
   return (
-    <div className="w-full max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
+    <div className="w-full text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
       <div className="flex w-full items-center justify-between">
         <div>
           <ParaTypo className="opacity-75 text-sm">Order ID</ParaTypo>

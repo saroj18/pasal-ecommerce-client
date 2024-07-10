@@ -8,7 +8,7 @@ export const categoryList=[
      url:'/electronic'
     },
    {
-     name:'Health & Beauty',
+     name:'Beauty',
      url:'/electronic'
     },
    {
@@ -32,7 +32,7 @@ export const categoryList=[
      url:'/electronic'
     },
    {
-     name:'Home & Lifestyle',
+     name:'Lifestyle',
      url:'/electronic'
     },
 ]

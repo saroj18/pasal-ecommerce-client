@@ -24,9 +24,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex justify-between items-center container">
-      <Link to={'/'}><img src={logo} className="w-[80px]" alt="" /></Link>
-      <ul className="flex items-center gap-x-7">
+    <nav className="flex justify-between items-center container  py-2">
+      <Link to={'/'}><img src={logo} className="w-[80px] mr-10 hidden sm:block" alt="" /></Link>
+      <ul className=" hidden md:flex items-center gap-x-7">
         {navList.map((ele, index) => {
           return (
             <Link key={index} to={ele.path}>
@@ -35,17 +35,17 @@ const Navbar = () => {
           );
         })}
       </ul>
-      <div className="flex items-center  w-[35%] ">
+      <div className="flex items-center w-full md:w-[35%]  ">
         <SearchBox className="w-full" />
         <div className="flex gap-x-6">
           <Heart
             onClick={() => navigate("/wishlist")}
-            className="cursor-pointer"
+            className="cursor-pointer hidden lg:block"
             opacity={0.7}
           />
           <ShoppingCart
             onClick={() => navigate("/cart")}
-            className="cursor-pointer"
+            className="cursor-pointer hidden lg:block"
             opacity={0.7}
           />
           <div className="relative">
@@ -59,7 +59,7 @@ const Navbar = () => {
             {dropdown && (
               <AccountDropdown
                 ref={dropDownRef}
-                className="absolute -left-36 top-12 z-10"
+                className="absolute -left-[212px]  top-10 z-10"
               />
             )}
           </div>
