@@ -9,11 +9,13 @@ import TableData from '../../../../components/common/TableData'
 
 const Customer = () => {
   return (
-    <div>
+    <div className='overflow-auto'>
+        <div className='sticky left-0 top-0'>
         <HeadingTypo className='text-3xl'>Customers</HeadingTypo>
         <ParaTypo className='opacity-75 text-[15px]'>all customers lists</ParaTypo>
-        <div>
-            <Table>
+        </div>
+        <div className='text-sm md:text-base'>
+            <Table >
                 <TableHead tableHeadData={tableHeadData}/>
                 <TableBody>
                     <TableData className='p-2'>89789345724935</TableData>

@@ -6,7 +6,7 @@ import Label from '../../../components/common/Label'
 
 const ProductInfo = () => {
   return (
-    <div className='border-2 bg-white border-gray-300 shadow-md rounded-md p-5 w-full max-w-[40%]'>
+    <div className='border-2 bg-white border-gray-300 shadow-md rounded-md p-1 sm:p-5 w-full lg:max-w-[40%]'>
         <HeadingTypo className='text-xl font-semibold my-2'>Product information</HeadingTypo>
         <div className='flex flex-col gap-y-3 border-2 border-gray-300 p-3 rounded-md'>
             <Label className='opacity-75'>Input Your Product's Name</Label>

@@ -10,18 +10,18 @@ import { useNavigate } from "react-router-dom";
 const SellerSignUp = () => {
   const navigate=useNavigate()
   return (
-      <div className="h-screen bg-gray-100">
+      <div className="h-screen bg-gray-100 px-3">
         <div
-        className="flex items-center w-full justify-around  max-w-[70%]  mx-auto border-2 border-gray-300 shadow-md
+        className="flex items-center w-full justify-around md:max-w-[60%] mx-auto border-2 border-gray-300 shadow-md
     "
       >
-        <div className=" border-r-2 border-gray-200 max-w-[45%] w-full p-2 ">
+        <div className=" border-r-2 border-gray-200  w-full lg:max-w-[50%] p-2 ">
           <div className="my-10">
             <img className="w-[25%] mx-auto mix-blend-multiply" src={logo} alt="" />
             <ParaTypo className="text-center">Welcome To</ParaTypo>
             <ParaTypo className="text-center text-4xl text-blue-500 my-2">Seller Account</ParaTypo>
           </div>
-          <form action="" className="flex flex-col gap-y-3">
+          <form action="" className="flex flex-col gap-y-3 ">
             <div className="flex flex-col ">
               <Label className="text-xl">Username</Label>
               <Input
@@ -57,7 +57,6 @@ const SellerSignUp = () => {
             Go to Login
           </ParaTypo>
         </div>
-          <img  src={ecommerce} alt="" />
       </div>
       </div>
   );

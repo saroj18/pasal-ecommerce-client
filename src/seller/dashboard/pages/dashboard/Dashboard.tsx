@@ -1,7 +1,6 @@
 import FilterBar from "../../components/FilterBar";
 import AmountCard from "../../components/AmountCard";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
-import MostSellingProductCard from "../../components/MostSellingProductCard";
 import jacket from '../../../../assets/jacket.png'
 import SetChart from "../../../../admin/pages/vendor/SetChart";
 
@@ -9,7 +8,7 @@ const Dashboard = () => {
   return (
     <div className="w-full  font-poppins">
       <FilterBar />
-      <div className="flex gap-x-4 mt-5">
+      <div className="flex flex-wrap gap-4 mt-5">
         <AmountCard
           className={"grow bg-green-50"}
           heading="Estimate Revenue"
@@ -46,10 +45,10 @@ const Dashboard = () => {
           actAmount="+2453"
         />
       </div>
-      <div className="flex gap-x-3 mt-6 ">
-        <div className=" flex justify-center gap-x-4 items-center mx-auto rounded-md shadow-md w-full">
-          <SetChart chartType="line" heading="Total Visit"/>
-          <SetChart chartType="line" heading="Total Order"/>
+      {/* <div className="flex gap-x-3 mt-6 "> */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mt-6">
+          <SetChart className="w-full" chartType="line" heading="Total Visit"/>
+          <SetChart className="w-full" chartType="line" heading="Total Order"/>
         </div>
         {/* <div className="border-2 border-gray-500 rounded-md p-3 w-full max-w-[40%] max-h-[350px] overflow-y-scroll">
           <HeadingTypo className="text-xl my-3">
@@ -62,9 +61,10 @@ const Dashboard = () => {
             <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
           </div>
         </div> */}
-      </div>
+      {/* </div> */}
       <HeadingTypo className="text-2xl my-8">Recent Orders</HeadingTypo>
-      <table className="w-full text-center">
+      <div className="overflow-auto">
+      <table className="w-full text-center text-xs sm:text-base">
         <thead>
           <tr>
             <th className="p-4">Product</th>
@@ -98,6 +98,7 @@ const Dashboard = () => {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

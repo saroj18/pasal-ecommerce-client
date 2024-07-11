@@ -4,13 +4,16 @@ import ParaTypo from '../../../components/common/ParaTypo'
 import Select from '../../../components/common/Select'
 import Option from '../../../components/common/Option'
 import Button from '../../../components/common/Button'
+import { Menu } from 'lucide-react'
+import { useSeller } from '../../context/SellerContext'
 
 const FilterBar = () => {
   return (
-    <div className='flex justify-between p-2 '>
+    <div className='flex flex-col justify-between p-2 gap-y-3 '>
         <div>
-            <HeadingTypo className='text-2xl'>Welcome Back, Saroj</HeadingTypo>
-            <ParaTypo className='text-[15px] text-gray-400'>Here's what happening with your store today</ParaTypo>
+              
+            <HeadingTypo className='md:text-2xl text-lg w-full'>Welcome Back, Saroj</HeadingTypo>
+            <ParaTypo className='sm:text-[15px] text-gray-400 text-xs'>Here's what happening with your store today</ParaTypo>
         </div>
         <div className='flex items-center gap-x-4'>
                 <Select>
@@ -20,7 +23,7 @@ const FilterBar = () => {
                     <Option value='pastsixmonth'>Last 6 Months</Option>
                     <Option value='pastoneyear'>Last 1 Year</Option>
                 </Select>
-                <Button className='bg-black text-white px-3 py-2 rounded-md'>View LifeTime</Button>
+                <Button className='bg-black text-white px-3 py-2 rounded-md text-sm sm:text-xl'>View LifeTime</Button>
         </div>
     </div>
   )

@@ -10,18 +10,18 @@ import SearchBox from "../../../../components/common/Search";
 const Review = () => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div>
-      <div className="flex justify-between">
-      <div>
+    <div className="overflow-auto">
+      <div className="flex justify-between flex-col md:flex-row sticky left-0 top-0">
+      <div className="w-full max-w-fit mx-auto md:m-0">
         <HeadingTypo className="text-3xl">Reviews</HeadingTypo>
         <ParaTypo className="opacity-75 text-[16px]">
           Your's all products review
         </ParaTypo>
       </div>
-      <SearchBox className="w-full max-w-[25%]" />
+      <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
       </div>
       <div>
-        <table className="w-full text-center mt-5 bg-white shadow-md">
+        <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
           <thead>
             <tr className="sticky top-0 left-0 bg-white border-t-2">
               <th className="p-4">Product</th>

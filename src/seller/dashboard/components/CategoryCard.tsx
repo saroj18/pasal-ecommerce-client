@@ -6,7 +6,7 @@ import Option from '../../../components/common/Option'
 
 const CategoryCard = () => {
   return (
-    <div className='border-2 border-gray-300 p-3 rounded-md grow'>
+    <div className='border-2 border-gray-300 p-3 rounded-md grow w-full'>
         <HeadingTypo className='text-2xl font-semibold'>Category</HeadingTypo>
         <div className='flex flex-col'>
         <Label className='text-[17px] opacity-75 my-2'>Product Category</Label>

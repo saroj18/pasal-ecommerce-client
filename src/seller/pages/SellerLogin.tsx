@@ -10,13 +10,12 @@ import { useNavigate } from "react-router-dom";
 const SellerLogin = () => {
   const navigate=useNavigate()
   return (
-      <div className="bg-gray-100 h-screen">
+      <div className="bg-gray-100 h-screen px-4">
         <div
-        className="flex items-center w-full justify-around  max-w-[70%]  mx-auto border-2 border-gray-200 shadow-md
+        className="flex items-center w-full justify-around  mx-auto 
     "
       >
-          <img  src={ecommerce} alt="" />
-        <div className="border-l-2 border-gray-300 rounded-md  max-w-[45%] w-full p-2 ">
+        <div className=" rounded-md sm:max-w-[80%] md:max-w-[60%] lg:max-w-[35%]  mx-auto w-full p-2 ">
           <div className="my-10">
             <img className="w-[25%] mx-auto mix-blend-multiply" src={logo} alt="" />
             <ParaTypo className="text-center">Welcome To</ParaTypo>

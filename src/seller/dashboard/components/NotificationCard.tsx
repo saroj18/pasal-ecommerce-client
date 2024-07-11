@@ -14,8 +14,8 @@ const NotificationCard = ({heading}:notificationProps) => {
         <ParaTypo className='bg-green-500 text-white rounded-md text-sm px-3 py-[3px]'>{heading}</ParaTypo>
         <ParaTypo className='opacity-75 flex items-center gap-x-2 text-sm'><AlarmClock/> 24 Nov 2021 at 01:11 PM</ParaTypo>
         </div>
-        <HeadingTypo className='font-semibold mt-2'>By Saroj Aryal</HeadingTypo>
-        <ParaTypo className='opacity-75'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur harum nostrum ?</ParaTypo>
+        <HeadingTypo className='font-semibold mt-2 text-sm md:text-base'>By Saroj Aryal</HeadingTypo>
+        <ParaTypo className='opacity-75 text-sm md:text-base'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur harum nostrum ?</ParaTypo>
     </div>
   )
 }

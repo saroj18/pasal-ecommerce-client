@@ -11,16 +11,16 @@ import { Edit, Layers, Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
 const Product = () => {
   return (
-    <div className="w-full ">
+    <div>
       <HeadingTypo className="text-3xl">Add Product</HeadingTypo>
       <ParaTypo className="opacity-75 text-[15px]">
         Add your product for your customer
       </ParaTypo>
 
-      <div className="flex gap-x-7 mt-5">
+      <div className="flex flex-col lg:flex-row gap-7 mt-5">
         <ProductInfo />
-        <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md p-5 gap-y-3 bg-white ">
-          <div className=" gap-y-5 flex items-start   gap-x-3">
+        <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
+          <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
             <ProductImage />
             <CategoryCard />
           </div>
@@ -29,19 +29,19 @@ const Product = () => {
       </div>
       <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">Save</Button>
 
-      <div className="relative flex items-center justify-between my-4">
-        <div>
-          <HeadingTypo className="text-3xl  mt-7">Product Lists</HeadingTypo>
-          <ParaTypo className="text-[15px] opacity-75">
+      <div className="relative flex flex-col sm:flex-row items-center sm:justify-between  my-4">
+        <div className="my-4">
+          <HeadingTypo className="sm:text-3xl text-2xl ">Product Lists</HeadingTypo>
+          <ParaTypo className="sm:text-[15px] text-xs opacity-75">
             See all your's products
           </ParaTypo>
         </div>
-        <SearchBox className="w-[25%]" />
+        <SearchBox className="sm:max-w-[55%] md:max-w-[50%] lg:max-w-[30%] w-full" />
       </div>
       <hr />
 
       <div className="bg-white ">
-        <table className="w-full text-center rounded-md shadow-md">
+        <table className="w-full overflow-auto text-xs lg:text-base text-center rounded-md shadow-md">
             <thead>
           <tr className="border-2 border-gray-300">
               <th className="p-3">Product</th>
@@ -56,10 +56,10 @@ const Product = () => {
             </thead>
 
           <tbody>
-            <tr className="border-2 border-gray-300 text-xl">
+            <tr className="border-2 border-gray-300 lg:text-xl text-sm">
               <td className="flex flex-col items-center p-2">
-                <img className="h-[80px] rounded-md" src={jacket} alt="" />
-                <ParaTypo>Leather Jacket</ParaTypo>
+                <img className="lg:h-[80px] h-[40px] rounded-md" src={jacket} alt="" />
+                <ParaTypo className="text-sm lg:text-base">Leather Jacket</ParaTypo>
               </td>
               <td>Rs 200</td>
               <td>Puma</td>
@@ -67,16 +67,16 @@ const Product = () => {
               <td>22</td>
               <td>20</td>
               <td>2024-03-11</td>
-              <td className="flex justify-around items-center px-5">
-                <Trash strokeWidth={0.9} className="cursor-pointer"/>
-                <Edit strokeWidth={0.9} className="cursor-pointer"/>
-                <Layers color="red" strokeWidth={0.9} className="cursor-pointer"/>
+              <td className="flex justify-around gap-x-1 items-center px-3">
+                <Trash strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Edit strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Layers color="red" strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
               </td>
             </tr>
-            <tr className="border-2 border-gray-300 text-xl">
+            <tr className="border-2 border-gray-300 lg:text-xl text-sm">
               <td className="flex flex-col items-center p-2">
-                <img className="h-[80px] rounded-md" src={jacket} alt="" />
-                <ParaTypo>Leather Jacket</ParaTypo>
+                <img className="lg:h-[80px] h-[40px] rounded-md" src={jacket} alt="" />
+                <ParaTypo className="text-sm lg:text-base">Leather Jacket</ParaTypo>
               </td>
               <td>Rs 200</td>
               <td>Puma</td>
@@ -84,10 +84,10 @@ const Product = () => {
               <td>22</td>
               <td>20</td>
               <td>2024-03-11</td>
-              <td className="flex justify-around items-center px-5">
-                <Trash strokeWidth={0.9} className="cursor-pointer"/>
-                <Edit strokeWidth={0.9} className="cursor-pointer"/>
-                <Layers color="green" strokeWidth={0.9} className="cursor-pointer"/>
+              <td className="flex justify-around gap-x-1 items-center px-3">
+                <Trash strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Edit strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Layers color="green" strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
               </td>
             </tr>
           </tbody>
