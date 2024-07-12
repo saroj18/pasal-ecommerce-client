@@ -12,12 +12,12 @@ import { useNavigate } from 'react-router-dom'
 const Vendor = () => {
   const navigate=useNavigate()
   return (
-    <div className='w-full'>
-        <div className='flex items-center justify-between'>
+    <div className='w-full overflow-auto'>
+        <div className='flex flex-col md:flex-row items-center justify-between sticky left-0 top-0'>
         <HeadingTypo className='text-3xl my-4'>Vendor Lists</HeadingTypo>
-        <SearchBox className='w-[25%]'/>
+        <SearchBox className='sm:w-[45%] md:w-[25%] w-full'/>
         </div>
-        <Table className='border-2'>
+        <Table className='border-2 text-xs md:text-base'>
             <TableHead className='' tableHeadData={tableHeadData}/>
             <TableBody>
                 <TableData className='p-2'>125353453534543</TableData>

@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom'
 const VendorApprove = () => {
     const navigate=useNavigate()
   return (
-    <div>
-        <HeadingTypo className='text-3xl my-4'>Apply for Register</HeadingTypo>
-        <Table>
+    <div className='overflow-auto'>
+        <HeadingTypo className='text-3xl my-4 sticky left-0 top-0'>Apply for Register</HeadingTypo>
+        <Table className='text-xs md:text-base'>
             <TableHead tableHeadData={tableHead}/>
             <TableBody>
                 <TableData className='p-2'>79837429823</TableData>

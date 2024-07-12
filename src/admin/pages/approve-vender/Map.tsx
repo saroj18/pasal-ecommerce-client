@@ -15,7 +15,7 @@ const shopIcon:L.Icon = new L.Icon({
 
 const Map = () => {
   return (
-    <div className="max-w-[60%] w-full max-h-[500px] h-full  overflow-scroll">
+    <div className=" w-full max-h-[500px] h-full  overflow-scroll rounded-md">
       <MapContainer className="" center={[51.505, -0.09]} zoom={20}  scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

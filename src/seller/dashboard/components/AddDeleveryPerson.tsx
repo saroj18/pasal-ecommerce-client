@@ -81,11 +81,11 @@ const addDeleveryPerson: addDeleveryPersonProps[] = [
 const AddDeleveryPerson = () => {
   return (
     <div>
-      <div className=" border-2 border-gray-300 rounded-md p-4 mt-5 bg-white shadow-md">
+      <div className=" border-2 border-gray-300 rounded-md p-4 mt-5 bg-white shadow-md ">
         <HeadingTypo className="text-2xl font-semibold underline mb-2 ">
           Add Delevery Person
         </HeadingTypo>
-        <form className="grid grid-cols-3 gap-x-3">
+        <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3">
           {addDeleveryPerson.map((ele, index) => {
             let input =
               ele.type == "select" ? (
@@ -110,7 +110,7 @@ const AddDeleveryPerson = () => {
             return input;
           })}
         </form>
-        <Button className="bg-red-500 rounded-md px-4 py-2 text-white mt-4">
+        <Button className="bg-red-500 w-full md:max-w-fit rounded-md px-4 py-2 text-white mt-4">
           Add
         </Button>
       </div>

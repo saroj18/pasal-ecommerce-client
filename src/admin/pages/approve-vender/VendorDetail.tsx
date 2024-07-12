@@ -21,7 +21,7 @@ const VendorDetail = () => {
         Vendor Details
       </HeadingTypo>
       <div>
-        <div className="grid grid-cols-4 justify-between gap-3 my-6 border-2 border-gray-300 p-2 shadow-md rounded-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-between gap-3 my-6 border-2 border-gray-300 p-2 shadow-md rounded-md">
           {shopDetails.map(
             (ele: { label: string; value: string }, index: number) => {
               return (
@@ -36,16 +36,16 @@ const VendorDetail = () => {
         </div>
       </div>
       <div>
-        <HeadingTypo className="text-3xl my-3 font-semibold">
+        <HeadingTypo className="md:text-3xl text-xl my-3 font-semibold">
           Shop Image and Map
         </HeadingTypo>
-        <div className="border-2 border-gray-500 rounded-md p-2 flex h-[500px] gap-x-2">
-          <img src={shopImage} alt="" />
+        <div className="border-2 border-gray-500 rounded-md p-2 flex h-[700px] md:h-[500px] flex-col md:flex-row w-full gap-4">
+          <img className="md:w-[50%]" src={shopImage} alt="" />
             <Map/>
         </div>
       </div>
       <div>
-        <HeadingTypo className="text-3xl my-3 font-semibold">
+        <HeadingTypo className="md:text-3xl text-xl my-3 font-semibold">
           Document and Owner Photo
         </HeadingTypo>
         <div className="border-2 border-gray-500 rounded-md p-2 flex  items-center">

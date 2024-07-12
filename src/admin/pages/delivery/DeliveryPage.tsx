@@ -11,20 +11,22 @@ import Label from "../../../components/common/Label";
 const DeliveryPage = () => {
     const[open,setOpen]=useState<boolean>(false)
   return (
-    <div>
-      <HeadingTypo className="text-3xl">Delevery Person</HeadingTypo>
+    <div className="overflow-auto">
+     <div className="sticky left-0 top-0">
+     <HeadingTypo className="text-3xl">Delevery Person</HeadingTypo>
       <ParaTypo className="opacity-75 text-[15px]">
         Add and View Delevery Persons
       </ParaTypo>
-      <AddDeleveryPerson />
-      <div className="relative flex justify-between items-center">
+      <AddDeleveryPerson  />
+      <div className="md:relative flex justify-between flex-col lg:flex-row items-center">
       <HeadingTypo className="text-2xl font-semibold  mt-6">
         All Delevery Person
       </HeadingTypo>
-      <SearchBox className="w-full max-w-[25%]"/>
+      <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]"/>
       </div>
+     </div>
 
-      <table className="w-full text-center bg-white shadow-md my-4">
+      <table className="w-full text-xs md:text-base text-center bg-white shadow-md my-4">
         <thead>
           <tr className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white">
             <th className="p-2">Image</th>
@@ -50,7 +52,7 @@ const DeliveryPage = () => {
                   className=" border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
                 >
                   <td className="p-3 flex items-center justify-center">
-                  <img className="h-[70px] rounded-md" src={person} alt="" />
+                  <img className="mdh-[70px] h-[30px] rounded-md" src={person} alt="" />
                   </td>
                   <td className="p-3">0932901471239234</td>
                   <td className="p-3">John Doe</td>
@@ -59,9 +61,9 @@ const DeliveryPage = () => {
                   <td className="p-3">2024-01-22</td>
                   <td className="p-3">9876545676</td>
                   <td className="p-3">On Leave</td>
-                  <td className="p-3 flex items-center gap-x-6 justify-center">
-                    <Edit strokeWidth={1} color="green"/>
-                    <Trash strokeWidth={1} color="red"/>
+                  <td className="p-3 flex items-center gap-x-3 md:gap-x-6 justify-center">
+                    <Edit className="size-4 md:size-5" strokeWidth={1} color="green"/>
+                    <Trash className="size-4 md:size-5" strokeWidth={1} color="red"/>
                   </td>
                 </tr>
               );
