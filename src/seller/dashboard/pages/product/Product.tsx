@@ -27,11 +27,15 @@ const Product = () => {
           <PriceCard />
         </div>
       </div>
-      <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">Save</Button>
+      <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
+        Save
+      </Button>
 
       <div className="relative flex flex-col sm:flex-row items-center sm:justify-between  my-4">
         <div className="my-4">
-          <HeadingTypo className="sm:text-3xl text-2xl ">Product Lists</HeadingTypo>
+          <HeadingTypo className="sm:text-3xl text-2xl ">
+            Product Lists
+          </HeadingTypo>
           <ParaTypo className="sm:text-[15px] text-xs opacity-75">
             See all your's products
           </ParaTypo>
@@ -42,8 +46,8 @@ const Product = () => {
 
       <div className="bg-white ">
         <table className="w-full overflow-auto text-xs lg:text-base text-center rounded-md shadow-md">
-            <thead>
-          <tr className="border-2 border-gray-300">
+          <thead>
+            <tr className="border-2 border-gray-300">
               <th className="p-3">Product</th>
               <th className="p-3">Price</th>
               <th className="p-3">Brand</th>
@@ -52,14 +56,20 @@ const Product = () => {
               <th className="p-3">Total Sale</th>
               <th className="p-3">Added Date</th>
               <th className="p-3">Action</th>
-          </tr>
-            </thead>
+            </tr>
+          </thead>
 
           <tbody>
             <tr className="border-2 border-gray-300 lg:text-xl text-sm">
               <td className="flex flex-col items-center p-2">
-                <img className="lg:h-[80px] h-[40px] rounded-md" src={jacket} alt="" />
-                <ParaTypo className="text-sm lg:text-base">Leather Jacket</ParaTypo>
+                <img
+                  className="lg:h-[80px] h-[40px] rounded-md"
+                  src={jacket}
+                  alt=""
+                />
+                <ParaTypo className="text-sm lg:text-base">
+                  Leather Jacket
+                </ParaTypo>
               </td>
               <td>Rs 200</td>
               <td>Puma</td>
@@ -68,15 +78,31 @@ const Product = () => {
               <td>20</td>
               <td>2024-03-11</td>
               <td className="flex justify-around gap-x-1 items-center px-3">
-                <Trash strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
-                <Edit strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
-                <Layers color="red" strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Trash
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
+                <Edit
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
+                <Layers
+                  color="red"
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
               </td>
             </tr>
             <tr className="border-2 border-gray-300 lg:text-xl text-sm">
               <td className="flex flex-col items-center p-2">
-                <img className="lg:h-[80px] h-[40px] rounded-md" src={jacket} alt="" />
-                <ParaTypo className="text-sm lg:text-base">Leather Jacket</ParaTypo>
+                <img
+                  className="lg:h-[80px] h-[40px] rounded-md"
+                  src={jacket}
+                  alt=""
+                />
+                <ParaTypo className="text-sm lg:text-base">
+                  Leather Jacket
+                </ParaTypo>
               </td>
               <td>Rs 200</td>
               <td>Puma</td>
@@ -85,14 +111,23 @@ const Product = () => {
               <td>20</td>
               <td>2024-03-11</td>
               <td className="flex justify-around gap-x-1 items-center px-3">
-                <Trash strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
-                <Edit strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
-                <Layers color="green" strokeWidth={0.9} className="cursor-pointer size-4 md:size-5"/>
+                <Trash
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
+                <Edit
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
+                <Layers
+                  color="green"
+                  strokeWidth={0.9}
+                  className="cursor-pointer size-4 md:size-5"
+                />
               </td>
             </tr>
           </tbody>
         </table>
-        
       </div>
     </div>
   );

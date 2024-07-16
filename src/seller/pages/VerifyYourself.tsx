@@ -27,29 +27,33 @@ const VerifyYourself = () => {
   };
   return (
     <div>
-      {formStage < 3 && <div className="bg-gray-200 h-screen">
-        <HeadingTypo className="text-center text-3xl py-4 font-semibold ">Let's Verify YourSelf</HeadingTypo>
-        <div className="w-full bg-white max-w-[900px] rounded-md p-4 mx-auto">
-          {formStage===0&&<UserDetails />}
-          {formStage===1&&<ShopDetails />}
-          {formStage===2&&<OtpVerification />}
-          <div className="flex justify-between mt-5">
-            <Button
-              onClick={prvHandler}
-              className="bg-blue-500 text-white px-6 rounded-md  py-1 text-2xl"
-            >
-              Prv
-            </Button>
-            <Button
-              onClick={nextHandler}
-              className="bg-red-500 text-white px-6 rounded-md  py-1  text-2xl"
-            >
-              Next
-            </Button>
+      {formStage < 3 && (
+        <div className="bg-gray-200 h-screen">
+          <HeadingTypo className="text-center text-3xl py-4 font-semibold ">
+            Let's Verify YourSelf
+          </HeadingTypo>
+          <div className="w-full bg-white max-w-[900px] rounded-md p-4 mx-auto">
+            {formStage === 0 && <UserDetails />}
+            {formStage === 1 && <ShopDetails />}
+            {formStage === 2 && <OtpVerification />}
+            <div className="flex justify-between mt-5">
+              <Button
+                onClick={prvHandler}
+                className="bg-blue-500 text-white px-6 rounded-md  py-1 text-2xl"
+              >
+                Prv
+              </Button>
+              <Button
+                onClick={nextHandler}
+                className="bg-red-500 text-white px-6 rounded-md  py-1  text-2xl"
+              >
+                Next
+              </Button>
+            </div>
           </div>
         </div>
-      </div>}
-        {formStage===3 && <ThanksForChoosingUs/>}
+      )}
+      {formStage === 3 && <ThanksForChoosingUs />}
     </div>
   );
 };

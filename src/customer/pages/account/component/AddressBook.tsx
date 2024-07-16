@@ -29,17 +29,22 @@ const AddressBookComponent = () => {
 };
 
 const AddressBook = () => {
-  const[open,setOpen]=useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <div className="p-3 w-full">
       <div className="flex justify-between w-full items-center">
         <HeadingTypo className="text-2xl my-3">Address Book</HeadingTypo>
-        <p onClick={()=>setOpen(!open)} className="cursor-pointer text-blue-500 font-semibold">+ Add New Address</p>
+        <p
+          onClick={() => setOpen(!open)}
+          className="cursor-pointer text-blue-500 font-semibold"
+        >
+          + Add New Address
+        </p>
       </div>
-      {open&& <AddAddressForm setOpen={setOpen}/>}
+      {open && <AddAddressForm setOpen={setOpen} />}
       <div className="grid grid-cols-1  lg:grid-cols-2 gap-3">
-      <AddressBookComponent />
-      <AddressBookComponent />
+        <AddressBookComponent />
+        <AddressBookComponent />
       </div>
     </div>
   );

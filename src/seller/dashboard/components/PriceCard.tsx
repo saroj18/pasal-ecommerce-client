@@ -31,24 +31,24 @@ const PriceCard = () => {
         </div>
       </div>
       <div className="grow flex flex-col">
-          <Label className="text-2xl font-semibold ">Barganing</Label>
-          <Select className="h-[50px]">
-            <Option defaultChecked value="">
-              Select Option
-            </Option>
-            <Option value="enable">Enable</Option>
-            <Option value="disable">Disable</Option>
-          </Select>
+        <Label className="text-2xl font-semibold ">Barganing</Label>
+        <Select className="h-[50px]">
+          <Option defaultChecked value="">
+            Select Option
+          </Option>
+          <Option value="enable">Enable</Option>
+          <Option value="disable">Disable</Option>
+        </Select>
       </div>
       <div className="grow flex flex-col">
-          <Label className="text-2xl font-semibold ">Chating</Label>
-          <Select className="h-[50px]">
-            <Option defaultChecked value="">
-              Select Option
-            </Option>
-            <Option value="enable">Enable</Option>
-            <Option value="disable">Disable</Option>
-          </Select>
+        <Label className="text-2xl font-semibold ">Chating</Label>
+        <Select className="h-[50px]">
+          <Option defaultChecked value="">
+            Select Option
+          </Option>
+          <Option value="enable">Enable</Option>
+          <Option value="disable">Disable</Option>
+        </Select>
       </div>
     </div>
   );

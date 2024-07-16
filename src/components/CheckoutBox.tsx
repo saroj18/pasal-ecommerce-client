@@ -6,8 +6,6 @@ import Input from "./common/Input";
 import Select from "./common/Select";
 import Option from "./common/Option";
 
-
-
 const CheckoutBox = () => {
   const [payment, setPayment] = useState<boolean>(false);
 

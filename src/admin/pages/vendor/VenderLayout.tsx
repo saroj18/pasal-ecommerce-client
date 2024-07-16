@@ -1,10 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 const VenderLayout = () => {
-  
-  return <div>
-    <Outlet/>
-  </div>
-}
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
 
-export default VenderLayout
+export default VenderLayout;

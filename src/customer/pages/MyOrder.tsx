@@ -45,7 +45,13 @@ const MyOrder = () => {
           {Array(10)
             .fill(null)
             .map((_, index) => {
-              return <OrderCard background="blue" key={index} label="Est. arrival on 20 Jan 2024" />;
+              return (
+                <OrderCard
+                  background="blue"
+                  key={index}
+                  label="Est. arrival on 20 Jan 2024"
+                />
+              );
             })}
         </div>
       )}
@@ -54,7 +60,13 @@ const MyOrder = () => {
           {Array(10)
             .fill(null)
             .map((_, index) => {
-              return <OrderCard background="green" key={index} label="Arrived on 18 Jan 2024" />;
+              return (
+                <OrderCard
+                  background="green"
+                  key={index}
+                  label="Arrived on 18 Jan 2024"
+                />
+              );
             })}
         </div>
       )}
@@ -63,7 +75,13 @@ const MyOrder = () => {
           {Array(10)
             .fill(null)
             .map((_, index) => {
-              return <OrderCard background="red" key={index} label="Canceled on 15 Jan 2024" />;
+              return (
+                <OrderCard
+                  background="red"
+                  key={index}
+                  label="Canceled on 15 Jan 2024"
+                />
+              );
             })}
         </div>
       )}

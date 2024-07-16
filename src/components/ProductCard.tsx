@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import React from "react";
 import Button from "./common/Button";
-import computer from '../../public/computer.png'
+import computer from "../../public/computer.png";
 
 type cardProps = {
   hideBtn?: string;
@@ -19,7 +19,9 @@ const ProductCard = ({ hideBtn = "Add to cart", icon }: cardProps) => {
         <span className="absolute top-1 left-[86%]">{icon}</span>
       </div>
       <div className="p-3">
-        <p className="font-semibold text-sm sm:text-xl">IPS LCD Gaming Monitor</p>
+        <p className="font-semibold text-sm sm:text-xl">
+          IPS LCD Gaming Monitor
+        </p>
         <div className="flex items-center gap-4 my-1">
           <p className="font-bold">$370</p>
           <p className="line-through opacity-[0.5]">$400</p>

@@ -6,11 +6,11 @@ import Header from "./component/Header";
 const AccountLayout = () => {
   return (
     <div className="flex gap-x-2 relative ">
-        <SideBar />
-        <div className="w-full">
-          <Header/>
+      <SideBar />
+      <div className="w-full">
+        <Header />
         <Outlet />
-        </div>
+      </div>
     </div>
   );
 };

@@ -69,7 +69,9 @@ const ProductDescription = () => {
                 return (
                   <div className="w-full items-center flex gap-3" key={index}>
                     <div className="w-[90%] my-1 h-[10px] border-2 border-orange-500 rounded-md  ">
-                      <div className={`w-[${index*10}%] h-[8px] rounded-md bg-orange-500`}></div>
+                      <div
+                        className={`w-[${index * 10}%] h-[8px] rounded-md bg-orange-500`}
+                      ></div>
                     </div>
                     <span>123</span>
                   </div>
@@ -79,9 +81,9 @@ const ProductDescription = () => {
         </div>
       </div>
       <hr />
-      <ReviewComponent/>
-      <ReviewComponent/>
-      <ReviewComponent/>
+      <ReviewComponent />
+      <ReviewComponent />
+      <ReviewComponent />
       <hr />
     </div>
   );

@@ -1,0 +1,8 @@
+node_modules
+tailwind.config.js
+tsconfig.json
+tsconfig.node.json
+vite.config.ts 
+package-lock.json
+package.json
+postcss.config.js

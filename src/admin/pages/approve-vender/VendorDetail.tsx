@@ -31,7 +31,7 @@ const VendorDetail = () => {
                   value={ele.value}
                 />
               );
-            }
+            },
           )}
         </div>
       </div>
@@ -41,7 +41,7 @@ const VendorDetail = () => {
         </HeadingTypo>
         <div className="border-2 border-gray-500 rounded-md p-2 flex h-[700px] md:h-[500px] flex-col md:flex-row w-full gap-4">
           <img className="md:w-[50%]" src={shopImage} alt="" />
-            <Map/>
+          <Map />
         </div>
       </div>
       <div>

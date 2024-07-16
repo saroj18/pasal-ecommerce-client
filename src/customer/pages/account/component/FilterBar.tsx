@@ -15,20 +15,20 @@ const FilterBar = () => {
       <ParaTypo className="text-xl font-semibold mt-2">By Brand</ParaTypo>
       <div>
         <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>Samsung</span>
+          <Input type="radio" name="brand" />
+          <span>Samsung</span>
         </div>
         <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>Apple</span>
+          <Input type="radio" name="brand" />
+          <span>Apple</span>
         </div>
         <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>LG</span>
+          <Input type="radio" name="brand" />
+          <span>LG</span>
         </div>
         <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>Panasocic</span>
+          <Input type="radio" name="brand" />
+          <span>Panasocic</span>
         </div>
       </div>
       <hr />
@@ -37,12 +37,12 @@ const FilterBar = () => {
         <div className="flex items-center justify-between mb-2 w-full">
           <div>
             <ParaTypo>Min</ParaTypo>
-            <Input className="max-w-[80px]" type="text"/>
+            <Input className="max-w-[80px]" type="text" />
           </div>
           <span>----</span>
           <div>
             <ParaTypo>Max</ParaTypo>
-            <Input className="max-w-[80px]" type="text"/>
+            <Input className="max-w-[80px]" type="text" />
           </div>
         </div>
       </div>
@@ -50,30 +50,29 @@ const FilterBar = () => {
       <div>
         <ParaTypo className="font-semibold text-xl mt-3">By Rating</ParaTypo>
         <div>
-        <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>1 Star</span>
+          <div className="flex items-center gap-x-2">
+            <Input type="radio" name="brand" />
+            <span>1 Star</span>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Input type="radio" name="brand" />
+            <span>2 Star</span>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Input type="radio" name="brand" />
+            <span>3 Star</span>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Input type="radio" name="brand" />
+            <span>4 Star</span>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Input type="radio" name="brand" />
+            <span>5 Star</span>
+          </div>
         </div>
-        <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>2 Star</span>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>3 Star</span>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>4 Star</span>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <Input type="radio" name="brand"/>
-        <span>5 Star</span>
-        </div>
-      </div>
       </div>
       <hr />
-      
     </section>
   );
 };

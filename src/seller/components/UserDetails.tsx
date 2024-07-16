@@ -14,37 +14,65 @@ const UserDetails = () => {
       <div className="flex gap-4 justify-center">
         <div className="flex flex-col grow my-2">
           <Label>First Name</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your first name" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your first name"
+          />
         </div>
         <div className="flex flex-col grow my-2">
           <Label>Last Name</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your last name" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your last name"
+          />
         </div>
       </div>
       <div className="flex gap-4 justify-center">
         <div className="flex flex-col grow my-2">
           <Label>Email</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your email" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your email"
+          />
         </div>
         <div className="flex flex-col grow my-2">
           <Label>Phone</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your phone" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your phone"
+          />
         </div>
       </div>
       <div className="flex gap-4 justify-center">
         <div className="flex flex-col grow my-2">
           <Label>Address</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your address" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your address"
+          />
         </div>
         <div className="flex flex-col grow my-2">
           <Label>Postal Code</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your postal code" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your postal code"
+          />
         </div>
       </div>
       <div className="flex gap-x-4 justify-center items-center">
         <div className="flex flex-col grow my-2">
           <Label>DOB</Label>
-          <Input type="text" className="h-[50px]" placeholder="Enter your DOB" />
+          <Input
+            type="text"
+            className="h-[50px]"
+            placeholder="Enter your DOB"
+          />
         </div>
         <div className="flex flex-col grow">
           <Label>Gender</Label>

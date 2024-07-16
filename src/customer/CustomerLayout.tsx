@@ -8,14 +8,14 @@ const Layout = () => {
   return (
     <>
       <header className="shadow-sm sticky top-0 left-0 z-10 bg-white">
-        <OfferBar/>
+        <OfferBar />
         <Navbar />
       </header>
       <main className="container">
         <Outlet />
       </main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );

@@ -31,14 +31,18 @@ const OrderCheckout = () => {
                     Brand:Samsung
                   </ParaTypo>
                 </div>
-                <HeadingTypo className="sm:text-xl text-xs opacity-75">Qty:3</HeadingTypo>
-                <HeadingTypo className="sm:text-xl text-xs">Total: 3000</HeadingTypo>
+                <HeadingTypo className="sm:text-xl text-xs opacity-75">
+                  Qty:3
+                </HeadingTypo>
+                <HeadingTypo className="sm:text-xl text-xs">
+                  Total: 3000
+                </HeadingTypo>
               </div>
             );
           })}
       </div>
       <div className="w-full mx-auto sm:max-w-[600px] sticky top-0 left-0 h-fit">
-        <SelectAndViewAddress/>
+        <SelectAndViewAddress />
         <CheckoutBox />
       </div>
     </div>

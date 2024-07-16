@@ -1,13 +1,20 @@
-import React from 'react'
+import React from "react";
 
 interface textAreaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
-className:string
+  className: string;
 }
 
-const TextArea = React.forwardRef<HTMLTextAreaElement,textAreaProps>(({className},ref) => {
+const TextArea = React.forwardRef<HTMLTextAreaElement, textAreaProps>(
+  ({ className }, ref) => {
     return (
-      <textarea className={'border-2 border-gray-500 rounded-md outline-none'+className} ref={ref}></textarea>
-    )
-  })
+      <textarea
+        className={
+          "border-2 border-gray-500 rounded-md outline-none" + className
+        }
+        ref={ref}
+      ></textarea>
+    );
+  },
+);
 
-export default TextArea
+export default TextArea;

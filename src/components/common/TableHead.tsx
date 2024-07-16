@@ -6,13 +6,17 @@ const TableHead = ({
 }: {
   tableHeadData: string[];
   className?: string;
-  tableHeadStyle?:string
+  tableHeadStyle?: string;
 }) => {
   return (
     <thead>
-      <tr className={'sticky top-0 left-0 bg-white border-t-2'+className}>
+      <tr className={"sticky top-0 left-0 bg-white border-t-2" + className}>
         {tableHeadData.map((ele, index) => {
-          return <th className={'p-2 min-w-[120px]'} key={index}>{ele}</th>;
+          return (
+            <th className={"p-2 min-w-[120px]"} key={index}>
+              {ele}
+            </th>
+          );
         })}
       </tr>
     </thead>

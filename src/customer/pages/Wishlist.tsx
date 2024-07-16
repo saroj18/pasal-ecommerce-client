@@ -25,7 +25,15 @@ const Wishlist = () => {
     <div>
       <HeaderBar btnText="See All" heading="Wishlist(4)" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 mb-10">
-        <ProductCard icon={<Trash strokeWidth={1.5} size={30} className="bg-white rounded-full p-1"/>} />
+        <ProductCard
+          icon={
+            <Trash
+              strokeWidth={1.5}
+              size={30}
+              className="bg-white rounded-full p-1"
+            />
+          }
+        />
         <ProductCard />
         <ProductCard />
         <ProductCard />

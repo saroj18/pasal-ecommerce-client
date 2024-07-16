@@ -1,10 +1,12 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const ApproveVendorLayout = () => {
   return (
-    <div><Outlet/></div>
-  )
-}
+    <div>
+      <Outlet />
+    </div>
+  );
+};
 
-export default ApproveVendorLayout
+export default ApproveVendorLayout;
