@@ -1,14 +1,29 @@
-import React from "react";
 import logo from "../../assets/logo.jpg";
 import ParaTypo from "../../components/common/ParaTypo";
 import Label from "../../components/common/Label";
 import Input from "../../components/common/Input";
-import ecommerce from "../../../src/assets/ecommerseImage.webp";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserSignUpZodSchema } from "../../customer/zodschema/user";
+import { useMutation } from "../../utils/useMutation";
+import { FormInput } from "../../customer/pages/Signup";
+
+
 
 const SellerSignUp = () => {
   const navigate = useNavigate();
+  const[mutate]=useMutation()
+  const{register,handleSubmit,formState:{errors}}=useForm<FormInput>({
+    resolver:zodResolver(UserSignUpZodSchema)
+  })
+
+  const onSubmit=(info:FormInput)=>{
+    console.log(info)
+    const{email,password,fullname,username}=info
+    mutate('/user/signup','POST',{email,password,fullname,username,role:'seller'})
+  }
   return (
     <div className="h-screen bg-gray-100 px-3">
       <div
@@ -27,30 +42,46 @@ const SellerSignUp = () => {
               Seller Account
             </ParaTypo>
           </div>
-          <form action="" className="flex flex-col gap-y-3 ">
+          <form action="" className="flex flex-col gap-y-3 " onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col ">
               <Label className="text-xl">Username</Label>
               <Input
+              {...register('username')}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your username"
               />
+              {errors.username?.message && <ParaTypo className="text-sm text-red-500">{errors.username?.message}</ParaTypo>}
             </div>
             <div className="flex flex-col ">
               <Label className="text-xl">Name</Label>
               <Input
+              {...register('fullname')}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your name"
               />
+              {errors.fullname?.message && <ParaTypo className="text-sm text-red-500">{errors.fullname?.message}</ParaTypo>}
+            </div>
+            <div className="flex flex-col ">
+              <Label className="text-xl">email</Label>
+              <Input
+              {...register('email')}
+                className="h-[50px] w-full"
+                type="text"
+                placeholder="enter your email"
+              />
+              {errors.email?.message && <ParaTypo className="text-sm text-red-500">{errors.email?.message}</ParaTypo>}
             </div>
             <div className="flex flex-col ">
               <Label className="text-xl">Password</Label>
               <Input
+              {...register('password')}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your password"
               />
+              {errors.password?.message && <ParaTypo className="text-sm text-red-500">{errors.password?.message}</ParaTypo>}
             </div>
             <ParaTypo className="text-right cursor-pointer">
               Forgot Password

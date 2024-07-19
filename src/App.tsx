@@ -1,4 +1,3 @@
-import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./customer/CustomerLayout";
 import Home from "./customer/pages/Home";
@@ -26,7 +25,6 @@ import Order from "./seller/dashboard/pages/order/Order";
 import Review from "./seller/dashboard/pages/review/Review";
 import "reactjs-popup/dist/index.css";
 import Analytics from "./seller/dashboard/pages/analytics/Analytics";
-import Costumer from "./seller/dashboard/pages/delevery/Delevery";
 import Delevery from "./seller/dashboard/pages/delevery/Delevery";
 import DeleveryPerson from "./seller/dashboard/pages/delevery-person/DeleveryPerson";
 import Customer from "./seller/dashboard/pages/customer/Customer";
@@ -46,6 +44,10 @@ import VendorApprove from "./admin/pages/approve-vender/VendorApprove";
 import AdminAnalytics from "./admin/pages/analytics/AdminAnalytics";
 import ApproveVendorLayout from "./admin/pages/approve-vender/ApproveVendorLayout";
 import VendorDetail from "./admin/pages/approve-vender/VendorDetail";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminSignup from "./admin/pages/AdminSignup";
+import AdminLogin from "./admin/pages/AdminLogin";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -177,6 +179,14 @@ const App = () => {
       ],
     },
     {
+      path: "/adminsignup",
+      element: <AdminSignup />,
+    },
+    {
+      path: "/adminlogin",
+      element: <AdminLogin />,
+    },
+    {
       path: "/admin",
       element: <AdminLayout />,
       children: [
@@ -234,6 +244,7 @@ const App = () => {
   return (
     <>
       <RouterProvider router={route} />
+      <ToastContainer />
     </>
   );
 };

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "chart.js": "^4.4.3",
     "dayjs": "^1.11.11",
     "leaflet": "^1.9.4",
@@ -17,10 +18,13 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.23.0",
+    "react-toastify": "^10.0.5",
     "reactjs-popup": "^2.0.6",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.12",
