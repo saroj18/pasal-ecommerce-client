@@ -9,7 +9,67 @@ import SearchBox from "../../../../components/common/Search";
 import jacket from "../../../../assets/jacket.png";
 import { Edit, Layers, Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
+import { productZodSchema } from "../../../zodschema/product";
+import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "../../../../utils/useMutation";
+
+export type ProductType = z.infer<typeof productZodSchema>;
+export type FormProps = {
+  register: UseFormRegister<ProductType>;
+  errors: FieldErrors<ProductType>;
+};
+
 const Product = () => {
+  const {
+    register,
+    trigger,
+    setValue,
+    setError,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ProductType>({
+    resolver: zodResolver(productZodSchema),
+    defaultValues: {
+      name: "Samsung Altra Pro Max 20 Gen",
+      brand: "Samsung",
+      category: "electronic",
+      price: "120000",
+      discount: "12",
+      stock: "4444",
+      description: "this is the best phone in the world with 100% satisfaction guarantee and 1 year warranty",
+      chating:"enable",
+      barganing:"enable",
+    },
+  });
+  const [mutate] = useMutation();
+  const formData = new FormData();
+  
+  const onSubmit = (data: ProductType) => {
+    console.log(data)
+    if(data.features.length<5){
+      setError('features',{
+        message:"Atleast 5 features are required"
+      })
+      return
+    }
+    const productInfo: { [key: string]: string } = {};
+    Object.entries(data).forEach(([key, value]) => {
+      if (key != "images") {
+        productInfo[key] = value;
+      } else {
+        for (let i = 0; i < value.length; i++) {
+          formData.append("images", value[i]);
+        }
+      }
+    });
+    formData.append("productInfo", JSON.stringify(productInfo));
+    mutate("/product/add", "POST", formData);
+    reset()
+  };
+
   return (
     <div>
       <HeadingTypo className="text-3xl">Add Product</HeadingTypo>
@@ -17,19 +77,26 @@ const Product = () => {
         Add your product for your customer
       </ParaTypo>
 
-      <div className="flex flex-col lg:flex-row gap-7 mt-5">
-        <ProductInfo />
-        <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
-          <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
-            <ProductImage />
-            <CategoryCard />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col lg:flex-row gap-7 mt-5">
+          <ProductInfo errors={errors} register={register} />
+          <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
+            <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
+              <ProductImage
+                setValue={setValue}
+                trigger={trigger}
+                errors={errors}
+                register={register}
+              />
+              <CategoryCard errors={errors} register={register} />
+            </div>
+            <PriceCard setValue={setValue}  errors={errors} register={register} />
           </div>
-          <PriceCard />
         </div>
-      </div>
-      <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
-        Save
-      </Button>
+        <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
+          Add Product
+        </Button>
+      </form>
 
       <div className="relative flex flex-col sm:flex-row items-center sm:justify-between  my-4">
         <div className="my-4">

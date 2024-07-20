@@ -12,21 +12,25 @@ export const useMutation = () => {
     try {
       const resp = await fetch(`${import.meta.env.VITE_HOST}${url}`, {
         method,
-        body: JSON.stringify(bodyData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        credentials: "include",
+        body:
+          bodyData instanceof FormData ? bodyData : JSON.stringify(bodyData),
+        headers:
+          bodyData instanceof FormData
+            ? {}
+            : { "Content-Type": "application/json" },
       });
+      console.log(resp);
       const respData = await resp.json();
-      console.log(respData)
-      if(!respData.success){
-        toast.error(respData.error)
+      console.log(respData);
+      if (!respData.success) {
+        toast.error(respData.error);
       }
       setData(respData.data);
-      setLoading(false);    
+      setLoading(false);
       toast.success(respData.message);
     } catch (error: any) {
-        console.log(error)
+      console.log(error);
       setLoading(false);
       setError(true);
       toast.error(error.message);
