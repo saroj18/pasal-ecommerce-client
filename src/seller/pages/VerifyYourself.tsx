@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import  { MutableRefObject, useRef, useState } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
-import ParaTypo from "../../components/common/ParaTypo";
-import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import Label from "../../components/common/Label";
-import Select from "../../components/common/Select";
-import Option from "../../components/common/Option";
 import UserDetails from "../components/UserDetails";
 import ShopDetails from "../components/ShopDetails";
 import OtpVerification from "../components/OtpVerification";
 import ThanksForChoosingUs from "../components/ThanksForChoosingUs";
+import AddAddressForm from "../../customer/pages/account/page/AddAddressForm";
 
 const VerifyYourself = () => {
   const [formStage, setFormStage] = useState<number>(0);
+  const [open,setOpen]=useState(true)
+  const btnRef=useRef<MutableRefObject<HTMLButtonElement>>()
 
   const prvHandler = () => {
     if (formStage > 0) {
@@ -21,7 +19,7 @@ const VerifyYourself = () => {
   };
 
   const nextHandler = () => {
-    if (formStage < 3) {
+    if (formStage < 1) {
       setFormStage(formStage + 1);
     }
   };
@@ -30,12 +28,11 @@ const VerifyYourself = () => {
       {formStage < 3 && (
         <div className="bg-gray-200 h-screen">
           <HeadingTypo className="text-center text-3xl py-4 font-semibold ">
-            Let's Verify YourSelf
+            Let's Verify Your Shop
           </HeadingTypo>
           <div className="w-full bg-white max-w-[900px] rounded-md p-4 mx-auto">
-            {formStage === 0 && <UserDetails />}
-            {formStage === 1 && <ShopDetails />}
-            {formStage === 2 && <OtpVerification />}
+           <ShopDetails />
+            {false && <OtpVerification />}
             <div className="flex justify-between mt-5">
               <Button
                 onClick={prvHandler}
@@ -47,7 +44,7 @@ const VerifyYourself = () => {
                 onClick={nextHandler}
                 className="bg-red-500 text-white px-6 rounded-md  py-1  text-2xl"
               >
-                Next
+                {formStage===2 ? "Submit" : "Next"}
               </Button>
             </div>
           </div>

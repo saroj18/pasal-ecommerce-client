@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 import { string } from "zod";
+import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
+import { VerifyForm, VerifyInfoTyype } from "../customer/pages/account/component/VerifyForm";
+import { useQuery } from "../utils/useQuery";
 
 type ProductType = {
   name: string;
@@ -13,7 +16,6 @@ type ProductType = {
   price: string;
   features: string[];
   images?: File[];
-  
 };
 type ProvideProps = {
   sidebar: boolean;
@@ -24,12 +26,18 @@ type ProvideProps = {
   setProductInfo: React.Dispatch<React.SetStateAction<ProductType>>;
   zodError:{[key:string]:string}
   setZodError:React.Dispatch<React.SetStateAction<{[key:string]:string}>>
+  verifyPopup:boolean
+  setVerifyPopup:React.Dispatch<React.SetStateAction<boolean>>
+  setVerifyInfo: React.Dispatch<React.SetStateAction<AddressForm | VerifyForm | VerifyInfoTyype>>;
+  verifyInfo: AddressForm | VerifyForm | VerifyInfoTyype;
+  data:any
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
 
 export const Context = ({ children }: { children: React.ReactNode }) => {
   const [sidebar, setSidebar] = useState<boolean>(false);
+  const[verifyPopup,setVerifyPopup]=useState<boolean>(false)
   const [accountSideBar, setAccountSideBar] = useState<boolean>(false);
   const[zodError,setZodError]=useState<{[key:string]:string}>({})
   const [productInfo, setProductInfo] = useState<ProductType>({
@@ -45,6 +53,26 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     features: [],
     images: [],
   });
+  const [verifyInfo,setVerifyInfo]=useState<VerifyInfoTyype | VerifyForm | AddressForm>({
+    fullname:'',
+    email:'',
+    mobile:'',
+    dob:'',
+    state:'',
+    district:'',
+    tole:'',
+    city:'',
+    gender:'',
+    defaultAddress:'',
+    nearBy:'',
+    ward:'',
+    location:{
+      lat:0,
+      lng:0
+    }
+  })
+
+  const [data]=useQuery('/user')
   return (
     <ContextProvider.Provider
       value={{
@@ -55,7 +83,12 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         setProductInfo,
         productInfo,
         zodError,
-        setZodError
+        setZodError,
+        verifyPopup,
+        setVerifyPopup,
+        setVerifyInfo,
+        verifyInfo,
+        data
       }}
     >
       {children}

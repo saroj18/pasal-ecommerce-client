@@ -24,6 +24,7 @@ export const useMutation = () => {
       const respData = await resp.json();
       console.log(respData);
       if (!respData.success) {
+        setError(true)
         toast.error(respData.error);
       }
       setData(respData.data);

@@ -48,6 +48,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminSignup from "./admin/pages/AdminSignup";
 import AdminLogin from "./admin/pages/AdminLogin";
+import VerifyForm from "./customer/pages/account/component/VerifyForm";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -115,6 +116,10 @@ const App = () => {
             {
               path: "myreview",
               element: <MyReview />,
+            },
+            {
+              path: "verify",
+              element: <VerifyForm />,
             },
           ],
         },

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import SearchBox from "../../../../components/common/Search";
@@ -8,8 +8,12 @@ import Table from "../../../../components/common/Table";
 import { tableData, tableHeadData } from "./tableData";
 import TableData from "../../../../components/common/TableData";
 import TableBody from "../../../../components/common/TableBody";
+import { useQuery } from "../../../../utils/useQuery";
+import TableRow from "../../../../components/common/TableRow";
 
 const Inventory = () => {
+  const [data, error, loading] = useQuery("/product/inventory");
+  console.log(data);
   return (
     <div className="overflow-auto">
       <div className="flex flex-col lg:flex-row gap-y-4 lg:justify-between w-full  md:relative sticky left-0 top-0">
@@ -38,12 +42,21 @@ const Inventory = () => {
           className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
           tableHeadData={tableHeadData}
         />
-        <TableBody className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0">
-          {tableData.map((ele, index) => {
+        <TableBody>
+          {data?.map((ele: any, index) => {
             return (
-              <Fragment key={index}>
-                <TableData className="p-3">{ele}</TableData>
-              </Fragment>
+              <TableRow className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0">
+                <TableData className="p-3">{ele._id}</TableData>
+                <TableData className="p-3">{ele.name}</TableData>
+                <TableData className="p-3">{ele.category}</TableData>
+                <TableData className="p-3">{ele.stock}</TableData>
+                <TableData className="p-3">{ele.stock}</TableData>
+                <TableData className="p-3">{ele.price}</TableData>
+                <TableData className="p-3">{ele.discount}</TableData>
+                <TableData className="p-3">{ele.brand}</TableData>
+                <TableData className="p-3">{ele.price}</TableData>
+                <TableData className="p-3">{ele.price*245}</TableData>
+              </TableRow>
             );
           })}
         </TableBody>

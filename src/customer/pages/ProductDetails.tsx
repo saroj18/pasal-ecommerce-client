@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import { BaggageClaim, Heart, MessageCircle, Star, Video } from "lucide-react";
 import ParaTypo from "../../components/common/ParaTypo";
@@ -98,14 +97,14 @@ const ProductDetails = () => {
               </Button>
             </div>
           </div>
-          <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {/* <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
             <Button className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4">
               Bargaining On Video Call <Video fill="white" color="white" />{" "}
             </Button>
             <Button className="rounded-md py-2 px-3 justify-center bg-blue-500 text-white flex gap-x-2">
               Chat with Shop Owner <MessageCircle />{" "}
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
       <ProductDescription />

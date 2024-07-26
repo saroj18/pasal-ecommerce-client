@@ -7,7 +7,7 @@ type categoryProps = {
 
 const CategoryCard = ({ category, icon }: categoryProps) => {
   return (
-    <div className="border-2 border-gray-500 flex justify-center items-center flex-col h-[150px] w-[150px] rounded-md cursor-pointer">
+    <div className="border-2 border-gray-500 flex justify-center items-center flex-col h-[140px] w-[140px] rounded-md cursor-pointer">
       {icon}
       <p className="text-xl">{category}</p>
     </div>

@@ -2,15 +2,11 @@ import React from "react";
 import ParaTypo from "../common/ParaTypo";
 import { twMerge } from "tailwind-merge";
 import {
-  Cross,
-  CrossIcon,
-  Delete,
   Heart,
   LogIn,
   LogOut,
   ShoppingBag,
   ShoppingCart,
-  Star,
   StarIcon,
   User,
 } from "lucide-react";

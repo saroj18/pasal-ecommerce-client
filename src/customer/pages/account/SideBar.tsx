@@ -26,6 +26,11 @@ const SideBar = () => {
         <Link to={"/account/addressbook"}>
           <li className="cursor-pointer">Address Book</li>
         </Link>
+        <Link to={"/account/verify"}>
+          <li className="cursor-pointer">
+            Verify Yourself
+          </li>
+        </Link>
       </ul>
       <Link to={"/account/myreview"}>
         <HeadingTypo className="text-lg cursor-pointer my-2">

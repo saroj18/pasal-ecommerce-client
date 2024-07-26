@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import PersonalProfile from "./component/box/PersonalProfile";
 import AddressBox from "./component/box/AddressBox";

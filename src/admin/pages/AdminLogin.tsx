@@ -19,7 +19,7 @@ const AdminLogin = () => {
 
   const onSubmit=(info:LoginInput)=>{
     const{email,password}=info
-    mutate('/user/login','POST',{email,password,role:'seller'})
+    mutate('/user/login','POST',{email,password,role:'admin'})
   }
   return (
     <div className="bg-gray-100 h-screen px-4">
