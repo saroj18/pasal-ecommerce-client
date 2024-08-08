@@ -7,7 +7,7 @@ type AddressBookProps = {
   userInfo: any;
 };
 
-const AddressBookComponent = ({ setOpen, userInfo }: AddressBookProps) => {
+const AddressBookComponent = ({ setOpen, userInfo}: AddressBookProps) => {
   console.log(userInfo);
   return (
     <>
@@ -26,11 +26,8 @@ const AddressBookComponent = ({ setOpen, userInfo }: AddressBookProps) => {
           {`${userInfo.district} District, ${userInfo.state} Province, ${userInfo.city}-${userInfo.ward}, ${userInfo.tole}, Near By ${userInfo.nearBy}`}
         </p>
         <div className="flex text-sm sm:text-sm">
-          <p className="border-2 border-gray-500 lowercase rounded-md mx-1 p-1 shadow-md">
-            DEFAULT DELIVERY ADDRESS
-          </p>
-          <p className="border-2 border-gray-500 lowercase rounded-md mx-1 p-1 shadow-md">
-            DEFAULT BILLING ADDRESS
+          <p className="border-2 border-gray-500 rounded-md mx-1 p-1 shadow-md uppercase">
+            {userInfo.defaultAddress}
           </p>
         </div>
       </div>
@@ -41,8 +38,8 @@ const AddressBookComponent = ({ setOpen, userInfo }: AddressBookProps) => {
 const AddressBook = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const [data] = useQuery<any>("/user/address");
-  console.log(data);
+  const {data} = useQuery<any>("/user/address");
+  console.log('data>>>>>',data);
   return (
     <div className="p-3 w-full">
       <div className="flex justify-between w-full items-center">

@@ -5,11 +5,20 @@ import { Heart, Search, ShoppingCart, User } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
 import logo from "../../assets/logo.jpg";
 import SearchBox from "../common/Search";
+import ParaTypo from "../common/ParaTypo";
+import { useQuery } from "../../utils/useQuery";
+
+// type CountType={
+//   wishListCount:number
+//   cartCount:number
+// }
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
+  const {data}=useQuery<any>('/product/cartandwishlist/count')
+  console.log(data)
 
   const popupCloser = (e: MouseEvent) => {
     if (
@@ -43,16 +52,22 @@ const Navbar = () => {
       <div className="flex items-center w-full md:w-[35%]  ">
         <SearchBox className="w-full" />
         <div className="flex gap-x-6">
+          <div className="relative">
           <Heart
             onClick={() => navigate("/wishlist")}
             className="cursor-pointer hidden lg:block"
             opacity={0.7}
           />
-          <ShoppingCart
-            onClick={() => navigate("/cart")}
-            className="cursor-pointer hidden lg:block"
-            opacity={0.7}
-          />
+          <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">{data?.wishListCount}</ParaTypo>
+          </div>
+          <div className="relative">
+            <ShoppingCart
+              onClick={() => navigate("/cart")}
+              className="cursor-pointer hidden lg:block"
+              opacity={0.7}
+            />
+            <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">{data?.cartCount}</ParaTypo>
+          </div>
           <div className="relative">
             <User
               onClick={(e) => {
@@ -63,6 +78,8 @@ const Navbar = () => {
             />
             {dropdown && (
               <AccountDropdown
+              cartCount={data?.cartCount}
+              wishListCount={data?.wishListCount}
                 ref={dropDownRef}
                 className="absolute -left-[212px]  top-10 z-10"
               />

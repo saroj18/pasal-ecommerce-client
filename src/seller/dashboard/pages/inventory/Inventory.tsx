@@ -12,7 +12,7 @@ import { useQuery } from "../../../../utils/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 
 const Inventory = () => {
-  const [data, error, loading] = useQuery("/product/inventory");
+  const {data, error, loading} = useQuery<any>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">
@@ -43,7 +43,7 @@ const Inventory = () => {
           tableHeadData={tableHeadData}
         />
         <TableBody>
-          {data?.map((ele: any, index) => {
+          {data?.map((ele: any, index:number) => {
             return (
               <TableRow className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0">
                 <TableData className="p-3">{ele._id}</TableData>

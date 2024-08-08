@@ -72,7 +72,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     }
   })
 
-  const [data]=useQuery('/user')
+  const {data}=useQuery('/user')
   return (
     <ContextProvider.Provider
       value={{

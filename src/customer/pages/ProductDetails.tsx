@@ -3,24 +3,47 @@ import { BaggageClaim, Heart, MessageCircle, Star, Video } from "lucide-react";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import ProductSectionBar from "../../components/bar/ProductSectionBar";
 import ProductCard from "../../components/ProductCard";
 import { HeaderBar } from "./Wishlist";
 import ProductDescription from "./account/component/ProductDescription";
+import { useParams } from "react-router-dom";
+import { useQuery } from "../../utils/useQuery";
+import { useMutation } from "../../utils/useMutation";
+import { useState } from "react";
 
 const ProductDetails = () => {
+  const { id } = useParams<{ id: string }>();
+  const {mutate} = useMutation();
+  const [count, setCount] = useState(1);
+
+  const {data} = useQuery<any>(`/product/${id}`);
+
+  const addToCartHandler = (id: string) => {
+    mutate(`/product/cart`, "POST", { productId: id,count });
+  };
+
+  const addOnWishList=(id:string)=>{
+    mutate('/product/wishlist','POST',{productId:id})
+  }
+
+  const increaseCount = () => {
+    setCount(count + 1);
+  }
+
+  const decreaseCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col md:flex-row gap-x-10 mt-8 mb-10 border-b-2 pb-3">
-        <div className="border-2 border-gray-500 rounded-md shadow-md">
-          <img
-            className="w-[80%]"
-            src="https://purepng.com/public/uploads/large/purepng.com-refrigeratorrefrigeratorfridgeiceboxrefrigeratoryfreezer-1701528368818jyb9k.png"
-            alt=""
-          />
+        <div className="border-2 border-gray-500 rounded-md shadow-md md:min-w-[35%] p-3 flex items-center justify-center">
+          <img src={data?.images?.[0]} alt="" />
         </div>
         <div>
-          <HeadingTypo className="text-3xl">LCD Monitor 45 Inch</HeadingTypo>
+          <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
           <div className="flex items-center my-4">
             <section className="flex items-center">
               <Star size={17} color="orange" fill="orange" />
@@ -34,11 +57,9 @@ const ProductDetails = () => {
               In Stock
             </span>
           </div>
-          <ParaTypo className="font-bold text-2xl">$122</ParaTypo>
+          <ParaTypo className="font-bold text-2xl">${data?.price}</ParaTypo>
           <ParaTypo className="text-sm border-b-2 pb-4 my-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit,
-            ratione! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Aliquam, accusantium! Aperiam, saepe voluptas. Autem, provident.
+            {data?.description}
           </ParaTypo>
           <div className="flex gap-x-3">
             <ParaTypo>Colors:</ParaTypo>
@@ -71,27 +92,31 @@ const ProductDetails = () => {
           <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
             <div className="flex gap-x-4">
               <div className="flex items-center border-gray-500 border-2 h-[40px]">
-                <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
+                <ParaTypo onClick={decreaseCount} className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white">
                   -
                 </ParaTypo>
                 <Input
-                  className="w-[40px] rounded-none h-[40px]"
+                  className="w-[40px] rounded-none h-[40px] text-center font-bold"
                   readOnly
                   type="text"
+                  value={count}
                 />
-                <ParaTypo className="px-4 text-4xl cursor-pointer hover:bg-red-500 hover:text-white">
+                <ParaTypo onClick={increaseCount} className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white">
                   +
                 </ParaTypo>
               </div>
               <div className="border-2 border-gray-500 p-1 rounded-md flex justify-center items-center cursor-pointer">
-                <Heart strokeWidth={1.2} />
+                <Heart onClick={()=>addOnWishList(data?._id)} strokeWidth={1.2} />
               </div>
             </div>
             <div className=" gap-2 flex flex-col lg:flex-row ">
               <Button className="bg-red-500  rounded-md text-white py-2 px-4 ">
                 Buy Now
               </Button>
-              <Button className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2">
+              <Button
+                onClick={() => addToCartHandler(data._id)}
+                className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2"
+              >
                 Add to Cart
                 <BaggageClaim strokeWidth={1} />
               </Button>
@@ -107,7 +132,10 @@ const ProductDetails = () => {
           </div> */}
         </div>
       </div>
-      <ProductDescription />
+      <ProductDescription
+        description={data?.description}
+        features={data?.features}
+      />
       <HeaderBar heading="For You" btnText="See More" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-3">
         <ProductCard />

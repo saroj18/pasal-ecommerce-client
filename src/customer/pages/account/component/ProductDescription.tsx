@@ -4,30 +4,31 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import { StarIcon } from "lucide-react";
 import { ReviewComponent } from "../page/ReviewHistory";
 
-const ProductDescription = () => {
+type ProductDescriptionProps = {
+  description: string;
+  features: string[];
+};
+
+const ProductDescription = ({description,features}:ProductDescriptionProps) => {
   return (
     <div>
       <HeadingTypo className="text-2xl font-semibold mb-3 underline">
         Product Description
       </HeadingTypo>
       <ParaTypo className="opacity-75">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iure
-        perspiciatis accusantium quos ex explicabo sit assumenda dolorum maxime!
-        Iste. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto
-        quia delectus dicta harum repudiandae, est animi. Cumque neque ad
-        incidunt.
+       {description}
       </ParaTypo>
 
       <HeadingTypo className="text-2xl font-semibold my-5 underline">
         Specification
       </HeadingTypo>
       <ul className="list-disc ml-9 text-xl">
-        <li>Crystal clear display</li>
-        <li>Full Warranty from 1 year</li>
-        <li>Buy 1 get 1 free</li>
-        <li>Easy to Installation</li>
-        <li>Very Expensive</li>
-        <li>Fokat ka mall</li>
+        {
+          features?.map((feature,index)=>{
+            return <li key={index}>{feature}</li>
+          }
+          )
+        }
       </ul>
       <HeadingTypo className="text-2xl font-semibold my-5 underline">
         Rating and Reviews

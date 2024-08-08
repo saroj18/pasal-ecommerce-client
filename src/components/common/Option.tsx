@@ -3,11 +3,12 @@ import React from "react";
 interface optionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
   children: string;
   value: string;
+  className?:string
 }
 
 const Option = React.forwardRef<HTMLOptionElement, optionProps>(
-  ({ value, children }) => {
-    return <option value={value}>{children}</option>;
+  ({ value,className,children }) => {
+    return <option className={className} value={value}>{children}</option>;
   },
 );
 

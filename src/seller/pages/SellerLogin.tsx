@@ -12,15 +12,19 @@ import { useMutation } from "../../utils/useMutation";
 
 const SellerLogin = () => {
   const navigate = useNavigate();
-  const[mutate]=useMutation()
-  const{register,handleSubmit,formState:{errors}}=useForm<LoginInput>({
-    resolver:zodResolver(UserLoginZodSchema)
-  })
+  const { mutate } = useMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInput>({
+    resolver: zodResolver(UserLoginZodSchema),
+  });
 
-  const onSubmit=(info:LoginInput)=>{
-    const{email,password}=info
-    mutate('/user/login','POST',{email,password,role:'seller'})
-  }
+  const onSubmit = (info: LoginInput) => {
+    const { email, password } = info;
+    mutate("/user/login", "POST", { email, password, role: "seller" });
+  };
   return (
     <div className="bg-gray-100 h-screen px-4">
       <div
@@ -39,27 +43,39 @@ const SellerLogin = () => {
               Seller Account
             </ParaTypo>
           </div>
-          <form action="" className="flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            action=""
+            className="flex flex-col gap-y-3"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex flex-col ">
               <Label className="text-xl">Email</Label>
               <Input
-              {...register('email')}
+                {...register("email")}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your email"
               />
-              {errors.email?.message && <ParaTypo className="text-sm text-red-500">{errors.email?.message}</ParaTypo>}
+              {errors.email?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.email?.message}
+                </ParaTypo>
+              )}
             </div>
 
             <div className="flex flex-col ">
               <Label className="text-xl">Password</Label>
               <Input
-              {...register('password')}
+                {...register("password")}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your password"
               />
-              {errors.password?.message && <ParaTypo className="text-sm text-red-500">{errors.password?.message}</ParaTypo>}
+              {errors.password?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.password?.message}
+                </ParaTypo>
+              )}
             </div>
             <ParaTypo className="text-right cursor-pointer">
               Forgot Password

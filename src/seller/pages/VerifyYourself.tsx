@@ -1,16 +1,12 @@
-import  { MutableRefObject, useRef, useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import Button from "../../components/common/Button";
-import UserDetails from "../components/UserDetails";
 import ShopDetails from "../components/ShopDetails";
 import OtpVerification from "../components/OtpVerification";
 import ThanksForChoosingUs from "../components/ThanksForChoosingUs";
-import AddAddressForm from "../../customer/pages/account/page/AddAddressForm";
 
 const VerifyYourself = () => {
   const [formStage, setFormStage] = useState<number>(0);
-  const [open,setOpen]=useState(true)
-  const btnRef=useRef<MutableRefObject<HTMLButtonElement>>()
 
   const prvHandler = () => {
     if (formStage > 0) {
@@ -31,7 +27,7 @@ const VerifyYourself = () => {
             Let's Verify Your Shop
           </HeadingTypo>
           <div className="w-full bg-white max-w-[900px] rounded-md p-4 mx-auto">
-           <ShopDetails />
+            <ShopDetails />
             {false && <OtpVerification />}
             <div className="flex justify-between mt-5">
               <Button
@@ -44,7 +40,7 @@ const VerifyYourself = () => {
                 onClick={nextHandler}
                 className="bg-red-500 text-white px-6 rounded-md  py-1  text-2xl"
               >
-                {formStage===2 ? "Submit" : "Next"}
+                {formStage === 2 ? "Submit" : "Next"}
               </Button>
             </div>
           </div>

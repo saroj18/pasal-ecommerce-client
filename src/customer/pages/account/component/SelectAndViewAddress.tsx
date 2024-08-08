@@ -1,27 +1,76 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../../components/common/Button";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Option from "../../../../components/common/Option";
 import Select from "../../../../components/common/Select";
+import { useQuery } from "../../../../utils/useQuery";
+import { OrderType } from "../../OrderCheckout";
 
 type addressProps = {
   delevery: boolean;
   billing: boolean;
 };
 
-const SelectAndViewAddress = () => {
+type AddressProps={
+orderDetails:OrderType
+setOrderDetails:React.Dispatch<React.SetStateAction<OrderType>>
+}
+
+const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
   const [open, setOpen] = useState<addressProps>({
     delevery: false,
     billing: false,
   });
+  const [address, setAddress] = useState({
+    deleveryAddress: "",
+    billingAddress: "",
+  });
+
+  const delevery:any[] = [];
+  const billing:any[] = [];
+  const {data} = useQuery<any>("/user/address");
+
+  data && data.forEach((ele:any) => {
+    if (
+      ele.defaultAddress == "delevery" ||
+      ele.defaultAddress == "deleveryandbilling"
+    ) {
+      delevery.push(ele);
+    }
+    if (
+      ele.defaultAddress == "billing" ||
+      ele.defaultAddress == "deleveryandbilling"
+    ) {
+      billing.push(ele);
+    }
+  });
+
+  useEffect(()=>{
+    let dele=`${delevery[0]?.state} Province,${delevery[0]?.district} District,${delevery[0]?.city}-${delevery[0]?.ward},${delevery[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`
+    let bill=`${billing[0]?.state} Province,${billing[0]?.district} District,${billing[0]?.city}-${billing[0]?.ward},${billing[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`
+  setAddress((prv)=>({...prv,deleveryAddress:dele}))
+  setAddress((prv)=>({...prv,billingAddress:bill}))
+  setOrderDetails((prv)=>({...prv,billingAddress:billing[0]?._id,deleveryAddress:delevery[0]?._id}))
+  },[data])
+
+  const billingHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
+    setOrderDetails((prv)=>({...prv,billingAddress:e.target.value}))
+    setAddress((prv)=>({...prv,billingAddress:e.target.title}))
+  }
+  const deleveryHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
+    console.log(e.target)
+    setOrderDetails((prv)=>({...prv,deleveryAddress:e.target.value}))
+    setAddress((prv)=>({...prv,deleveryAddress:e.target.title}))
+  }
+
+  console.log(data);
   return (
     <div className="p-2 border-2 border-gray-200 shadow-md mb-2">
       <div className="border-2 p-2 rounded-md shadow-md">
         <HeadingTypo className="text-xl mb-2  ">Delevery Address</HeadingTypo>
         <div className="flex items-center gap-x-3">
-          <HeadingTypo className="opacity-60">
-            Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-            Swarshati Mandir
+          <HeadingTypo className="opacity-60 capitalize">
+            {address.deleveryAddress}
           </HeadingTypo>
           <Button
             onClick={() => setOpen((prv) => ({ ...prv, delevery: true }))}
@@ -32,22 +81,18 @@ const SelectAndViewAddress = () => {
         </div>
         {open.delevery && (
           <div>
-            <Select className="w-full mt-4">
-              <Option defaultChecked value="">
-                Select Address
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
+            <Select onChange={deleveryHandler} className="w-full mt-4 capitalize">
+              {data.map((ele: any, index: number) => {
+                const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
+                return (
+                  (ele.defaultAddress == "delevery" ||
+                    ele.defaultAddress == "deleveryandbilling") && (
+                    <Option title={address} value={ele._id} key={index} className="capitalize">
+                      {address}
+                    </Option>
+                  )
+                );
+              })}
             </Select>
             <Button
               onClick={() => setOpen((prv) => ({ ...prv, delevery: false }))}
@@ -61,9 +106,8 @@ const SelectAndViewAddress = () => {
       <div className="border-2 p-2 rounded-md shadow-md my-2">
         <HeadingTypo className="text-xl mb-2  ">Billing Address</HeadingTypo>
         <div className="flex items-center gap-x-3">
-          <HeadingTypo className="opacity-60">
-            Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-            Swarshati Mandir
+          <HeadingTypo className="opacity-60 capitalize">
+            {address.billingAddress}
           </HeadingTypo>
           <Button
             onClick={() => setOpen((prv) => ({ ...prv, billing: true }))}
@@ -74,22 +118,18 @@ const SelectAndViewAddress = () => {
         </div>
         {open.billing && (
           <div>
-            <Select className="w-full mt-4">
-              <Option defaultChecked value="">
-                Select Address
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
-              <Option value="">
-                Bagmati Province,Ratnanagar,Tadi Bazar,Ratnanagar 14,Near By
-                Swarshati Mandir
-              </Option>
+            <Select onChange={billingHandler} className="w-full mt-4 capitalize">
+              {data.map((ele: any, index: number) => {
+                const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
+                return (
+                  (ele.defaultAddress == "billing" ||
+                    ele.defaultAddress == "deleveryandbilling") && (
+                    <Option  value={ele._id} key={index} className="capitalize">
+                      {address}
+                    </Option>
+                  )
+                );
+              })}
             </Select>
             <Button
               onClick={() => setOpen((prv) => ({ ...prv, billing: false }))}

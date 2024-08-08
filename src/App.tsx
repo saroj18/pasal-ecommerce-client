@@ -49,6 +49,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminSignup from "./admin/pages/AdminSignup";
 import AdminLogin from "./admin/pages/AdminLogin";
 import VerifyForm from "./customer/pages/account/component/VerifyForm";
+import EsewaSuccess from "./customer/pages/EsewaSuccess";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -90,7 +91,7 @@ const App = () => {
           element: <OrderCheckout />,
         },
         {
-          path: "/details",
+          path: "/details/:id",
           element: <ProductDetails />,
         },
         {
@@ -136,6 +137,10 @@ const App = () => {
     {
       path: "/otp",
       element: <VerifyYourself />,
+    },
+    {
+      path: "/esewa-success",
+      element: <EsewaSuccess />,
     },
     {
       path: "/dashboard",
@@ -249,7 +254,13 @@ const App = () => {
   return (
     <>
       <RouterProvider router={route} />
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        closeOnClick={true}
+        limit={1}
+        autoClose={1000}
+        hideProgressBar={true}
+      />
     </>
   );
 };

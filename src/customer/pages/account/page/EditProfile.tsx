@@ -11,13 +11,22 @@ import { EditProfileZodSchema } from "../../../zodschema/user";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
+import { useQuery } from "../../../../utils/useQuery";
 
 type EditProfileType=z.infer<typeof EditProfileZodSchema>
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const [data]=useQuery<any>('/user')
+  console.log(data)
   const{register,handleSubmit,formState:{errors}}=useForm<EditProfileType>({
-    resolver:zodResolver(EditProfileZodSchema)
+    resolver:zodResolver(EditProfileZodSchema),
+    defaultValues:{
+      fullname:data?.fullname,
+      email:data?.email,
+      mobile:data?.mobile,
+      dob:data?.dob
+    }
   })
 
   const onSubmit=(data:EditProfileType)=>{

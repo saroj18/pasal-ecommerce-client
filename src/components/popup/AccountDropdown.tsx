@@ -14,10 +14,12 @@ import { Link } from "react-router-dom";
 
 type dropdownProps = {
   className: string;
+  cartCount:number
+  wishListCount:number
 };
 
 const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
-  ({ className }, ref) => {
+  ({ className,cartCount,wishListCount }, ref) => {
     return (
       <div
         ref={ref}
@@ -46,15 +48,17 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
         </div>
         <div className="flex items-center gap-4 p-2 lg:hidden hover:bg-neutral-100 cursor-pointer">
           <Heart opacity={0.6} />
-          <Link to={"/account/myreview"}>
+          <Link to={"/wishlist"}>
             <ParaTypo className="">My WishList</ParaTypo>
           </Link>
+            <ParaTypo className="text-red-500">{wishListCount}</ParaTypo>
         </div>
         <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
           <ShoppingCart opacity={0.6} />
-          <Link to={"/account/myreview"}>
+          <Link to={"/cart"}>
             <ParaTypo className="">My Cart</ParaTypo>
           </Link>
+            <ParaTypo className="text-red-500">{cartCount}</ParaTypo>
         </div>
         <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
           <LogIn opacity={0.6} />

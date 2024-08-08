@@ -1,8 +1,22 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-export const useMutation = () => {
-  const [data, setData] = useState<any>();
+type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  message: string;
+  error?: string;
+};
+
+type UseMutationResult<T> = {
+  mutate: (url: string, method: string, bodyData: any) => Promise<void>;
+  data: T | undefined;
+  error: boolean;
+  loading: boolean;
+};
+
+export const useMutation = <T>(): UseMutationResult<T> => {
+  const [data, setData] = useState<T | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -21,15 +35,18 @@ export const useMutation = () => {
             : { "Content-Type": "application/json" },
       });
       console.log(resp);
-      const respData = await resp.json();
+      const respData: ApiResponse<T> = await resp.json();
       console.log(respData);
       if (!respData.success) {
-        setError(true)
+        setError(true);
         toast.error(respData.error);
+      } else {
+        setData(respData.data);
       }
-      setData(respData.data);
+      if (respData.message) {
+        toast.success(respData.message);
+      }
       setLoading(false);
-      toast.success(respData.message);
     } catch (error: any) {
       console.log(error);
       setLoading(false);
@@ -38,5 +55,5 @@ export const useMutation = () => {
     }
   };
 
-  return [mutate, data, error, loading];
+  return { mutate, data, error, loading };
 };

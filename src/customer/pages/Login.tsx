@@ -15,7 +15,7 @@ export type LoginInput=z.infer<typeof UserLoginZodSchema>
 
 const Login = () => {
   const navigate = useNavigate();
-  const[mutate]=useMutation()
+  const{mutate}=useMutation()
   const{register,handleSubmit,formState:{errors}}=useForm<LoginInput>({
     resolver:zodResolver(UserLoginZodSchema)
   })
