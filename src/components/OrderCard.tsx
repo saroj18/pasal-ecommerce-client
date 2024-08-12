@@ -7,16 +7,18 @@ import computer from "../../public/computer.png";
 const OrderCard = ({
   background,
   label,
+  info
 }: {
   background: string;
   label: string;
+  info:any
 }) => {
   return (
     <div className="w-full text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
       <div className="flex w-full items-center justify-between">
         <div>
           <ParaTypo className="opacity-75 text-sm">Order ID</ParaTypo>
-          <HeadingTypo>#34254353523</HeadingTypo>
+          <HeadingTypo className="text-sm">#{info._id}</HeadingTypo>
         </div>
         <div>
           <ParaTypo
@@ -29,12 +31,12 @@ const OrderCard = ({
       <div className="flex justify-between border-gray-50o p-2 border-2 rounded-full my-2">
         <div className="flex items-center gap-x-2">
           <Truck />
-          <span>Kalanki,Kathmandu</span>
+          <span className="text-sm">Kalanki,Kathmandu</span>
         </div>
         <p>--------</p>
         <div className="flex items-center gap-x-2">
           <MapPin />
-          <span>Ratnanagar,Chitwan</span>
+          <span className="capitalize text-sm">{`${info.deleveryAddress.city},${info.deleveryAddress.district}`}</span>
         </div>
       </div>
       <div className="flex items-center">

@@ -8,3 +8,7 @@
 .leaflet-container {
   height: 100%;
 }
+
+.scrollbar {
+  scrollbar-width: 0;
+}

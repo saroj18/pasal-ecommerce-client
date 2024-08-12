@@ -1,4 +1,3 @@
-import React from "react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Button from "../../../../components/common/Button";
@@ -21,7 +20,7 @@ const DetailsBox = ({ heading, data }: detailsProps) => {
 
 const MyProfile = () => {
 
-  const [data] = useQuery<any>("/user");
+  const {data} = useQuery<any>("/user");
   console.log(data)
   return (
     <div className="w-full p-4 bg-gray-50">

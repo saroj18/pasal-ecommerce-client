@@ -9,10 +9,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../utils/useMutation";
+import { useEffect } from "react";
 
 const SellerLogin = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation();
+  const { mutate, response } = useMutation<any>();
   const {
     register,
     handleSubmit,
@@ -25,6 +26,22 @@ const SellerLogin = () => {
     const { email, password } = info;
     mutate("/user/login", "POST", { email, password, role: "seller" });
   };
+
+  useEffect(() => {
+    console.log(response);
+    if (response && response?.data.verify) {
+      if (!response.data.shopVerify) {
+        navigate("/otp");
+      } else {
+        navigate("/dashboard");
+      }
+      localStorage.setItem("role", "SELLER");
+    }
+    if (response && !response?.data.verify) {
+      navigate("/account/verify");
+      localStorage.setItem("role", "SELLER");
+    }
+  }, [response]);
   return (
     <div className="bg-gray-100 h-screen px-4">
       <div

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Table from "../../../components/common/Table";
 import TableHead from "../../../components/common/TableHead";
@@ -8,9 +8,21 @@ import { tableHeadData } from "./tableData";
 import Button from "../../../components/common/Button";
 import SearchBox from "../../../components/common/Search";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "../../../utils/useQuery";
+import TableRow from "../../../components/common/TableRow";
 
 const Vendor = () => {
   const navigate = useNavigate();
+  const [vendorList, setVendorList] = useState([]);
+
+  const { data } = useQuery<any>("/vendor");
+
+  useEffect(() => {
+    if (data) {
+      setVendorList(data);
+    }
+  }, [data]);
+
   return (
     <div className="w-full overflow-auto">
       <div className="flex flex-col md:flex-row items-center justify-between sticky left-0 top-0">
@@ -20,21 +32,32 @@ const Vendor = () => {
       <Table className="border-2 text-xs md:text-base">
         <TableHead className="" tableHeadData={tableHeadData} />
         <TableBody>
-          <TableData className="p-2">125353453534543</TableData>
-          <TableData className="p-2">John Doe Stor</TableData>
-          <TableData className="p-2">Kalanki,Kathmandu</TableData>
-          <TableData className="p-2">2024-03-03</TableData>
-          <TableData className="p-2">John Doe</TableData>
-          <TableData className="p-2">400</TableData>
-          <TableData className="p-2">Rs 3M</TableData>
-          <TableData className="p-2">
-            <Button
-              onClick={() => navigate("vendor-details")}
-              className="bg-green-500 text-white py-2 px-4 rounded-md"
-            >
-              View Full Details
-            </Button>
-          </TableData>
+          {vendorList &&
+            vendorList.map((ele: any, index) => {
+              return (
+                <>
+                  <TableRow>
+                    <TableData key={index} className="p-2">
+                      {ele._id.slice(15)}
+                    </TableData>
+                    <TableData className="p-2">{ele.shopName}</TableData>
+                    <TableData className="p-2">{ele.shopAddress}</TableData>
+                    <TableData className="p-2">2024-03-03</TableData>
+                    <TableData className="p-2">{ele.owner.fullname}</TableData>
+                    <TableData className="p-2">{ele.category}</TableData>
+                    <TableData className="p-2">{ele.monthlyTurnover}</TableData>
+                    <TableData className="p-2">
+                      <Button
+                        onClick={() => navigate(ele._id)}
+                        className="bg-green-500 text-white py-2 px-4 rounded-md"
+                      >
+                        View Full Details
+                      </Button>
+                    </TableData>
+                  </TableRow>
+                </>
+              );
+            })}
         </TableBody>
       </Table>
     </div>

@@ -10,7 +10,7 @@ const SideBar = () => {
     <aside
       onClick={() => setAccountSideBar(false)}
       style={{ top: accountSideBar ? "0%" : "-70%" }}
-      className=" md:flex flex-col transition-all duration-400 p-3 shadow-lg w-full md:max-w-[220px] max-h-[500px] md:sticky -top-[18%] md:left-0 left- bg-white absolute"
+      className=" md:flex flex-col transition-all scrollbar duration-400 p-3 shadow-lg w-full md:max-w-[220px] max-h-[500px] md:sticky -top-[18%] md:left-0 left- bg-white absolute"
     >
       <X
         onClick={() => setAccountSideBar(false)}

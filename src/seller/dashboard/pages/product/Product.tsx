@@ -40,21 +40,22 @@ const Product = () => {
       price: "120000",
       discount: "12",
       stock: "4444",
-      description: "this is the best phone in the world with 100% satisfaction guarantee and 1 year warranty",
-      chating:"enable",
-      barganing:"enable",
+      description:
+        "this is the best phone in the world with 100% satisfaction guarantee and 1 year warranty",
+      chating: "enable",
+      barganing: "enable",
     },
   });
-  const {mutate} = useMutation();
+  const { mutate } = useMutation();
   const formData = new FormData();
-  
+
   const onSubmit = (data: ProductType) => {
-    console.log(data)
-    if(data.features.length<5){
-      setError('features',{
-        message:"Atleast 5 features are required"
-      })
-      return
+    console.log(data);
+    if (data.features.length < 5) {
+      setError("features", {
+        message: "Atleast 5 features are required",
+      });
+      return;
     }
     const productInfo: { [key: string]: string } = {};
     Object.entries(data).forEach(([key, value]) => {
@@ -68,14 +69,14 @@ const Product = () => {
     });
     formData.append("productInfo", JSON.stringify(productInfo));
     mutate("/product/add", "POST", formData);
-    reset()
+    reset();
   };
 
-  const {data}=useQuery<any>('/product')
+  const { data } = useQuery<any>("/product/myproduct");
 
-  const productDeleteHandler=(id:string)=>{
-    mutate(`/product/${id}`,'DELETE',{id})
-  }
+  const productDeleteHandler = (id: string) => {
+    mutate(`/product/${id}`, "DELETE", { id });
+  };
 
   return (
     <div>
@@ -97,7 +98,11 @@ const Product = () => {
               />
               <CategoryCard errors={errors} register={register} />
             </div>
-            <PriceCard setValue={setValue}  errors={errors} register={register} />
+            <PriceCard
+              setValue={setValue}
+              errors={errors}
+              register={register}
+            />
           </div>
         </div>
         <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
@@ -134,45 +139,43 @@ const Product = () => {
           </thead>
 
           <tbody>
-            {
-              data && data.map((product:any)=>(
+            {data &&
+              data.map((product: any) => (
                 <tr className="border-2 border-gray-300 lg:text-xl text-sm">
-                <td className="flex flex-col items-center p-2">
-                  <img
-                    className="lg:h-[80px] h-[40px] rounded-md"
-                    src={product.images[0]}
-                    alt=""
-                  />
-                  <ParaTypo className="text-sm lg:text-base">
-                    {product.name}
-                  </ParaTypo>
-                </td>
-                <td>Rs {product.price}</td>
-                <td>{product.brand}</td>
-                <td>{product.category}</td>
-                <td>22</td>
-                <td>20</td>
-                <td>2024-03-11</td>
-                <td className="flex justify-around gap-x-1 items-center px-3">
-                  <Trash
-                  onClick={()=>productDeleteHandler(product._id)}
-                    strokeWidth={0.9}
-                    className="cursor-pointer size-4 md:size-5"
-                  />
-                  <Edit
-                    strokeWidth={0.9}
-                    className="cursor-pointer size-4 md:size-5"
-                  />
-                  <Layers
-                    color="red"
-                    strokeWidth={0.9}
-                    className="cursor-pointer size-4 md:size-5"
-                  />
-                </td>
-              </tr>
-              ))
-            }
-            
+                  <td className="flex flex-col items-center p-2">
+                    <img
+                      className="lg:h-[80px] h-[40px] rounded-md"
+                      src={product.images[0]}
+                      alt=""
+                    />
+                    <ParaTypo className="text-sm lg:text-base">
+                      {product.name}
+                    </ParaTypo>
+                  </td>
+                  <td>Rs {product.price}</td>
+                  <td>{product.brand}</td>
+                  <td>{product.category}</td>
+                  <td>22</td>
+                  <td>20</td>
+                  <td>2024-03-11</td>
+                  <td className="flex justify-around gap-x-1 items-center px-3">
+                    <Trash
+                      onClick={() => productDeleteHandler(product._id)}
+                      strokeWidth={0.9}
+                      className="cursor-pointer size-4 md:size-5"
+                    />
+                    <Edit
+                      strokeWidth={0.9}
+                      className="cursor-pointer size-4 md:size-5"
+                    />
+                    <Layers
+                      color="red"
+                      strokeWidth={0.9}
+                      className="cursor-pointer size-4 md:size-5"
+                    />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

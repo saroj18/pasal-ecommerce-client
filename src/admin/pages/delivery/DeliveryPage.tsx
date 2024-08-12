@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import person from "../../../../src/assets/person.avif";
 import Popup from "reactjs-popup";
 import { Edit, Trash, X } from "lucide-react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import ParaTypo from "../../../components/common/ParaTypo";
 import SearchBox from "../../../components/common/Search";
-import AddDeleveryPerson from "../../../seller/dashboard/components/AddDeleveryPerson";
 import Label from "../../../components/common/Label";
+import AddDeleveryPerson from "./AddDeleveryPerson";
+import { useQuery } from "../../../utils/useQuery";
 
 const DeliveryPage = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { data } = useQuery<any>("/deleveryperson");
   return (
     <div className="overflow-auto">
       <div className="sticky left-0 top-0">
@@ -42,29 +44,30 @@ const DeliveryPage = () => {
         </thead>
 
         <tbody>
-          {Array(30)
-            .fill(null)
-            .map((_, index) => {
+          {data &&
+            data.map((ele: any, index: number) => {
               return (
                 <tr
                   onClick={() => setOpen(true)}
                   key={index}
-                  className=" border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
+                  className="capitalize border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
                 >
                   <td className="p-3 flex items-center justify-center">
                     <img
                       className="mdh-[70px] h-[30px] rounded-md"
-                      src={person}
+                      src={ele.profileImage}
                       alt=""
                     />
                   </td>
-                  <td className="p-3">0932901471239234</td>
-                  <td className="p-3">John Doe</td>
-                  <td className="p-3">Kathmandu</td>
-                  <td className="p-3">Male</td>
-                  <td className="p-3">2024-01-22</td>
-                  <td className="p-3">9876545676</td>
-                  <td className="p-3">On Leave</td>
+                  <td title={ele._id} className="p-3">
+                    {ele._id.slice(15)}
+                  </td>
+                  <td className="p-3">{ele.firstname}</td>
+                  <td className="p-3">{ele.address}</td>
+                  <td className="p-3">{ele.gender}</td>
+                  <td className="p-3">{ele.dob}</td>
+                  <td className="p-3">{ele.phone}</td>
+                  <td className="p-3">{ele.status}</td>
                   <td className="p-3 flex items-center gap-x-3 md:gap-x-6 justify-center">
                     <Edit
                       className="size-4 md:size-5"

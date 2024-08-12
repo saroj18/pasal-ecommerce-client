@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Label from "../../../../components/common/Label";
 import Input from "../../../../components/common/Input";
@@ -14,12 +14,12 @@ import { z } from "zod";
 import { useContextProvider } from "../../../../context/Context";
 
 export type VerifyForm = z.infer<typeof UserVefifyZodSchema>;
-export type VerifyInfoTyype=VerifyForm & AddressForm
+export type VerifyInfoTyype = VerifyForm & AddressForm;
 
 const VerifyForm = () => {
-  const [open, setOpen] = useState(false);
-  const {setVerifyInfo,data}=useContextProvider()
-  console.log(data)
+  const [open, setOpen] = useState<boolean>(false);
+  const { setVerifyInfo, data } = useContextProvider();
+  console.log(data);
   const {
     register,
     handleSubmit,
@@ -27,31 +27,31 @@ const VerifyForm = () => {
     formState: { errors },
   } = useForm<VerifyForm>({
     resolver: zodResolver(UserVefifyZodSchema),
-    defaultValues:{
-      fullname:data.fullname,
-      email:data.email
-    }
+    defaultValues: {
+      fullname: data?.fullname,
+      email: data?.email,
+    },
   });
 
   const onSubmit = (data: VerifyForm) => {
-    if(!data){
-        setOpen(false)
-        return
-    }else{
-        setOpen(true)
-        setVerifyInfo((prv)=>({...prv,...data}))
-        return
+    if (!data) {
+      setOpen(false);
+      return;
+    } else {
+      setOpen(true);
+      setVerifyInfo((prv) => ({ ...prv, ...data }));
+      return;
     }
   };
 
-  useEffect(()=>{
-    if(data){
+  useEffect(() => {
+    if (data) {
       reset({
-        fullname:data.fullname,
-        email:data.email
-      })
+        fullname: data.fullname,
+        email: data.email,
+      });
     }
-  },[data])
+  }, [data]);
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
       <HeadingTypo className="text-3xl my-3">Verify Yourself</HeadingTypo>
@@ -62,7 +62,7 @@ const VerifyForm = () => {
         <div>
           <Label className="flex flex-col">Full Name</Label>
           <Input
-          disabled
+            disabled
             {...register("fullname")}
             className="w-full h-[50px]"
             placeholder="enter your full name"
@@ -77,7 +77,7 @@ const VerifyForm = () => {
         <div>
           <Label className="flex flex-col">Email Address</Label>
           <Input
-          disabled
+            disabled
             {...register("email")}
             className="w-full h-[50px]"
             placeholder="enter your email address"
@@ -133,14 +133,12 @@ const VerifyForm = () => {
           )}
         </div>
         <div className="my-7 flex flex-col gap-2 justify-center sm:items-start">
-          <Button
-            className="border-2 bg-blue-500 rounded-md text-white px-3 py-2"
-            >
+          <Button className="border-2 bg-blue-500 rounded-md text-white px-3 py-2">
             {open ? "Submit" : "Verify Address"}
           </Button>
         </div>
       </form>
-              {open && <AddAddressForm setOpen={setOpen} />}
+      {open && <AddAddressForm setOpen={setOpen} />}
     </div>
   );
 };

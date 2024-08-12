@@ -217,7 +217,7 @@ const App = () => {
               element: <VendorAnalytics />,
             },
             {
-              path: "vendor-details",
+              path: ":id",
               element: <VendorDetails />,
             },
           ],
@@ -239,7 +239,7 @@ const App = () => {
               element: <VendorApprove />,
             },
             {
-              path: "details",
+              path: ":id",
               element: <VendorDetail />,
             },
           ],

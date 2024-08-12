@@ -4,8 +4,8 @@ export const tableHeadData = [
   "Address",
   "Join On",
   "Owner",
-  "Total Sale",
-  "Total TurnOver",
+  "Category",
+  "Exptd. TurnOver(Y)",
   "Action",
 ];
 

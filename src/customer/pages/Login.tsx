@@ -9,22 +9,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginZodSchema } from "../zodschema/user";
 import { z } from "zod";
 import { useMutation } from "../../utils/useMutation";
+import { useEffect } from "react";
 
-export type LoginInput=z.infer<typeof UserLoginZodSchema>
-
+export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
-  const{mutate}=useMutation()
-  const{register,handleSubmit,formState:{errors}}=useForm<LoginInput>({
-    resolver:zodResolver(UserLoginZodSchema)
-  })
+  const { mutate, data } = useMutation<any>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInput>({
+    resolver: zodResolver(UserLoginZodSchema),
+  });
 
-  const onSubmit=(item:LoginInput)=>{
-    const{email,password}=item
+  useEffect(() => {
+    if (data) {
+      navigate("/");
+      localStorage.setItem("role", "CUSTOMER");
+    }
+  }, [data]);
 
-    mutate('/user/login','POST',{email,password,role:'customer'})
-  }
+  const onSubmit = (item: LoginInput) => {
+    const { email, password } = item;
+    mutate("/user/login", "POST", { email, password, role: "customer" });
+  };
   return (
     <div className="flex justify-around mt-10 flex-col gap-4 md:flex-row lg:max-w-[75%] mx-auto">
       <img className="md:max-w-[45%] mx-auto" src={ecommerseImage} alt="" />
@@ -32,19 +42,27 @@ const Login = () => {
         <HeadingTypo className="text-2xl">Log in to Exclusive</HeadingTypo>
         <ParaTypo className="mt-2">Enter your details below</ParaTypo>
         <Input
-        {...register('email')}
+          {...register("email")}
           type="text"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Email"
         />
-        {errors.email?.message && <ParaTypo className="text-red-500 text-sm">{errors.email.message}</ParaTypo>}
+        {errors.email?.message && (
+          <ParaTypo className="text-red-500 text-sm">
+            {errors.email.message}
+          </ParaTypo>
+        )}
         <Input
-        {...register('password')}
+          {...register("password")}
           type="password"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Password"
         />
-        {errors.password?.message && <ParaTypo className="text-red-500 text-sm">{errors.password.message}</ParaTypo>}
+        {errors.password?.message && (
+          <ParaTypo className="text-red-500 text-sm">
+            {errors.password.message}
+          </ParaTypo>
+        )}
         <Button className="w-full bg-red-500 text-white py-3 rounded-md mt-5">
           Login
         </Button>

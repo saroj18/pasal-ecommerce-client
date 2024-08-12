@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import Label from "../../components/common/Label";
 import Input from "../../components/common/Input";
@@ -11,6 +11,7 @@ import { ShopDetailsZodSchema } from "../zodschema/product";
 import { z } from "zod";
 import ParaTypo from "../../components/common/ParaTypo";
 import { useMutation } from "../../utils/useMutation";
+import { useNavigate } from "react-router-dom";
 
 type ShopType = z.infer<typeof ShopDetailsZodSchema>;
 
@@ -18,7 +19,8 @@ const ShopDetails = () => {
   const shopImageFileInputRef = useRef<HTMLInputElement>(null);
   const documentImageFileInputRef = useRef<HTMLInputElement>(null);
   const yourImageFileInputRef = useRef<HTMLInputElement>(null);
-  const [mutate] = useMutation();
+  const { mutate, response } = useMutation();
+  const navigate = useNavigate();
 
   const clickHandler = (params: string) => {
     if (params == "yourImage") {
@@ -34,7 +36,6 @@ const ShopDetails = () => {
     register,
     setValue,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ShopType>({
     resolver: zodResolver(ShopDetailsZodSchema),
@@ -65,6 +66,17 @@ const ShopDetails = () => {
     formData.append("shopDetails", info);
     mutate("/seller/verify", "POST", formData);
   };
+
+  useEffect(() => {
+    console.log(response);
+
+    if (response && response?.data.verify) {
+      navigate("/dashboard");
+    }
+    if (response && !response?.data.verify) {
+      navigate("/account/verify");
+    }
+  }, [response]);
 
   const imageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Label from "../../../../components/common/Label";
 import Input from "../../../../components/common/Input";
@@ -8,21 +7,32 @@ import Select from "../../../../components/common/Select";
 import Option from "../../../../components/common/Option";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { AddressZodSchema } from "../../../zodschema/user";
+import {
+  AddressZodSchema,
+  LocalStorageUserRoleSchema,
+} from "../../../zodschema/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useContextProvider } from "../../../../context/Context";
 import { useMutation } from "../../../../utils/useMutation";
+import { useEffect } from "react";
+import {
+  errorFormatter,
+  zodErrorFormatter,
+} from "../../../../utils/errorFormatter";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export type AddressForm = z.infer<typeof AddressZodSchema>;
 
 type formProps = {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   close?: boolean;
 };
 
 const AddAddressForm = ({ setOpen, close = false }: formProps) => {
-  const [mutate, data, error] = useMutation();
+  const { mutate, response } = useMutation();
+  const navigate = useNavigate();
   const {
     register,
     setValue,
@@ -44,17 +54,36 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
   };
 
   const onSubmit = (data: AddressForm) => {
-    
-      let obj = { ...verifyInfo, ...data  };
+    let obj = { ...verifyInfo, ...data };
     mutate("/user/verify", "POST", obj);
   };
 
+  const closeHandler = () => {
+    if (setOpen) setOpen(false);
+  };
+
+  useEffect(() => {
+    console.log(response);
+    if (response?.success) {
+      const role = LocalStorageUserRoleSchema.safeParse({
+        role: localStorage.getItem("role"),
+      });
+      if (role.success) {
+        console.log(role.data);
+        role.data.role == "CUSTOMER" ? navigate("/") : navigate("/otp");
+      } else {
+        const error = zodErrorFormatter(role?.error?.format());
+        toast.error(error.role);
+      }
+    }
+  }, [response]);
+
   return (
-    <div className="w-full max-w-[700px] mx-auto border-gray-500 border-2 rounded-md p-3 mb-3 relative">
+    <div className="w-full max-w-[700px] bg-white mx-auto border-gray-300 shadow-md border-2 rounded-md p-3 mb-3 relative">
       <HeadingTypo className="text-2xl mb-4">Add Address</HeadingTypo>
       {close && (
         <X
-          onClick={() => setOpen(false)}
+          onClick={closeHandler}
           className="absolute left-[93%] cursor-pointer top-2"
         />
       )}

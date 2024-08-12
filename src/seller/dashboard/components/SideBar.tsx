@@ -21,7 +21,7 @@ const SideBar = ({ accountList, dashboardList }: SideBarProps) => {
   return (
     <aside
       onClick={() => setSidebar(false)}
-      className={`grow  ${sideBar ? "min-w-[250px]" : " min-w-[80px]"} md:w-[80px] h-[100vh] absolute max-h-[100%] border-b-0 bg-white z-10  md:sticky top-0  ${sidebar ? "left-0" : "-left-[100%]"} transition-all  overflow-y-scroll overflow-x-hidden border-2 border-gray-500  shadow-md font-poppins p-3`}
+      className={`grow  ${sideBar ? "min-w-[250px]" : " min-w-[80px]"} h-screen md:w-[80px] fixed border-b-0 bg-white z-10  md:sticky top-0  ${sidebar ? "left-0" : "-left-[100%]"} transition-all overflow-y-scroll overflow-x-hidden border-2 border-gray-500  shadow-md font-poppins scrollbar p-3`}
     >
       <X
         onClick={() => setSidebar(false)}

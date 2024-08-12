@@ -60,7 +60,7 @@ const CheckoutBox = ({
     if (!orderDetails.payMethod) {
       toast.error("please select payment method");
     }
-    mutate("/payment/esewa", "POST", { orderDetails });
+    mutate("/order/esewa", "POST", { orderDetails });
   };
 
   console.log(totalPrice);

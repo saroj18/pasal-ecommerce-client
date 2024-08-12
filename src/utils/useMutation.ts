@@ -13,12 +13,14 @@ type UseMutationResult<T> = {
   data: T | undefined;
   error: boolean;
   loading: boolean;
+  response: any;
 };
 
 export const useMutation = <T>(): UseMutationResult<T> => {
   const [data, setData] = useState<T | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [response, setResponse] = useState<any>();
 
   const mutate = async (url: string, method: string, bodyData: any) => {
     setError(false);
@@ -37,14 +39,15 @@ export const useMutation = <T>(): UseMutationResult<T> => {
       console.log(resp);
       const respData: ApiResponse<T> = await resp.json();
       console.log(respData);
+      setResponse(respData);
       if (!respData.success) {
         setError(true);
         toast.error(respData.error);
       } else {
         setData(respData.data);
-      }
-      if (respData.message) {
-        toast.success(respData.message);
+        if (respData.message) {
+          toast.success(respData.message);
+        }
       }
       setLoading(false);
     } catch (error: any) {
@@ -55,5 +58,5 @@ export const useMutation = <T>(): UseMutationResult<T> => {
     }
   };
 
-  return { mutate, data, error, loading };
+  return { mutate, data, response, error, loading };
 };

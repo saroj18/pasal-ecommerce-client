@@ -3,13 +3,17 @@ import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import OrderCard from "../../components/OrderCard";
 import Button from "../../components/common/Button";
+import { useQuery } from "../../utils/useQuery";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
+  const { data: shippingOrders } = useQuery<any>("/order");
+  console.log(shippingOrders);
 
   const clickHandler = (params: string) => {
     setOrderState(params);
   };
+
   return (
     <div className="mt-4">
       <HeadingTypo className="text-3xl">My Orders</HeadingTypo>
@@ -42,17 +46,16 @@ const MyOrder = () => {
       </div>
       {orderState == "shipping" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {Array(10)
-            .fill(null)
-            .map((_, index) => {
-              return (
-                <OrderCard
-                  background="blue"
-                  key={index}
-                  label="Est. arrival on 20 Jan 2024"
-                />
-              );
-            })}
+          {shippingOrders?.map((ele, index: number) => {
+            return (
+              <OrderCard
+                background="blue"
+                key={index}
+                label="Est. arrival on 20 Jan 2024"
+                info={ele}
+              />
+            );
+          })}
         </div>
       )}
       {orderState == "arrived" && (

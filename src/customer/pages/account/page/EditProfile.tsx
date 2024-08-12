@@ -17,7 +17,7 @@ type EditProfileType=z.infer<typeof EditProfileZodSchema>
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const [data]=useQuery<any>('/user')
+  const {data}=useQuery<any>('/user')
   console.log(data)
   const{register,handleSubmit,formState:{errors}}=useForm<EditProfileType>({
     resolver:zodResolver(EditProfileZodSchema),

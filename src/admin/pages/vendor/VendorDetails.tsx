@@ -1,15 +1,29 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Label from "../../../components/common/Label";
 import MostSellingProductCard from "../../../seller/dashboard/components/MostSellingProductCard";
 import Button from "../../../components/common/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import DetailsCard from "./DetailsCard";
 import { shopDetails } from "./tableData";
+import { useQuery } from "../../../utils/useQuery";
+import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 
 const VendorDetails = () => {
   const navigate = useNavigate();
+  const [vendor, setVendor] = useState<any>();
+  const [shop, setShop] = useState<{ [key: string]: string }>({});
+  const { id } = useParams();
+  const { data } = useQuery(`/vendor/${id}`);
+
+  useEffect(() => {
+    if (data) {
+      setVendor(data);
+      const shopInfo = shopDataFormatter(data);
+      setShop(shopInfo);
+    }
+  }, [data]);
 
   return (
     <div className="md:p-5">
@@ -19,7 +33,7 @@ const VendorDetails = () => {
       />
       <div className="flex flex-col md:flex-row justify-between items-center">
         <HeadingTypo className="text-2xl font-semibold">
-          John Doe Shop
+          {vendor?.shopName} Shop
         </HeadingTypo>
         <Button
           onClick={() => navigate("/admin/vendor/analytics")}
@@ -28,15 +42,10 @@ const VendorDetails = () => {
           View Analytics
         </Button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-between gap-3 my-6">
-        {shopDetails.map(
-          (
-            { label, value }: { label: string; value: string },
-            index: number,
-          ) => {
-            return <DetailsCard key={index} heading={label} value={value} />;
-          },
-        )}
+      <div className="flex flex-wrap justify-between gap-3 my-6">
+        {Object.entries(shop).map(([key, value]: [string, string]) => {
+          return <DetailsCard key={key} heading={key} value={value} />;
+        })}
       </div>
       <div>
         <HeadingTypo className="text-3xl font-semibold">
