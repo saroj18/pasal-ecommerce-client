@@ -1,5 +1,3 @@
-import { UseFormRegister } from "react-hook-form";
-import { FormInputs } from "./AddDeleveryPerson";
 
 type addDeleveryPersonOptions = {
   children: string;

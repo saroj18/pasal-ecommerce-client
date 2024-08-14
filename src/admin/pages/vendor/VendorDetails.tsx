@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
-import Label from "../../../components/common/Label";
 import MostSellingProductCard from "../../../seller/dashboard/components/MostSellingProductCard";
 import Button from "../../../components/common/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import DetailsCard from "./DetailsCard";
-import { shopDetails } from "./tableData";
 import { useQuery } from "../../../utils/useQuery";
 import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 

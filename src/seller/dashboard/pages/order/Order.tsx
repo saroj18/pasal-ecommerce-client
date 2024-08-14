@@ -1,11 +1,15 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import SearchBox from "../../../../components/common/Search";
 import jacket from "../../../../assets/jacket.png";
 import Button from "../../../../components/common/Button";
+import { useMutation } from "../../../../utils/useMutation";
+import { useQuery } from "../../../../utils/useQuery";
 
 const Order = () => {
+  const { data } = useQuery<any>("/order/sellerorder");
+  console.log(data);
+
   return (
     <div className="overflow-auto">
       <div className="flex flex-col md:flex-row w-full justify-between md:justify-around lg:justify-between items-center sticky left-0 top-0">
@@ -33,26 +37,35 @@ const Order = () => {
           </tr>
         </thead>
         <tbody>
-          {Array(15)
-            .fill(null)
-            .map((_, index) => {
+          {data &&
+            data.map((ele: any, index: number) => {
               return (
-                <tr key={index} className="border-b-2 border-t-2 ">
-                  <td className="p-2 flex flex-col items-center justify-center gap-x-2">
-                    {" "}
+                <tr key={index} className="border-b-2 border-t-2 capitalize ">
+                  <td
+                    title={ele.orderProducts?.name}
+                    className="p-2 flex flex-col items-center justify-center gap-x-2"
+                  >
                     <img
                       className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
-                      src={jacket}
+                      src={ele.orderProducts?.images[0]}
                     />{" "}
-                    Leather Jacket
+                    {ele.orderProducts?.name.slice(0, 20)}...
                   </td>
-                  <td className="p-2">985943879872934</td>
-                  <td className="p-2">John Doe</td>
-                  <td className="p-2">2024-01-22</td>
-                  <td className="p-2">02:44 PM</td>
-                  <td className="p-2">Khalti</td>
-                  <td className="p-2">30%</td>
-                  <td className="p-2">Rs 3000</td>
+                  <td title={ele.product} className="p-2">
+                    {ele.product.slice(15)}
+                  </td>
+                  <td title={ele.customer[0]._id} className="p-2">
+                    {ele.customer[0].fullname}
+                  </td>
+                  <td className="p-2">
+                    {new Date(ele.createdAt).toDateString()}
+                  </td>
+                  <td className="p-2">
+                    {new Date(ele.createdAt).toLocaleTimeString()}
+                  </td>
+                  <td className="p-2">{ele.payMethod}</td>
+                  <td className="p-2">{ele.orderProducts?.discount}%</td>
+                  <td className="p-2">Rs {ele.orderProducts?.price}</td>
                   <td className="p-2 flex gap-1 flex-col items-center">
                     <Button className="bg-green-500 px-3 w-full py-2 text-white rounded-md">
                       Placed

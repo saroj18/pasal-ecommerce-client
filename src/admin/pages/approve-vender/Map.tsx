@@ -1,17 +1,16 @@
-import React from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import Popup from "reactjs-popup";
 import "leaflet/dist/leaflet.css";
-import shop from "../../../assets/shop.png";
-import L from "leaflet";
+// import shop from "../../../assets/shop.png";
+// import L from "leaflet";
 
-const shopIcon: L.Icon = new L.Icon({
-  iconUrl: shop,
-  // iconRetinaUrl: marker,
-  popupAnchor: [-0, -0],
-  iconSize: [32, 45],
-  shadowRetinaUrl: shop,
-});
+// const shopIcon: L.Icon = new L.Icon({
+//   iconUrl: shop,
+//   // iconRetinaUrl: marker,
+//   popupAnchor: [-0, -0],
+//   iconSize: [32, 45],
+//   shadowRetinaUrl: shop,
+// });
 
 type MapProps = {
   locationPoint: {

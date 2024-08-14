@@ -33,13 +33,14 @@ const OrderCheckout = () => {
     totalPrice: 0,
     deleveryCharge: 20,
   });
+  console.log("pp", productData);
 
   loading ? <h1>loading</h1> : null;
   useLayoutEffect(() => {
     let products: string[] = [];
     productData &&
       productData.forEach((ele: any) => {
-        products.push(ele._id);
+        products.push(ele.product._id);
       });
     setOrderDetails((prv) => ({ ...prv, product: products }));
   }, [productData]);

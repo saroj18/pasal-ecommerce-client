@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Table from "../../../components/common/Table";
 import TableHead from "../../../components/common/TableHead";
@@ -6,7 +6,7 @@ import { tableHead } from "./tableData";
 import TableBody from "../../../components/common/TableBody";
 import TableData from "../../../components/common/TableData";
 import Button from "../../../components/common/Button";
-import { IndexRouteObject, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useQuery } from "../../../utils/useQuery";
 import TableRow from "../../../components/common/TableRow";
 

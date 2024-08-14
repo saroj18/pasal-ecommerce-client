@@ -44,6 +44,7 @@ const ProductDetails = () => {
         </div>
         <div>
           <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
+          <ParaTypo>From {}</ParaTypo>
           <div className="flex items-center my-4">
             <section className="flex items-center">
               <Star size={17} color="orange" fill="orange" />
@@ -59,7 +60,7 @@ const ProductDetails = () => {
           </div>
           <ParaTypo className="font-bold text-2xl">${data?.price}</ParaTypo>
           <ParaTypo className="text-sm border-b-2 pb-4 my-4">
-            {data?.description}
+            {data?.description.slice(0,200)}...
           </ParaTypo>
           <div className="flex gap-x-3">
             <ParaTypo>Colors:</ParaTypo>

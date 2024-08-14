@@ -1,4 +1,3 @@
-import React from "react";
 import Label from "../../../components/common/Label";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import { twMerge } from "tailwind-merge";

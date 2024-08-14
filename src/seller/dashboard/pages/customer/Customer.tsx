@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Table from "../../../../components/common/Table";
@@ -6,8 +5,24 @@ import TableHead from "../../../../components/common/TableHead";
 import { tableHeadData } from "./data";
 import TableBody from "../../../../components/common/TableBody";
 import TableData from "../../../../components/common/TableData";
+import { useQuery } from "../../../../utils/useQuery";
+import TableRow from "../../../../components/common/TableRow";
+import dayjs from "dayjs";
+import {
+  differenceInBusinessDays,
+  differenceInCalendarDays,
+  differenceInHours,
+  differenceInSeconds,
+  formatDistanceToNow,
+} from "date-fns";
 
 const Customer = () => {
+  const { data } = useQuery<any>("/user/allmycustomer");
+
+  console.log(data);
+
+  const value = dayjs(data?.[0].createdAt).format("YYYY//MM/DD");
+  console.log(value);
   return (
     <div className="overflow-auto">
       <div className="sticky left-0 top-0">
@@ -20,15 +35,42 @@ const Customer = () => {
         <Table>
           <TableHead tableHeadData={tableHeadData} />
           <TableBody>
-            <TableData className="p-2">89789345724935</TableData>
-            <TableData className="p-2">John Doe</TableData>
-            <TableData className="p-2">Leather Jacket</TableData>
-            <TableData className="p-2">43928iuoi98943u</TableData>
-            <TableData className="p-2">Rs 2000</TableData>
-            <TableData className="p-2">10%</TableData>
-            <TableData className="p-2">2024-03-02</TableData>
-            <TableData className="p-2">1 day ago</TableData>
-            <TableData className="p-2">Esewa</TableData>
+            {data &&
+              data.map((ele: any) => {
+                return (
+                  <TableRow key={ele._id}>
+                    <TableData title={ele._id} className="p-2">
+                      {ele._id.slice(15)}
+                    </TableData>
+                    <TableData className="p-2 capitalize">
+                      {ele.customer.fullname}
+                    </TableData>
+                    <TableData
+                      title={ele.productList.name}
+                      className="p-2 capitalize"
+                    >
+                      {ele.productList.name.slice(30)}...
+                    </TableData>
+                    <TableData title={ele.productList._id} className="p-2">
+                      {ele.productList._id.slice(15)}
+                    </TableData>
+                    <TableData className="p-2">
+                      Rs {ele.productList.price}
+                    </TableData>
+                    <TableData className="p-2">
+                      {new Date(ele.createdAt).toDateString()}
+                    </TableData>
+                    <TableData className="p-2 capitalize">
+                      {formatDistanceToNow(new Date(ele.createdAt), {
+                        addSuffix: true,
+                      })}
+                    </TableData>
+                    <TableData className="p-2 capitalize">
+                      {ele.payMethod}
+                    </TableData>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </div>

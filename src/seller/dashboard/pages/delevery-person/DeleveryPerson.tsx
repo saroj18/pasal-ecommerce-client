@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import AddDeleveryPerson from "../../components/AddDeleveryPerson";
 import person from "../../../../assets/person.avif";
 import SearchBox from "../../../../components/common/Search";
 import Popup from "reactjs-popup";
 import Label from "../../../../components/common/Label";
 import { X } from "lucide-react";
+import { useQuery } from "../../../../utils/useQuery";
 
 const DeleveryPerson = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { data } = useQuery<any>("/deleveryperson");
   return (
     <div className="overflow-auto">
-      {/* <HeadingTypo className="text-3xl">Delevery Person</HeadingTypo>
-      <ParaTypo className="opacity-75 text-[15px]">
-        Add and View Delevery Persons
-      </ParaTypo> */}
-      {/* <AddDeleveryPerson /> */}
       <div className="md:relative flex flex-col md:flex-row justify-between items-center sticky left-0 top-0">
         <HeadingTypo className="text-2xl font-semibold  mt-6">
           All Delevery Person
@@ -39,29 +35,32 @@ const DeleveryPerson = () => {
         </thead>
 
         <tbody>
-          {Array(30)
-            .fill(null)
-            .map((_, index) => {
+          {data &&
+            data.map((ele: any, index: number) => {
               return (
                 <tr
                   onClick={() => setOpen(true)}
                   key={index}
-                  className=" border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
+                  className=" border-gray-300 capitalize border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
                 >
                   <td className="p-3 flex items-center justify-center">
                     <img
                       className="h-[30px] lg:h-[70px] rounded-md"
-                      src={person}
+                      src={ele.profileImage}
                       alt=""
                     />
                   </td>
-                  <td className="p-3">0932901471239234</td>
-                  <td className="p-3">John Doe</td>
-                  <td className="p-3">Kathmandu</td>
-                  <td className="p-3">Male</td>
-                  <td className="p-3">2024-01-22</td>
-                  <td className="p-3">9876545676</td>
-                  <td className="p-3">On Leave</td>
+                  <td title={ele._id} className="p-3">
+                    {ele._id.slice(15)}
+                  </td>
+                  <td className="p-3">{ele.firstname + " " + ele.lastname}</td>
+                  <td className="p-3">{ele.address}</td>
+                  <td className="p-3">{ele.gender}</td>
+                  <td className="p-3">
+                    {new Date(ele.createdAt).toDateString()}
+                  </td>
+                  <td className="p-3">{ele.phone}</td>
+                  <td className="p-3">{ele.status}</td>
                 </tr>
               );
             })}

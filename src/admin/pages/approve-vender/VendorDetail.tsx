@@ -1,6 +1,5 @@
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import { ArrowLeft } from "lucide-react";
-import { shopDetails } from "./tableData";
 import DetailsCard from "../vendor/DetailsCard";
 import TextArea from "../../../components/common/TextArea";
 import Button from "../../../components/common/Button";

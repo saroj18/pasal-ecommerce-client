@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../../assets/logo.jpg";
 import { AlignJustify, X } from "lucide-react";
 import {
-  accountList,
-  dashboardList,
   listProps,
 } from "../constaints/sidebarList";
 import ParaTypo from "../../../components/common/ParaTypo";

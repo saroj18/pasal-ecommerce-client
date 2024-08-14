@@ -4,7 +4,6 @@ export const tableHeadData = [
   "Product",
   "Product ID",
   "Price",
-  "Discount",
   "Purchase Date",
   "Purchase On",
   "Payment",

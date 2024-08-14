@@ -1,11 +1,10 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Label from "../../../../components/common/Label";
 import Input from "../../../../components/common/Input";
 import Select from "../../../../components/common/Select";
 import Option from "../../../../components/common/Option";
 import Button from "../../../../components/common/Button";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { EditProfileZodSchema } from "../../../zodschema/user";
 import { z } from "zod";

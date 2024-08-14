@@ -50,6 +50,7 @@ import AdminSignup from "./admin/pages/AdminSignup";
 import AdminLogin from "./admin/pages/AdminLogin";
 import VerifyForm from "./customer/pages/account/component/VerifyForm";
 import EsewaSuccess from "./customer/pages/EsewaSuccess";
+import User from "./seller/dashboard/pages/user/User";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -225,6 +226,10 @@ const App = () => {
         {
           path: "delivery",
           element: <DeliveryPage />,
+        },
+        {
+          path: "user",
+          element: <User />,
         },
         {
           path: "notification",

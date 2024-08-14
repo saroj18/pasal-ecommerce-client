@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import ProductInfo from "../../components/ProductInfo";
@@ -6,7 +5,6 @@ import ProductImage from "../../components/ProductImage";
 import CategoryCard from "../../components/CategoryCard";
 import PriceCard from "../../components/PriceCard";
 import SearchBox from "../../../../components/common/Search";
-import jacket from "../../../../assets/jacket.png";
 import { Edit, Layers, Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
 import { productZodSchema } from "../../../zodschema/product";
@@ -34,14 +32,17 @@ const Product = () => {
   } = useForm<ProductType>({
     resolver: zodResolver(productZodSchema),
     defaultValues: {
-      name: "Samsung Altra Pro Max 20 Gen",
+      name: "DSLR Camera",
       brand: "Samsung",
       category: "electronic",
-      price: "120000",
+      price: "12000",
       discount: "12",
-      stock: "4444",
-      description:
-        "this is the best phone in the world with 100% satisfaction guarantee and 1 year warranty",
+      stock: "44",
+      description: `Discover the power of professional photography with this high-performance DSLR camera. Designed for photographers of all levels, it offers an exceptional blend of quality, versatility, and durability.
+
+At its core, this DSLR boasts a high-resolution sensor, ensuring every shot is captured with stunning detail and clarity. Whether you're shooting wide landscapes or intricate portraits, the image quality is unparalleled. The fast autofocus system guarantees sharp images, even in challenging conditions or with moving subjects.
+
+One of the standout features is its interchangeable lens system. From wide-angle to telephoto, you have the freedom to choose the perfect lens for any situation, expanding your creative possibilities. The optical viewfinder provides a true-to-life, lag-free view of your scene, making composition easy and intuitive.`,
       chating: "enable",
       barganing: "enable",
     },
@@ -68,6 +69,7 @@ const Product = () => {
       }
     });
     formData.append("productInfo", JSON.stringify(productInfo));
+    // formData.append('shopId',)
     mutate("/product/add", "POST", formData);
     reset();
   };
@@ -124,10 +126,11 @@ const Product = () => {
       <hr />
 
       <div className="bg-white ">
-        <table className="w-full overflow-auto text-xs lg:text-base text-center rounded-md shadow-md">
+        <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
           <thead>
             <tr className="border-2 border-gray-300">
               <th className="p-3">Product</th>
+              <th className="p-3">Product Id</th>
               <th className="p-3">Price</th>
               <th className="p-3">Brand</th>
               <th className="p-3">Category</th>
@@ -141,24 +144,28 @@ const Product = () => {
           <tbody>
             {data &&
               data.map((product: any) => (
-                <tr className="border-2 border-gray-300 lg:text-xl text-sm">
+                <tr className="border-2 border-gray-300  text-base">
                   <td className="flex flex-col items-center p-2">
                     <img
                       className="lg:h-[80px] h-[40px] rounded-md"
                       src={product.images[0]}
                       alt=""
                     />
-                    <ParaTypo className="text-sm lg:text-base">
-                      {product.name}
+                    <ParaTypo
+                      title={product.name}
+                      className="text-sm lg:text-base"
+                    >
+                      {product.name.slice(0, 30)}...
                     </ParaTypo>
                   </td>
+                  <td title={product._id}>{product._id.slice(15)}</td>
                   <td>Rs {product.price}</td>
                   <td>{product.brand}</td>
                   <td>{product.category}</td>
                   <td>22</td>
                   <td>20</td>
                   <td>2024-03-11</td>
-                  <td className="flex justify-around gap-x-1 items-center px-3">
+                  <td className="flex justify-around items-start gap-x-1 px-3">
                     <Trash
                       onClick={() => productDeleteHandler(product._id)}
                       strokeWidth={0.9}

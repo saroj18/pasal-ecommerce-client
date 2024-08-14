@@ -35,13 +35,13 @@ const Cart = () => {
             data && data.
             map((ele:any,index:number)=>(
               <tr key={index} className=" my-8 border-b-2 border-t-2 ">
-              <td className="p-4">
+              <td className="p-4 ">
                 <img
                   className="w-[50px] mx-auto "
                   src={ele?.product.images?.[0]}
                   alt=""
                 />
-                <ParaTypo className="text-sm">{ele?.product.name}</ParaTypo>
+                <ParaTypo title={ele?.product.name} className="text-sm">{ele?.product.name.slice(0,30)}...</ParaTypo>
               </td>
               <td className="p-4">${ele?.product.price}</td>
               <td className="p-4">

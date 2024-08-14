@@ -1,5 +1,4 @@
 import {
-  BadgeDollarSign,
   BarChart4,
   Bell,
   DollarSignIcon,
@@ -7,6 +6,7 @@ import {
   LayoutDashboard,
   Store,
   Truck,
+  User,
   View,
 } from "lucide-react";
 
@@ -45,6 +45,11 @@ export const generalSideBarList = [
     name: "Approve Vendor",
     url: "approve",
     icon: <View />,
+  },
+  {
+    name: "User",
+    url: "user",
+    icon: <User />,
   },
   {
     name: "Notification",

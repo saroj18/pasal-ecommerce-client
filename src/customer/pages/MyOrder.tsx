@@ -46,7 +46,7 @@ const MyOrder = () => {
       </div>
       {orderState == "shipping" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {shippingOrders?.map((ele, index: number) => {
+          {shippingOrders?.map((ele:any, index: number) => {
             return (
               <OrderCard
                 background="blue"

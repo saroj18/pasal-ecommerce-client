@@ -1,4 +1,3 @@
-import React, { Fragment, useEffect } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import SearchBox from "../../../../components/common/Search";
@@ -12,7 +11,7 @@ import { useQuery } from "../../../../utils/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 
 const Inventory = () => {
-  const {data, error, loading} = useQuery<any>("/product/inventory");
+  const { data} = useQuery<any>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">
@@ -36,26 +35,31 @@ const Inventory = () => {
         </div>
       </div>
 
-      <Table className="w-full over text-xs md:text-base text-center bg-white shadow-md my-4">
+      <Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
         <TableHead
           tableHeadStyle="p-2"
           className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
           tableHeadData={tableHeadData}
         />
         <TableBody>
-          {data?.map((ele: any, index:number) => {
+          {data?.map((ele: any, index: number) => {
             return (
-              <TableRow className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0">
-                <TableData className="p-3">{ele._id}</TableData>
-                <TableData className="p-3">{ele.name}</TableData>
+              <TableRow
+                key={index}
+                className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0"
+              >
+                <TableData title={ele._id} className="p-3">
+                  {ele._id.slice(15)}
+                </TableData>
+                <TableData title={ele.name} className="p-3 truncate">{ele.name.slice(0,30)}</TableData>
                 <TableData className="p-3">{ele.category}</TableData>
                 <TableData className="p-3">{ele.stock}</TableData>
                 <TableData className="p-3">{ele.stock}</TableData>
                 <TableData className="p-3">{ele.price}</TableData>
-                <TableData className="p-3">{ele.discount}</TableData>
+                <TableData className="p-3">{ele.discount}%</TableData>
                 <TableData className="p-3">{ele.brand}</TableData>
                 <TableData className="p-3">{ele.price}</TableData>
-                <TableData className="p-3">{ele.price*245}</TableData>
+                <TableData className="p-3">{ele.price * 245}</TableData>
               </TableRow>
             );
           })}

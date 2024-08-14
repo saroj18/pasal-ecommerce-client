@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import person from "../../../../src/assets/person.avif";
 import Popup from "reactjs-popup";
 import { Edit, Trash, X } from "lucide-react";
@@ -8,10 +8,17 @@ import SearchBox from "../../../components/common/Search";
 import Label from "../../../components/common/Label";
 import AddDeleveryPerson from "./AddDeleveryPerson";
 import { useQuery } from "../../../utils/useQuery";
+import { useMutation } from "../../../utils/useMutation";
 
 const DeliveryPage = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { data } = useQuery<any>("/deleveryperson");
+  const { mutate } = useMutation<any>();
+
+  const deleteHandler = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    mutate("/deleveryperson", "DELETE", { id });
+  };
   return (
     <div className="overflow-auto">
       <div className="sticky left-0 top-0">
@@ -62,10 +69,12 @@ const DeliveryPage = () => {
                   <td title={ele._id} className="p-3">
                     {ele._id.slice(15)}
                   </td>
-                  <td className="p-3">{ele.firstname}</td>
+                  <td className="p-3">{ele.firstname + " " + ele.lastname}</td>
                   <td className="p-3">{ele.address}</td>
                   <td className="p-3">{ele.gender}</td>
-                  <td className="p-3">{ele.dob}</td>
+                  <td className="p-3">
+                    {new Date(ele.createdAt).toDateString()}
+                  </td>
                   <td className="p-3">{ele.phone}</td>
                   <td className="p-3">{ele.status}</td>
                   <td className="p-3 flex items-center gap-x-3 md:gap-x-6 justify-center">
@@ -75,6 +84,7 @@ const DeliveryPage = () => {
                       color="green"
                     />
                     <Trash
+                      onClick={(e) => deleteHandler(e, ele._id)}
                       className="size-4 md:size-5"
                       strokeWidth={1}
                       color="red"

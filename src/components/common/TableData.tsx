@@ -1,14 +1,13 @@
 import React from "react";
 
-export const TableData = ({
-  children,
-  className,
-}: {
+interface TableDataProps
+  extends React.TableHTMLAttributes<HTMLTableCellElement> {
   children: React.ReactNode;
   className: string;
-  tableDataStyle?: string;
-}) => {
-  return <td className={className}>{children}</td>;
+}
+
+export const TableData = ({ children, className,...props }: TableDataProps) => {
+  return <td className={className} {...props}>{children}</td>;
 };
 
 export default TableData;
