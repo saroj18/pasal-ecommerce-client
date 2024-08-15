@@ -43,13 +43,13 @@ const Order = () => {
                 <tr key={index} className="border-b-2 border-t-2 capitalize ">
                   <td
                     title={ele.orderProducts?.name}
-                    className="p-2 flex flex-col items-center justify-center gap-x-2"
+                    className="p-2 flex flex-col items-center max-w-xs truncate justify-center gap-x-2"
                   >
                     <img
                       className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
                       src={ele.orderProducts?.images[0]}
                     />{" "}
-                    {ele.orderProducts?.name.slice(0, 20)}...
+                    {ele.orderProducts?.name.slice(0, 20)}
                   </td>
                   <td title={ele.product} className="p-2">
                     {ele.product.slice(15)}

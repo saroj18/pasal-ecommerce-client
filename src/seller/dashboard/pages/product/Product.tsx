@@ -153,9 +153,9 @@ One of the standout features is its interchangeable lens system. From wide-angle
                     />
                     <ParaTypo
                       title={product.name}
-                      className="text-sm lg:text-base"
+                      className="text-sm lg:text-base max-w-xs truncate"
                     >
-                      {product.name.slice(0, 30)}...
+                      {product.name.slice(0, 30)}
                     </ParaTypo>
                   </td>
                   <td title={product._id}>{product._id.slice(15)}</td>

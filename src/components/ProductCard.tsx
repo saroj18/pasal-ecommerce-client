@@ -15,7 +15,6 @@ type cardProps = {
 };
 
 const ProductCard = ({ remove = false, icon, product }: cardProps) => {
-  console.log("jj", product);
   const { mutate } = useMutation();
 
   const deleteHandler = (e: React.MouseEvent<SVGSVGElement>, id: string) => {

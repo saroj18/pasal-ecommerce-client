@@ -1,12 +1,23 @@
-import React from 'react'
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-const TableRow = ({className,children}:{className?:string,children:React.ReactNode}) => {
-  return <tr className={
-    " border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer" +
-    className
-  }>
-    {children}
-  </tr>
+interface TableRowProps extends React.TableHTMLAttributes<HTMLTableRowElement> {
+  className?: string;
+  children: React.ReactNode;
 }
 
-export default TableRow
+const TableRow = ({ className, children, ...props }: TableRowProps) => {
+  return (
+    <tr
+      className={twMerge(
+        className,
+        " border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer",
+      )}
+      {...props}
+    >
+      {children}
+    </tr>
+  );
+};
+
+export default TableRow;

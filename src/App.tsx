@@ -50,7 +50,8 @@ import AdminSignup from "./admin/pages/AdminSignup";
 import AdminLogin from "./admin/pages/AdminLogin";
 import VerifyForm from "./customer/pages/account/component/VerifyForm";
 import EsewaSuccess from "./customer/pages/EsewaSuccess";
-import User from "./seller/dashboard/pages/user/User";
+import User from "./admin/pages/user/User";
+import UserInfo from "./admin/pages/user/UserInfo";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -230,6 +231,10 @@ const App = () => {
         {
           path: "user",
           element: <User />,
+        },
+        {
+          path: "user/:id",
+          element: <UserInfo />,
         },
         {
           path: "notification",

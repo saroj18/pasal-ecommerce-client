@@ -51,7 +51,7 @@ const Inventory = () => {
                 <TableData title={ele._id} className="p-3">
                   {ele._id.slice(15)}
                 </TableData>
-                <TableData title={ele.name} className="p-3 truncate">{ele.name.slice(0,30)}</TableData>
+                <TableData title={ele.name} className="p-3 truncate max-w-xs">{ele.name.slice(0,30)}</TableData>
                 <TableData className="p-3">{ele.category}</TableData>
                 <TableData className="p-3">{ele.stock}</TableData>
                 <TableData className="p-3">{ele.stock}</TableData>

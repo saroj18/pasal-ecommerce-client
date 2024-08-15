@@ -10,7 +10,8 @@ import { VerifyPopup } from "../popup/VerifyPopup";
 import { useQuery } from "../../utils/useQuery";
 
 const Home = () => {
-  const {data}=useQuery<any>('/user')
+  const { data } = useQuery<any>("/user");
+  console.log("sroa", data?.verify);
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
@@ -109,7 +110,7 @@ const Home = () => {
             </Button>
           </Link>
         </div>
-        {!  data===null && !data?.verify && <VerifyPopup/>}
+        {data && !data?.verify && <VerifyPopup />}
       </section>
     </>
   );

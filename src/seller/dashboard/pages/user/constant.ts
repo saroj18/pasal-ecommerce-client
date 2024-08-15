@@ -1,1 +1,0 @@
-export const tableHeadData=['Id','Name','Address','Gender','Email','Join On','Verified','Action']

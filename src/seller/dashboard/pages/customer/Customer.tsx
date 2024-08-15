@@ -47,9 +47,9 @@ const Customer = () => {
                     </TableData>
                     <TableData
                       title={ele.productList.name}
-                      className="p-2 capitalize"
+                      className="p-2 capitalize max-w-xs truncate"
                     >
-                      {ele.productList.name.slice(30)}...
+                      {ele.productList.name}
                     </TableData>
                     <TableData title={ele.productList._id} className="p-2">
                       {ele.productList._id.slice(15)}
