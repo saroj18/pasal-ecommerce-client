@@ -6,7 +6,7 @@ const Order = () => {
   const { data } = useQuery<any>(`/order/${id}`);
   console.log(data);
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid lg:grid-cols-2 gap-3">
       {data?.map((ele: any, index: number) => {
         return (
           <OrderCard

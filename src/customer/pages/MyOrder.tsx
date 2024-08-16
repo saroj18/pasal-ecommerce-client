@@ -7,8 +7,10 @@ import { useQuery } from "../../utils/useQuery";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data: shippingOrders } = useQuery<any>("/order");
-  console.log(shippingOrders);
+  const { data: completeOrder } = useQuery<any>("/order/placed");
+  const { data: cancledOrder } = useQuery<any>("/order/cancled");
+  const { data: pendingOrder } = useQuery<any>("/order/pending");
+  console.log(pendingOrder);
 
   const clickHandler = (params: string) => {
     setOrderState(params);
@@ -46,13 +48,13 @@ const MyOrder = () => {
       </div>
       {orderState == "shipping" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {shippingOrders?.map((ele:any, index: number) => {
+          {pendingOrder?.map((ele: any, index: number) => {
             return (
               <OrderCard
                 background="blue"
                 key={index}
-                label="Est. arrival on 20 Jan 2024"
                 info={ele}
+                date={`Estd. ${new Date(ele.createdAt).toDateString()}`}
               />
             );
           })}
@@ -60,32 +62,30 @@ const MyOrder = () => {
       )}
       {orderState == "arrived" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {Array(10)
-            .fill(null)
-            .map((_, index) => {
-              return (
-                <OrderCard
-                  background="green"
-                  key={index}
-                  label="Arrived on 18 Jan 2024"
-                />
-              );
-            })}
+          {completeOrder?.map((ele: any, index: number) => {
+            return (
+              <OrderCard
+                background="green"
+                key={index}
+                info={ele}
+                date={`Arrived on ${new Date(ele.updatedAt).toDateString()}`}
+              />
+            );
+          })}
         </div>
       )}
       {orderState == "canceled" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {Array(10)
-            .fill(null)
-            .map((_, index) => {
-              return (
-                <OrderCard
-                  background="red"
-                  key={index}
-                  label="Canceled on 15 Jan 2024"
-                />
-              );
-            })}
+          {cancledOrder?.map((ele: any, index: number) => {
+            return (
+              <OrderCard
+                background="red"
+                key={index}
+                date={`Cancled on ${new Date(ele.updatedAt).toDateString()}`}
+                info={ele}
+              />
+            );
+          })}
         </div>
       )}
     </div>

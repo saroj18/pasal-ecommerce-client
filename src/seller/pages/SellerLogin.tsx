@@ -20,6 +20,10 @@ const SellerLogin = () => {
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: zodResolver(UserLoginZodSchema),
+    defaultValues: {
+      email: "saroj@gmail.com",
+      password: "password",
+    },
   });
 
   const onSubmit = (info: LoginInput) => {

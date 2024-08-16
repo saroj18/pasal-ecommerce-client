@@ -1,18 +1,18 @@
 import React, { Fragment } from "react";
 import ParaTypo from "./common/ParaTypo";
 import HeadingTypo from "./common/HeadingTypo";
-import { LocateIcon, MapPin, Trash, Truck } from "lucide-react";
+import { MapPin, Trash, Truck } from "lucide-react";
 
 const OrderCard = ({
   background,
-  label,
   info,
+  date,
 }: {
   background: string;
-  label: string;
   info: any;
+  date: string;
 }) => {
-  console.log(info);
+  console.log(date);
   return (
     <>
       {info?.product?.map((ele: any, index: number) => {
@@ -28,7 +28,7 @@ const OrderCard = ({
                   <ParaTypo
                     className={`opacity-75 text-sm border-2 text-white  rounded-full px-2 py-1 bg-${background}-500`}
                   >
-                    {label}
+                    {date}
                   </ParaTypo>
                 </div>
               </div>
@@ -46,7 +46,10 @@ const OrderCard = ({
               <div className="flex h-[100px] items-center justify-around">
                 <img className="w-[100px]" src={ele?.images?.[0]} alt="" />
                 <div className="w-full max-w-[60%] ">
-                  <HeadingTypo title={ele.name} className="text-base font-semibold w-full truncate">
+                  <HeadingTypo
+                    title={ele.name}
+                    className="text-base font-semibold w-full truncate"
+                  >
                     {ele.name}
                   </HeadingTypo>
                   <ParaTypo className="opacity-80">Rs {ele.price}</ParaTypo>
@@ -54,7 +57,11 @@ const OrderCard = ({
               </div>
               <div className="flex items-center justify-end gap-x-4">
                 <ParaTypo className="cursor-pointer text-sm">Pending</ParaTypo>
-                <Trash color="red" strokeWidth={0.8} className="cursor-pointer"/>
+                <Trash
+                  color="red"
+                  strokeWidth={0.8}
+                  className="cursor-pointer"
+                />
               </div>
             </div>
           </Fragment>

@@ -6,5 +6,6 @@ export const tableHeadData = [
   "Price",
   "Purchase Date",
   "Purchase On",
+  "Order Status",
   "Payment",
 ];

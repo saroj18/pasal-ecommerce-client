@@ -8,7 +8,16 @@ import { useQuery } from "../../../../utils/useQuery";
 
 const Order = () => {
   const { data } = useQuery<any>("/order/sellerorder");
+  const { mutate } = useMutation<any>();
   console.log(data);
+
+  const orderPlacedHandler = (id: string) => {
+    console.log(id);
+    mutate("/order/placed", "POST", { id });
+  };
+  const orderCancledHandler = (id: string) => {
+    mutate("/order/cancled", "POST", { id });
+  };
 
   return (
     <div className="overflow-auto">
@@ -67,10 +76,16 @@ const Order = () => {
                   <td className="p-2">{ele.orderProducts?.discount}%</td>
                   <td className="p-2">Rs {ele.orderProducts?.price}</td>
                   <td className="p-2 flex gap-1 flex-col items-center">
-                    <Button className="bg-green-500 px-3 w-full py-2 text-white rounded-md">
+                    <Button
+                      onClick={() => orderPlacedHandler(ele._id)}
+                      className="bg-green-500 px-3 w-full py-2 text-white rounded-md"
+                    >
                       Placed
                     </Button>
-                    <Button className="bg-red-500 px-3 w-full py-2 text-white  rounded-md">
+                    <Button
+                      onClick={() => orderCancledHandler(ele._id)}
+                      className="bg-red-500 px-3 w-full py-2 text-white  rounded-md"
+                    >
                       Cancel
                     </Button>
                   </td>

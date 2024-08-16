@@ -40,7 +40,7 @@ const Customer = () => {
                 return (
                   <TableRow key={ele._id}>
                     <TableData title={ele._id} className="p-2">
-                      {ele._id.slice(15)}
+                      {ele.customer._id.slice(15)}
                     </TableData>
                     <TableData className="p-2 capitalize">
                       {ele.customer.fullname}
@@ -65,6 +65,7 @@ const Customer = () => {
                         addSuffix: true,
                       })}
                     </TableData>
+                    <TableData className="p-2">{ele.status}</TableData>
                     <TableData className="p-2 capitalize">
                       {ele.payMethod}
                     </TableData>
