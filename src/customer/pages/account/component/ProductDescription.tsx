@@ -7,28 +7,28 @@ import { ReviewComponent } from "../page/ReviewHistory";
 type ProductDescriptionProps = {
   description: string;
   features: string[];
+  review: any;
 };
 
-const ProductDescription = ({description,features}:ProductDescriptionProps) => {
+const ProductDescription = ({
+  description,
+  features,
+  review,
+}: ProductDescriptionProps) => {
   return (
     <div>
       <HeadingTypo className="text-2xl font-semibold mb-3 underline">
         Product Description
       </HeadingTypo>
-      <ParaTypo className="opacity-75">
-       {description}
-      </ParaTypo>
+      <ParaTypo className="opacity-75">{description}</ParaTypo>
 
       <HeadingTypo className="text-2xl font-semibold my-5 underline">
         Specification
       </HeadingTypo>
       <ul className="list-disc ml-9 text-xl">
-        {
-          features?.map((feature,index)=>{
-            return <li key={index}>{feature}</li>
-          }
-          )
-        }
+        {features?.map((feature, index) => {
+          return <li key={index}>{feature}</li>;
+        })}
       </ul>
       <HeadingTypo className="text-2xl font-semibold my-5 underline">
         Rating and Reviews
@@ -82,9 +82,10 @@ const ProductDescription = ({description,features}:ProductDescriptionProps) => {
         </div>
       </div>
       <hr />
-      <ReviewComponent />
-      <ReviewComponent />
-      <ReviewComponent />
+      {review &&
+        review.map((ele: any, index: number) => {
+          return <ReviewComponent key={index} info={ele} />;
+        })}
       <hr />
     </div>
   );

@@ -14,7 +14,7 @@ const UserInfo = () => {
         User Info
       </HeadingTypo>
       <div>
-        <ul className="flex items-center gap-x-4 my-5 text-xl bg-red-500 rounded-md">
+        <ul className="flex items-center gap-x-4 my-5 text-xl bg-red-500 rounded-md ">
           {userInfoData.map((ele, index) => {
             return (
               <li

@@ -6,14 +6,21 @@ const Order = () => {
   const { data } = useQuery<any>(`/order/${id}`);
   console.log(data);
   return (
-    <div className="grid lg:grid-cols-2 gap-3">
+    <div className="grid lg:grid-cols-2 gap-3 p-3">
       {data?.map((ele: any, index: number) => {
         return (
           <OrderCard
-            background="blue"
+            background={
+              ele._id === "complete"
+                ? "green"
+                : ele._id === "pending"
+                  ? "blue"
+                  : "red"
+            }
             key={index}
-            label="Est. arrival on 20 Jan 2024"
-            info={ele}
+            date={new Date(ele.info.updatedAt).toDateString()}
+            info={ele.info}
+            element={ele}
           />
         );
       })}

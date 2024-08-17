@@ -6,9 +6,17 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import Popup from "reactjs-popup";
 import { Cross, X } from "lucide-react";
 import SearchBox from "../../../../components/common/Search";
+import { useQuery } from "../../../../utils/useQuery";
 
 const Review = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [info, setInfo] = useState<any>();
+  const { data } = useQuery<any>("/review/myreview");
+
+  const clickHandler = (data: any) => {
+    setOpen(!open);
+    setInfo(data);
+  };
   return (
     <div className="overflow-auto">
       <div className="flex justify-between flex-col md:flex-row sticky left-0 top-0">
@@ -29,48 +37,48 @@ const Review = () => {
               <th className="p-4">Review By</th>
               <th className="p-4">Review Date</th>
               <th className="p-4">Review Time</th>
-              <th className="p-4">Review Image</th>
               <th className="p-4">Message</th>
+              <th className="p-4">Star</th>
               <th className="p-4">Like</th>
               <th className="p-4">Dislike</th>
-              <th className="p-4">Action</th>
             </tr>
           </thead>
           <tbody>
-            {Array(15)
-              .fill(null)
-              .map((_, index) => {
+            {data &&
+              data.map((ele: any) => {
                 return (
                   <tr
-                    onClick={() => setOpen(!open)}
-                    key={index}
+                    onClick={() => clickHandler(ele)}
+                    key={ele._id}
                     className="border-b-2 border-t-2 cursor-pointer "
                   >
-                    <td className="p-2 flex flex-col items-center justify-center gap-x-2">
+                    <td
+                      title={ele.product.name}
+                      className="p-2 flex flex-col items-center justify-center gap-x-2"
+                    >
                       <img
                         className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
-                        src={jacket}
+                        src={ele.product.images[0]}
                       />
-                      Leather Jacket
+                      {ele.product.name.slice(0,20)}...
                     </td>
-                    <td className="p-2">985943879872934</td>
-                    <td className="p-2">John Doe</td>
-                    <td className="p-2">2024-01-22</td>
-                    <td className="p-2">02:44 PM</td>
-                    <td className="p-2 flex justify-center items-center">
-                      <img
-                        className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
-                        src={jacket}
-                      />
+                    <td title={ele.product._id} className="p-2">
+                      {ele.product._id.slice(15)}
                     </td>
-                    <td className="p-2">yo product ramro xa</td>
+                    <td className="p-2">{ele.user.fullname}</td>
+                    <td className="p-2">
+                      {new Date(ele.createdAt).toDateString()}
+                    </td>
+                    <td className="p-2">
+                      {new Date(ele.createdAt).toLocaleTimeString()}
+                    </td>
+
+                    <td className="p-2 text-red-500">
+                      {ele.reviewMessage.slice(0, 30)}...
+                    </td>
+                    <td className="p-2">{ele.reviewStar}</td>
                     <td className="p-2">30</td>
                     <td className="p-2">5</td>
-                    <td className="p-2">
-                      <Button className="bg-red-500 px-3 py-2 text-white ml-2 rounded-md">
-                        Delete
-                      </Button>
-                    </td>
                   </tr>
                 );
               })}
@@ -80,14 +88,18 @@ const Review = () => {
       <Popup open={open} onClose={() => setOpen(false)}>
         <div className="w-full p-3  ">
           <HeadingTypo className="text-3xl my-2">Review</HeadingTypo>
-          <ParaTypo className="font-bold my-2">By John Doe</ParaTypo>
+          <ParaTypo className="font-semibold text-red-500">{info?.product.name}</ParaTypo>
+          <ParaTypo className="font-bold my-2">
+            By {info?.user.fullname}
+          </ParaTypo>
           <div className="border-2 border-gray-500 rounded-md p-2">
-            <img className="h-[100px] rounded-md" src={jacket} alt="" />
+            <img
+              className="h-[100px] rounded-md"
+              src={info?.product.images[0]}
+              alt=""
+            />
             <ParaTypo className="text-[16px] my-2">
-              Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Aliquid a quasi, quos eius vel nostrum nam perspiciatis maiores
-              consequuntur vitae! ipsum dolor sit amet consectetur adipisicing
-              elit. Laborum, facilis!
+              {info?.reviewMessage}
             </ParaTypo>
           </div>
         </div>

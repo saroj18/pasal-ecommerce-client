@@ -13,28 +13,28 @@ import { useState } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const {mutate} = useMutation();
+  const { mutate } = useMutation();
   const [count, setCount] = useState(1);
 
-  const {data} = useQuery<any>(`/product/${id}`);
+  const { data } = useQuery<any>(`/product/${id}`);
 
   const addToCartHandler = (id: string) => {
-    mutate(`/product/cart`, "POST", { productId: id,count });
+    mutate(`/product/cart`, "POST", { productId: id, count });
   };
 
-  const addOnWishList=(id:string)=>{
-    mutate('/product/wishlist','POST',{productId:id})
-  }
+  const addOnWishList = (id: string) => {
+    mutate("/product/wishlist", "POST", { productId: id });
+  };
 
   const increaseCount = () => {
     setCount(count + 1);
-  }
+  };
 
   const decreaseCount = () => {
     if (count > 1) {
       setCount(count - 1);
     }
-  }
+  };
 
   return (
     <>
@@ -44,7 +44,7 @@ const ProductDetails = () => {
         </div>
         <div>
           <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
-          <ParaTypo>From {}</ParaTypo>
+          <ParaTypo>From: <span className="text-blue-500">{data?.addedBy.shopName}</span></ParaTypo>
           <div className="flex items-center my-4">
             <section className="flex items-center">
               <Star size={17} color="orange" fill="orange" />
@@ -54,13 +54,15 @@ const ProductDetails = () => {
               <Star size={17} color="orange" fill="orange" />
             </section>
             <p>(44)</p>{" "}
-            <span className="text-green-500 ml-2 border-l-2 pl-1">
-              In Stock
+            <span
+              className={`text-green-500 ml-2 border-l-2 pl-1 ${data?.stock != 0 ? "text-green-500 " : "text-red-500"}`}
+            >
+              {data?.stock != 0 ? "In Stock" : "Out of Stock"}
             </span>
           </div>
           <ParaTypo className="font-bold text-2xl">${data?.price}</ParaTypo>
           <ParaTypo className="text-sm border-b-2 pb-4 my-4">
-            {data?.description.slice(0,200)}...
+            {data?.description.slice(0, 200)}...
           </ParaTypo>
           <div className="flex gap-x-3">
             <ParaTypo>Colors:</ParaTypo>
@@ -93,7 +95,10 @@ const ProductDetails = () => {
           <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
             <div className="flex gap-x-4">
               <div className="flex items-center border-gray-500 border-2 h-[40px]">
-                <ParaTypo onClick={decreaseCount} className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white">
+                <ParaTypo
+                  onClick={decreaseCount}
+                  className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white"
+                >
                   -
                 </ParaTypo>
                 <Input
@@ -102,12 +107,18 @@ const ProductDetails = () => {
                   type="text"
                   value={count}
                 />
-                <ParaTypo onClick={increaseCount} className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white">
+                <ParaTypo
+                  onClick={increaseCount}
+                  className="px-4 text-4xl cursor-pointer select-none hover:bg-red-500 hover:text-white"
+                >
                   +
                 </ParaTypo>
               </div>
               <div className="border-2 border-gray-500 p-1 rounded-md flex justify-center items-center cursor-pointer">
-                <Heart onClick={()=>addOnWishList(data?._id)} strokeWidth={1.2} />
+                <Heart
+                  onClick={() => addOnWishList(data?._id)}
+                  strokeWidth={1.2}
+                />
               </div>
             </div>
             <div className=" gap-2 flex flex-col lg:flex-row ">
@@ -136,6 +147,7 @@ const ProductDetails = () => {
       <ProductDescription
         description={data?.description}
         features={data?.features}
+        review={data?.review}
       />
       <HeaderBar heading="For You" btnText="See More" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-3">

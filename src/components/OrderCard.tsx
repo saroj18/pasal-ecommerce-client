@@ -2,23 +2,26 @@ import React, { Fragment } from "react";
 import ParaTypo from "./common/ParaTypo";
 import HeadingTypo from "./common/HeadingTypo";
 import { MapPin, Trash, Truck } from "lucide-react";
+import Button from "./common/Button";
 
 const OrderCard = ({
   background,
   info,
   date,
+  element
 }: {
   background: string;
   info: any;
   date: string;
+  element?:any
 }) => {
-  console.log(date);
+  console.log(info);
   return (
     <>
       {info?.product?.map((ele: any, index: number) => {
         return (
           <Fragment key={index}>
-            <div className="w-full text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
+            <div className="w-full relative text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
               <div className="flex w-full items-center justify-between">
                 <div>
                   <ParaTypo className="opacity-75 text-sm">Order ID</ParaTypo>
@@ -28,7 +31,7 @@ const OrderCard = ({
                   <ParaTypo
                     className={`opacity-75 text-sm border-2 text-white  rounded-full px-2 py-1 bg-${background}-500`}
                   >
-                    {date}
+                    {element?._id === 'complete' ? `Arrived On ${date}` : element?._id === 'pending' ? `Estd.on ${date}` : `Cancelled On ${date}`}
                   </ParaTypo>
                 </div>
               </div>
@@ -55,14 +58,11 @@ const OrderCard = ({
                   <ParaTypo className="opacity-80">Rs {ele.price}</ParaTypo>
                 </div>
               </div>
-              <div className="flex items-center justify-end gap-x-4">
-                <ParaTypo className="cursor-pointer text-sm">Pending</ParaTypo>
-                <Trash
-                  color="red"
-                  strokeWidth={0.8}
-                  className="cursor-pointer"
-                />
-              </div>
+              {ele.status == "pending" && (
+                <Button className="bg-red-500 text-sm p-2 absolute left-[83%] top-[80%]">
+                  Cancle Order
+                </Button>
+              )}
             </div>
           </Fragment>
         );

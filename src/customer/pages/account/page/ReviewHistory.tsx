@@ -1,25 +1,27 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Button from "../../../../components/common/Button";
-import { Star, StarIcon, StarOff, ThumbsDown, ThumbsUp } from "lucide-react";
+import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import { useQuery } from "../../../../utils/useQuery";
 
-export const ReviewComponent = () => {
+export const ReviewComponent = ({ info }: { info: any }) => {
+  console.log(info);
   return (
     <div className=" rounded-md shadow-md border-2 border-neutral-200 p-2 my-4">
-      <HeadingTypo>Saroj's Store</HeadingTypo>
+      <HeadingTypo>{info?.reviewProduct?.addedBy?.shopName}</HeadingTypo>
       <ParaTypo className="text-sm text-gray-400 my-2">
-        Purchase on 19 Jan 2023
+        Review on {new Date(info?.createdAt).toDateString()}
       </ParaTypo>
+      {info?.reviewBy?.fullname && (
+        <ParaTypo>Review By: {info?.reviewBy?.fullname}</ParaTypo>
+      )}
       <div className="flex my-4 items-center gap-x-4 border-2 border-gray-200 rounded-md p-3">
         <img
           className="w-[100px]"
-          src="https://www.freepnglogos.com/uploads/lcd-png/lcd-png-transparent-lcd-images-pluspng-39.png"
+          src={info?.reviewProduct?.images[0]}
           alt=""
         />
-        <ParaTypo>
-          LCD Monitor wiht 43" Display and High Qualit Contrast
-        </ParaTypo>
+        <ParaTypo>{info?.reviewProduct.name}</ParaTypo>
       </div>
       <div className="flex justify-between items-center">
         <section className="flex items-center">
@@ -37,19 +39,19 @@ export const ReviewComponent = () => {
           </Button>
         </div>
       </div>
-      <ParaTypo>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda,
-        impedit.
-      </ParaTypo>
+      <ParaTypo>{info?.reviewMessage}</ParaTypo>
     </div>
   );
 };
 
 const ReviewHistory = () => {
+  const { data } = useQuery<any>("/review");
   return (
     <div>
-      <ReviewComponent />
-      <ReviewComponent />
+      {data &&
+        data.map((ele: any) => {
+          return <ReviewComponent info={ele} key={ele._id} />;
+        })}
     </div>
   );
 };
