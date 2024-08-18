@@ -52,6 +52,7 @@ import VerifyForm from "./customer/pages/account/component/VerifyForm";
 import EsewaSuccess from "./customer/pages/EsewaSuccess";
 import User from "./admin/pages/user/User";
 import UserInfo from "./admin/pages/user/UserInfo";
+import VendorMoreDetails from "./admin/pages/vendor/VendorMoreDetails";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -217,6 +218,10 @@ const App = () => {
             {
               path: "analytics",
               element: <VendorAnalytics />,
+            },
+            {
+              path: ":id/more",
+              element: <VendorMoreDetails />,
             },
             {
               path: ":id",

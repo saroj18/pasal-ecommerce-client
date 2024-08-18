@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { StarIcon } from "lucide-react";
@@ -15,6 +15,16 @@ const ProductDescription = ({
   features,
   review,
 }: ProductDescriptionProps) => {
+  console.log(review);
+
+  const averageRating = useCallback(() => {
+    let total = 0;
+    review?.forEach((ele: any) => {
+      total += ele.reviewStar;
+    });
+    return Math.round(total / 5);
+  }, [review]);
+
   return (
     <div>
       <HeadingTypo className="text-2xl font-semibold mb-3 underline">
@@ -35,15 +45,16 @@ const ProductDescription = ({
       </HeadingTypo>
       <div className="flex items-center gap-x-10 w-full max-w-[70%] mb-3">
         <div>
-          <ParaTypo className="text-4xl font-semibold">4.5</ParaTypo>
+          <ParaTypo className="text-4xl font-semibold">
+            {averageRating()}/5
+          </ParaTypo>
           <div className="flex items-center my-3">
-            <StarIcon color="orange" fill="orange" />
-            <StarIcon color="orange" fill="orange" />
-            <StarIcon color="orange" fill="orange" />
-            <StarIcon color="orange" fill="orange" />
-            <StarIcon color="orange" fill="orange" />
+            {Array(5)
+              .fill(null)
+              .map((_, index) => {
+                return <StarIcon key={index} color={index<averageRating()?'orange':'black'} fill={index<averageRating()?'orange':'transparent'} />;
+              })}
           </div>
-          <ParaTypo>420 Ratings</ParaTypo>
         </div>
         <div className="flex flex-col gap-4 sm:flex-row w-full gap-x-5">
           <div>
@@ -84,7 +95,7 @@ const ProductDescription = ({
       <hr />
       {review &&
         review.map((ele: any, index: number) => {
-          return <ReviewComponent key={index} info={ele} />;
+          return <ReviewComponent key={index} flag={false} info={ele} />;
         })}
       <hr />
     </div>

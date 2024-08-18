@@ -59,3 +59,9 @@ export const shopDetails = [
     value: "Active",
   },
 ];
+
+
+export const vendorMoreDetailsNav=['Orders','Reviews','Payment','Products']
+
+
+export const tableHeadDataForPaymentHistory=["Id","Pay On","Pay Method","Product","Total",]

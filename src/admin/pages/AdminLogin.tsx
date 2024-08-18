@@ -12,7 +12,7 @@ import { useMutation } from "../../utils/useMutation";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const[mutate]=useMutation()
+  const{mutate}=useMutation()
   const{register,handleSubmit,formState:{errors}}=useForm<LoginInput>({
     resolver:zodResolver(UserLoginZodSchema)
   })

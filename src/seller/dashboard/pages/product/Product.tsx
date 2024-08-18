@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
+import { useState } from "react";
 
 export type ProductType = z.infer<typeof productZodSchema>;
 export type FormProps = {
@@ -21,6 +22,7 @@ export type FormProps = {
 };
 
 const Product = () => {
+  const [open, setOpen] = useState(false);
   const {
     register,
     trigger,
@@ -86,31 +88,35 @@ One of the standout features is its interchangeable lens system. From wide-angle
       <ParaTypo className="opacity-75 text-[15px]">
         Add your product for your customer
       </ParaTypo>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col lg:flex-row gap-7 mt-5">
-          <ProductInfo errors={errors} register={register} />
-          <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
-            <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
-              <ProductImage
+      <Button onClick={() => setOpen(!open)} className="bg-green-500 my-4">
+        Product Add
+      </Button>
+      {open && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col lg:flex-row gap-7 mt-5">
+            <ProductInfo errors={errors} register={register} />
+            <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
+              <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
+                <ProductImage
+                  setValue={setValue}
+                  trigger={trigger}
+                  errors={errors}
+                  register={register}
+                />
+                <CategoryCard errors={errors} register={register} />
+              </div>
+              <PriceCard
                 setValue={setValue}
-                trigger={trigger}
                 errors={errors}
                 register={register}
               />
-              <CategoryCard errors={errors} register={register} />
             </div>
-            <PriceCard
-              setValue={setValue}
-              errors={errors}
-              register={register}
-            />
           </div>
-        </div>
-        <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
-          Add Product
-        </Button>
-      </form>
+          <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
+            Add Product
+          </Button>
+        </form>
+      )}
 
       <div className="relative flex flex-col sm:flex-row items-center sm:justify-between  my-4">
         <div className="my-4">

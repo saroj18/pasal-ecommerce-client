@@ -25,6 +25,10 @@ type Product = {
 const OrderCheckout = () => {
   const { mutate, data, loading } = useMutation();
   const { data: productData } = useQuery<Product[]>("/product/cart");
+  const deleteFromCart = (id: string) => {
+    mutate("/product/cart", "DELETE", { productId: id });
+  };
+
   const [orderDetails, setOrderDetails] = useState<OrderType>({
     product: [],
     payMethod: "cash",
@@ -33,7 +37,7 @@ const OrderCheckout = () => {
     totalPrice: 0,
     deleveryCharge: 20,
   });
-  console.log("pp", productData);
+  console.log("kera", productData);
 
   loading ? <h1>loading</h1> : null;
   useLayoutEffect(() => {
@@ -45,10 +49,6 @@ const OrderCheckout = () => {
     setOrderDetails((prv) => ({ ...prv, product: products }));
   }, [productData]);
 
-  const deleteFromCart = (id: string) => {
-    mutate("/product/cart", "DELETE", { productId: id });
-  };
-  console.log(productData);
   return (
     <div className="flex flex-col lg:flex-row justify-between mt-5 gap-x-6">
       <div className="w-full  flex items-start gap-3  border-2 border-gray-400 max-h-[200px]  md:h-fit flex-wrap overflow-y-scroll rounded-md p-4 shadow-md ">

@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import MostSellingProductCard from "../../../seller/dashboard/components/MostSellingProductCard";
 import Button from "../../../components/common/Button";
@@ -33,12 +33,20 @@ const VendorDetails = () => {
         <HeadingTypo className="text-2xl font-semibold">
           {vendor?.shopName} Shop
         </HeadingTypo>
-        <Button
-          onClick={() => navigate("/admin/vendor/analytics")}
-          className="bg-orange-500 px-4 py-2 rounded-md text-white"
-        >
-          View Analytics
-        </Button>
+        <div className="flex gap-x-5">
+          <Button
+            onClick={() => navigate(`/admin/vendor/${id}/more`)}
+            className="bg-red-500 px-4 py-2 rounded-md text-white"
+          >
+            View More
+          </Button>
+          <Button
+            onClick={() => navigate("/admin/vendor/analytics")}
+            className="bg-orange-500 px-4 py-2 rounded-md text-white"
+          >
+            View Analytics
+          </Button>
+        </div>
       </div>
       <div className="flex flex-wrap justify-between gap-3 my-6">
         {Object.entries(shop).map(([key, value]: [string, string]) => {

@@ -4,6 +4,7 @@ import { userInfoData } from "./constant";
 import Info from "./Info";
 import Order from "./Order";
 import Payment from "./Payment";
+import Review from "./Review";
 
 const UserInfo = () => {
   const [control, setControl] = useState("info");
@@ -32,6 +33,7 @@ const UserInfo = () => {
         {control == "info" && <Info />}
         {control == "order" && <Order />}
         {control == "payment" && <Payment />}
+        {control == "review" && <Review />}
       </div>
     </div>
   );
