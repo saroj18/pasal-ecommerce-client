@@ -14,7 +14,7 @@ const VendorDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState("");
   const [shop, setShop] = useState<{ [key: string]: string }>({});
-  const { data } = useQuery<any>(`/vendor/${id}`);
+  const { data,refetch } = useQuery<any>(`/vendor/${id}`);
   const { mutate } = useMutation();
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +22,7 @@ const VendorDetail = () => {
   };
 
   const clickHandler = (param: string) => {
-    mutate("/vendor/verify", "POST", { flag: param, shopId: id });
+    mutate("/vendor/verify", "POST", { flag: param, shopId: id },refetch);
   };
 
   useEffect(() => {

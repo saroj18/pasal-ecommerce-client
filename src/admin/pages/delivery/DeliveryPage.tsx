@@ -12,12 +12,12 @@ import { useMutation } from "../../../utils/useMutation";
 
 const DeliveryPage = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { data } = useQuery<any>("/deleveryperson");
+  const { data,refetch } = useQuery<any>("/deleveryperson");
   const { mutate } = useMutation<any>();
 
   const deleteHandler = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    mutate("/deleveryperson", "DELETE", { id });
+    mutate("/deleveryperson", "DELETE", { id },refetch);
   };
   return (
     <div className="overflow-auto">

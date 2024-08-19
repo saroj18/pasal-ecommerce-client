@@ -10,16 +10,15 @@ type UseQueryResult<T> = {
   data: T | T[] | null;
   error: boolean;
   loading: boolean;
+  refetch: () => void;
 };
 
 export const useQuery = <T>(url: string): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | null>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  console.log("outside query");
 
   const fetchData = async () => {
-    console.log("inside query");
     setError(false);
     setLoading(true);
     try {
@@ -43,5 +42,5 @@ export const useQuery = <T>(url: string): UseQueryResult<T> => {
     fetchData();
   }, []);
 
-  return { data, error, loading };
+  return { data, error, loading, refetch: fetchData };
 };

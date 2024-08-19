@@ -10,11 +10,11 @@ import { useMutation } from "../../utils/useMutation";
 
 const Cart = () => {
 
-  const {data}=useQuery<any>('/product/cart')
+  const {data,refetch}=useQuery<any>('/product/cart')
   const {mutate}=useMutation()
 
   const cartDeleteHandler=(id:string)=>{
-    mutate('/product/cart','DELETE',{productId:id})
+    mutate('/product/cart','DELETE',{productId:id},refetch)
   }
 
   console.log(data)

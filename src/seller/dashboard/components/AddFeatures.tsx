@@ -6,7 +6,12 @@ import { X } from "lucide-react";
 import { useContextProvider } from "../../../context/Context";
 import { PriceCardProps } from "./PriceCard";
 
-const AddFeatures = ({ register, errors,setValue }: PriceCardProps) => {
+const AddFeatures = ({
+  register,
+  errors,
+  setValue,
+  updateData,
+}: PriceCardProps) => {
   const [features, setFeatures] = useState<string>("");
   const { setProductInfo, productInfo } = useContextProvider();
   const [featuresCollection, setFeaturesCollection] = useState<string[]>([]);
@@ -22,8 +27,14 @@ const AddFeatures = ({ register, errors,setValue }: PriceCardProps) => {
   console.log(productInfo);
 
   useEffect(() => {
-    setValue("features",featuresCollection)
+    setValue("features", featuresCollection);
   }, [featuresCollection]);
+
+  useEffect(() => {
+    if (updateData) {
+      setFeaturesCollection(updateData.features);
+    }
+  }, [updateData]);
 
   const closeHandler = (index: number) => {
     setFeaturesCollection((prv) => {

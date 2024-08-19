@@ -13,20 +13,20 @@ import { useMutation } from "../../../utils/useMutation";
 import React from "react";
 
 const User = () => {
-  const { data } = useQuery<any>("/user/allcustomer");
+  const { data,refetch } = useQuery<any>("/user/allcustomer");
   const { mutate, data: deleteData } = useMutation();
   const navigate = useNavigate();
 
   const blockHandler = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
-    mutate("/user/block", "POST", { id });
+    mutate("/user/block", "POST", { id },refetch);
   };
   const unBlockHandler = (
     e: React.MouseEvent<HTMLButtonElement>,
     id: string,
   ) => {
     e.stopPropagation();
-    mutate("/user/unblock", "POST", { id });
+    mutate("/user/unblock", "POST", { id },refetch);
   };
   return (
     <div>

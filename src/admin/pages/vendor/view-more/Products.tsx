@@ -6,11 +6,11 @@ import { useQuery } from "../../../../utils/useQuery";
 const Products = () => {
   const { mutate } = useMutation();
 
-  const { data } = useQuery<any>("/product/myproduct");
+  const { data,refetch } = useQuery<any>("/product/myproduct");
   console.log("dd", data);
 
   const productDeleteHandler = (id: string) => {
-    mutate(`/product/${id}`, "DELETE", { id });
+    mutate(`/product/${id}`, "DELETE", { id },refetch);
   };
 
   return (

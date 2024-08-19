@@ -11,9 +11,10 @@ import { UseFormReset, UseFormSetValue } from "react-hook-form";
 
 export interface PriceCardProps extends FormProps {
   setValue:UseFormSetValue<ProductType>
+  updateData?: any;
 }
 
-const PriceCard = ({ register, errors,setValue }: PriceCardProps) => {
+const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => {
   const { setProductInfo, zodError } = useContextProvider();
   console.log(zodError);
 
@@ -109,7 +110,7 @@ const PriceCard = ({ register, errors,setValue }: PriceCardProps) => {
           </ParaTypo>
         </div>
       </div>
-      <AddFeatures setValue={setValue} errors={errors} register={register} />
+      <AddFeatures updateData={updateData} setValue={setValue} errors={errors} register={register} />
     </>
   );
 };

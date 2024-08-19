@@ -1,22 +1,21 @@
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import SearchBox from "../../../../components/common/Search";
-import jacket from "../../../../assets/jacket.png";
 import Button from "../../../../components/common/Button";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
 
 const Order = () => {
-  const { data } = useQuery<any>("/order/sellerorder");
+  const { data, refetch } = useQuery<any>("/order/sellerorder");
   const { mutate } = useMutation<any>();
   console.log(data);
 
   const orderPlacedHandler = (id: string) => {
     console.log(id);
-    mutate("/order/placed", "POST", { id });
+    mutate("/order/placed", "POST", { id }, refetch);
   };
   const orderCancledHandler = (id: string) => {
-    mutate("/order/cancled", "POST", { id });
+    mutate("/order/cancled", "POST", { id }, refetch);
   };
 
   return (

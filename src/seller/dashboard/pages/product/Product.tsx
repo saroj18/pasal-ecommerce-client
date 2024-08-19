@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type ProductType = z.infer<typeof productZodSchema>;
 export type FormProps = {
@@ -23,12 +23,18 @@ export type FormProps = {
 
 const Product = () => {
   const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [updateData, setUpdateData] = useState<any>();
+  const { data, refetch } = useQuery<any>("/product/myproduct");
+  const { mutate, data: mutateData } = useMutation();
+
+  console.log(updateData);
   const {
     register,
     trigger,
     setValue,
-    setError,
     reset,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<ProductType>({
@@ -42,14 +48,37 @@ const Product = () => {
       stock: "44",
       description: `Discover the power of professional photography with this high-performance DSLR camera. Designed for photographers of all levels, it offers an exceptional blend of quality, versatility, and durability.
 
-At its core, this DSLR boasts a high-resolution sensor, ensuring every shot is captured with stunning detail and clarity. Whether you're shooting wide landscapes or intricate portraits, the image quality is unparalleled. The fast autofocus system guarantees sharp images, even in challenging conditions or with moving subjects.
+    At its core, this DSLR boasts a high-resolution sensor, ensuring every shot is captured with stunning detail and clarity. Whether you're shooting wide landscapes or intricate portraits, the image quality is unparalleled. The fast autofocus system guarantees sharp images, even in challenging conditions or with moving subjects.
 
-One of the standout features is its interchangeable lens system. From wide-angle to telephoto, you have the freedom to choose the perfect lens for any situation, expanding your creative possibilities. The optical viewfinder provides a true-to-life, lag-free view of your scene, making composition easy and intuitive.`,
+    One of the standout features is its interchangeable lens system. From wide-angle to telephoto, you have the freedom to choose the perfect lens for any situation, expanding your creative possibilities. The optical viewfinder provides a true-to-life, lag-free view of your scene, making composition easy and intuitive.`,
       chating: "enable",
       barganing: "enable",
     },
   });
-  const { mutate } = useMutation();
+
+  useEffect(() => {
+    if (edit && updateData) {
+      reset({
+        name: updateData?.name || "",
+        brand: updateData?.brand || "",
+        category: updateData?.category || "",
+        price: updateData?.price.toString() || "",
+        discount: updateData?.discount || "",
+        stock: updateData?.stock.toString() || 0,
+        description: updateData?.description || "",
+        chating: updateData?.chating || "",
+        barganing: updateData?.barganing || "",
+      });
+    }
+  }, [edit, updateData, reset]);
+
+  useEffect(() => {
+    if (mutateData && edit) {
+      setOpen(false);
+      setEdit(false);
+    }
+  }, [mutateData]);
+
   const formData = new FormData();
 
   const onSubmit = (data: ProductType) => {
@@ -71,15 +100,29 @@ One of the standout features is its interchangeable lens system. From wide-angle
       }
     });
     formData.append("productInfo", JSON.stringify(productInfo));
-    // formData.append('shopId',)
-    mutate("/product/add", "POST", formData);
-    reset();
+    if (edit)
+      mutate(`/product/${updateData._id}`, "POST", productInfo, refetch);
+    else mutate("/product/add", "POST", formData, refetch);
+    // reset();
   };
 
-  const { data } = useQuery<any>("/product/myproduct");
-
   const productDeleteHandler = (id: string) => {
-    mutate(`/product/${id}`, "DELETE", { id });
+    mutate(`/product/${id}`, "DELETE", refetch);
+  };
+
+  const editHandler = async (id: string) => {
+    const resp = await fetch(import.meta.env.VITE_HOST + "/product/" + id);
+    const respData = await resp.json();
+    if (respData.success) {
+      setOpen(true);
+      setEdit(true);
+      setUpdateData(respData.data);
+    }
+  };
+
+  const formToogleHandler = () => {
+    setOpen((prv) => !prv);
+    setEdit(false);
   };
 
   return (
@@ -88,9 +131,11 @@ One of the standout features is its interchangeable lens system. From wide-angle
       <ParaTypo className="opacity-75 text-[15px]">
         Add your product for your customer
       </ParaTypo>
-      <Button onClick={() => setOpen(!open)} className="bg-green-500 my-4">
-        Product Add
+
+      <Button onClick={formToogleHandler} className="bg-green-500 my-4">
+        {open ? "Close Form" : "Product Add"}
       </Button>
+
       {open && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col lg:flex-row gap-7 mt-5">
@@ -102,10 +147,12 @@ One of the standout features is its interchangeable lens system. From wide-angle
                   trigger={trigger}
                   errors={errors}
                   register={register}
+                  updateData={updateData}
                 />
                 <CategoryCard errors={errors} register={register} />
               </div>
               <PriceCard
+                updateData={updateData}
                 setValue={setValue}
                 errors={errors}
                 register={register}
@@ -113,7 +160,7 @@ One of the standout features is its interchangeable lens system. From wide-angle
             </div>
           </div>
           <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
-            Add Product
+            {edit ? "Update Product" : "Add Product"}
           </Button>
         </form>
       )}
@@ -150,7 +197,10 @@ One of the standout features is its interchangeable lens system. From wide-angle
           <tbody>
             {data &&
               data.map((product: any) => (
-                <tr className="border-2 border-gray-300  text-base">
+                <tr
+                  key={product?._id}
+                  className="border-2 border-gray-300  text-base"
+                >
                   <td className="flex flex-col items-center p-2">
                     <img
                       className="lg:h-[80px] h-[40px] rounded-md"
@@ -178,11 +228,12 @@ One of the standout features is its interchangeable lens system. From wide-angle
                       className="cursor-pointer size-4 md:size-5"
                     />
                     <Edit
+                      onClick={() => editHandler(product._id)}
                       strokeWidth={0.9}
                       className="cursor-pointer size-4 md:size-5"
                     />
                     <Layers
-                      color="red"
+                      color={`${product.stock === 0 ? "red" : "green"}`}
                       strokeWidth={0.9}
                       className="cursor-pointer size-4 md:size-5"
                     />

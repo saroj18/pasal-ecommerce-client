@@ -9,7 +9,12 @@ type ApiResponse<T> = {
 };
 
 type UseMutationResult<T> = {
-  mutate: (url: string, method: string, bodyData: any) => Promise<void>;
+  mutate: (
+    url: string,
+    method: string,
+    bodyData: any,
+    refetch?: () => void | undefined,
+  ) => Promise<void>;
   data: T | undefined;
   error: boolean;
   loading: boolean;
@@ -22,7 +27,12 @@ export const useMutation = <T>(): UseMutationResult<T> => {
   const [loading, setLoading] = useState<boolean>(false);
   const [response, setResponse] = useState<any>();
 
-  const mutate = async (url: string, method: string, bodyData: any) => {
+  const mutate = async (
+    url: string,
+    method: string,
+    bodyData: any,
+    refetch?: () => void,
+  ) => {
     setError(false);
     setLoading(true);
     try {
@@ -48,6 +58,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
         if (respData.message) {
           toast.success(respData.message);
         }
+        refetch && refetch();
       }
       setLoading(false);
     } catch (error: any) {

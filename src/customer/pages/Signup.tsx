@@ -22,7 +22,7 @@ const Signup = () => {
   //   email:'',
   //   role:''
   // })
-  const{mutate, data, error, loading}=useMutation()
+  const{mutate}=useMutation()
   
   const{register,handleSubmit,formState:{errors}}=useForm<FormInput>({
     resolver:zodResolver(UserSignUpZodSchema)

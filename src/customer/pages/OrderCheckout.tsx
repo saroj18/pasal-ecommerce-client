@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import SelectAndViewAddress from "./account/component/SelectAndViewAddress";
 import { useQuery } from "../../utils/useQuery";
 import { useMutation } from "../../utils/useMutation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export type OrderType = {
   product: string[];
@@ -24,9 +24,9 @@ type Product = {
 
 const OrderCheckout = () => {
   const { mutate, data, loading } = useMutation();
-  const { data: productData } = useQuery<Product[]>("/product/cart");
+  const { data: productData, refetch } = useQuery<Product[]>("/product/cart");
   const deleteFromCart = (id: string) => {
-    mutate("/product/cart", "DELETE", { productId: id });
+    mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };
 
   const [orderDetails, setOrderDetails] = useState<OrderType>({

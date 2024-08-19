@@ -55,7 +55,7 @@ const Inventory = () => {
                   {ele.name.slice(0, 30)}
                 </TableData>
                 <TableData className="p-3">{ele.category}</TableData>
-                <TableData className="p-3">{ele.stock}</TableData>
+                <TableData className="p-3">{ele.stock!=0?ele.stock:<span className="text-red-500 font-semibold">Out of Stock</span>}</TableData>
                 <TableData className="p-3">
                   {new Date(ele.createdAt).toDateString()}
                 </TableData>

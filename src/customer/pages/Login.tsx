@@ -9,14 +9,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginZodSchema } from "../zodschema/user";
 import { z } from "zod";
 import { useMutation } from "../../utils/useMutation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
   const { mutate, data } = useMutation<any>();
-  const emailRef = useRef<HTMLInputElement | null>(null);
+
   const {
     register,
     handleSubmit,

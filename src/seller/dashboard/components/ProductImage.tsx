@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import ParaTypo from "../../../components/common/ParaTypo";
 import Input from "../../../components/common/Input";
@@ -8,6 +8,7 @@ import { UseFormSetValue, UseFormTrigger } from "react-hook-form";
 interface ProductImageProps extends FormProps {
   setValue: UseFormSetValue<ProductType>;
   trigger: UseFormTrigger<ProductType>;
+  updateData: any;
 }
 
 const ProductImage = ({
@@ -15,8 +16,10 @@ const ProductImage = ({
   errors,
   setValue,
   trigger,
+  updateData,
 }: ProductImageProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [images, setImages] = React.useState<FileList | null>(null);
 
   const clickHandler = () => {
     inputRef.current?.click();
@@ -24,11 +27,18 @@ const ProductImage = ({
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
+    setImages(files);
     if (files) {
       setValue("images", files);
       trigger("images");
     }
   };
+
+  useEffect(() => {
+    if (updateData) {
+      setValue("images", "UPDATE");
+    }
+  }, [updateData]);
 
   return (
     <div className="border-2 border-gray-300 rounded-md p-2 grow w-full">
@@ -43,9 +53,37 @@ const ProductImage = ({
           onClick={clickHandler}
           className="flex grow justify-center p-2 items-center flex-col gap-y-1 text-blue-500 font-semibold rounded-md cursor-pointer border-2 border-gray-300"
         >
-          <span>+</span>
-          <ParaTypo className="text-[13px] opacity-75">Add Photo</ParaTypo>
+          {!updateData && <span>+</span>}
+          <ParaTypo className="text-[13px] opacity-75">
+            {updateData ? "Image cannot be update" : "Add Photo"}
+          </ParaTypo>
+          <div className="flex w-full justify-between">
+            {updateData
+              ? updateData?.images?.map((image: any, index: number) => {
+                  return (
+                    <img
+                      onClick={() => setValue("images", updateData.images)}
+                      className="h-[20px] w-[20px] object-cover cursor-pointer"
+                      key={index}
+                      src={image}
+                      alt=""
+                    />
+                  );
+                })
+              : images &&
+                Array.from(images).map((image, index) => {
+                  return (
+                    <img
+                      className="h-[20px] w-[20px] object-cover cursor-pointer"
+                      key={index}
+                      src={URL.createObjectURL(image)}
+                      alt=""
+                    />
+                  );
+                })}
+          </div>
           <Input
+            disabled={updateData ? true : false}
             {...register("images")}
             onChange={changeHandler}
             multiple

@@ -24,14 +24,14 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
 
-  const { data } = useQuery<any>(`/product/${id}`);
+  const { data, refetch } = useQuery<any>(`/product/${id}`);
 
   const addToCartHandler = (id: string) => {
-    mutate(`/product/cart`, "POST", { productId: id, count });
+    mutate(`/product/cart`, "POST", { productId: id, count }, refetch);
   };
 
   const addOnWishList = (id: string) => {
-    mutate("/product/wishlist", "POST", { productId: id });
+    mutate("/product/wishlist", "POST", { productId: id }, refetch);
   };
 
   const increaseCount = () => {
@@ -91,7 +91,7 @@ const ProductDetails = () => {
                   );
                 })}
             </section>
-            <p className="text-xl">({averageRating()})</p>{" "}
+            <p className="text-xl">({data?.starArray?.length})</p>{" "}
             <span
               className={`text-green-500 ml-2 border-l-2 pl-1 ${data?.stock != 0 ? "text-green-500 " : "text-red-500"}`}
             >
