@@ -17,12 +17,15 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../../utils/useQuery";
 import { useMutation } from "../../utils/useMutation";
 import { useCallback, useState } from "react";
+import Magnifier from "react-magnifier";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { mutate } = useMutation();
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
+  const [enter, setEnter] = useState(false);
+  const [leave, setLeave] = useState(false);
 
   const { data, refetch } = useQuery<any>(`/product/${id}`);
 
@@ -55,8 +58,14 @@ const ProductDetails = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row gap-x-10 mt-8 mb-10 border-b-2 pb-3">
-        <div className="border-2 border-gray-500 rounded-md shadow-md w-full max-w-lg p-3 flex-col flex items-center justify-center">
-          <img className="w-[90%]" src={image || data?.images?.[0]} alt="" />
+        <div className="border-2 relative border-gray-500 rounded-md shadow-md w-full max-w-lg p-3 flex-col flex items-center justify-center">
+          {/* @ts-ignore */}
+          <Magnifier
+            mgWidth={300}
+            mgHeight={300}
+            src={image || data?.images?.[0]}
+          />
+
           <div className="flex w-full justify-center gap-x-4 mt-3 overflow-hidden">
             {data?.images?.map((ele: string, index: number) => {
               return (
@@ -74,7 +83,7 @@ const ProductDetails = () => {
         <div>
           <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
           <ParaTypo>
-            From:{" "}
+            From:
             <span className="text-blue-500">{data?.addedBy.shopName}</span>
           </ParaTypo>
           <div className="flex gap-x-2 items-center my-4">

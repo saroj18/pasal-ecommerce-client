@@ -52,7 +52,13 @@ const ProductDescription = ({
             {Array(5)
               .fill(null)
               .map((_, index) => {
-                return <StarIcon key={index} color={index<averageRating()?'orange':'black'} fill={index<averageRating()?'orange':'transparent'} />;
+                return (
+                  <StarIcon
+                    key={index}
+                    color={index < averageRating() ? "orange" : "black"}
+                    fill={index < averageRating() ? "orange" : "transparent"}
+                  />
+                );
               })}
           </div>
         </div>
@@ -62,12 +68,16 @@ const ProductDescription = ({
               .fill(null)
               .map((_, index) => {
                 return (
-                  <div className="flex items-center gap-x-2">
+                  <div key={index} className="flex items-center gap-x-2">
                     {Array(index + 1)
                       .fill(null)
                       .map((_, index) => {
                         return (
-                          <StarIcon fill="orange" color="orange" key={index} />
+                          <StarIcon
+                            key={index}
+                            fill="orange"
+                            color="orange"
+                          />
                         );
                       })}
                   </div>

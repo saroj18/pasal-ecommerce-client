@@ -35,7 +35,7 @@ export const useQuery = <T>(url: string): UseQueryResult<T> => {
     } catch (err: any) {
       setLoading(false);
       setError(true);
-      toast.error(err.message || "An error occurred");
+      toast.error("server started soon!!!");
     }
   };
   useEffect(() => {
