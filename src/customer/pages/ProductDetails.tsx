@@ -24,8 +24,6 @@ const ProductDetails = () => {
   const { mutate } = useMutation();
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
-  const [enter, setEnter] = useState(false);
-  const [leave, setLeave] = useState(false);
 
   const { data, refetch } = useQuery<any>(`/product/${id}`);
 
@@ -52,7 +50,7 @@ const ProductDetails = () => {
     data?.review?.forEach((ele: any) => {
       total += ele.reviewStar;
     });
-    return Math.round(total / 5);
+    return total / 5;
   }, [data]);
 
   return (
@@ -100,45 +98,26 @@ const ProductDetails = () => {
                   );
                 })}
             </section>
-            <p className="text-xl">({data?.starArray?.length})</p>{" "}
+            <p className="text-xl">({data?.starArray?.length})</p>
             <span
               className={`text-green-500 ml-2 border-l-2 pl-1 ${data?.stock != 0 ? "text-green-500 " : "text-red-500"}`}
             >
               {data?.stock != 0 ? "In Stock" : "Out of Stock"}
             </span>
           </div>
-          <ParaTypo className="font-bold text-2xl">Rs {data?.price}</ParaTypo>
+          <div className="flex items-center gap-x-3">
+            <ParaTypo className="font-bold text-2xl">
+              Rs {data?.priceAfterDiscount}
+            </ParaTypo>
+            <ParaTypo className="text-red-500 text-sm">
+              Off {data?.discount}%
+            </ParaTypo>
+          </div>
+          <ParaTypo className="line-through opacity-70 text-sm">Rs {data?.price}</ParaTypo>
           <ParaTypo className="text-sm border-b-2 pb-4 my-4">
             {data?.description.slice(0, 200)}...
           </ParaTypo>
-          {/* <div className="flex gap-x-3">
-            <ParaTypo>Colors:</ParaTypo>
-            <div className="flex gap-x-2">
-              <span className="rounded-full border-2 h-8 w-8 bg-red-500"></span>
-              <span className="rounded-full border-2 h-8 w-8 bg-blue-500"></span>
-              <span className="rounded-full border-2 h-8 w-8 bg-green-500"></span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-4 my-4">
-            <ParaTypo>Size:</ParaTypo>
-            <div className="flex items-center gap-x-3">
-              <ParaTypo className="border-2 hover:bg-red-500 hover:text-white cursor-pointer rounded-md px-2">
-                XS
-              </ParaTypo>
-              <ParaTypo className="border-2 hover:bg-red-500 hover:text-white cursor-pointer rounded-md px-2">
-                S
-              </ParaTypo>
-              <ParaTypo className="border-2 hover:bg-red-500 hover:text-white cursor-pointer rounded-md px-2">
-                M
-              </ParaTypo>
-              <ParaTypo className="border-2 hover:bg-red-500 hover:text-white cursor-pointer rounded-md px-2">
-                L
-              </ParaTypo>
-              <ParaTypo className="border-2 hover:bg-red-500 hover:text-white cursor-pointer rounded-md px-2">
-                XL
-              </ParaTypo>
-            </div>
-          </div> */}
+          
           <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
             <div className="flex gap-x-4">
               <div className="flex items-center border-gray-500 border-2 h-[40px]">

@@ -28,7 +28,7 @@ export const generalSideBarList = [
   },
   {
     name: "Offers",
-    url: "offer",
+    url: "offers",
     icon: <HandCoins />,
   },
   {

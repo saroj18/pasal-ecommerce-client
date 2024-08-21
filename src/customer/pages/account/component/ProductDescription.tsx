@@ -20,7 +20,7 @@ const ProductDescription = ({
   const averageRating = useCallback(() => {
     let total = 0;
     review?.forEach((ele: any) => {
-      total += ele.reviewStar;
+      total += ele.reviewStar ?? 0;
     });
     return Math.round(total / 5);
   }, [review]);
@@ -73,11 +73,7 @@ const ProductDescription = ({
                       .fill(null)
                       .map((_, index) => {
                         return (
-                          <StarIcon
-                            key={index}
-                            fill="orange"
-                            color="orange"
-                          />
+                          <StarIcon key={index} fill="orange" color="orange" />
                         );
                       })}
                   </div>
@@ -105,7 +101,11 @@ const ProductDescription = ({
       <hr />
       {review &&
         review.map((ele: any, index: number) => {
-          return <ReviewComponent key={index} flag={false} info={ele} />;
+          return (
+            Object.keys(ele).length > 0 && (
+              <ReviewComponent key={index} flag={false} info={ele} />
+            )
+          );
         })}
       <hr />
     </div>

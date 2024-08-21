@@ -16,7 +16,7 @@ const ProductSectionBar = ({ heading, option = true }: productSectionProps) => {
       </p>
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center w-full lg:w-[50%]  justify-between">
-          <TypoGraphy className="text-2xl sm:text-3xl lg:text-4xl lg:m-0 text-center w-fit mx-auto  ">
+          <TypoGraphy className="text-2xl sm:text-3xl lg:text-3xl lg:m-0 text-center w-fit mx-auto  ">
             {heading}
           </TypoGraphy>
           {option && <Timmer />}

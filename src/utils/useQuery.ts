@@ -13,7 +13,7 @@ type UseQueryResult<T> = {
   refetch: () => void;
 };
 
-export const useQuery = <T>(url: string): UseQueryResult<T> => {
+export const useQuery = <T>(url?: string): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | null>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);

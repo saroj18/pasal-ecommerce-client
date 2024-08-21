@@ -12,7 +12,7 @@ type UseMutationResult<T> = {
   mutate: (
     url: string,
     method: string,
-    bodyData: any,
+    bodyData?: any,
     refetch?: () => void | undefined,
   ) => Promise<void>;
   data: T | undefined;
@@ -30,7 +30,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
   const mutate = async (
     url: string,
     method: string,
-    bodyData: any,
+    bodyData?: any,
     refetch?: () => void,
   ) => {
     setError(false);

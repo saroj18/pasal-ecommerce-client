@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ProductCard from "../../components/ProductCard";
-import FilterBar from "./account/component/FilterBar";
 import { useQuery } from "../../utils/useQuery";
 
 export type ElementType= {
@@ -18,6 +17,7 @@ export type ElementType= {
   brand:string,
   barganing:string
   _id:string
+  review:[]
 }
 
 const AllProducts = () => {

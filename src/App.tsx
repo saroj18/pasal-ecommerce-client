@@ -53,6 +53,9 @@ import EsewaSuccess from "./customer/pages/EsewaSuccess";
 import User from "./admin/pages/user/User";
 import UserInfo from "./admin/pages/user/UserInfo";
 import VendorMoreDetails from "./admin/pages/vendor/VendorMoreDetails";
+import OfferLayout from "./admin/pages/offers/OfferLayout";
+import CreateOffer from "./admin/pages/offers/CreateOffer";
+import Offers from "./admin/pages/offers/Offers";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -226,6 +229,20 @@ const App = () => {
             {
               path: ":id",
               element: <VendorDetails />,
+            },
+          ],
+        },
+        {
+          path: "offers",
+          element: <OfferLayout />,
+          children: [
+            {
+              path: "",
+              element: <Offers />,
+            },
+            {
+              path: "createoffer",
+              element: <CreateOffer />,
             },
           ],
         },
