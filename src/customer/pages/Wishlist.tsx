@@ -15,7 +15,7 @@ export const HeaderBar = ({ heading, btnText }: barProps) => {
   
   return (
     <div className="flex justify-between items-center my-4">
-      <HeadingTypo className="text-xl">{heading}</HeadingTypo>
+      <HeadingTypo className="text-xl font-semibold">{heading}</HeadingTypo>
       <Button className="border-2 p-2 px-6 bg-red-500 text-white">
         {btnText}
       </Button>

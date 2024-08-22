@@ -41,10 +41,7 @@ const Cart = () => {
                     {ele?.product.name.slice(0, 30)}...
                   </ParaTypo>
                 </td>
-                <td className="p-4">
-                  Rs{" "}
-                  {ele?.product.priceAfterDiscount}
-                </td>
+                <td className="p-4">Rs {ele?.product.priceAfterDiscount}</td>
                 <td className="p-4">
                   <Input
                     type="number"
@@ -54,9 +51,7 @@ const Cart = () => {
                   />
                 </td>
                 <td className="p-4">
-                  Rs{" "}
-                  {(ele?.product.priceAfterDiscount) *
-                    ele.productCount}
+                  Rs {ele?.product.priceAfterDiscount * ele?.productCount}
                 </td>
                 <td className="p-4">
                   <Trash

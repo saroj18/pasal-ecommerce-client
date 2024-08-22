@@ -1,12 +1,5 @@
 import HeadingTypo from "../../components/common/HeadingTypo";
-import {
-  BaggageClaim,
-  Heart,
-  MessageCircle,
-  Star,
-  StarIcon,
-  Video,
-} from "lucide-react";
+import { BaggageClaim, Heart, StarIcon } from "lucide-react";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -16,7 +9,7 @@ import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../../utils/useQuery";
 import { useMutation } from "../../utils/useMutation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Magnifier from "react-magnifier";
 
 const ProductDetails = () => {
@@ -25,7 +18,7 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
 
-  const { data, refetch } = useQuery<any>(`/product/${id}`);
+  let { data, refetch } = useQuery<any>(`/product/${id}`);
 
   const addToCartHandler = (id: string) => {
     mutate(`/product/cart`, "POST", { productId: id, count }, refetch);
@@ -44,6 +37,13 @@ const ProductDetails = () => {
       setCount(count - 1);
     }
   };
+
+  useEffect(() => {
+    console.log(id);
+    console.log(data?._id);
+    if (!data) return;
+    refetch();
+  }, [id]);
 
   const averageRating = useCallback(() => {
     let total = 0;
@@ -80,10 +80,19 @@ const ProductDetails = () => {
         </div>
         <div>
           <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
-          <ParaTypo>
-            From:
-            <span className="text-blue-500">{data?.addedBy.shopName}</span>
-          </ParaTypo>
+          <div className="flex items-center gap-x-4">
+            <ParaTypo>
+              From:
+              <span className="text-blue-500">{data?.addedBy.shopName}</span>
+            </ParaTypo>
+            {data?.offer && (
+              <img
+                className="h-[30px] place-content-end"
+                src="https://png.pngtree.com/png-clipart/20230119/original/pngtree-creative-special-offer-banner-shape-tag-png-image_8922232.png"
+                alt=""
+              />
+            )}
+          </div>
           <div className="flex gap-x-2 items-center my-4">
             <section className="flex items-center">
               {Array(5)
@@ -113,11 +122,13 @@ const ProductDetails = () => {
               Off {data?.discount}%
             </ParaTypo>
           </div>
-          <ParaTypo className="line-through opacity-70 text-sm">Rs {data?.price}</ParaTypo>
+          <ParaTypo className="line-through opacity-70 text-sm">
+            Rs {data?.price}
+          </ParaTypo>
           <ParaTypo className="text-sm border-b-2 pb-4 my-4">
             {data?.description.slice(0, 200)}...
           </ParaTypo>
-          
+
           <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
             <div className="flex gap-x-4">
               <div className="flex items-center border-gray-500 border-2 h-[40px]">
@@ -178,13 +189,17 @@ const ProductDetails = () => {
         features={data?.features}
         review={data?.review}
       />
-      <HeaderBar heading="For You" btnText="See More" />
+      <HeaderBar heading="Our Others Products" btnText="See More" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-3">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {data?.ourOtherProducts?.map((ele: any) => {
+          return <ProductCard key={ele._id} product={ele} />;
+        })}
+      </div>
+      <HeaderBar heading="Related Products" btnText="See More" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-3">
+        {data?.relatedProducts?.map((ele: any) => {
+          return <ProductCard key={ele._id} product={ele} />;
+        })}
       </div>
     </>
   );

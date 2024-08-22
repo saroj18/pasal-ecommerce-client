@@ -2,15 +2,17 @@ import { Edit, Layers, Trash } from "lucide-react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   const { mutate } = useMutation();
+  const { id } = useParams();
 
-  const { data,refetch } = useQuery<any>("/product/myproduct");
+  const { data, refetch } = useQuery<any>("/product/myproduct?id=" + id);
   console.log("dd", data);
 
   const productDeleteHandler = (id: string) => {
-    mutate(`/product/${id}`, "DELETE", { id },refetch);
+    mutate(`/product/${id}`, "DELETE", { id }, refetch);
   };
 
   return (
@@ -53,7 +55,7 @@ const Products = () => {
                   <td>{product.brand}</td>
                   <td>{product.category}</td>
                   <td>22</td>
-                  <td>20</td>
+                  <td>{product.totalSale}</td>
                   <td>2024-03-11</td>
                   <td className="flex justify-around items-start gap-x-1 px-3">
                     <Trash

@@ -62,7 +62,7 @@ const Inventory = () => {
                 <TableData className="p-3">{ele.price}</TableData>
                 <TableData className="p-3">{ele.discount}%</TableData>
                 <TableData className="p-3">{ele.brand}</TableData>
-                <TableData className="p-3">{ele.price}</TableData>
+                <TableData className="p-3">{ele.totalSale}</TableData>
                 <TableData className="p-3">{ele.price * 245}</TableData>
               </TableRow>
             );

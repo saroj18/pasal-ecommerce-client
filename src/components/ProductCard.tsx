@@ -16,6 +16,7 @@ type cardProps = {
 
 const ProductCard = ({ remove = false, icon, product }: cardProps) => {
   const { mutate } = useMutation();
+  console.log("product", product);
 
   const deleteHandler = (e: React.MouseEvent<SVGSVGElement>, id: string) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
     product?.review?.forEach((ele: any) => {
       total += ele.reviewStar;
     });
+    console.log("tot", total);
     return total / 5;
   }, [product]);
   return (
@@ -51,19 +53,32 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
         <div className="flex items-center gap-x-3 my-1">
           <p className="font-bold opacity-60">
             Rs {""}
-            {product?.price -
-              (product?.price * Number(product?.discount)) / 100}
+            {product?.priceAfterDiscount}
           </p>
-          <p className="line-through opacity-[0.5]">Rs {product?.price}</p>
-          <ParaTypo className="text-green-500 text-sm font-semibold">
-            {Number(product?.discount)} % off
-          </ParaTypo>
+          {product?.discount != 0 && (
+            <p className="line-through opacity-[0.5]">Rs {product?.price}</p>
+          )}
+          {product?.discount != 0 && (
+            <ParaTypo className="text-green-500 text-sm font-semibold">
+              {Number(product?.discount)} % off
+            </ParaTypo>
+          )}
         </div>
         <div className="flex items-center gap-x-2">
           <ParaTypo className="bg-green-500 text-white px-2 py-1 rounded-md text-sm flex gap-x-1">
-            {averageRating()} <Star strokeWidth={2} fill="white" size={18} />
+            {averageRating() ?? "0"}{" "}
+            <Star strokeWidth={2} fill="white" size={18} />
           </ParaTypo>
-          <ParaTypo className="opacity-60">(44)</ParaTypo>
+          <ParaTypo className="opacity-60">
+            ({product?.starArray.length})
+          </ParaTypo>
+          {product?.offer && (
+            <img
+              className="h-[50px] place-content-end"
+              src="https://png.pngtree.com/png-clipart/20230119/original/pngtree-creative-special-offer-banner-shape-tag-png-image_8922232.png"
+              alt=""
+            />
+          )}
           {remove && (
             <Trash
               className="cursor-pointer"

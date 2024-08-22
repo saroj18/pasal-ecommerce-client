@@ -13,6 +13,7 @@ export type OrderType = {
   billingAddress: string;
   totalPrice: number;
   deleveryCharge: number;
+  cartInfo: any;
 };
 
 type Product = {
@@ -36,6 +37,7 @@ const OrderCheckout = () => {
     billingAddress: "",
     totalPrice: 0,
     deleveryCharge: 20,
+    cartInfo: [],
   });
   console.log("kera", productData);
 
@@ -46,7 +48,11 @@ const OrderCheckout = () => {
       productData.forEach((ele: any) => {
         products.push(ele.product._id);
       });
-    setOrderDetails((prv) => ({ ...prv, product: products }));
+    setOrderDetails((prv) => ({
+      ...prv,
+      product: products,
+      cartInfo: productData
+    }));
   }, [productData]);
 
   return (

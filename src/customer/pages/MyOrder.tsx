@@ -7,10 +7,7 @@ import { useQuery } from "../../utils/useQuery";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data: completeOrder } = useQuery<any>("/order/placed");
-  const { data: cancledOrder } = useQuery<any>("/order/cancled");
-  const { data: pendingOrder } = useQuery<any>("/order/pending");
-  console.log(pendingOrder);
+  const { data } = useQuery<any>("/order/myorder");
 
   const clickHandler = (params: string) => {
     setOrderState(params);
@@ -48,42 +45,51 @@ const MyOrder = () => {
       </div>
       {orderState == "shipping" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {pendingOrder?.map((ele: any, index: number) => {
+          {data?.map((ele: any, index: number) => {
             return (
-              <OrderCard
-                background="blue"
-                key={index}
-                info={ele}
-                date={`Estd. ${new Date(ele.createdAt).toDateString()}`}
-              />
+              ele?._id == "pending" && (
+                <OrderCard
+                  background="blue"
+                  key={index}
+                  info={ele.info}
+                  date={`Estd. ${new Date(ele.createdAt).toDateString()}`}
+                  element={ele?._id}
+                />
+              )
             );
           })}
         </div>
       )}
       {orderState == "arrived" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {completeOrder?.map((ele: any, index: number) => {
+          {data?.map((ele: any, index: number) => {
             return (
-              <OrderCard
-                background="green"
-                key={index}
-                info={ele}
-                date={`Arrived on ${new Date(ele.updatedAt).toDateString()}`}
-              />
+              ele?._id == "complete" && (
+                <OrderCard
+                  background="green"
+                  key={index}
+                  info={ele.info}
+                  date={`Arrived on ${new Date(ele.updatedAt).toDateString()}`}
+                  element={ele?._id}
+                />
+              )
             );
           })}
         </div>
       )}
       {orderState == "canceled" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {cancledOrder?.map((ele: any, index: number) => {
+          {data?.map((ele: any, index: number) => {
             return (
-              <OrderCard
-                background="red"
-                key={index}
-                date={`Cancled on ${new Date(ele.updatedAt).toDateString()}`}
-                info={ele}
-              />
+              ele?._id == "cancled" && (
+                <OrderCard
+                  background="red"
+                  key={index}
+                  date={`Cancled on ${new Date(ele.updatedAt).toDateString()}`}
+                  info={ele.info}
+                  element={ele?._id}
+                />
+              )
             );
           })}
         </div>

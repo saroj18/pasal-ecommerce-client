@@ -34,7 +34,6 @@ const CheckoutBox = ({
       setPayment(false);
     }
   };
-  console.log("ss", cartData);
 
   const walletHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setWallet(e.target.value);
@@ -43,7 +42,7 @@ const CheckoutBox = ({
   useEffect(() => {
     totalPrice = cartData?.reduce((acc: number, cur: any) => {
       console.log(cur);
-      acc += cur.product.price * cur.productCount;
+      acc += cur.product.priceAfterDiscount * cur.productCount;
       return acc;
     }, 0);
     setOrderDetails((prv) => ({
