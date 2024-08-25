@@ -6,8 +6,6 @@ import Context from "./context/Context.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Context>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </Context>,
 );

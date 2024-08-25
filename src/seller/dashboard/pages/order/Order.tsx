@@ -38,8 +38,10 @@ const Order = () => {
             <th className="p-4">Order By</th>
             <th className="p-4">Order Date</th>
             <th className="p-4">Order Time</th>
+            <th className="p-4">Actual Price</th>
             <th className="p-4">Payment</th>
             <th className="p-4">Discount</th>
+            <th className="p-4">Order Qty</th>
             <th className="p-4">Amount</th>
             <th className="p-4">Action</th>
           </tr>
@@ -71,9 +73,11 @@ const Order = () => {
                   <td className="p-2">
                     {new Date(ele.createdAt).toLocaleTimeString()}
                   </td>
+                  <td className="p-2">Rs {ele.orderProducts.price}</td>
                   <td className="p-2">{ele.payMethod}</td>
                   <td className="p-2">{ele.orderProducts?.discount}%</td>
-                  <td className="p-2">Rs {ele.orderProducts?.price}</td>
+                  <td className="p-2">{ele.cartInfo[0]?.productCount}</td>
+                  <td className="p-2">Rs {ele.cartInfo[0]?.productCount*ele.orderProducts?.priceAfterDiscount}</td>
                   <td className="p-2 flex gap-1 flex-col items-center">
                     <Button
                       onClick={() => orderPlacedHandler(ele._id)}

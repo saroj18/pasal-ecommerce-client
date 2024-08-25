@@ -78,10 +78,10 @@ const OrderCheckout = () => {
                     alt=""
                   />
                   <ParaTypo
-                    title={`${ele.product.price * ele.productCount}`}
+                    title={`${ele.product.priceAfterDiscount * ele.productCount}`}
                     className="text-sm"
                   >
-                    Rs: {`${ele.product.price}*${ele.productCount}`}
+                    Rs: {`${ele.product.priceAfterDiscount}*${ele.productCount}`}
                   </ParaTypo>
                 </div>
               </div>

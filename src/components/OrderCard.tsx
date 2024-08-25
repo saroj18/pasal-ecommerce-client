@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import ParaTypo from "./common/ParaTypo";
 import HeadingTypo from "./common/HeadingTypo";
-import { MapPin, Trash, Truck } from "lucide-react";
+import { MapPin, Truck } from "lucide-react";
 import Button from "./common/Button";
 
 const OrderCard = ({
@@ -64,7 +64,7 @@ const OrderCard = ({
                     {ele.name}
                   </HeadingTypo>
                   <ParaTypo className="opacity-80">
-                    Rs {ele.product.price}
+                    Rs {ele.product.priceAfterDiscount}
                   </ParaTypo>
                 </div>
               </div>

@@ -16,9 +16,7 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import { useContextProvider } from "../../../../context/Context";
 import { useMutation } from "../../../../utils/useMutation";
 import { useEffect } from "react";
-import {
-  zodErrorFormatter,
-} from "../../../../utils/errorFormatter";
+import { zodErrorFormatter } from "../../../../utils/errorFormatter";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +37,19 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
     formState: { errors },
   } = useForm<AddressForm>({
     resolver: zodResolver(AddressZodSchema),
+    defaultValues: {
+      city: "Ratnanagar",
+      district: "Chitwan",
+      state: "Bagmati",
+      defaultAddress: "delevery",
+      nearBy: "Sarswati Mandir",
+      tole: "Ramlila",
+      ward: "14",
+      location: {
+        lat: 0.333,
+        lng: 4.33,
+      },
+    },
   });
   const { verifyInfo } = useContextProvider();
 
@@ -62,13 +73,11 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
   };
 
   useEffect(() => {
-    console.log(response);
     if (response?.success) {
       const role = LocalStorageUserRoleSchema.safeParse({
         role: localStorage.getItem("role"),
       });
       if (role.success) {
-        console.log(role.data);
         role.data.role == "CUSTOMER" ? navigate("/") : navigate("/otp");
       } else {
         const error = zodErrorFormatter(role?.error?.format());

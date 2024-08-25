@@ -39,6 +39,12 @@ const ShopDetails = () => {
     formState: { errors },
   } = useForm<ShopType>({
     resolver: zodResolver(ShopDetailsZodSchema),
+    defaultValues: {
+      shopLocation: {
+        lat: 0.22,
+        lng: 2.333,
+      },
+    },
   });
 
   const locationHandler = () => {

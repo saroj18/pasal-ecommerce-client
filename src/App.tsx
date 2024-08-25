@@ -56,6 +56,7 @@ import VendorMoreDetails from "./admin/pages/vendor/VendorMoreDetails";
 import OfferLayout from "./admin/pages/offers/OfferLayout";
 import CreateOffer from "./admin/pages/offers/CreateOffer";
 import Offers from "./admin/pages/offers/Offers";
+import Message from "./customer/pages/account/page/Message";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -104,6 +105,10 @@ const App = () => {
           path: "/account",
           element: <AccountLayout />,
           children: [
+            {
+              path: "message",
+              element: <Message />,
+            },
             {
               path: "/account",
               element: <Account />,

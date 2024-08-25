@@ -30,6 +30,9 @@ const VerifyForm = () => {
     defaultValues: {
       fullname: data?.fullname,
       email: data?.email,
+      dob: "2000-01-05",
+      gender: "male",
+      mobile: "9876543210",
     },
   });
 
