@@ -57,6 +57,7 @@ import OfferLayout from "./admin/pages/offers/OfferLayout";
 import CreateOffer from "./admin/pages/offers/CreateOffer";
 import Offers from "./admin/pages/offers/Offers";
 import Message from "./customer/pages/account/page/Message";
+import Chat from "./seller/dashboard/pages/message/Chat";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -184,6 +185,10 @@ const App = () => {
         {
           path: "delevery",
           element: <Delevery />,
+        },
+        {
+          path: "message",
+          element: <Chat />,
         },
         {
           path: "customer",

@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
-import { string } from "zod";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
-import { VerifyForm, VerifyInfoTyype } from "../customer/pages/account/component/VerifyForm";
+import {
+  VerifyForm,
+  VerifyInfoTyype,
+} from "../customer/pages/account/component/VerifyForm";
 import { useQuery } from "../utils/useQuery";
 
 type ProductType = {
@@ -24,22 +26,26 @@ type ProvideProps = {
   setAccountSideBar: React.Dispatch<React.SetStateAction<boolean>>;
   productInfo: ProductType;
   setProductInfo: React.Dispatch<React.SetStateAction<ProductType>>;
-  zodError:{[key:string]:string}
-  setZodError:React.Dispatch<React.SetStateAction<{[key:string]:string}>>
-  verifyPopup:boolean
-  setVerifyPopup:React.Dispatch<React.SetStateAction<boolean>>
-  setVerifyInfo: React.Dispatch<React.SetStateAction<AddressForm | VerifyForm | VerifyInfoTyype>>;
+  zodError: { [key: string]: string };
+  setZodError: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
+  verifyPopup: boolean;
+  setVerifyPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setVerifyInfo: React.Dispatch<
+    React.SetStateAction<AddressForm | VerifyForm | VerifyInfoTyype>
+  >;
   verifyInfo: AddressForm | VerifyForm | VerifyInfoTyype;
-  data:any
+  data: any;
+  socketServer: WebSocket | null;
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
 
 export const Context = ({ children }: { children: React.ReactNode }) => {
   const [sidebar, setSidebar] = useState<boolean>(false);
-  const[verifyPopup,setVerifyPopup]=useState<boolean>(false)
+  const [verifyPopup, setVerifyPopup] = useState<boolean>(false);
   const [accountSideBar, setAccountSideBar] = useState<boolean>(false);
-  const[zodError,setZodError]=useState<{[key:string]:string}>({})
+  const [zodError, setZodError] = useState<{ [key: string]: string }>({});
+  const [socketServer, setSocketServer] = useState<WebSocket | null>(null);
   const [productInfo, setProductInfo] = useState<ProductType>({
     name: "",
     description: "",
@@ -53,26 +59,36 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     features: [],
     images: [],
   });
-  const [verifyInfo,setVerifyInfo]=useState<VerifyInfoTyype | VerifyForm | AddressForm>({
-    fullname:'',
-    email:'',
-    mobile:'',
-    dob:'',
-    state:'',
-    district:'',
-    tole:'',
-    city:'',
-    gender:'',
-    defaultAddress:'',
-    nearBy:'',
-    ward:'',
-    location:{
-      lat:0,
-      lng:0
-    }
-  })
+  const [verifyInfo, setVerifyInfo] = useState<
+    VerifyInfoTyype | VerifyForm | AddressForm
+  >({
+    fullname: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    state: "",
+    district: "",
+    tole: "",
+    city: "",
+    gender: "",
+    defaultAddress: "",
+    nearBy: "",
+    ward: "",
+    location: {
+      lat: 0,
+      lng: 0,
+    },
+  });
 
-  const {data}=useQuery('/user')
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:4000");
+    socket.addEventListener("open", () => {
+      console.log("socket connect with server successfully");
+    });
+    setSocketServer(socket);
+  }, []);
+
+  const { data } = useQuery("/user");
   return (
     <ContextProvider.Provider
       value={{
@@ -88,7 +104,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         setVerifyPopup,
         setVerifyInfo,
         verifyInfo,
-        data
+        data,
+        socketServer,
       }}
     >
       {children}

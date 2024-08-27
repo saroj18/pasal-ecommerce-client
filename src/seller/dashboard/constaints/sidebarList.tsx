@@ -9,6 +9,7 @@ import {
   ListOrdered,
   MoveDiagonal,
   PersonStanding,
+  Send,
   Settings,
   ShoppingBasket,
   Star,
@@ -62,6 +63,11 @@ export const dashboardList: listProps[] = [
     name: "Customer",
     url: "/dashboard/customer",
     icon: <User />,
+  },
+  {
+    name: "Message",
+    url: "/dashboard/message",
+    icon: <Send />,
   },
   {
     name: "Notification",
