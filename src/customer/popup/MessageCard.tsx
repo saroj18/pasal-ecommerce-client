@@ -1,24 +1,32 @@
+import { MessageProps } from "./ChatPopup";
 
 type MessageCardProps = {
-  message: string|boolean;
-  messageType: string|undefined;
-  user:string
+  message: string | boolean;
+  messageType: string | undefined;
+  user: string;
+  msg: MessageProps;
 };
 
-const MessageCard = ({ message, messageType,user }: MessageCardProps) => {
+const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
   return (
-    <div className={`flex gap-x-2 ${!messageType?" self-end":"self-start"}`}>
-          <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-          <div className="flex flex-col gap-y-1">
-            <p className="text-sm">{user}</p>
-            <p className={` p-2 rounded-lg ${messageType?"bg-blue-500 text-white":"bg-gray-500 text-white"}`}>{message}</p>
-          </div>
-        </div>
+    <div
+      className={`flex gap-x-2 ${messageType == msg?.receiver ? " self-end" : "self-start"}`}
+    >
+      <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+      <div className="flex flex-col gap-y-1">
+        <p className="text-sm">{user}</p>
+        <p
+          className={` p-2 rounded-lg ${messageType == msg?.receiver ? "bg-blue-500 text-white" : "bg-gray-500 text-white"}`}
+          title={new Date(msg.createdAt as string).toLocaleTimeString()}
+        >
+          {message}
+        </p>
+      </div>
+    </div>
   );
 };
 
 export default MessageCard;
-
 
 export const message = [
   {

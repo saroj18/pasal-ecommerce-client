@@ -80,15 +80,19 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
+  const { data } = useQuery("/user");
+  console.log("context call");
+
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:4000");
-    socket.addEventListener("open", () => {
-      console.log("socket connect with server successfully");
-    });
-    setSocketServer(socket);
+      const socket = new WebSocket("ws://localhost:4000");
+      socket.addEventListener("open", () => {
+        console.log("socket connect with server successfully");
+      });
+      setSocketServer(socket);
+
+      return () => socket.close();
   }, []);
 
-  const { data } = useQuery("/user");
   return (
     <ContextProvider.Provider
       value={{

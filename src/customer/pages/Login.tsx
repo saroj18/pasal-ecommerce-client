@@ -29,6 +29,7 @@ const Login = () => {
     if (data) {
       navigate("/");
       localStorage.setItem("role", "CUSTOMER");
+      window.location.reload();
     }
   }, [data]);
 

@@ -194,7 +194,14 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <ChatPopup userId={data?.addedBy?.owner} open={open} setOpen={setOpen} />
+      {open && (
+        <ChatPopup
+          userId={data?.addedBy?.owner}
+          open={open}
+          setOpen={setOpen}
+          product={data?._id}
+        />
+      )}
       <ProductDescription
         description={data?.description}
         features={data?.features}

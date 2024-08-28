@@ -1,12 +1,13 @@
 import { Send } from "lucide-react";
 import Sidebar from "./Sidebar";
 import Input from "../../../../components/common/Input";
-import MessageCard, { message } from "../../../../customer/popup/MessageCard";
+import MessageCard from "../../../../customer/popup/MessageCard";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import jacket from "../../../../assets/jacket.png";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
+import { useQuery } from "../../../../utils/useQuery";
 
 const Chat = () => {
   const [text, setText] = useState("");
@@ -14,17 +15,27 @@ const Chat = () => {
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
+  const [id, setId] = useState("");
+  const { data, refetch } = useQuery<any[]>(`/chats?id=${id}`);
+  const [client, setClient] = useState("");
+  const [product, setProduct] = useState<any>();
+
+  useEffect(() => {
+    if (id) {
+      refetch();
+    }
+  }, [id]);
 
   const clickhandler = () => {
     socketServer?.send(
       JSON.stringify({
-        receiver: "66bb977e3d027fee0c03fd7f",
+        receiver: id,
         message: text,
         type: "customer_and_vendor_chat",
       }),
     );
     const value = {
-      receiver: "66bb977e3d027fee0c03fd7f",
+      receiver: id,
       message: text,
       type: "customer_and_vendor_chat",
     };
@@ -32,10 +43,9 @@ const Chat = () => {
   };
 
   const focusHandler = () => {
-    console.log("focus");
     socketServer?.send(
       JSON.stringify({
-        receiver: "66bb977e3d027fee0c03fd7f",
+        receiver: id,
         message: true,
         type: "typing",
       }),
@@ -45,7 +55,7 @@ const Chat = () => {
   const blurHandler = () => {
     socketServer?.send(
       JSON.stringify({
-        receiver: "66bb977e3d027fee0c03fd7f",
+        receiver: id,
         message: false,
         type: "typing",
       }),
@@ -56,32 +66,48 @@ const Chat = () => {
     if (socketServer)
       socketServer.onmessage = (info) => {
         const serverData = JSON.parse(info.data);
+        console.log(serverData);
         if (serverData.type == "typing") {
           setTyping(serverData.message);
         }
         if (serverData.type == "customer_and_vendor_chat") {
           setChat((prv) => [...prv, serverData]);
+          if (product?._id !== serverData.product._id) {
+            setProduct(serverData.product);
+          }
         }
       };
-  }, []);
+  }, [socketServer]);
 
   useEffect(() => {
-    if (text && chatBodyRef.current) {
+    if (chatBodyRef.current) {
       chatBodyRef.current.scrollTo({
         top: chatBodyRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
   }, [typing, chat]);
+
+  useEffect(() => {
+    if (data) {
+      setChat([...data]);
+    }
+  }, [data]);
+  console.log(product.images[0]);
   return (
     <div className="flex gap-x-2">
-      <Sidebar />
+      <Sidebar setId={setId} setClient={setClient} />
       <div className=" rounded-md p-1 w-full">
         <div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
           <img className="w-[40px] h-[40px] rounded-full" src={jacket} alt="" />
           <div>
-            <ParaTypo className="text-sm">Madan Panipuri Pasal</ParaTypo>
-            <span>online</span>
+            <ParaTypo className="text-sm">{client}</ParaTypo>
+            {/* {id && <span>online</span>} */}
+            {typing && (
+              <ParaTypo className="text-center text-sm text-white-500">
+                typing....
+              </ParaTypo>
+            )}
           </div>
         </div>
 
@@ -91,14 +117,24 @@ const Chat = () => {
         >
           {chat.map((msg, index) => (
             <MessageCard
-              key={index}
-              user={"bhola"}
-              message={msg.message}
-              messageType={msg?.sender}
+            key={index}
+            user={"bhola"}
+            message={msg.message}
+            messageType={id}
+            msg={msg}
             />
           ))}
+          <ParaTypo className="text-center">Selected Product</ParaTypo>
+          <img title={product?.name} className="w-[150px] mx-auto border-2 border-gray-500 rounded-md shadow-md p-1" src={product?.images?.[0]} alt="" />
+          <ParaTypo className="text-center text-sm">Rs {product?.priceAfterDiscount}</ParaTypo>
+          <ParaTypo className="text-center text-sm">Discount {product?.discount}%</ParaTypo>
+
+          {!id && (
+            <ParaTypo className="text-center mt-10 text-3xl font-semibold">
+              Select Chat Person
+            </ParaTypo>
+          )}
         </div>
-        {typing && <ParaTypo className="text-center text-sm text-green-500">typing....</ParaTypo>}
 
         <div className="flex items-center gap-x-1">
           <Input

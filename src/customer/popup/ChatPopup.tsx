@@ -6,11 +6,13 @@ import { Send } from "lucide-react";
 import MessageCard, { message } from "./MessageCard";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../context/Context";
+import { useQuery } from "../../utils/useQuery";
 
 type ChatPopupProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
+  product:string
 };
 
 export type MessageProps = {
@@ -18,14 +20,16 @@ export type MessageProps = {
   receiver: string;
   message: string | boolean;
   type: string;
+  createdAt?: string;
 };
 
-const ChatPopup = ({ userId, open, setOpen }: ChatPopupProps) => {
+const ChatPopup = ({ userId, open, setOpen,product }: ChatPopupProps) => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const messageBodyRef = useRef<HTMLDivElement | null>(null);
+  const { data } = useQuery<any[]>("/chats?id=" + userId);
   console.log(userId);
 
   const clickhandler = () => {
@@ -34,6 +38,7 @@ const ChatPopup = ({ userId, open, setOpen }: ChatPopupProps) => {
         receiver: userId,
         message: text,
         type: "customer_and_vendor_chat",
+        product
       }),
     );
     const value = {
@@ -76,16 +81,22 @@ const ChatPopup = ({ userId, open, setOpen }: ChatPopupProps) => {
         }
       };
     }
-  }, []);
+  }, [socketServer]);
 
   useEffect(() => {
-    if (text && messageBodyRef.current) {
+    if (messageBodyRef.current) {
       messageBodyRef.current.scrollTo({
         top: messageBodyRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
   }, [chat, typing]);
+
+  useEffect(() => {
+    if (data) {
+      setChat([...data]);
+    }
+  }, [data]);
 
   return (
     <Popup
@@ -113,10 +124,15 @@ const ChatPopup = ({ userId, open, setOpen }: ChatPopupProps) => {
               key={index}
               user={"chola"}
               message={msg.message}
-              messageType={msg?.sender}
+              messageType={userId}
+              msg={msg}
             />
           ))}
-          {typing && <ParaTypo className="text-center text-sm text-green-500">typing.....</ParaTypo>}
+          {typing && (
+            <ParaTypo className="text-center text-sm text-green-500">
+              typing.....
+            </ParaTypo>
+          )}
         </div>
 
         <div className="flex items-center gap-x-1">
