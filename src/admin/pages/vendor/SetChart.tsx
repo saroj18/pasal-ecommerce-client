@@ -32,14 +32,7 @@ const SetChart = ({
         tension: 0.4,
         fill: true,
       },
-      {
-        label: "second",
-        data: Array(30)
-          .fill(null)
-          .map((_, index) => Math.floor(Math.random() * index)),
-        tension: 0.4,
-        fill: true,
-      },
+      
     ],
   };
   return (

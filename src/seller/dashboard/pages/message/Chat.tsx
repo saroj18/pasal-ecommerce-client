@@ -93,7 +93,6 @@ const Chat = () => {
       setChat([...data]);
     }
   }, [data]);
-  console.log(product.images[0]);
   return (
     <div className="flex gap-x-2">
       <Sidebar setId={setId} setClient={setClient} />
@@ -117,17 +116,31 @@ const Chat = () => {
         >
           {chat.map((msg, index) => (
             <MessageCard
-            key={index}
-            user={"bhola"}
-            message={msg.message}
-            messageType={id}
-            msg={msg}
+              key={index}
+              user={"bhola"}
+              message={msg.message}
+              messageType={id}
+              msg={msg}
             />
           ))}
-          <ParaTypo className="text-center">Selected Product</ParaTypo>
-          <img title={product?.name} className="w-[150px] mx-auto border-2 border-gray-500 rounded-md shadow-md p-1" src={product?.images?.[0]} alt="" />
-          <ParaTypo className="text-center text-sm">Rs {product?.priceAfterDiscount}</ParaTypo>
-          <ParaTypo className="text-center text-sm">Discount {product?.discount}%</ParaTypo>
+          {product && (
+            <>
+              {" "}
+              <ParaTypo className="text-center">Selected Product</ParaTypo>
+              <img
+                title={product?.name}
+                className="w-[150px] mx-auto border-2 border-gray-500 rounded-md shadow-md p-1"
+                src={product?.images?.[0]}
+                alt=""
+              />
+              <ParaTypo className="text-center text-sm">
+                Rs {product?.priceAfterDiscount}
+              </ParaTypo>
+              <ParaTypo className="text-center text-sm">
+                Discount {product?.discount}%
+              </ParaTypo>
+            </>
+          )}
 
           {!id && (
             <ParaTypo className="text-center mt-10 text-3xl font-semibold">
