@@ -62,8 +62,11 @@ const User = () => {
                   <TableData className="p-4">
                     {new Date(ele.createdAt).toDateString()}
                   </TableData>
-                  <TableData className="p-4 capitalize">
+                  <TableData className={`p-4 capitalize ${ele.verify?'text-green-500':'text-red-500'}`}>
                     {ele.verify.toString()}
+                  </TableData>
+                  <TableData className={`p-4 capitalize ${ele.shopVerify?'text-green-500':'text-red-500'}`}>
+                    {ele.shopVerify.toString()}
                   </TableData>
                   <TableData className="p-4 capitalize">
                     {ele.signUpAs}

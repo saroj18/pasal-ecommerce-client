@@ -57,7 +57,7 @@ const ProductDetails = () => {
     data?.review?.forEach((ele: any) => {
       total += ele.reviewStar;
     });
-    return total / 5;
+    return total / data?.review?.length;
   }, [data]);
 
   return (

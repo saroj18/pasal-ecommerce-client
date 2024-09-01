@@ -4,7 +4,7 @@ import SearchBox from "../../../../components/common/Search";
 import Button from "../../../../components/common/Button";
 import TableHead from "../../../../components/common/TableHead";
 import Table from "../../../../components/common/Table";
-import { tableData, tableHeadData } from "./tableData";
+import {  tableHeadData } from "./tableData";
 import TableData from "../../../../components/common/TableData";
 import TableBody from "../../../../components/common/TableBody";
 import { useQuery } from "../../../../utils/useQuery";
@@ -61,6 +61,7 @@ const Inventory = () => {
                 </TableData>
                 <TableData className="p-3">{ele.price}</TableData>
                 <TableData className="p-3">{ele.discount}%</TableData>
+                <TableData className="p-3">Rs {ele.priceAfterDiscount}</TableData>
                 <TableData className="p-3">{ele.brand}</TableData>
                 <TableData className="p-3">{ele.totalSale}</TableData>
                 <TableData className="p-3">{ele.totalSaleAmount}</TableData>

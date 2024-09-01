@@ -1,15 +1,21 @@
-import React from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import ParaTypo from "../../../components/common/ParaTypo";
 import Select from "../../../components/common/Select";
 import Option from "../../../components/common/Option";
 import Button from "../../../components/common/Button";
-import { Menu } from "lucide-react";
-import { useSeller } from "../../context/SellerContext";
+import React from "react";
 
-const FilterBar = () => {
+type FilterBarProps = {
+  time: string;
+  setTime: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const FilterBar = ({ setTime }: FilterBarProps) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setTime(e.target.value);
+  };
   return (
-    <div className="flex flex-col justify-between p-2 gap-y-3 ">
+    <div className="flex flex-col md:flex-row justify-between p-2 gap-y-3 ">
       <div>
         <HeadingTypo className="md:text-2xl text-lg w-full">
           Welcome Back, Saroj
@@ -19,14 +25,14 @@ const FilterBar = () => {
         </ParaTypo>
       </div>
       <div className="flex items-center gap-x-4">
-        <Select>
-          <Option defaultChecked value="today">
-            Today
+        <Select onChange={changeHandler}>
+          <Option defaultChecked value="24hrs">
+            Last 24 Hrs.
           </Option>
-          <Option value="pastsevendays">Last 7 Days</Option>
-          <Option value="pastonemonth">Last 1 Month</Option>
-          <Option value="pastsixmonth">Last 6 Months</Option>
-          <Option value="pastoneyear">Last 1 Year</Option>
+          <Option value="7days">Last 7 Days</Option>
+          <Option value="1month">Last 1 Month</Option>
+          <Option value="6months">Last 6 Months</Option>
+          <Option value="1year">Last 1 Year</Option>
         </Select>
         <Button className="bg-black text-white px-3 py-2 rounded-md text-sm sm:text-xl">
           View LifeTime

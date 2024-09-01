@@ -29,6 +29,7 @@ const Login = () => {
     if (data) {
       navigate("/");
       localStorage.setItem("role", "CUSTOMER");
+      localStorage.setItem("user", data?._id);
       window.location.reload();
     }
   }, [data]);

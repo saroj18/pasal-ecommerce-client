@@ -68,6 +68,7 @@ const Product = () => {
         description: updateData?.description || "",
         chating: updateData?.chating || "",
         barganing: updateData?.barganing || "",
+        images: "UPDATE",
       });
     }
   }, [edit, updateData, reset]);
@@ -82,7 +83,6 @@ const Product = () => {
   const formData = new FormData();
 
   const onSubmit = (data: ProductType) => {
-    console.log(data);
     if (data.features.length < 5) {
       setError("features", {
         message: "Atleast 5 features are required",
@@ -185,6 +185,8 @@ const Product = () => {
               <th className="p-3">Product</th>
               <th className="p-3">Product Id</th>
               <th className="p-3">Price</th>
+              <th className="p-3">Discount</th>
+              <th className="p-3">PAD</th>
               <th className="p-3">Brand</th>
               <th className="p-3">Category</th>
               <th className="p-3">Review</th>
@@ -216,10 +218,12 @@ const Product = () => {
                   </td>
                   <td title={product._id}>{product._id.slice(15)}</td>
                   <td>Rs {product.price}</td>
+                  <td>{product.discount}%</td>
+                  <td>Rs {product.priceAfterDiscount}</td>
                   <td>{product.brand}</td>
                   <td>{product.category}</td>
-                  <td>22</td>
-                  <td>20</td>
+                  <td>{product?.review?.length}</td>
+                  <td>{product.totalSale}</td>
                   <td>2024-03-11</td>
                   <td className="flex justify-around items-start gap-x-1 px-3">
                     <Trash

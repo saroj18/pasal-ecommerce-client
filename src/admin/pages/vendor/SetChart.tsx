@@ -3,12 +3,17 @@ import { Chart } from "react-chartjs-2";
 import "chart.js/auto";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import { twMerge } from "tailwind-merge";
+import { useEffect, useState } from "react";
+import ParaTypo from "../../../components/common/ParaTypo";
 
 interface ChartProps {
   chartType: keyof ChartTypeRegistry;
   heading: string;
   showLabels?: boolean;
   className?: string;
+  graphData: any[];
+  label: string;
+  color: string;
 }
 
 const SetChart = ({
@@ -16,23 +21,34 @@ const SetChart = ({
   heading,
   className,
   showLabels = true,
+  graphData,
+  label,
+  color,
 }: ChartProps) => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let count = 0;
+    graphData &&
+      graphData?.forEach((ele) => {
+        console.log("dd", ele);
+        count += ele?.value;
+      });
+    setTotal(count);
+  }, [graphData]);
+
   const data: ChartData = {
-    labels: showLabels
-      ? Array(30)
-          .fill(null)
-          .map((_, index) => `2024-03-${index + 1}`)
-      : [],
+    labels: graphData ? graphData.map((ele) => ele.date.slice(0, 8)) : [],
     datasets: [
       {
-        label: "first",
-        data: Array(30)
-          .fill(null)
-          .map((_, index) => Math.floor(Math.random() * index)),
+        label: label,
+        data: graphData && graphData.map((ele) => ele.value),
         tension: 0.4,
         fill: true,
+        circular: true,
+        borderColor: color,
+        backgroundColor: color,
       },
-      
     ],
   };
   return (
@@ -42,9 +58,12 @@ const SetChart = ({
         className,
       )}
     >
-      <HeadingTypo className="sm:text-3xl opacity-75 font-semibold text-xl">
-        {heading}
-      </HeadingTypo>
+      <div className="flex justify-between items-center">
+        <HeadingTypo className="sm:text-2xl opacity-75 font-semibold text-xl">
+          {heading}
+        </HeadingTypo>
+        <ParaTypo className="text-xl font-semibold">{total}</ParaTypo>
+      </div>
       <Chart type={chartType} data={data} />
     </div>
   );

@@ -1,10 +1,7 @@
-import { Star, Trash, X } from "lucide-react";
+import { Star, Trash } from "lucide-react";
 import React, { useCallback } from "react";
-import Button from "./common/Button";
-import computer from "../../public/computer.png";
 import ParaTypo from "./common/ParaTypo";
 import { Link } from "react-router-dom";
-import { ElementType } from "../customer/pages/AllProducts";
 import { useMutation } from "../utils/useMutation";
 
 type cardProps = {
@@ -30,8 +27,10 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
       total += ele.reviewStar;
     });
     console.log("tot", total);
-    return total / 5;
+    return total / product?.review?.length;
   }, [product]);
+
+
   return (
     <Link to={`/details/${product?._id}`} className="shadow-md ">
       <div className="bg-gray-100 flex items-center justify-center overflow-hidden p-2 cursor-pointer cart relative h-[200px] sm:h-[300px] md:h-[300px] ">

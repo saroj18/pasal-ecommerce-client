@@ -6,6 +6,7 @@ export let tableHeadData = [
   "Added Date",
   "Price",
   "Discount",
+  "PAD",
   "Brand",
   "Total Sale",
   "Total Sale Amount",

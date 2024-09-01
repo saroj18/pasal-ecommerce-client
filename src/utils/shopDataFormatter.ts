@@ -15,6 +15,7 @@ export const shopDataFormatter = (data: any) => {
     "username",
   ];
   const shopInfo: { [key: string]: string } = {};
+  if(!data) return
 
   Object.entries(data).forEach(([key, value]: [string, any]) => {
     if (typeof value == "object") {

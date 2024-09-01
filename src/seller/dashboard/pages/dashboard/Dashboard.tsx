@@ -1,17 +1,25 @@
 import FilterBar from "../../components/FilterBar";
 import AmountCard from "../../components/AmountCard";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
-import jacket from "../../../../assets/jacket.png";
 import SetChart from "../../../../admin/pages/vendor/SetChart";
 import { useQuery } from "../../../../utils/useQuery";
+import MostSellingProductCard from "../../components/MostSellingProductCard";
+import { useEffect, useState } from "react";
+import { useMutation } from "../../../../utils/useMutation";
 
 const Dashboard = () => {
+  const [time, setTime] = useState("24hrs");
   const { data } = useQuery<any>("/seller/sellerdashboard");
   const { data: orders } = useQuery<any>("/order/sellerorder");
-  console.log(data);
+  const { data: bestSellingProducts } = useQuery<any>("/product/bestselling");
+  const { mutate, data: graphData } = useMutation<any>();
+
+  useEffect(() => {
+    mutate("/seller/sellerdashboardgraph", "POST", { time });
+  }, [time]);
   return (
     <div className="w-full  font-poppins">
-      <FilterBar />
+      <FilterBar time={time} setTime={setTime} />
       <div className="flex flex-wrap gap-4 mt-5">
         <AmountCard
           className={"grow bg-green-50"}
@@ -46,20 +54,62 @@ const Dashboard = () => {
       </div>
       {/* <div className="flex gap-x-3 mt-6 "> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mt-6">
-        <SetChart className="w-full" chartType="line" heading="Total Visit" />
-        <SetChart className="w-full" chartType="line" heading="Total Order" />
+        <SetChart
+          graphData={graphData?.graphData}
+          color=""
+          className="w-full"
+          chartType="line"
+          label="order"
+          heading="Total Order"
+        />
+        <SetChart
+          graphData={graphData?.revenueData}
+          color="rgba(255, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="amount"
+          heading="Total Revenue"
+        />
       </div>
-      {/* <div className="border-2 border-gray-500 rounded-md p-3 w-full max-w-[40%] max-h-[350px] overflow-y-scroll">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">
+        <div className="border-2 border-gray-500 rounded-md p-3  max-h-[350px] overflow-y-scroll">
           <HeadingTypo className="text-xl my-3">
             Most Selling Products
           </HeadingTypo>
           <div className="shadow-md">
-            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
-            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
-            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
-            <MostSellingProductCard name="Primuem Leather Jacket" id="873209472392349832" result="123 Sale" />
+            {bestSellingProducts &&
+              bestSellingProducts?.product.map((ele:any) => {
+                return (
+                  <MostSellingProductCard
+                  key={ele._id}
+                    name={ele.name}
+                    id={ele._id}
+                    result={`${ele.totalSale} Sale`}
+                    image={ele.images[0]}
+                  />
+                );
+              })}
+
           </div>
-        </div> */}
+        </div>
+        <div className="border-2 border-gray-500 rounded-md p-3  max-h-[350px] overflow-y-scroll">
+          <HeadingTypo className="text-xl my-3">Top Category</HeadingTypo>
+          <div className="shadow-md">
+            {bestSellingProducts &&
+              bestSellingProducts?.topCategory.map((ele:any) => {
+                return (
+                  <MostSellingProductCard
+                  key={ele._id}
+                    name={ele._id}
+                    id={ele._id}
+                    result={`${ele.totalSale} Sale`}
+                  />
+                );
+              })}
+           
+          </div>
+        </div>
+      </div>
       {/* </div> */}
       <HeadingTypo className="text-2xl my-8">Recent Pending Orders</HeadingTypo>
       <div className="overflow-auto">
@@ -76,24 +126,34 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {orders &&
-              orders.map((ele:any) => {
-                return <tr key={ele._id} className="border-b-2 border-t-2 ">
-                  <td className="p-2 flex items-center justify-center gap-x-2 flex-col">
-                    {" "}
-                    <img
-                      className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
-                      src={ele.orderProducts.images[0]}
-                    />{" "}
-                    {ele.orderProducts.name}
-                  </td>
-                  <td className="p-2">{ele.customer[0].fullname}</td>
-                  <td title={ele._id} className="p-2">{ele._id.slice(15)}</td>
-                  <td title={new Date(ele.createdAt).toLocaleTimeString()} className="p-2">{new Date(ele.createdAt).toDateString()}</td>
-                  <td className="p-2">Rs {ele.orderProducts.priceAfterDiscount}</td>
-                  <td className="p-2">{ele.orderProducts.discount}%</td>
-                </tr>;
+              orders.map((ele: any) => {
+                return (
+                  <tr key={ele._id} className="border-b-2 border-t-2 ">
+                    <td className="p-2 flex items-center justify-center gap-x-2 flex-col">
+                      {" "}
+                      <img
+                        className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
+                        src={ele.orderProducts.images[0]}
+                      />{" "}
+                      {ele.orderProducts.name}
+                    </td>
+                    <td className="p-2">{ele.customer[0].fullname}</td>
+                    <td title={ele._id} className="p-2">
+                      {ele._id.slice(15)}
+                    </td>
+                    <td
+                      title={new Date(ele.createdAt).toLocaleTimeString()}
+                      className="p-2"
+                    >
+                      {new Date(ele.createdAt).toDateString()}
+                    </td>
+                    <td className="p-2">
+                      Rs {ele.orderProducts.priceAfterDiscount}
+                    </td>
+                    <td className="p-2">{ele.orderProducts.discount}%</td>
+                  </tr>
+                );
               })}
-
           </tbody>
         </table>
       </div>

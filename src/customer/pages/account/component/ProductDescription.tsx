@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import  { useCallback } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { StarIcon } from "lucide-react";
@@ -22,7 +22,7 @@ const ProductDescription = ({
     review?.forEach((ele: any) => {
       total += ele.reviewStar ?? 0;
     });
-    return Math.round(total / 5);
+    return Math.round(total / review?.length);
   }, [review]);
 
   return (

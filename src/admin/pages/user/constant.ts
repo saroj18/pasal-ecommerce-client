@@ -6,11 +6,23 @@ export const tableHeadData = [
   "Email",
   "Join On",
   "Verified",
+  "ShopVerify",
   "Signup as",
   "Action",
 ];
 
+export const userInfoData = [
+  "Info",
+  "Order History",
+  "Review History",
+  "Payment History",
+];
 
-export const userInfoData=['Info','Order History','Review History','Payment History']
-
-export const tableHeadDataForPayment=["Id","Pay On","Pay Method","Product","Total","Purchase From"]
+export const tableHeadDataForPayment = [
+  "Id",
+  "Pay On",
+  "Pay Method",
+  "Product",
+  "Total",
+  "Purchase From",
+];

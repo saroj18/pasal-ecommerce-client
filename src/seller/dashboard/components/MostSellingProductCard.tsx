@@ -6,21 +6,22 @@ type Card = {
   name: string;
   id: string;
   result: string;
+  image?:string
 };
 
-const MostSellingProductCard = ({ name, id, result }: Card) => {
+const MostSellingProductCard = ({ name, id, result,image }: Card) => {
   return (
-    <div className="flex justify-between my-5 border-2  p-1 items-center">
+    <div className="flex justify-between my-2 shadow-md border-2  px-2 py-1 items-center">
       <img
-        className="w-[20%] rounded-md"
-        src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGVhdGhlciUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D"
+        className="w-[10%] rounded-md"
+        src={image || 'http://localhost:5173/src/assets/logo.jpg'}
         alt=""
       />
       <div>
-        <ParaTypo>{name}</ParaTypo>
+        <ParaTypo title={name} className="text-base">{name}</ParaTypo>
         <ParaTypo className="text-gray-400 text-xs">{id}</ParaTypo>
       </div>
-      <Button className="border-2 rounded-md px-2 py-3">{result}</Button>
+      <Button className="border-2 rounded-md p-2 text-sm">{result}</Button>
     </div>
   );
 };

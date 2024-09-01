@@ -18,7 +18,10 @@ const Chat = () => {
   const [id, setId] = useState("");
   const { data, refetch } = useQuery<any[]>(`/chats?id=${id}`);
   const [client, setClient] = useState("");
-  const [product, setProduct] = useState<any>();
+  const [product, setProduct] = useState<{ sender: string; product: any }>({
+    sender: "",
+    product: "",
+  });
 
   useEffect(() => {
     if (id) {
@@ -66,14 +69,16 @@ const Chat = () => {
     if (socketServer)
       socketServer.onmessage = (info) => {
         const serverData = JSON.parse(info.data);
-        console.log(serverData);
         if (serverData.type == "typing") {
           setTyping(serverData.message);
         }
         if (serverData.type == "customer_and_vendor_chat") {
           setChat((prv) => [...prv, serverData]);
-          if (product?._id !== serverData.product._id) {
-            setProduct(serverData.product);
+          if (product?.product?._id !== serverData.product._id) {
+            setProduct({
+              product: serverData.product,
+              sender: serverData.sender,
+            });
           }
         }
       };
@@ -93,15 +98,16 @@ const Chat = () => {
       setChat([...data]);
     }
   }, [data]);
+
+
   return (
     <div className="flex gap-x-2">
       <Sidebar setId={setId} setClient={setClient} />
-      <div className=" rounded-md p-1 w-full">
+      <div className="rounded-md p-1 w-full">
         <div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
           <img className="w-[40px] h-[40px] rounded-full" src={jacket} alt="" />
           <div>
             <ParaTypo className="text-sm">{client}</ParaTypo>
-            {/* {id && <span>online</span>} */}
             {typing && (
               <ParaTypo className="text-center text-sm text-white-500">
                 typing....
@@ -114,30 +120,32 @@ const Chat = () => {
           ref={chatBodyRef}
           className="flex flex-col w-full h-[550px] overflow-y-auto"
         >
-          {chat.map((msg, index) => (
-            <MessageCard
-              key={index}
-              user={"bhola"}
-              message={msg.message}
-              messageType={id}
-              msg={msg}
-            />
-          ))}
-          {product && (
+          {chat.map(
+            (msg, index) =>
+              (msg.receiver == id || msg.sender == id) && (
+                <MessageCard
+                  key={index}
+                  user={"bhola"}
+                  message={msg.message}
+                  messageType={id}
+                  msg={msg}
+                />
+              ),
+          )}
+          {product.product && product.sender == id && (
             <>
-              {" "}
               <ParaTypo className="text-center">Selected Product</ParaTypo>
               <img
-                title={product?.name}
+                title={product?.product?.name}
                 className="w-[150px] mx-auto border-2 border-gray-500 rounded-md shadow-md p-1"
-                src={product?.images?.[0]}
+                src={product?.product?.images?.[0]}
                 alt=""
               />
               <ParaTypo className="text-center text-sm">
-                Rs {product?.priceAfterDiscount}
+                Rs {product?.product?.priceAfterDiscount}
               </ParaTypo>
               <ParaTypo className="text-center text-sm">
-                Discount {product?.discount}%
+                Discount {product?.product?.discount}%
               </ParaTypo>
             </>
           )}

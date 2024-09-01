@@ -12,7 +12,7 @@ type ChatPopupProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
-  product:string
+  product: string;
 };
 
 export type MessageProps = {
@@ -23,14 +23,14 @@ export type MessageProps = {
   createdAt?: string;
 };
 
-const ChatPopup = ({ userId, open, setOpen,product }: ChatPopupProps) => {
+const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const messageBodyRef = useRef<HTMLDivElement | null>(null);
   const { data } = useQuery<any[]>("/chats?id=" + userId);
-  console.log(userId);
+  console.log("sora", userId);
 
   const clickhandler = () => {
     socketServer?.send(
@@ -38,7 +38,7 @@ const ChatPopup = ({ userId, open, setOpen,product }: ChatPopupProps) => {
         receiver: userId,
         message: text,
         type: "customer_and_vendor_chat",
-        product
+        product,
       }),
     );
     const value = {
