@@ -84,13 +84,14 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   console.log("context call");
 
   useEffect(() => {
-      const socket = new WebSocket("ws://localhost:4000");
-      socket.addEventListener("open", () => {
-        console.log("socket connect with server successfully");
-      });
-      setSocketServer(socket);
+    const socket = new WebSocket("ws://localhost:4000");
+    console.log(import.meta.env.VITE_SOCKET_URL);
+    socket.addEventListener("open", () => {
+      console.log("socket connect with server successfully");
+    });
+    setSocketServer(socket);
 
-      return () => socket.close();
+    return () => socket.close();
   }, []);
 
   return (
