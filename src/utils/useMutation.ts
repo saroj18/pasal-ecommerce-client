@@ -43,8 +43,13 @@ export const useMutation = <T>(): UseMutationResult<T> => {
           bodyData instanceof FormData ? bodyData : JSON.stringify(bodyData),
         headers:
           bodyData instanceof FormData
-            ? {}
-            : { "Content-Type": "application/json" },
+            ? {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+              }
+            : {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
       });
       console.log(resp);
       const respData: ApiResponse<T> = await resp.json();

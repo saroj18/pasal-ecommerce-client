@@ -19,6 +19,7 @@ const VendorDetails = () => {
     if (data) {
       setVendor(data);
       const shopInfo = shopDataFormatter(data);
+      if(shopInfo)
       setShop(shopInfo);
     }
   }, [data]);
@@ -41,7 +42,7 @@ const VendorDetails = () => {
             View More
           </Button>
           <Button
-            onClick={() => navigate("/admin/vendor/analytics")}
+            onClick={() => navigate(`/admin/vendor/analytics?id=${id}`)}
             className="bg-orange-500 px-4 py-2 rounded-md text-white"
           >
             View Analytics

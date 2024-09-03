@@ -86,7 +86,7 @@ const Home = () => {
       <section className="flex flex-col items-center mt-5">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-x-3 ">
           {bestSellingProducts &&
-            bestSellingProducts.map((ele: any) => {
+            bestSellingProducts?.product?.map((ele: any) => {
               return <ProductCard key={ele._id} product={ele} />;
             })}
         </div>

@@ -25,6 +25,9 @@ export const useQuery = <T>(url?: string): UseQueryResult<T> => {
       const resp = await fetch(import.meta.env.VITE_HOST + url, {
         method: "GET",
         credentials: "include",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       const respData: ApiResponse<T> = await resp.json();
       setData(respData.data);

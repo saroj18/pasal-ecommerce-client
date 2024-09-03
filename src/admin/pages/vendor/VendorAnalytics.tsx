@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Select from "../../../components/common/Select";
 import Option from "../../../components/common/Option";
 import { ArrowLeftIcon } from "lucide-react";
 import SetChart from "./SetChart";
+import { useMutation } from "../../../utils/useMutation";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const VendorAnalytics = () => {
+  const [time, setTime] = useState("24hrs");
+  const { mutate, data: graphData } = useMutation<any>();
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    mutate(
+      `/seller/sellerdashboardgraph?id=${searchParams.get("id")}`,
+      "POST",
+      { time },
+    );
+  }, [time]);
+
+  const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setTime(e.target.value);
+  };
+
   return (
     <div>
       <ArrowLeftIcon
@@ -14,22 +31,49 @@ const VendorAnalytics = () => {
       />
       <div className="flex flex-col lg:flex-row items-center justify-between py-4 ">
         <HeadingTypo className="text-2xl font-semibold">Analytics</HeadingTypo>
-        <Select className="h-[50px] w-full sm:max-w-[45%] lg:max-w-[15%]">
-          <Option value="today">Today</Option>
-          <Option value="yesterdata">Yesterday</Option>
-          <Option value="pastsevendays">Past 7 Day</Option>
-          <Option value="pastonemonth">Past 1 Month</Option>
-          <Option value="pastsixmonth">Past 6 Month</Option>
-          <Option value="pastoneyear">Past 1 Year</Option>
-          <Option value="lifetime">LifeTime</Option>
+        <Select onChange={changeHandler}>
+          <Option defaultChecked value="24hrs">
+            Last 24 Hrs.
+          </Option>
+          <Option value="7days">Last 7 Days</Option>
+          <Option value="1month">Last 1 Month</Option>
+          <Option value="6months">Last 6 Months</Option>
+          <Option value="1year">Last 1 Year</Option>
         </Select>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center justify-between ">
-        <SetChart heading="Total Order" chartType="bar" />
-        <SetChart heading="Total Revenue" chartType="line" />
-        <SetChart heading="Total Orders" chartType="line" />
-        <SetChart heading="Top Sale" chartType="line" />
-        <SetChart heading="Top Sale" chartType="line" />
+        <SetChart
+          graphData={graphData?.totalVisitors}
+          color="rgba(154, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="visitors"
+          heading="Total Visitors"
+        />
+        <SetChart
+          graphData={graphData?.graphData}
+          color=""
+          className="w-full"
+          chartType="line"
+          label="order"
+          heading="Total Order"
+        />
+        <SetChart
+          graphData={graphData?.revenueData}
+          color="rgba(255, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="amount"
+          heading="Total Revenue"
+        />
+        <SetChart
+          graphData={graphData?.totalReview}
+          color="rgba(0, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="reviews"
+          heading="Total Review"
+        />
       </div>
     </div>
   );

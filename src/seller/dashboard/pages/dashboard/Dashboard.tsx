@@ -17,6 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     mutate("/seller/sellerdashboardgraph", "POST", { time });
   }, [time]);
+
   return (
     <div className="w-full  font-poppins">
       <FilterBar time={time} setTime={setTime} />
@@ -39,7 +40,7 @@ const Dashboard = () => {
         <AmountCard
           className={"grow bg-orange-50"}
           heading="Total SaleAmount"
-          amount={"Rs " + data?.products.totalSaleAmount}
+          amount={"Rs " + data?.orders.totalSaleAmount}
         />
         <AmountCard
           className={"grow bg-blue-50"}
@@ -54,6 +55,14 @@ const Dashboard = () => {
       </div>
       {/* <div className="flex gap-x-3 mt-6 "> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mt-6">
+      <SetChart
+          graphData={graphData?.totalVisitors}
+          color="rgba(154, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="visitors"
+          heading="Total Visitors"
+        />
         <SetChart
           graphData={graphData?.graphData}
           color=""
@@ -69,6 +78,14 @@ const Dashboard = () => {
           chartType="line"
           label="amount"
           heading="Total Revenue"
+        />
+         <SetChart
+          graphData={graphData?.totalReview}
+          color="rgba(0, 0, 0, 0.5)"
+          className="w-full"
+          chartType="line"
+          label="reviews"
+          heading="Total Review"
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 my-4">

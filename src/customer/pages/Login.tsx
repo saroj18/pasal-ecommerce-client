@@ -30,7 +30,7 @@ const Login = () => {
       navigate("/");
       localStorage.setItem("role", "CUSTOMER");
       localStorage.setItem("user", data?._id);
-      window.location.reload();
+      // window.location.reload();
     }
   }, [data]);
 
