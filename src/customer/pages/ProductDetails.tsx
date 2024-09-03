@@ -16,7 +16,6 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../../utils/useQuery";
 import { useMutation } from "../../utils/useMutation";
 import { useCallback, useEffect, useState } from "react";
-import Magnifier from "react-magnifier";
 import ChatPopup from "../popup/ChatPopup";
 
 const ProductDetails = () => {
@@ -64,12 +63,7 @@ const ProductDetails = () => {
     <>
       <div className="flex flex-col md:flex-row gap-x-10 mt-8 mb-10 border-b-2 pb-3">
         <div className="border-2 relative border-gray-500 rounded-md shadow-md w-full max-w-lg p-3 flex-col flex items-center justify-center">
-          {/* @ts-ignore */}
-          <Magnifier
-            mgWidth={300}
-            mgHeight={300}
-            src={image || data?.images?.[0]}
-          />
+          <img src={image || data?.images?.[0]} alt="product image" />
 
           <div className="flex w-full justify-center gap-x-4 mt-3 overflow-hidden">
             {data?.images?.map((ele: string, index: number) => {
