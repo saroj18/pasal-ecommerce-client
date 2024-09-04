@@ -4,18 +4,25 @@ import Select from "../../../components/common/Select";
 import Option from "../../../components/common/Option";
 import Button from "../../../components/common/Button";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 type FilterBarProps = {
-  time: string;
+  time?: string;
   setTime: React.Dispatch<React.SetStateAction<string>>;
+  className?: string;
 };
 
-const FilterBar = ({ setTime }: FilterBarProps) => {
+const FilterBar = ({ setTime, className }: FilterBarProps) => {
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTime(e.target.value);
   };
   return (
-    <div className="flex flex-col md:flex-row justify-between p-2 gap-y-3 ">
+    <div
+      className={twMerge(
+        "flex flex-col md:flex-row justify-between p-2 gap-y-3 ",
+        className,
+      )}
+    >
       <div>
         <HeadingTypo className="md:text-2xl text-lg w-full">
           Welcome Back, Saroj
@@ -34,7 +41,10 @@ const FilterBar = ({ setTime }: FilterBarProps) => {
           <Option value="6months">Last 6 Months</Option>
           <Option value="1year">Last 1 Year</Option>
         </Select>
-        <Button className="bg-black text-white px-3 py-2 rounded-md text-sm sm:text-xl">
+        <Button
+          onClick={() => setTime("1year")}
+          className="bg-black text-white px-3 py-2 rounded-md text-sm sm:text-xl"
+        >
           View LifeTime
         </Button>
       </div>
