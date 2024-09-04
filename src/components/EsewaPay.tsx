@@ -53,13 +53,13 @@ const EsewaPay = ({ data }: ObjectData) => {
         type="text"
         id="success_url"
         name="success_url"
-        value="http://localhost:5173/esewa-success"
+        value={import.meta.env.VITE_ESEWA_SUCCESS_URL}
       />
       <input
         type="text"
         id="failure_url"
         name="failure_url"
-        value="http://localhost:5173/"
+        value={import.meta.env.VITE_ESEWA_FAILER_URL}
       />
       <input
         type="text"

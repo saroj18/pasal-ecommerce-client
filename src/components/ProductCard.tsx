@@ -27,7 +27,7 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
       total += ele.reviewStar;
     });
     console.log("tot", total);
-    return total / product?.review?.length;
+    return (total / product?.review?.length).toFixed(1)
   }, [product]);
 
 
@@ -63,9 +63,9 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
             </ParaTypo>
           )}
         </div>
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-3">
           <ParaTypo className="bg-green-500 text-white px-2 py-1 rounded-md text-sm flex gap-x-1">
-            {averageRating() ?? "0"}{" "}
+            {averageRating()||'0'}
             <Star strokeWidth={2} fill="white" size={18} />
           </ParaTypo>
           <ParaTypo className="opacity-60">
@@ -73,7 +73,7 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
           </ParaTypo>
           {product?.offer && (
             <img
-              className="h-[50px] place-content-end"
+              className="h-[30px] place-content-end"
               src="https://png.pngtree.com/png-clipart/20230119/original/pngtree-creative-special-offer-banner-shape-tag-png-image_8922232.png"
               alt=""
             />
