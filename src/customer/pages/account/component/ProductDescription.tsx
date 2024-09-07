@@ -22,7 +22,7 @@ const ProductDescription = ({
     review?.forEach((ele: any) => {
       total += ele.reviewStar ?? 0;
     });
-    return Math.round(total / review?.length);
+    return total / review?.length;
   }, [review]);
 
   return (
@@ -46,7 +46,7 @@ const ProductDescription = ({
       <div className="flex items-center gap-x-10 w-full max-w-[70%] mb-3">
         <div>
           <ParaTypo className="text-4xl font-semibold">
-            {averageRating()}/5
+            {averageRating().toFixed(1)}/5
           </ParaTypo>
           <div className="flex items-center my-3">
             {Array(5)

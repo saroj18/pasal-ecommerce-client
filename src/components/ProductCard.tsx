@@ -13,7 +13,6 @@ type cardProps = {
 
 const ProductCard = ({ remove = false, icon, product }: cardProps) => {
   const { mutate } = useMutation();
-  console.log("product", product);
 
   const deleteHandler = (e: React.MouseEvent<SVGSVGElement>, id: string) => {
     e.preventDefault();
@@ -23,14 +22,17 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
 
   const averageRating = useCallback(() => {
     let total = 0;
-    product?.review?.forEach((ele: any) => {
-      total += ele.reviewStar;
-    });
-    console.log("tot", total);
-    return (total / product?.review?.length).toFixed(1)
+    product?.review?.length > 0 &&
+      product?.review?.forEach((ele: any) => {
+        total += ele.reviewStar;
+        console.log(ele.reviewStar);
+      });
+    if (total == 0) {
+      return "0";
+    }
+    return (total / product?.review?.length).toFixed(1);
   }, [product]);
-
-
+  console.log(averageRating());
   return (
     <Link to={`/details/${product?._id}`} className="shadow-md ">
       <div className="bg-gray-100 flex items-center justify-center overflow-hidden p-2 cursor-pointer cart relative h-[200px] sm:h-[300px] md:h-[300px] ">
@@ -65,11 +67,11 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
         </div>
         <div className="flex items-center gap-x-3">
           <ParaTypo className="bg-green-500 text-white px-2 py-1 rounded-md text-sm flex gap-x-1">
-            {averageRating()||'0'}
+            {averageRating() || "0"}
             <Star strokeWidth={2} fill="white" size={18} />
           </ParaTypo>
           <ParaTypo className="opacity-60">
-            ({product?.starArray.length})
+            ({product?.starArray?.length})
           </ParaTypo>
           {product?.offer && (
             <img
