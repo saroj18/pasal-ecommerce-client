@@ -1,10 +1,9 @@
-import React from "react";
 import ParaTypo from "../../../components/common/ParaTypo";
 import Button from "../../../components/common/Button";
 
 type Card = {
   name: string;
-  id: string;
+  id?: string;
   result: string;
   image?: string;
 };
@@ -18,12 +17,14 @@ const MostSellingProductCard = ({ name, id, result, image }: Card) => {
         alt=""
       />
       <div>
-        <ParaTypo title={name} className="text-base">
-          {name.slice(0, 20)}...
+        <ParaTypo title={name} className="text-sm">
+          {name.slice(0, 15)}...
         </ParaTypo>
-        <ParaTypo className="text-gray-400 text-xs">{id}</ParaTypo>
+        <ParaTypo title={id} className="text-gray-400 text-xs">
+          {id?.slice(0, 15)}
+        </ParaTypo>
       </div>
-      <Button className="border-2 rounded-md p-2 text-sm">{result}</Button>
+      <Button className="border-2 rounded-md p-1 text-sm">{result}</Button>
     </div>
   );
 };

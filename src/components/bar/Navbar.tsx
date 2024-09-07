@@ -36,7 +36,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex justify-between items-center container  py-2">
+    <nav className="flex justify-between items-center container ">
       <Link to={"/"}>
         <img src={logo} className="w-[80px] mr-10 hidden sm:block" alt="" />
       </Link>

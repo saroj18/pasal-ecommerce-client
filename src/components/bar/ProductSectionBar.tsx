@@ -2,6 +2,7 @@ import React from "react";
 import TypoGraphy from "../common/HeadingTypo";
 import Timmer from "../Timmer";
 import { MoveLeft, MoveRight } from "lucide-react";
+import { useSwiper } from "swiper/react";
 
 type productSectionProps = {
   heading: string;
@@ -9,8 +10,10 @@ type productSectionProps = {
 };
 
 const ProductSectionBar = ({ heading, option = true }: productSectionProps) => {
+  const swiper = useSwiper();
+
   return (
-    <div className="mt-10">
+    <div className="my-5">
       <p className="font-semibold text-red-500 text-xl text-center lg:text-left">
         Today's
       </p>
@@ -23,6 +26,7 @@ const ProductSectionBar = ({ heading, option = true }: productSectionProps) => {
         </div>
         <div className=" items-center hidden lg:flex gap-x-3">
           <MoveLeft
+            onClick={() => swiper.slideNext()}
             size={35}
             className="border-2 bg-neutral-50 cursor-pointer rounded-full p-1"
           />
