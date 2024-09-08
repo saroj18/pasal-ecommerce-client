@@ -5,6 +5,7 @@ import Option from "../../../../components/common/Option";
 import Select from "../../../../components/common/Select";
 import { useQuery } from "../../../../utils/useQuery";
 import { OrderType } from "../../OrderCheckout";
+import Shimmer from "../../../../components/common/Shimmer";
 
 type addressProps = {
   delevery: boolean;
@@ -28,7 +29,7 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
 
   const delevery:any[] = [];
   const billing:any[] = [];
-  const {data} = useQuery<any>("/user/address");
+  const {data,loading} = useQuery<any>("/user/address");
 
   data && data.forEach((ele:any) => {
     if (
@@ -68,7 +69,7 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
     <div className="p-2 border-2 border-gray-200 shadow-md mb-2">
       <div className="border-2 p-2 rounded-md shadow-md">
         <HeadingTypo className="text-xl mb-2  ">Delevery Address</HeadingTypo>
-        <div className="flex items-center gap-x-3">
+        {loading?<Shimmer shape="rectange"/>:<div className="flex items-center gap-x-3">
           <HeadingTypo className="opacity-60 capitalize">
             {address.deleveryAddress}
           </HeadingTypo>
@@ -78,7 +79,7 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
           >
             Change
           </Button>
-        </div>
+        </div>}
         {open.delevery && (
           <div>
             <Select onChange={deleveryHandler} className="w-full mt-4 capitalize">
@@ -105,7 +106,7 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
       </div>
       <div className="border-2 p-2 rounded-md shadow-md my-2">
         <HeadingTypo className="text-xl mb-2  ">Billing Address</HeadingTypo>
-        <div className="flex items-center gap-x-3">
+        {loading?<Shimmer shape="rectange"/>:<div className="flex items-center gap-x-3">
           <HeadingTypo className="opacity-60 capitalize">
             {address.billingAddress}
           </HeadingTypo>
@@ -115,7 +116,7 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
           >
             Change
           </Button>
-        </div>
+        </div>}
         {open.billing && (
           <div>
             <Select onChange={billingHandler} className="w-full mt-4 capitalize">

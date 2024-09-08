@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import { navList } from "../../constants/NavList";
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, Search, ShoppingCart, User } from "lucide-react";
+import { Heart, ShoppingCart, User } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
 import logo from "../../assets/logo.jpg";
 import SearchBox from "../common/Search";
@@ -18,7 +18,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
   const {data}=useQuery<any>('/product/cartandwishlist/count')
-  console.log(data)
 
   const popupCloser = (e: MouseEvent) => {
     if (

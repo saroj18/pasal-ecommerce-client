@@ -4,10 +4,11 @@ import AddressBox from "./component/box/AddressBox";
 import BillingAddress from "./component/box/BillingAddress";
 import RecentOrders from "./component/RecentOrders";
 import { useQuery } from "../../../utils/useQuery";
+import Shimmer from "../../../components/common/Shimmer";
 
 const Account = () => {
-  const {data} = useQuery<any>('/user') 
-  console.log(data)
+  const { data, loading } = useQuery<any>("/user");
+  console.log(data);
   return (
     <div className=" p-2">
       <div className="flex items-center justify-between">
@@ -16,9 +17,25 @@ const Account = () => {
         </HeadingTypo>
       </div>
       <div className="flex w-full flex-wrap items-center justify-center gap-3 shadow-md mb-6">
-        <PersonalProfile fullname={data?.fullname} mobile={data?.mobile} gender={data?.gender} dob={data?.dob} />
-        <AddressBox cityWard={`${data?.address?.city}-${data?.address?.ward}`} mobile={data?.mobile} address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`} />
-        <BillingAddress cityWard={`${data?.address?.city}-${data?.address?.ward}`} mobile={data?.mobile} address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`} />
+        <PersonalProfile
+          loading={loading}
+          fullname={data?.fullname}
+          mobile={data?.mobile}
+          gender={data?.gender}
+          dob={data?.dob}
+        />
+        <AddressBox
+          loading={loading}
+          cityWard={`${data?.address?.city}-${data?.address?.ward}`}
+          mobile={data?.mobile}
+          address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`}
+        />
+        {loading?<Shimmer shape="rectange"/>:<BillingAddress
+          loading={true}
+          cityWard={`${data?.address?.city}-${data?.address?.ward}`}
+          mobile={data?.mobile}
+          address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`}
+        />}
       </div>
       <RecentOrders />
     </div>

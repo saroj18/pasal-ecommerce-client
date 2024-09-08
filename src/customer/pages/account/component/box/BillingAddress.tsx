@@ -4,7 +4,7 @@ import { AddressProps } from "./AddressBox";
 
 const BillingAddress = ({address,cityWard,mobile}:AddressProps) => {
   return (
-    <div className="grow border-2 border-gray-500 rounded-md shadow-sm p-4">
+    <div className="grow border-2 border-gray-300 rounded-md shadow-sm p-4">
       <div className="flex items-center gap-x-6 mb-4">
         <HeadingTypo className="text-xl">Billing Address</HeadingTypo>
         <span className="text-blue-500 cursor-pointer">Edit</span>

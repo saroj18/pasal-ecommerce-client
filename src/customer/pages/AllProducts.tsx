@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ProductCard from "../../components/ProductCard";
 import { useQuery } from "../../utils/useQuery";
 import FilterBar from "./account/component/FilterBar";
 import ProductFilterBar from "../ProductFilterBar";
+import Shimmer from "../../components/common/Shimmer";
 
 export type ElementType = {
   addedBy: { [key: string]: string };
@@ -24,14 +25,14 @@ export type ElementType = {
 
 const AllProducts = () => {
   const [product, setProduct] = useState<any[]>([]);
-  const { data } = useQuery<any>("/product");
-  console.log(data);
+  const { data, loading } = useQuery<any>("/product");
+  console.log("loading>>", loading);
   useEffect(() => {
     // window.scrollTo({ top: 0 });
     if (data) {
       setProduct(data);
     }
-  }, [ data]);
+  }, [data]);
   return (
     <div>
       <HeadingTypo className="text-2xl my-4">All Products</HeadingTypo>
@@ -39,9 +40,11 @@ const AllProducts = () => {
       <div className="flex">
         <FilterBar setProduct={setProduct} />
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
-          {product?.length > 0 &&
+          { loading?<Shimmer count={6} width="320px" height="300px" shape="rectange"/>:
             product?.map((ele: ElementType, index: number) => {
-              return <ProductCard product={ele} key={index} />;
+              return (
+                <ProductCard product={ele} key={index} />
+              );
             })}
         </div>
       </div>

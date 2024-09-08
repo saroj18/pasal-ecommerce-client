@@ -4,10 +4,11 @@ import ParaTypo from "../../components/common/ParaTypo";
 import OrderCard from "../../components/OrderCard";
 import Button from "../../components/common/Button";
 import { useQuery } from "../../utils/useQuery";
+import Shimmer from "../../components/common/Shimmer";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data } = useQuery<any>("/order/myorder");
+  const { data,loading } = useQuery<any>("/order/myorder");
 
   const clickHandler = (params: string) => {
     setOrderState(params);
@@ -43,7 +44,7 @@ const MyOrder = () => {
           Canceled
         </Button>
       </div>
-      {orderState == "shipping" && (
+      {loading?<Shimmer shape="rectange"/>:orderState == "shipping" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
           {data?.map((ele: any, index: number) => {
             return (
@@ -60,7 +61,7 @@ const MyOrder = () => {
           })}
         </div>
       )}
-      {orderState == "arrived" && (
+      {loading?<Shimmer shape="rectange"/>:orderState == "arrived" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
           {data?.map((ele: any, index: number) => {
             return (
@@ -77,7 +78,7 @@ const MyOrder = () => {
           })}
         </div>
       )}
-      {orderState == "canceled" && (
+      {loading?<Shimmer shape="rectange"/>:orderState == "canceled" && (
         <div className="mt-7 flex flex-wrap justify-center gap-5">
           {data?.map((ele: any, index: number) => {
             return (

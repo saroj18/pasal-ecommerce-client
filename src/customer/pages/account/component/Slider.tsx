@@ -5,9 +5,9 @@ import ProductCard from "../../../../components/ProductCard";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
+import Shimmer from "../../../../components/common/Shimmer";
 
-const Slider = ({ productList }: { productList: any[] }) => {
-  console.log("log>>", productList);
+const Slider = ({ productList,loadingState }: { productList: any[],loadingState?:boolean }) => {
 
   return (
     <>
@@ -24,11 +24,11 @@ const Slider = ({ productList }: { productList: any[] }) => {
       >
         <section className="flex flex-col items-center mt-5">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-x-3 ">
-            {productList &&
+            {loadingState?<Shimmer shape="rectange" width="300px" height="300px" count={4}/>:
               productList?.map((ele: any) => {
                 return (
-                  <SwiperSlide>
-                    <ProductCard key={ele._id} product={ele} />
+                  <SwiperSlide key={ele._id}>
+                    <ProductCard  key={ele._id} product={ele} />
                   </SwiperSlide>
                 );
               })}

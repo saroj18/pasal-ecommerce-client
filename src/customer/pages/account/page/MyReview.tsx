@@ -6,11 +6,12 @@ import ReviewHistory from "./ReviewHistory";
 import Popup from "reactjs-popup";
 import ReviewForm from "./ReviewForm";
 import { useQuery } from "../../../../utils/useQuery";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const ReviewComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [reviewInfo, setReviewInfo] = useState<any>({});
-  const { data } = useQuery<any>("/review/reviewneed");
+  const { data,loading } = useQuery<any>("/review/reviewneed");
   console.log(data);
   const clickHandler = (info: any) => {
     setOpen(true);
@@ -18,7 +19,7 @@ const ReviewComponent = () => {
   };
   return (
     <>
-      {data &&
+      {loading?<Shimmer height="150px" count={3} shape="rectange"/>:
         data?.map((ele: any) => {
           return (
             <div

@@ -3,6 +3,7 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import Button from "../../../../components/common/Button";
 import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
 import { useQuery } from "../../../../utils/useQuery";
+import Shimmer from "../../../../components/common/Shimmer";
 
 export const ReviewComponent = ({
   info,
@@ -60,10 +61,10 @@ export const ReviewComponent = ({
 };
 
 const ReviewHistory = () => {
-  const { data } = useQuery<any>("/review");
+  const { data,loading } = useQuery<any>("/review");
   return (
     <div>
-      {data &&
+      {loading?<Shimmer count={2} shape="rectange"/>:
         data?.map((ele: any) => {
           return <ReviewComponent info={ele} key={ele._id} />;
         })}

@@ -7,30 +7,31 @@ import { VerifyPopup } from "../popup/VerifyPopup";
 import { useQuery } from "../../utils/useQuery";
 import "swiper/css";
 import Slider from "../../customer/pages/account/component/Slider";
+import Shimmer from "../../components/common/Shimmer";
+import { Fragment } from "react/jsx-runtime";
 
 const Home = () => {
   const { data } = useQuery<any>("/user");
-  const { data: offerList } = useQuery<any>("/offers");
-  const { data: bestSellingProducts } = useQuery<any>("/product/bestselling");
-  const { data: randomProducts } = useQuery<any>("/product/randomproducts");
-  console.log("sroa", randomProducts);
+  const { data: offerList,loading:offerListLoading } = useQuery<any>("/offers");
+  const { data: bestSellingProducts,loading:bestSellingProductLoading } = useQuery<any>("/product/bestselling");
+  const { data: randomProducts,loading:randomProductsLoading } = useQuery<any>("/product/randomproducts");
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
-        <CategorySideBar />
+        {/* <CategorySideBar /> */}
         <Crousel />
       </section>
-      {offerList &&
-        offerList.map((ele: any) => {
+      {offerListLoading?<Shimmer height="350px" count={5} shape="rectange"/>:
+        offerList?.map((ele: any) => {
           return (
-            <>
+            <Fragment key={ele._id}>
               <ProductSectionBar
                 heading={ele.name + ` (with extra % off)`}
                 option={false}
               />
               <Slider productList={ele?.product} />
               
-            </>
+            </Fragment>
           );
         })}
       <ProductSectionBar option={false} heading="Browse By Category" />
@@ -69,7 +70,7 @@ const Home = () => {
         />
       </div>
       <ProductSectionBar option={false} heading="Best Selling Products" />
-      <Slider productList={bestSellingProducts?.product} />
+      <Slider loadingState={bestSellingProductLoading}  productList={bestSellingProducts?.product} />
 
       <section className="mt-7">
         <Crousel />
@@ -77,7 +78,7 @@ const Home = () => {
 
       <section>
         <ProductSectionBar option={false} heading="Explore Our Products" />
-        <Slider productList={randomProducts} />
+        <Slider loadingState={randomProductsLoading} productList={randomProducts} />
 
         {data && !data?.verify && <VerifyPopup />}
       </section>

@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { useQuery } from "../../utils/useQuery";
 import { Trash } from "lucide-react";
 import { useMutation } from "../../utils/useMutation";
+import Shimmer from "../../components/common/Shimmer";
 
 const Cart = () => {
-  const { data, refetch } = useQuery<any>("/product/cart");
+  const { data, refetch,loading:cartLoading } = useQuery<any>("/product/cart");
   const { mutate } = useMutation();
 
   const cartDeleteHandler = (id: string) => {
@@ -17,7 +18,7 @@ const Cart = () => {
   console.log(data);
   return (
     <div className="grid overflow-auto">
-      <table className="w-full text-center">
+      {cartLoading?<Shimmer shape="rectange"/>:<table className="w-full text-center">
         <thead>
           <tr>
             <th className="p-8">Product</th>
@@ -28,8 +29,8 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((ele: any, index: number) => (
+          {
+            data?.map((ele: any, index: number) => (
               <tr key={index} className=" my-8 border-b-2 border-t-2 ">
                 <td className="p-4 ">
                   <img
@@ -63,7 +64,7 @@ const Cart = () => {
               </tr>
             ))}
         </tbody>
-      </table>
+      </table>}
       <Link className="sm:place-self-end place-self-start" to={"/checkout"}>
         <Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">
           Go to Checkout

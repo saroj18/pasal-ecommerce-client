@@ -5,6 +5,7 @@ import SelectAndViewAddress from "./account/component/SelectAndViewAddress";
 import { useQuery } from "../../utils/useQuery";
 import { useMutation } from "../../utils/useMutation";
 import { useLayoutEffect, useState } from "react";
+import Shimmer from "../../components/common/Shimmer";
 
 export type OrderType = {
   product: string[];
@@ -25,7 +26,7 @@ type Product = {
 
 const OrderCheckout = () => {
   const { mutate, data, loading } = useMutation();
-  const { data: productData, refetch } = useQuery<Product[]>("/product/cart");
+  const { data: productData, refetch,loading:cartLoading } = useQuery<Product[]>("/product/cart");
   const deleteFromCart = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };
@@ -57,7 +58,7 @@ const OrderCheckout = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-between mt-5 gap-x-6">
-      <div className="w-full  flex items-start gap-3  border-2 border-gray-400 max-h-[200px]  md:h-fit flex-wrap overflow-y-scroll rounded-md p-4 shadow-md ">
+      {cartLoading?<Shimmer shape="rectange"/>:<div className="w-full  flex items-start gap-3  border-2 border-gray-400 max-h-[200px]  md:h-fit flex-wrap overflow-y-scroll rounded-md p-4 shadow-md ">
         {productData &&
           productData?.map((ele: any, index: number) => {
             return (
@@ -87,9 +88,9 @@ const OrderCheckout = () => {
               </div>
             );
           })}
-      </div>
+      </div>}
       <div className="w-full mx-auto sm:max-w-[600px] sticky top-0 left-0 h-fit">
-        <SelectAndViewAddress
+       <SelectAndViewAddress
           orderDetails={orderDetails}
           setOrderDetails={setOrderDetails}
         />
