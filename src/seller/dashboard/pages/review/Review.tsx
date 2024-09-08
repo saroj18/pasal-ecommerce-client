@@ -7,11 +7,12 @@ import Popup from "reactjs-popup";
 import { Cross, X } from "lucide-react";
 import SearchBox from "../../../../components/common/Search";
 import { useQuery } from "../../../../utils/useQuery";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const Review = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [info, setInfo] = useState<any>();
-  const { data } = useQuery<any>("/review/myreview");
+  const { data,loading } = useQuery<any>("/review/myreview");
 
   const clickHandler = (data: any) => {
     setOpen(!open);
@@ -28,8 +29,11 @@ const Review = () => {
         </div>
         <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
       </div>
+      {
+        loading?<Shimmer height="60px" count={8} shape="rectange"/>:null
+      }
       <div>
-        <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
+        {data?.length>0&&<table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
           <thead>
             <tr className="sticky top-0 left-0 bg-white border-t-2">
               <th className="p-4">Product</th>
@@ -44,8 +48,8 @@ const Review = () => {
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.map((ele: any) => {
+            {
+              data?.map((ele: any) => {
                 return (
                   <tr
                     onClick={() => clickHandler(ele)}
@@ -83,7 +87,7 @@ const Review = () => {
                 );
               })}
           </tbody>
-        </table>
+        </table>}
       </div>
       <Popup open={open} onClose={() => setOpen(false)}>
         <div className="w-full p-3  ">

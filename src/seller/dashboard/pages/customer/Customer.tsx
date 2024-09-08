@@ -9,15 +9,12 @@ import { useQuery } from "../../../../utils/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 import dayjs from "dayjs";
 import {
-  differenceInBusinessDays,
-  differenceInCalendarDays,
-  differenceInHours,
-  differenceInSeconds,
   formatDistanceToNow,
 } from "date-fns";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const Customer = () => {
-  const { data } = useQuery<any>("/user/allmycustomer");
+  const { data,loading } = useQuery<any>("/user/allmycustomer");
 
   console.log(data);
 
@@ -31,11 +28,14 @@ const Customer = () => {
           all customers lists
         </ParaTypo>
       </div>
-      <div className="text-sm md:text-base">
+      {
+        loading?<Shimmer height="50px" count={8} shape="rectange"/>:null
+      }
+      {data?.length>0&&<div className="text-sm md:text-base">
         <Table>
           <TableHead tableHeadData={tableHeadData} />
           <TableBody>
-            {data &&
+            {
               data.map((ele: any) => {
                 return (
                   <TableRow key={ele._id}>
@@ -74,7 +74,7 @@ const Customer = () => {
               })}
           </TableBody>
         </Table>
-      </div>
+      </div>}
     </div>
   );
 };

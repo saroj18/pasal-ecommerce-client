@@ -1,13 +1,16 @@
 import ParaTypo from "../../../components/common/ParaTypo";
+import Shimmer from "../../../components/common/Shimmer";
 import { useQuery } from "../../../utils/useQuery";
 
 const Info = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data } = useQuery<any>(`/user/${id}`);
+  const { data,loading } = useQuery<any>(`/user/${id}`);
   console.log(data);
 
   return (
-    <div className="my-8 grid grid-cols-2  gap-y-4 mx-auto max-w-[750px]">
+    <>
+    {loading?<Shimmer shape="rectange"/>:
+      <div className="my-8 grid grid-cols-2  gap-y-4 mx-auto max-w-[750px]">
       <div className="flex items-center gap-x-4">
         <ParaTypo className="font-bold">Id:</ParaTypo>
         <ParaTypo>{data?._id}</ParaTypo>
@@ -73,6 +76,8 @@ const Info = () => {
         <ParaTypo>{data?.address?.nearBy}</ParaTypo>
       </div>
     </div>
+    }
+    </>
   );
 };
 

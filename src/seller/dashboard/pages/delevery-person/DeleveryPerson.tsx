@@ -7,10 +7,11 @@ import Popup from "reactjs-popup";
 import Label from "../../../../components/common/Label";
 import { X } from "lucide-react";
 import { useQuery } from "../../../../utils/useQuery";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const DeleveryPerson = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { data } = useQuery<any>("/deleveryperson");
+  const { data,loading } = useQuery<any>("/deleveryperson");
   return (
     <div className="overflow-auto">
       <div className="md:relative flex flex-col md:flex-row justify-between items-center sticky left-0 top-0">
@@ -19,8 +20,10 @@ const DeleveryPerson = () => {
         </HeadingTypo>
         <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
       </div>
-
-      <table className="w-full text-sm md:text-base text-center bg-white shadow-md my-4">
+{
+  loading?<Shimmer height="60px" count={5} shape="rectange"/>:null
+}
+      {data?.length>0&&<table className="w-full text-sm md:text-base text-center bg-white shadow-md my-4">
         <thead>
           <tr className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white">
             <th className="p-2">Image</th>
@@ -65,7 +68,7 @@ const DeleveryPerson = () => {
               );
             })}
         </tbody>
-      </table>
+      </table>}
 
       <Popup open={open} onClose={() => setOpen(false)}>
         <HeadingTypo className="text-2xl font-semibold mb-5">

@@ -9,9 +9,10 @@ import TableData from "../../../../components/common/TableData";
 import TableBody from "../../../../components/common/TableBody";
 import { useQuery } from "../../../../utils/useQuery";
 import TableRow from "../../../../components/common/TableRow";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const Inventory = () => {
-  const { data } = useQuery<any>("/product/inventory");
+  const { data,loading } = useQuery<any>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">
@@ -34,8 +35,10 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-
-      <Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
+{
+  loading?<Shimmer height="60px" count={8} shape="rectange"/>:null
+}
+      {data?.length>0&&<Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
         <TableHead
           tableHeadStyle="p-2"
           className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
@@ -69,7 +72,7 @@ const Inventory = () => {
             );
           })}
         </TableBody>
-      </Table>
+      </Table>}
     </div>
   );
 };

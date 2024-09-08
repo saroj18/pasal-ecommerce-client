@@ -5,7 +5,7 @@ import ProductImage from "../../components/ProductImage";
 import CategoryCard from "../../components/CategoryCard";
 import PriceCard from "../../components/PriceCard";
 import SearchBox from "../../../../components/common/Search";
-import { Edit, Layers, Trash } from "lucide-react";
+import { Edit, Layers, Loader, Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
 import { productZodSchema } from "../../../zodschema/product";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
@@ -14,6 +14,7 @@ import { z } from "zod";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
 import { useEffect, useState } from "react";
+import Shimmer from "../../../../components/common/Shimmer";
 
 export type ProductType = z.infer<typeof productZodSchema>;
 export type FormProps = {
@@ -25,7 +26,7 @@ const Product = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [updateData, setUpdateData] = useState<any>();
-  const { data, refetch } = useQuery<any>("/product/myproduct");
+  const { data, refetch,loading } = useQuery<any>("/product/myproduct");
   const { mutate, data: mutateData } = useMutation();
 
   console.log(updateData);
@@ -177,76 +178,80 @@ const Product = () => {
         <SearchBox className="sm:max-w-[55%] md:max-w-[50%] lg:max-w-[30%] w-full" />
       </div>
       <hr />
+{
+  loading?<Shimmer height="100px" count={5} shape="rectange"/>:null
+}
+      {data?.length > 0 && (
+        <div className="bg-white ">
+          <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
+            <thead>
+              <tr className="border-2 border-gray-300">
+                <th className="p-3">Product</th>
+                <th className="p-3">Product Id</th>
+                <th className="p-3">Price</th>
+                <th className="p-3">Discount</th>
+                <th className="p-3">PAD</th>
+                <th className="p-3">Brand</th>
+                <th className="p-3">Category</th>
+                <th className="p-3">Review</th>
+                <th className="p-3">Total Sale</th>
+                <th className="p-3">Added Date</th>
+                <th className="p-3">Action</th>
+              </tr>
+            </thead>
 
-      <div className="bg-white ">
-        <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
-          <thead>
-            <tr className="border-2 border-gray-300">
-              <th className="p-3">Product</th>
-              <th className="p-3">Product Id</th>
-              <th className="p-3">Price</th>
-              <th className="p-3">Discount</th>
-              <th className="p-3">PAD</th>
-              <th className="p-3">Brand</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Review</th>
-              <th className="p-3">Total Sale</th>
-              <th className="p-3">Added Date</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {data &&
-              data.map((product: any) => (
-                <tr
-                  key={product?._id}
-                  className="border-2 border-gray-300  text-base"
-                >
-                  <td className="flex flex-col items-center p-2">
-                    <img
-                      className="lg:h-[80px] h-[40px] rounded-md"
-                      src={product.images[0]}
-                      alt=""
-                    />
-                    <ParaTypo
-                      title={product.name}
-                      className="text-sm lg:text-base max-w-xs truncate"
-                    >
-                      {product.name.slice(0, 30)}
-                    </ParaTypo>
-                  </td>
-                  <td title={product._id}>{product._id.slice(15)}</td>
-                  <td>Rs {product.price}</td>
-                  <td>{product.discount}%</td>
-                  <td>Rs {product.priceAfterDiscount}</td>
-                  <td>{product.brand}</td>
-                  <td>{product.category}</td>
-                  <td>{product?.review?.length}</td>
-                  <td>{product.totalSale}</td>
-                  <td>2024-03-11</td>
-                  <td className="flex justify-around items-start gap-x-1 px-3">
-                    <Trash
-                      onClick={() => productDeleteHandler(product._id)}
-                      strokeWidth={0.9}
-                      className="cursor-pointer size-4 md:size-5"
-                    />
-                    <Edit
-                      onClick={() => editHandler(product._id)}
-                      strokeWidth={0.9}
-                      className="cursor-pointer size-4 md:size-5"
-                    />
-                    <Layers
-                      color={`${product.stock === 0 ? "red" : "green"}`}
-                      strokeWidth={0.9}
-                      className="cursor-pointer size-4 md:size-5"
-                    />
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+            <tbody>
+              {data &&
+                data.map((product: any) => (
+                  <tr
+                    key={product?._id}
+                    className="border-2 border-gray-300  text-base"
+                  >
+                    <td className="flex flex-col items-center p-2">
+                      <img
+                        className="lg:h-[80px] h-[40px] rounded-md"
+                        src={product.images[0]}
+                        alt=""
+                      />
+                      <ParaTypo
+                        title={product.name}
+                        className="text-sm lg:text-base max-w-xs truncate"
+                      >
+                        {product.name.slice(0, 30)}
+                      </ParaTypo>
+                    </td>
+                    <td title={product._id}>{product._id.slice(15)}</td>
+                    <td>Rs {product.price}</td>
+                    <td>{product.discount}%</td>
+                    <td>Rs {product.priceAfterDiscount}</td>
+                    <td>{product.brand}</td>
+                    <td>{product.category}</td>
+                    <td>{product?.review?.length}</td>
+                    <td>{product.totalSale}</td>
+                    <td>2024-03-11</td>
+                    <td className="flex justify-around items-start gap-x-1 px-3">
+                      <Trash
+                        onClick={() => productDeleteHandler(product._id)}
+                        strokeWidth={0.9}
+                        className="cursor-pointer size-4 md:size-5"
+                      />
+                      <Edit
+                        onClick={() => editHandler(product._id)}
+                        strokeWidth={0.9}
+                        className="cursor-pointer size-4 md:size-5"
+                      />
+                      <Layers
+                        color={`${product.stock === 0 ? "red" : "green"}`}
+                        strokeWidth={0.9}
+                        className="cursor-pointer size-4 md:size-5"
+                      />
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

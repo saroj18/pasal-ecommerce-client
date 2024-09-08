@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Table from "../../../components/common/Table";
 import TableHead from "../../../components/common/TableHead";
@@ -6,7 +6,7 @@ import { tableHead } from "./tableData";
 import TableBody from "../../../components/common/TableBody";
 import TableData from "../../../components/common/TableData";
 import Button from "../../../components/common/Button";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "../../../utils/useQuery";
 import TableRow from "../../../components/common/TableRow";
 
@@ -26,11 +26,11 @@ const VendorApprove = () => {
       <HeadingTypo className="text-3xl my-4 sticky left-0 top-0">
         Apply for Register
       </HeadingTypo>
-      <Table className="text-xs md:text-base">
-        <TableHead tableHeadData={tableHead} />
-        <TableBody>
-          {vendor &&
-            vendor.map((ele: any, index: number) => {
+      {vendor.length > 0 && (
+        <Table className="text-xs md:text-base">
+          <TableHead tableHeadData={tableHead} />
+          <TableBody>
+            {vendor.map((ele: any, index: number) => {
               return (
                 <TableRow key={index}>
                   <TableData className="p-2">{ele._id.slice(15)}</TableData>
@@ -58,8 +58,9 @@ const VendorApprove = () => {
                 </TableRow>
               );
             })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 };

@@ -9,15 +9,16 @@ import Label from "../../../components/common/Label";
 import AddDeleveryPerson from "./AddDeleveryPerson";
 import { useQuery } from "../../../utils/useQuery";
 import { useMutation } from "../../../utils/useMutation";
+import Shimmer from "../../../components/common/Shimmer";
 
 const DeliveryPage = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { data,refetch } = useQuery<any>("/deleveryperson");
+  const { data, refetch, loading } = useQuery<any>("/deleveryperson");
   const { mutate } = useMutation<any>();
 
   const deleteHandler = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    mutate("/deleveryperson", "DELETE", { id },refetch);
+    mutate("/deleveryperson", "DELETE", { id }, refetch);
   };
   return (
     <div className="overflow-auto">
@@ -34,25 +35,25 @@ const DeliveryPage = () => {
           <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
         </div>
       </div>
+      {loading ? <Shimmer shape="rectange" height="60px" count={5} /> : null}
+      {data?.length > 0 && (
+        <table className="w-full text-xs md:text-base text-center bg-white shadow-md my-4">
+          <thead>
+            <tr className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white">
+              <th className="p-2">Image</th>
+              <th className="p-2">UserID</th>
+              <th className="p-2">Name</th>
+              <th className="p-2">Address</th>
+              <th className="p-2">Gender</th>
+              <th className="p-2">Joined On</th>
+              <th className="p-2">Phone</th>
+              <th className="p-2">Status</th>
+              <th className="p-2">Action</th>
+            </tr>
+          </thead>
 
-      <table className="w-full text-xs md:text-base text-center bg-white shadow-md my-4">
-        <thead>
-          <tr className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white">
-            <th className="p-2">Image</th>
-            <th className="p-2">UserID</th>
-            <th className="p-2">Name</th>
-            <th className="p-2">Address</th>
-            <th className="p-2">Gender</th>
-            <th className="p-2">Joined On</th>
-            <th className="p-2">Phone</th>
-            <th className="p-2">Status</th>
-            <th className="p-2">Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data &&
-            data.map((ele: any, index: number) => {
+          <tbody>
+            {data.map((ele: any, index: number) => {
               return (
                 <tr
                   onClick={() => setOpen(true)}
@@ -93,8 +94,9 @@ const DeliveryPage = () => {
                 </tr>
               );
             })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      )}
 
       <Popup open={open} onClose={() => setOpen(false)}>
         <HeadingTypo className="text-2xl font-semibold mb-5">

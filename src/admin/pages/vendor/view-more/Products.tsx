@@ -3,13 +3,13 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
 import { useParams } from "react-router-dom";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const Products = () => {
   const { mutate } = useMutation();
   const { id } = useParams();
 
-  const { data, refetch } = useQuery<any>("/product/myproduct?id=" + id);
-  console.log("dd", data);
+  const { data, refetch,loading } = useQuery<any>("/product/myproduct?id=" + id);
 
   const productDeleteHandler = (id: string) => {
     mutate(`/product/${id}`, "DELETE", { id }, refetch);
@@ -18,7 +18,7 @@ const Products = () => {
   return (
     <div>
       <div className="bg-white ">
-        <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
+        {loading?<Shimmer count={5} height="100px" shape="rectange"/>:<table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
           <thead>
             <tr className="border-2 border-gray-300">
               <th className="p-3">Product</th>
@@ -72,7 +72,7 @@ const Products = () => {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     </div>
   );

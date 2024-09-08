@@ -4,9 +4,10 @@ import SearchBox from "../../../../components/common/Search";
 import Button from "../../../../components/common/Button";
 import { useMutation } from "../../../../utils/useMutation";
 import { useQuery } from "../../../../utils/useQuery";
+import Shimmer from "../../../../components/common/Shimmer";
 
 const Order = () => {
-  const { data, refetch } = useQuery<any>("/order/sellerorder");
+  const { data, refetch,loading } = useQuery<any>("/order/sellerorder");
   const { mutate } = useMutation<any>();
   console.log(data);
 
@@ -29,26 +30,28 @@ const Order = () => {
         </div>
         <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
       </div>
-
-      <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
-        <thead>
-          <tr className="sticky top-0 left-0 bg-white border-t-2">
-            <th className="p-4">Product</th>
-            <th className="p-4">Product ID</th>
-            <th className="p-4">Order By</th>
-            <th className="p-4">Order Date</th>
-            <th className="p-4">Order Time</th>
-            <th className="p-4">Actual Price</th>
-            <th className="p-4">Payment</th>
-            <th className="p-4">Discount</th>
-            <th className="p-4">Order Qty</th>
-            <th className="p-4">Amount</th>
-            <th className="p-4">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data.map((ele: any, index: number) => {
+{
+  loading?<Shimmer height="70px" count={9} shape="rectange"/>:null
+}
+      {data?.length > 0 && (
+        <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
+          <thead>
+            <tr className="sticky top-0 left-0 bg-white border-t-2">
+              <th className="p-4">Product</th>
+              <th className="p-4">Product ID</th>
+              <th className="p-4">Order By</th>
+              <th className="p-4">Order Date</th>
+              <th className="p-4">Order Time</th>
+              <th className="p-4">Actual Price</th>
+              <th className="p-4">Payment</th>
+              <th className="p-4">Discount</th>
+              <th className="p-4">Order Qty</th>
+              <th className="p-4">Amount</th>
+              <th className="p-4">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((ele: any, index: number) => {
               return (
                 <tr key={index} className="border-b-2 border-t-2 capitalize ">
                   <td
@@ -77,7 +80,11 @@ const Order = () => {
                   <td className="p-2">{ele.payMethod}</td>
                   <td className="p-2">{ele.orderProducts?.discount}%</td>
                   <td className="p-2">{ele.cartInfo[0]?.productCount}</td>
-                  <td className="p-2">Rs {ele.cartInfo[0]?.productCount*ele.orderProducts?.priceAfterDiscount}</td>
+                  <td className="p-2">
+                    Rs{" "}
+                    {ele.cartInfo[0]?.productCount *
+                      ele.orderProducts?.priceAfterDiscount}
+                  </td>
                   <td className="p-2 flex gap-1 flex-col items-center">
                     <Button
                       onClick={() => orderPlacedHandler(ele._id)}
@@ -95,8 +102,9 @@ const Order = () => {
                 </tr>
               );
             })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

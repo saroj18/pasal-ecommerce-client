@@ -2,14 +2,15 @@ import AmountCard from "../../../seller/dashboard/components/AmountCard";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import MostSellingProductCard from "../../../seller/dashboard/components/MostSellingProductCard";
 import { useQuery } from "../../../utils/useQuery";
+import Shimmer from "../../../components/common/Shimmer";
 
 const AdminDashboard = () => {
-  const { data } = useQuery<any>("/admin/dashboard");
-  const { data: topList } = useQuery<any>("/admin/toplist");
+  const { data,loading:dashBoardLoading } = useQuery<any>("/admin/dashboard");
+  const { data: topList,loading:listLoading } = useQuery<any>("/admin/toplist");
   return (
     <div className="w-full py-2">
       <HeadingTypo className="my-6 text-3xl">Welcome,To Dashboard</HeadingTypo>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 justify-between gap-3">
+      {dashBoardLoading?<Shimmer shape="rectange"/>:<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 justify-between gap-3">
         <AmountCard
           heading="Total Visitors"
           amount={data && data.totalVisitors}
@@ -40,14 +41,14 @@ const AdminDashboard = () => {
           amount={data && data.totalUser}
           className="grow bg-purple-100"
         />
-      </div>
+      </div>}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 text-xs sm:text-base gap-3 mt-6">
         <div className=" border-2 border-gray-300 shadow-md p-2 rounded-md bg-white">
           <HeadingTypo className="text-xl my-3 font-bold">
             Top Vender
           </HeadingTypo>
           <div className="max-h-[400px] overflow-y-scroll">
-            {topList &&
+            {listLoading?<Shimmer count={5} height="50px" shape="rectange"/>:
               topList?.topVender?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
@@ -65,7 +66,7 @@ const AdminDashboard = () => {
             Top Selling Products
           </HeadingTypo>
           <div className="max-h-[400px] overflow-y-scroll">
-            {topList &&
+            {listLoading?<Shimmer count={5} height="50px" shape="rectange"/>:
               topList?.topSellingProduct?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
@@ -83,7 +84,7 @@ const AdminDashboard = () => {
             Top Selling Category
           </HeadingTypo>
           <div className="max-h-[400px] overflow-y-scroll">
-            {topList &&
+            {listLoading?<Shimmer count={5} height="50px" shape="rectange"/>:
               topList?.topCategory?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
@@ -100,7 +101,7 @@ const AdminDashboard = () => {
             Top Expensive Products
           </HeadingTypo>
           <div className="max-h-[400px] overflow-y-scroll">
-            {topList &&
+            {listLoading?<Shimmer count={5} height="50px" shape="rectange"/>:
               topList?.topExpensiveProduct?.map((ele: any) => {
                 return (
                   <MostSellingProductCard

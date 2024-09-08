@@ -10,12 +10,13 @@ import SearchBox from "../../../components/common/Search";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "../../../utils/useQuery";
 import TableRow from "../../../components/common/TableRow";
+import Shimmer from "../../../components/common/Shimmer";
 
 const Vendor = () => {
   const navigate = useNavigate();
   const [vendorList, setVendorList] = useState([]);
 
-  const { data } = useQuery<any>("/vendor");
+  const { data,loading } = useQuery<any>("/vendor");
 
   useEffect(() => {
     if (data) {
@@ -29,11 +30,14 @@ const Vendor = () => {
         <HeadingTypo className="text-3xl my-4">Vendor Lists</HeadingTypo>
         <SearchBox className="sm:w-[45%] md:w-[25%] w-full" />
       </div>
-      <Table className="border-2 text-xs md:text-base">
-        <TableHead className="" tableHeadData={tableHeadData} />
-        <TableBody>
-          {vendorList &&
-            vendorList.map((ele: any, index) => {
+      {
+        loading?<Shimmer height="60px" count={7} shape="rectange"/>:null
+      }
+      {vendorList?.length > 0 && (
+        <Table className="border-2 text-xs md:text-base">
+          <TableHead className="" tableHeadData={tableHeadData} />
+          <TableBody>
+            {vendorList.map((ele: any, index) => {
               return (
                 <>
                   <TableRow>
@@ -58,8 +62,9 @@ const Vendor = () => {
                 </>
               );
             })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 };

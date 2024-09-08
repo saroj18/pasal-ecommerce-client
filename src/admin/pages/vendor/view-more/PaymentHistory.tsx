@@ -1,3 +1,4 @@
+import Shimmer from "../../../../components/common/Shimmer";
 import Table from "../../../../components/common/Table";
 import TableData from "../../../../components/common/TableData";
 import TableHead from "../../../../components/common/TableHead";
@@ -7,11 +8,12 @@ import { tableHeadDataForPaymentHistory } from "../tableData";
 
 const PaymentHistory = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data } = useQuery<any>(`/payment/vendorhistory?id=${id}`);
+  const { data,loading } = useQuery<any>(`/payment/vendorhistory?id=${id}`);
   console.log(data);
   return (
     <div>
-      <Table>
+      {
+        loading?<Shimmer height="80px" count={10} shape="rectange"/>:<Table>
         <TableHead tableHeadData={tableHeadDataForPaymentHistory} />
         {data &&
           data.map((ele: any, index: number) => {
@@ -40,7 +42,7 @@ const PaymentHistory = () => {
               </TableRow>
             );
           })}
-      </Table>
+      </Table>}
     </div>
   );
 };
