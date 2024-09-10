@@ -58,6 +58,12 @@ import CreateOffer from "./admin/pages/offers/CreateOffer";
 import Offers from "./admin/pages/offers/Offers";
 import Message from "./customer/pages/account/page/Message";
 import Chat from "./seller/dashboard/pages/message/Chat";
+import PrivateRoute from "./components/private/PrivateRoute";
+import PublicRoute from "./components/private/PublicRoute";
+import PublicRouteForSeller from "./components/private/PublicRouteForSeller";
+import PrivateRouteForSeller from "./components/private/PrivateRouteForSeller";
+import PrivateRouteForAdmin from "./components/private/PrivateRouteForAdmin";
+import PublicRouteForAdmin from "./components/private/PublicRouteForAdmin";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -71,48 +77,76 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: "/login",
-          element: <Login />,
+          path: "login",
+          element: (
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          ),
         },
         {
-          path: "/signup",
-          element: <Signup />,
+          path: "signup",
+          element: (
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          ),
         },
         {
-          path: "/wishlist",
-          element: <Wishlist />,
+          path: "wishlist",
+          element: (
+            <PrivateRoute>
+              <Wishlist />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/myorder",
-          element: <MyOrder />,
+          path: "myorder",
+          element: (
+            <PrivateRoute>
+              <MyOrder />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/allproducts",
+          path: "allproducts",
           element: <AllProducts />,
         },
         {
-          path: "/cart",
-          element: <Cart />,
+          path: "cart",
+          element: (
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/checkout",
-          element: <OrderCheckout />,
+          path: "checkout",
+          element: (
+            <PrivateRoute>
+              <OrderCheckout />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/details/:id",
+          path: "details/:id",
           element: <ProductDetails />,
         },
         {
-          path: "/account",
-          element: <AccountLayout />,
+          path: "account",
+          element: (
+            <PrivateRoute>
+              <AccountLayout />
+            </PrivateRoute>
+          ),
           children: [
+            {
+              path: "",
+              element: <Account />,
+            },
             {
               path: "message",
               element: <Message />,
-            },
-            {
-              path: "/account",
-              element: <Account />,
             },
             {
               path: "myprofile",
@@ -140,11 +174,19 @@ const App = () => {
     },
     {
       path: "/sellersignup",
-      element: <SellerSignUp />,
+      element: (
+        <PublicRouteForSeller>
+          <SellerSignUp />
+        </PublicRouteForSeller>
+      ),
     },
     {
       path: "/sellerlogin",
-      element: <SellerLogin />,
+      element: (
+        <PublicRouteForSeller>
+          <SellerLogin />
+        </PublicRouteForSeller>
+      ),
     },
     {
       path: "/otp",
@@ -156,10 +198,14 @@ const App = () => {
     },
     {
       path: "/dashboard",
-      element: <SellerLayout />,
+      element: (
+        <PrivateRouteForSeller>
+          <SellerLayout />
+        </PrivateRouteForSeller>
+      ),
       children: [
         {
-          path: "/dashboard",
+          path: "",
           element: <Dashboard />,
         },
         {
@@ -206,15 +252,27 @@ const App = () => {
     },
     {
       path: "/adminsignup",
-      element: <AdminSignup />,
+      element: (
+        <PublicRouteForAdmin>
+          <AdminSignup />
+        </PublicRouteForAdmin>
+      ),
     },
     {
       path: "/adminlogin",
-      element: <AdminLogin />,
+      element: (
+        <PublicRouteForAdmin>
+          <AdminLogin />
+        </PublicRouteForAdmin>
+      ),
     },
     {
       path: "/admin",
-      element: <AdminLayout />,
+      element: (
+        <PrivateRouteForAdmin>
+          <AdminLayout />
+        </PrivateRouteForAdmin>
+      ),
       children: [
         {
           path: "dashboard",

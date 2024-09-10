@@ -51,7 +51,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
               },
       });
-      console.log(resp);
+      // console.log(resp);
       const respData: ApiResponse<T> = await resp.json();
       console.log(respData);
       setResponse(respData);

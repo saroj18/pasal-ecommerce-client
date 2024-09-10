@@ -9,18 +9,48 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../utils/useMutation";
+import { useEffect } from "react";
+import { useContextProvider } from "../../context/Context";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const{mutate}=useMutation()
-  const{register,handleSubmit,formState:{errors}}=useForm<LoginInput>({
-    resolver:zodResolver(UserLoginZodSchema)
-  })
+  const { mutate, response } = useMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInput>({
+    resolver: zodResolver(UserLoginZodSchema),
+    defaultValues: {
+      email: "saroj@gmail.com",
+      password: "password",
+    },
+  });
+  const { setUser } = useContextProvider();
 
-  const onSubmit=(info:LoginInput)=>{
-    const{email,password}=info
-    mutate('/user/login','POST',{email,password,role:'admin'})
-  }
+  const onSubmit = (info: LoginInput) => {
+    const { email, password } = info;
+    mutate("/user/login", "POST", { email, password, role: "admin" });
+  };
+
+  useEffect(() => {
+    console.log(response);
+    if (response && response?.data.verify) {
+      if (!response.data.shopVerify) {
+        navigate("/otp");
+      } else {
+        setUser(response.data);
+        navigate("/admin");
+        window.location.reload();
+      }
+      localStorage.setItem("role", "ADMIN");
+    }
+    if (response && !response?.data.verify) {
+      navigate("/account/verify");
+      localStorage.setItem("role", "ADMIN");
+    }
+  }, [response]);
+
   return (
     <div className="bg-gray-100 h-screen px-4">
       <div
@@ -39,33 +69,45 @@ const AdminLogin = () => {
               Admin Account
             </ParaTypo>
           </div>
-          <form action="" className="flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            action=""
+            className="flex flex-col gap-y-3"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex flex-col ">
               <Label className="text-xl">Email</Label>
               <Input
-              {...register('email')}
+                {...register("email")}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your email"
               />
-              {errors.email?.message && <ParaTypo className="text-sm text-red-500">{errors.email?.message}</ParaTypo>}
+              {errors.email?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.email?.message}
+                </ParaTypo>
+              )}
             </div>
 
             <div className="flex flex-col ">
               <Label className="text-xl">Password</Label>
               <Input
-              {...register('password')}
+                {...register("password")}
                 className="h-[50px] w-full"
                 type="text"
                 placeholder="enter your password"
               />
-              {errors.password?.message && <ParaTypo className="text-sm text-red-500">{errors.password?.message}</ParaTypo>}
+              {errors.password?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.password?.message}
+                </ParaTypo>
+              )}
             </div>
             <ParaTypo className="text-right cursor-pointer">
               Forgot Password
             </ParaTypo>
             <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
-              Login as a Seller
+              Login as a Admin
             </Button>
           </form>
           <ParaTypo

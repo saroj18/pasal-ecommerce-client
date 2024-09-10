@@ -23,16 +23,21 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: zodResolver(UserLoginZodSchema),
+    defaultValues: {
+      email: "saroj@gmail.com",
+      password: "password",
+    },
   });
 
   useEffect(() => {
     if (data) {
       navigate("/");
+      window.location.reload();
       localStorage.setItem("role", "CUSTOMER");
       localStorage.setItem("user", data?._id);
-      // window.location.reload();
     }
   }, [data]);
+  console.log("login");
 
   const onSubmit = (item: LoginInput) => {
     const { email, password } = item;

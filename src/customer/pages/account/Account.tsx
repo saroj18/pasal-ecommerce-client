@@ -8,7 +8,7 @@ import Shimmer from "../../../components/common/Shimmer";
 
 const Account = () => {
   const { data, loading } = useQuery<any>("/user");
-  console.log(data);
+  console.log('>>dora');
   return (
     <div className=" p-2">
       <div className="flex items-center justify-between">

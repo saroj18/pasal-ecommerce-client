@@ -29,7 +29,7 @@ const AdminSignup = () => {
       password,
       fullname,
       username,
-      role: "seller",
+      role: "admin",
     });
   };
   return (
@@ -115,7 +115,7 @@ const AdminSignup = () => {
               Forgot Password
             </ParaTypo>
             <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
-              SignUp as a Seller
+              SignUp as a Admin
             </Button>
           </form>
           <ParaTypo

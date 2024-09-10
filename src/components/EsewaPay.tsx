@@ -53,13 +53,13 @@ const EsewaPay = ({ data }: ObjectData) => {
         type="text"
         id="success_url"
         name="success_url"
-        value={import.meta.env.VITE_ESEWA_SUCCESS_URL}
+        value={data.success_url}
       />
       <input
         type="text"
         id="failure_url"
         name="failure_url"
-        value={import.meta.env.VITE_ESEWA_FAILER_URL}
+        value={data.failer_url}
       />
       <input
         type="text"

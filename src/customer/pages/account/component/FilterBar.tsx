@@ -38,7 +38,7 @@ const FilterBar = ({
   };
 
   return (
-    <section className="border-gray-300 border-2 h-[100vh] max-h-full sticky top-28 left-0 w-full max-w-[250px] rounded-md shadow-md mr-5 px-4 py-2">
+    <section className="border-gray-300 border-2 h-fit sticky top-28 left-0 w-full max-w-[250px] rounded-md shadow-md mr-5 px-4 py-2">
       <div className="flex justify-between relative items-center border-b-2 py-2">
         <HeadingTypo className=" text-xl">Filter</HeadingTypo>
         {/* <X className="absolute cursor-pointer top-1 left-[90%]" /> */}
@@ -70,10 +70,10 @@ const FilterBar = ({
 
         <Select onChange={(e) => changeHandler(e, "price")} className="w-full">
           <Option value="">None</Option>
-          <Option value="999">0-999</Option>
-          <Option value="4999">1000-4999</Option>
-          <Option value="14999">5000-14999</Option>
-          <Option value="24999">15000-24999</Option>
+          <Option value="0-999">0-999</Option>
+          <Option value="1000-4999">1000-4999</Option>
+          <Option value="5000-14999">5000-14999</Option>
+          <Option value="15000-24999">15000-24999</Option>
           <Option value="25000">Above 25000</Option>
         </Select>
       </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type ApiResponse<T> = {
@@ -14,11 +14,11 @@ type UseQueryResult<T> = {
 };
 
 export const useQuery = <T>(url?: string): UseQueryResult<T> => {
-  const [data, setData] = useState<T | T[] | null>(null);
+  const [data, setData] = useState<T | T[] | any>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setError(false);
     setLoading(true);
     try {
@@ -30,7 +30,7 @@ export const useQuery = <T>(url?: string): UseQueryResult<T> => {
         },
       });
       const respData: ApiResponse<T> = await resp.json();
-      setData(respData.data);
+      setData(respData.data ?? null);
       setLoading(false);
       if (respData.message) {
         toast.success(respData.message);
@@ -40,7 +40,8 @@ export const useQuery = <T>(url?: string): UseQueryResult<T> => {
       setError(true);
       toast.error("server started soon!!!");
     }
-  };
+  }, []);
+
   useEffect(() => {
     fetchData();
   }, []);

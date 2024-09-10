@@ -6,6 +6,11 @@ import {
 } from "../customer/pages/account/component/VerifyForm";
 import { useQuery } from "../utils/useQuery";
 
+export type UserType = {
+  fullname: string;
+  role: string;
+};
+
 type ProductType = {
   name: string;
   description: string;
@@ -36,6 +41,8 @@ type ProvideProps = {
   verifyInfo: AddressForm | VerifyForm | VerifyInfoTyype;
   data: any;
   socketServer: WebSocket | null;
+  user: UserType | null;
+  setUser:React.Dispatch<React.SetStateAction<UserType|null>>
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
@@ -46,6 +53,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [accountSideBar, setAccountSideBar] = useState<boolean>(false);
   const [zodError, setZodError] = useState<{ [key: string]: string }>({});
   const [socketServer, setSocketServer] = useState<WebSocket | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [productInfo, setProductInfo] = useState<ProductType>({
     name: "",
     description: "",
@@ -80,8 +88,9 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const { data } = useQuery("/user");
+  const { data } = useQuery<UserType>("/user");
   console.log("context call");
+  console.log(data);
 
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);
@@ -92,6 +101,11 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
 
     return () => socket.close();
   }, []);
+
+  useEffect(() => {
+    console.log("demo");
+    setUser(data as UserType);
+  }, [data]);
 
   return (
     <ContextProvider.Provider
@@ -110,6 +124,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         verifyInfo,
         data,
         socketServer,
+        user,
+        setUser
       }}
     >
       {children}

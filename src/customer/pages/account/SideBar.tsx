@@ -42,7 +42,7 @@ const SideBar = () => {
           Message
         </HeadingTypo>
       </Link>
-      <Link to={"/sellersignup"}>
+      <Link to={"/sellerlogin"}>
         <HeadingTypo className="text-lg cursor-pointer my-2">
           Sell On Pasal
         </HeadingTypo>

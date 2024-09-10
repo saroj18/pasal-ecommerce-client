@@ -31,7 +31,6 @@ const SetChart = ({
     let count = 0;
     graphData &&
       graphData?.forEach((ele) => {
-        console.log("dd", ele);
         count += ele?.value;
       });
     setTotal(count);

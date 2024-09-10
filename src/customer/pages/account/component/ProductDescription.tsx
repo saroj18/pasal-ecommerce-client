@@ -8,22 +8,18 @@ type ProductDescriptionProps = {
   description: string;
   features: string[];
   review: any;
+  data:any
 };
 
 const ProductDescription = ({
   description,
   features,
   review,
+  data
 }: ProductDescriptionProps) => {
-  console.log(review);
 
-  const averageRating = useCallback(() => {
-    let total = 0;
-    review?.forEach((ele: any) => {
-      total += ele.reviewStar ?? 0;
-    });
-    return total / review?.length;
-  }, [review]);
+
+ 
 
   return (
     <div>
@@ -46,7 +42,7 @@ const ProductDescription = ({
       <div className="flex items-center gap-x-10 w-full max-w-[70%] mb-3">
         <div>
           <ParaTypo className="text-4xl font-semibold">
-            {averageRating().toFixed(1)}/5
+            {data?.rating?.toFixed(1)||'0'}/5
           </ParaTypo>
           <div className="flex items-center my-3">
             {Array(5)
@@ -55,8 +51,8 @@ const ProductDescription = ({
                 return (
                   <StarIcon
                     key={index}
-                    color={index < averageRating() ? "orange" : "black"}
-                    fill={index < averageRating() ? "orange" : "transparent"}
+                    color={index < Math.floor(data?.rating) ? "orange" : "black"}
+                    fill={index < Math.floor(data?.rating) ? "orange" : "transparent"}
                   />
                 );
               })}

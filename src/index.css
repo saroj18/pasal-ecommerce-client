@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#root{
+  min-height: 100vh;
+}
+
 .container {
   margin-inline: auto;
   max-width: 1300px;

@@ -6,31 +6,52 @@ import { useQuery } from "../../utils/useQuery";
 import { Trash } from "lucide-react";
 import { useMutation } from "../../utils/useMutation";
 import Shimmer from "../../components/common/Shimmer";
+import { useEffect } from "react";
+
+const customEvent = (eventName: string) => {
+  const event = new CustomEvent<CustomEvent>(eventName);
+  window.dispatchEvent(event);
+};
 
 const Cart = () => {
-  const { data, refetch,loading:cartLoading } = useQuery<any>("/product/cart");
-  const { mutate } = useMutation();
+  const {
+    data,
+    refetch,
+    loading: cartLoading,
+  } = useQuery<any>("/product/cart");
+  const { mutate, data: cartData } = useMutation();
 
   const cartDeleteHandler = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };
+  useEffect(() => {
+    let cartValue = Number(localStorage.getItem("cartCount"));
+    console.log("cart", typeof cartData);
+    if (cartValue < 0) return;
+    if (typeof cartData == "object") {
+      localStorage.setItem("cartCount", JSON.stringify(cartValue - 1));
+    }
+    customEvent("cartCount");
+  }, [cartData]);
+  console.log('cartcall')
 
-  console.log(data);
   return (
     <div className="grid overflow-auto">
-      {cartLoading?<Shimmer shape="rectange"/>:<table className="w-full text-center">
-        <thead>
-          <tr>
-            <th className="p-8">Product</th>
-            <th className="p-8">Price</th>
-            <th className="p-8">Quantity</th>
-            <th className="p-8">Subtotal</th>
-            <th className="p-8">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            data?.map((ele: any, index: number) => (
+      {cartLoading ? (
+        <Shimmer count={4} height="100px" shape="rectange" />
+      ) : (
+        <table className="w-full text-center">
+          <thead>
+            <tr>
+              <th className="p-8">Product</th>
+              <th className="p-8">Price</th>
+              <th className="p-8">Quantity</th>
+              <th className="p-8">Subtotal</th>
+              <th className="p-8">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((ele: any, index: number) => (
               <tr key={index} className=" my-8 border-b-2 border-t-2 ">
                 <td className="p-4 ">
                   <img
@@ -63,8 +84,9 @@ const Cart = () => {
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>}
+          </tbody>
+        </table>
+      )}
       <Link className="sm:place-self-end place-self-start" to={"/checkout"}>
         <Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">
           Go to Checkout

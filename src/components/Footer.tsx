@@ -4,7 +4,7 @@ import { Send } from "lucide-react";
 
 const Footer = () => {
   return (
-    <section className=" bg-black  text-white mt-7 max-h-fit">
+    <section className=" bg-black  text-white mt-7 max-h-fit ">
       <div className="container flex flex-wrap gap-y-6 justify-center py-6">
         <div className="relative grow w-full max-w-[250px]">
           <h1 className="text-xl">Exclusive</h1>

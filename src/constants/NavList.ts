@@ -12,7 +12,7 @@ export const navList = [
     path: "/about",
   },
   {
-    name: "Sign Up",
-    path: "signup",
+    name: "Log In",
+    path: "login",
   },
 ];

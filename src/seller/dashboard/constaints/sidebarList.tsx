@@ -3,6 +3,7 @@ import {
   BookHeart,
   DollarSign,
   HelpCircle,
+  Home,
   Layers,
   LayoutDashboard,
   LineChart,
@@ -73,6 +74,11 @@ export const dashboardList: listProps[] = [
     name: "Notification",
     url: "/dashboard/notification",
     icon: <Bell />,
+  },
+  {
+    name: "Switch on Home",
+    url: "/",
+    icon: <Home />,
   },
 ];
 

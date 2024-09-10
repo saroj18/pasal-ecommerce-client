@@ -15,10 +15,16 @@ import Shimmer from "../../components/common/Shimmer";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const { mutate, loading } = useMutation();
+  const { mutate, loading, data: cartData } = useMutation();
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
+  const [cart, setCart] = useState(Number(localStorage.getItem("cartCount")));
+
+  const customEvent = (eventName: string) => {
+    const event = new CustomEvent<CustomEvent>(eventName);
+    window.dispatchEvent(event);
+  };
 
   let {
     data,
@@ -27,7 +33,7 @@ const ProductDetails = () => {
   } = useQuery<any>(`/product/${id}`);
 
   const addToCartHandler = (id: string) => {
-    mutate(`/product/cart`, "POST", { productId: id, count }, refetch);
+    mutate(`/product/cart`, "POST", { productId: id, count });
   };
 
   const addOnWishList = (id: string) => {
@@ -45,27 +51,27 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!data) return;
     refetch();
   }, [id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
+    localStorage.setItem("cartCount", cart.toString());
+    customEvent("cartCount");
+  }, [cart]);
 
-  const averageRating = useCallback(() => {
-    let total = 0;
-    data?.review?.forEach((ele: any) => {
-      total += ele.reviewStar;
-    });
-    return total / data?.review?.length;
-  }, [data]);
+  useEffect(() => {
+    if (data) {
+      setCart(cart + 1);
+    }
+  }, [cartData]);
 
   return (
     <>
       <div className="flex flex-col md:flex-row gap-x-10 mt-8 mb-10 border-b-2 pb-3">
         {productLoading ? (
-          <Shimmer height="500px" width="600px" shape="rectange" />
+          <Shimmer height="600px" width="600px" shape="rectange" />
         ) : (
           <div className="border-2 relative border-gray-500 rounded-md shadow-md w-full max-w-md p-3 flex-col flex items-center justify-center">
             <img src={image || data?.images?.[0]} alt="product image" />
@@ -85,7 +91,7 @@ const ProductDetails = () => {
             </div>
           </div>
         )}
-        <div>
+        <div className="w-full">
           {productLoading ? (
             <Shimmer shape="rectange" height="100px" />
           ) : (
@@ -109,7 +115,7 @@ const ProductDetails = () => {
             </div>
           )}
           {productLoading ? (
-            <Shimmer height="100px" shape="rectange" />
+            <Shimmer height="70px" shape="rectange" />
           ) : (
             <div className="flex gap-x-2 items-center my-4">
               <section className="flex items-center">
@@ -119,9 +125,13 @@ const ProductDetails = () => {
                     return (
                       <StarIcon
                         key={index}
-                        color={index < averageRating() ? "orange" : "black"}
+                        color={
+                          index < Math.floor(data?.rating) ? "orange" : "black"
+                        }
                         fill={
-                          index < averageRating() ? "orange" : "transparent"
+                          index < Math.floor(data?.rating)
+                            ? "orange"
+                            : "transparent"
                         }
                       />
                     );
@@ -138,24 +148,26 @@ const ProductDetails = () => {
           {productLoading ? (
             <Shimmer height="100px" shape="rectange" />
           ) : (
-            <div className="flex items-center gap-x-3">
-              <ParaTypo className="font-bold text-2xl">
-                Rs {data?.priceAfterDiscount}
+            <>
+              <div className="flex items-center gap-x-3">
+                <ParaTypo className="font-bold text-2xl">
+                  Rs {data?.priceAfterDiscount}
+                </ParaTypo>
+                <ParaTypo className="text-red-500 text-sm">
+                  Off {data?.discount}%
+                </ParaTypo>
+              </div>
+              <ParaTypo className="line-through opacity-70 text-sm">
+                Rs {data?.price}
               </ParaTypo>
-              <ParaTypo className="text-red-500 text-sm">
-                Off {data?.discount}%
+              <ParaTypo className="text-sm border-b-2 pb-4 my-4">
+                {data?.description.slice(0, 200)}...
               </ParaTypo>
-            </div>
+            </>
           )}
-          <ParaTypo className="line-through opacity-70 text-sm">
-            Rs {data?.price}
-          </ParaTypo>
-          <ParaTypo className="text-sm border-b-2 pb-4 my-4">
-            {data?.description.slice(0, 200)}...
-          </ParaTypo>
 
           {productLoading ? (
-            <Shimmer shape="rectange" />
+            <Shimmer shape="rectange" height="100px" />
           ) : (
             <div className="flex flex-col gap-y-2 items-start w-full max-w-[50%]">
               <div className="flex gap-x-4">
@@ -204,7 +216,7 @@ const ProductDetails = () => {
             </div>
           )}
           {productLoading ? (
-            <Shimmer shape="rectange" />
+            <Shimmer height="100px" shape="rectange" />
           ) : (
             <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
               {/* <Button className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4">
@@ -235,6 +247,7 @@ const ProductDetails = () => {
           description={data?.description}
           features={data?.features}
           review={data?.review}
+          data={data}
         />
       )}
       <HeaderBar heading="Our Others Products" btnText="See More" />

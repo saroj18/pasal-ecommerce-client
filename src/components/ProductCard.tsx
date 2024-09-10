@@ -23,20 +23,10 @@ const ProductCard = ({
     mutate("/product/wishlist", "DELETE", { productId: id });
   };
 
-  const averageRating = useCallback(() => {
-    let total = 0;
-    product?.review?.length > 0 &&
-      product?.review?.forEach((ele: any) => {
-        total += ele.reviewStar;
-      });
-    if (total == 0) {
-      return "0";
-    }
-    return (total / product?.review?.length).toFixed(1);
-  }, [product]);
+ 
   return (
     <>
-      <Link to={`/details/${product?._id}`} className="shadow-md ">
+      <Link to={`/details/${product?._id}`} className=" h-fit shadow-md ">
         <div className="bg-gray-100 flex items-center justify-center overflow-hidden p-2 cursor-pointer cart relative h-[200px] sm:h-[300px] md:h-[300px] ">
           <img
             className="sm:w-[300px] w-[200px]"
@@ -46,7 +36,7 @@ const ProductCard = ({
 
           <span className="absolute top-1 left-[86%]">{icon}</span>
         </div>
-        <div className="p-3 flex flex-col gap-y-2 min-h-[150px] border-t-2 border-green-500 shadow-md" >
+        <div className="p-3 flex flex-col gap-y-2 min-h-[150px] border-2 border-gray-200 shadow-md">
           <p
             title={product?.name}
             className="font-semibold text-sm sm:text-lg truncate "
@@ -69,7 +59,7 @@ const ProductCard = ({
           </div>
           <div className="flex items-center gap-x-3">
             <ParaTypo className="bg-green-500 text-white px-2 py-1 rounded-md text-sm flex gap-x-1">
-              {averageRating() || "0"}
+              {product?.rating?.toFixed(1) || "0"}
               <Star strokeWidth={2} fill="white" size={18} />
             </ParaTypo>
             <ParaTypo className="opacity-60">

@@ -28,7 +28,9 @@ const AllProducts = () => {
   const { data, loading } = useQuery<any>("/product");
   console.log("loading>>", loading);
   useEffect(() => {
-    // window.scrollTo({ top: 0 });
+   setTimeout(() => {
+    window.scrollTo({ top: 0 });
+   }, 0);
     if (data) {
       setProduct(data);
     }
