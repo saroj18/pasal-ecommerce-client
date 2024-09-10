@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { navList } from "../../constants/NavList";
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, ShoppingCart, Store, User } from "lucide-react";
+import { Heart, ShoppingCart, Store, User, UserCheck } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
 import logo from "../../assets/logo.jpg";
 import SearchBox from "../common/Search";
@@ -59,15 +59,28 @@ const Navbar = () => {
       </Link>
       <ul className=" hidden md:flex items-center gap-x-7">
         {navList.map((ele, index) => {
+          if (
+            ele.path == "login" &&
+            user &&
+            (user.role == "customer" || user?.role == "seller")
+          )
+            return;
           return (
             <Link key={index} to={ele.path}>
-              <li>{ele.name}</li>
+              <li
+                className={
+                  ele.path == "/admin/dashboard" ? "text-green-500" : ""
+                }
+              >
+                {ele.name}
+              </li>
             </Link>
           );
         })}
       </ul>
       <div className="flex items-center w-full md:w-[35%]  ">
         <SearchBox className="w-full" />
+
         {user && (user.role == "customer" || user?.role == "seller") && (
           <div className="flex gap-x-6">
             {user.role == "seller" && (
@@ -77,6 +90,7 @@ const Navbar = () => {
                 opacity={0.7}
               />
             )}
+
             <div className="relative">
               <Heart
                 onClick={() => navigate("/wishlist")}

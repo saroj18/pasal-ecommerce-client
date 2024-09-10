@@ -3,6 +3,7 @@ import {
   Bell,
   DollarSignIcon,
   HandCoins,
+  Home,
   LayoutDashboard,
   Store,
   Truck,
@@ -55,5 +56,10 @@ export const generalSideBarList = [
     name: "Notification",
     url: "notification",
     icon: <Bell />,
+  },
+  {
+    name: "Home",
+    url: "/",
+    icon: <Home />,
   },
 ];

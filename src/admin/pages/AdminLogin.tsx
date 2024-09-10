@@ -40,8 +40,8 @@ const AdminLogin = () => {
         navigate("/otp");
       } else {
         setUser(response.data);
-        navigate("/admin");
-        window.location.reload();
+        navigate("/admin/dashboard");
+        // window.location.reload();
       }
       localStorage.setItem("role", "ADMIN");
     }

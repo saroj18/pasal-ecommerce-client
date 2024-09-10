@@ -52,6 +52,11 @@ const SideBar = () => {
           Delevery Staff
         </HeadingTypo>
       </Link>
+      <Link to={"/adminlogin"}>
+        <HeadingTypo className="text-lg cursor-pointer my-2">
+          I am Admin
+        </HeadingTypo>
+      </Link>
     </aside>
   );
 };

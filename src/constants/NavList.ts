@@ -15,4 +15,8 @@ export const navList = [
     name: "Log In",
     path: "login",
   },
+  {
+    name: "I am Admin",
+    path: "/admin/dashboard",
+  },
 ];

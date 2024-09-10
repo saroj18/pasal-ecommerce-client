@@ -10,7 +10,7 @@ const PrivateRouteForAdmin = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const checkUser = () => {
-      if (user && user.role !== "admin") {
+      if ((user && user.role !== "admin") || !user) {
         console.log("call");
         navigate("/adminlogin", { replace: true });
       } else {

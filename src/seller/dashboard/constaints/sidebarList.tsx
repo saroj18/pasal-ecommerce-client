@@ -76,7 +76,7 @@ export const dashboardList: listProps[] = [
     icon: <Bell />,
   },
   {
-    name: "Switch on Home",
+    name: "Go to Home",
     url: "/",
     icon: <Home />,
   },

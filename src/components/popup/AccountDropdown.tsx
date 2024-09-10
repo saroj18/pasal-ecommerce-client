@@ -36,7 +36,7 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
           toast.success(data.message);
           setUser(null);
           navigate("/login", { replace: true });
-          // window.location.reload();
+          window.location.reload();
         } else {
           toast.error(data.error);
         }

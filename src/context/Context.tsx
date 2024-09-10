@@ -8,7 +8,7 @@ import { useQuery } from "../utils/useQuery";
 
 export type UserType = {
   fullname: string;
-  role: string;
+  role: "customer" | "admin" | "seller";
 };
 
 type ProductType = {
@@ -42,7 +42,7 @@ type ProvideProps = {
   data: any;
   socketServer: WebSocket | null;
   user: UserType | null;
-  setUser:React.Dispatch<React.SetStateAction<UserType|null>>
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
@@ -125,7 +125,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         data,
         socketServer,
         user,
-        setUser
+        setUser,
       }}
     >
       {children}
