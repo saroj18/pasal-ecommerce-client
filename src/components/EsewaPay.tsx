@@ -59,7 +59,7 @@ const EsewaPay = ({ data }: ObjectData) => {
         type="text"
         id="failure_url"
         name="failure_url"
-        value={data.failer_url}
+        value={data.failure_url}
       />
       <input
         type="text"
