@@ -10,12 +10,14 @@ import { UserLoginZodSchema } from "../zodschema/user";
 import { z } from "zod";
 import { useMutation } from "../../utils/useMutation";
 import { useEffect } from "react";
+import { useContextProvider } from "../../context/Context";
 
 export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
   const { mutate, data } = useMutation<any>();
+  const { setUser } = useContextProvider();
 
   const {
     register,
@@ -31,8 +33,9 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
+      setUser(data);
       navigate("/");
-      window.location.reload();
+      // window.location.reload();
       localStorage.setItem("role", "CUSTOMER");
       localStorage.setItem("user", data?._id);
     }

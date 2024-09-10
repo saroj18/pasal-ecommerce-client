@@ -41,7 +41,7 @@ const SellerLogin = () => {
       } else {
         setUser(response.data);
         navigate("/dashboard");
-        window.location.reload();
+        // window.location.reload();
       }
       localStorage.setItem("role", "SELLER");
     }
