@@ -18,7 +18,7 @@ const Cart = () => {
     data,
     refetch,
     loading: cartLoading,
-  } = useQuery<any>("/product/cart");
+  } = useQuery<any>("/product/cart",false);
   const { mutate, data: cartData } = useMutation();
 
   const cartDeleteHandler = (id: string) => {
@@ -26,14 +26,12 @@ const Cart = () => {
   };
   useEffect(() => {
     let cartValue = Number(localStorage.getItem("cartCount"));
-    console.log("cart", typeof cartData);
     if (cartValue < 0) return;
     if (typeof cartData == "object") {
       localStorage.setItem("cartCount", JSON.stringify(cartValue - 1));
     }
     customEvent("cartCount");
   }, [cartData]);
-  console.log('cartcall')
 
   return (
     <div className="grid overflow-auto">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { addOnCache, getFromCache } from "./cacheHolder";
 
 type ApiResponse<T> = {
   success: boolean;
@@ -14,6 +15,7 @@ type UseMutationResult<T> = {
     method: string,
     bodyData?: any,
     refetch?: () => void | undefined,
+    // cache?:boolean
   ) => Promise<void>;
   data: T | undefined;
   error: boolean;
@@ -32,7 +34,23 @@ export const useMutation = <T>(): UseMutationResult<T> => {
     method: string,
     bodyData?: any,
     refetch?: () => void,
+    cache = true,
   ) => {
+    console.log(
+      "url>>",
+      url +
+        Object.keys(bodyData).toString() +
+        Object.values(bodyData).toString(),
+    );
+    const payload =
+      url +
+      Object.keys(bodyData).toString() +
+      Object.values(bodyData).toString();
+    const cacheData = getFromCache(payload);
+    if (cache && cacheData) {
+      setData(cacheData);
+      return;
+    }
     setError(false);
     setLoading(true);
     try {
@@ -60,6 +78,9 @@ export const useMutation = <T>(): UseMutationResult<T> => {
         toast.error(respData.error);
       } else {
         setData(respData.data);
+        if (cache) {
+          addOnCache(payload, respData.data);
+        }
         if (respData.message) {
           toast.success(respData.message);
         }
@@ -74,5 +95,11 @@ export const useMutation = <T>(): UseMutationResult<T> => {
     }
   };
 
-  return { mutate, data, response, error, loading };
+  return {
+    mutate,
+    data,
+    response,
+    error,
+    loading,
+  };
 };

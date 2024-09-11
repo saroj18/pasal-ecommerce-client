@@ -165,49 +165,53 @@ const Dashboard = () => {
             Recent Pending Orders
           </HeadingTypo>
           <div className="overflow-auto">
-            <table className="w-full text-center text-xs sm:text-base">
-              <thead>
-                <tr>
-                  <th className="p-4">Product</th>
-                  <th className="p-4">Customer</th>
-                  <th className="p-4">Order ID</th>
-                  <th className="p-4">Date</th>
-                  <th className="p-4">Price</th>
-                  <th className="p-4">Discount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders &&
-                  orders.map((ele: any) => {
-                    return (
-                      <tr key={ele._id} className="border-b-2 border-t-2 ">
-                        <td className="p-2 flex items-center justify-center gap-x-2 flex-col">
-                          {" "}
-                          <img
-                            className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
-                            src={ele.orderProducts.images[0]}
-                          />{" "}
-                          {ele.orderProducts.name}
-                        </td>
-                        <td className="p-2">{ele.customer[0].fullname}</td>
-                        <td title={ele._id} className="p-2">
-                          {ele._id.slice(15)}
-                        </td>
-                        <td
-                          title={new Date(ele.createdAt).toLocaleTimeString()}
-                          className="p-2"
-                        >
-                          {new Date(ele.createdAt).toDateString()}
-                        </td>
-                        <td className="p-2">
-                          Rs {ele.orderProducts.priceAfterDiscount}
-                        </td>
-                        <td className="p-2">{ele.orderProducts.discount}%</td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+            {orderLoading ? (
+              <Shimmer shape="rectange" height="150px" count={4} />
+            ) : (
+              <table className="w-full text-center text-xs sm:text-base">
+                <thead>
+                  <tr>
+                    <th className="p-4">Product</th>
+                    <th className="p-4">Customer</th>
+                    <th className="p-4">Order ID</th>
+                    <th className="p-4">Date</th>
+                    <th className="p-4">Price</th>
+                    <th className="p-4">Discount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders &&
+                    orders.map((ele: any) => {
+                      return (
+                        <tr key={ele._id} className="border-b-2 border-t-2 ">
+                          <td className="p-2 flex items-center justify-center gap-x-2 flex-col">
+                            {" "}
+                            <img
+                              className="w-[60px] border-2 border-gray-300 shadow-md rounded-md p-1"
+                              src={ele.orderProducts.images[0]}
+                            />{" "}
+                            {ele.orderProducts.name}
+                          </td>
+                          <td className="p-2">{ele.customer[0].fullname}</td>
+                          <td title={ele._id} className="p-2">
+                            {ele._id.slice(15)}
+                          </td>
+                          <td
+                            title={new Date(ele.createdAt).toLocaleTimeString()}
+                            className="p-2"
+                          >
+                            {new Date(ele.createdAt).toDateString()}
+                          </td>
+                          <td className="p-2">
+                            Rs {ele.orderProducts.priceAfterDiscount}
+                          </td>
+                          <td className="p-2">{ele.orderProducts.discount}%</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            )}
           </div>
         </>
       )}

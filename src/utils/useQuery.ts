@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { addOnCache, getFromCache } from "./cacheHolder";
 
 type ApiResponse<T> = {
   data: T | T[];
@@ -13,7 +14,7 @@ type UseQueryResult<T> = {
   refetch: () => void;
 };
 
-export const useQuery = <T>(url?: string): UseQueryResult<T> => {
+export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | any>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,6 +32,9 @@ export const useQuery = <T>(url?: string): UseQueryResult<T> => {
       });
       const respData: ApiResponse<T> = await resp.json();
       setData(respData.data ?? null);
+      if (cache) {
+        addOnCache(url as string, respData.data);
+      }
       setLoading(false);
       if (respData.message) {
         toast.success(respData.message);
@@ -43,8 +47,19 @@ export const useQuery = <T>(url?: string): UseQueryResult<T> => {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    const dataFromCache = getFromCache(url as string);
+    console.log("<<", dataFromCache);
+    if (cache && dataFromCache) {
+      setData(dataFromCache);
+    } else {
+      fetchData();
+    }
   }, []);
 
-  return { data, error, loading, refetch: fetchData };
+  return {
+    data,
+    error,
+    loading,
+    refetch: fetchData,
+  };
 };
