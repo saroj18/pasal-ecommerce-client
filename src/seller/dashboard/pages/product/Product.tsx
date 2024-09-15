@@ -11,8 +11,8 @@ import { productZodSchema } from "../../../zodschema/product";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "../../../../utils/useMutation";
-import { useQuery } from "../../../../utils/useQuery";
+import { useMutation } from "../../../../hooks/useMutation";
+import { useQuery } from "../../../../hooks/useQuery";
 import { useEffect, useState } from "react";
 import Shimmer from "../../../../components/common/Shimmer";
 
@@ -26,7 +26,7 @@ const Product = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [updateData, setUpdateData] = useState<any>();
-  const { data, refetch,loading } = useQuery<any>("/product/myproduct");
+  const { data, refetch, loading } = useQuery<any>("/product/myproduct");
   const { mutate, data: mutateData } = useMutation();
 
   console.log(updateData);
@@ -178,9 +178,7 @@ const Product = () => {
         <SearchBox className="sm:max-w-[55%] md:max-w-[50%] lg:max-w-[30%] w-full" />
       </div>
       <hr />
-{
-  loading?<Shimmer height="100px" count={5} shape="rectange"/>:null
-}
+      {loading ? <Shimmer height="100px" count={5} shape="rectange" /> : null}
       {data?.length > 0 && (
         <div className="bg-white ">
           <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">

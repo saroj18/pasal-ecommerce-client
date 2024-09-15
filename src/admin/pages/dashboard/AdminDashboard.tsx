@@ -1,7 +1,7 @@
 import AmountCard from "../../../seller/dashboard/components/AmountCard";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import MostSellingProductCard from "../../../seller/dashboard/components/MostSellingProductCard";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import Shimmer from "../../../components/common/Shimmer";
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";

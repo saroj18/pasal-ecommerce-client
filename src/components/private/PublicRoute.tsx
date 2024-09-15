@@ -9,8 +9,9 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   console.log(user);
 
   useLayoutEffect(() => {
+    console.log(user)
     const checkUser = () => {
-      if (user && user.role == "customer") {
+      if (user && user.role == "customer"||user?.role=='seller') {
         navigate("/", { replace: true });
       } else {
         setIsLoading(false);

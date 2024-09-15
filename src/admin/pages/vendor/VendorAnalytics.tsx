@@ -4,13 +4,13 @@ import Select from "../../../components/common/Select";
 import Option from "../../../components/common/Option";
 import { ArrowLeftIcon } from "lucide-react";
 import SetChart from "./SetChart";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 import { useParams, useSearchParams } from "react-router-dom";
 import Shimmer from "../../../components/common/Shimmer";
 
 const VendorAnalytics = () => {
   const [time, setTime] = useState("24hrs");
-  const { mutate, data: graphData,loading } = useMutation<any>();
+  const { mutate, data: graphData, loading } = useMutation<any>();
   const [searchParams] = useSearchParams();
   useEffect(() => {
     mutate(
@@ -43,38 +43,54 @@ const VendorAnalytics = () => {
         </Select>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center justify-between ">
-        {loading?<Shimmer height="370px" shape="rectange"/>:<SetChart
-          graphData={graphData?.totalVisitors}
-          color="rgba(154, 0, 0, 0.5)"
-          className="w-full"
-          chartType="line"
-          label="visitors"
-          heading="Total Visitors"
-        />}
-        {loading?<Shimmer height="370px" shape="rectange"/>:<SetChart
-          graphData={graphData?.graphData}
-          color=""
-          className="w-full"
-          chartType="line"
-          label="order"
-          heading="Total Order"
-        />}
-        {loading?<Shimmer height="370px" shape="rectange"/>:<SetChart
-          graphData={graphData?.revenueData}
-          color="rgba(255, 0, 0, 0.5)"
-          className="w-full"
-          chartType="line"
-          label="amount"
-          heading="Total Revenue"
-        />}
-        {loading?<Shimmer height="370px" shape="rectange"/>:<SetChart
-          graphData={graphData?.totalReview}
-          color="rgba(0, 0, 0, 0.5)"
-          className="w-full"
-          chartType="line"
-          label="reviews"
-          heading="Total Review"
-        />}
+        {loading ? (
+          <Shimmer height="370px" shape="rectange" />
+        ) : (
+          <SetChart
+            graphData={graphData?.totalVisitors}
+            color="rgba(154, 0, 0, 0.5)"
+            className="w-full"
+            chartType="line"
+            label="visitors"
+            heading="Total Visitors"
+          />
+        )}
+        {loading ? (
+          <Shimmer height="370px" shape="rectange" />
+        ) : (
+          <SetChart
+            graphData={graphData?.graphData}
+            color=""
+            className="w-full"
+            chartType="line"
+            label="order"
+            heading="Total Order"
+          />
+        )}
+        {loading ? (
+          <Shimmer height="370px" shape="rectange" />
+        ) : (
+          <SetChart
+            graphData={graphData?.revenueData}
+            color="rgba(255, 0, 0, 0.5)"
+            className="w-full"
+            chartType="line"
+            label="amount"
+            heading="Total Revenue"
+          />
+        )}
+        {loading ? (
+          <Shimmer height="370px" shape="rectange" />
+        ) : (
+          <SetChart
+            graphData={graphData?.totalReview}
+            color="rgba(0, 0, 0, 0.5)"
+            className="w-full"
+            chartType="line"
+            label="reviews"
+            heading="Total Review"
+          />
+        )}
       </div>
     </div>
   );

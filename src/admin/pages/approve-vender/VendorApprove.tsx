@@ -7,7 +7,7 @@ import TableBody from "../../../components/common/TableBody";
 import TableData from "../../../components/common/TableData";
 import Button from "../../../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import TableRow from "../../../components/common/TableRow";
 
 const VendorApprove = () => {

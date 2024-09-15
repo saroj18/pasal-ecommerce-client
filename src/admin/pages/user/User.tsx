@@ -4,17 +4,17 @@ import TableHead from "../../../components/common/TableHead";
 import TableBody from "../../../components/common/TableBody";
 import TableRow from "../../../components/common/TableRow";
 import TableData from "../../../components/common/TableData";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import { tableHeadData } from "./constant";
 import Button from "../../../components/common/Button";
 import Table from "../../../components/common/Table";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 import React from "react";
 import Shimmer from "../../../components/common/Shimmer";
 
 const User = () => {
-  const { data, refetch,loading } = useQuery<any>("/user/allcustomer");
+  const { data, refetch, loading } = useQuery<any>("/user/allcustomer");
   const { mutate, data: deleteData } = useMutation();
   const navigate = useNavigate();
 
@@ -36,70 +36,67 @@ const User = () => {
         <SearchBox className="w-[300px]" />
       </div>
       <hr />
-      {
-        loading?<Shimmer height="60px" count={8} shape="rectange"/>:null
-      }
+      {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
       {data?.length > 0 && (
         <Table>
           <TableHead tableHeadData={tableHeadData} />
           <TableBody>
-            {
-              data.map((ele: any) => {
-                return (
-                  <TableRow
-                    className="cursor-pointer hover:bg-slate-50"
-                    onClick={() => navigate(ele._id)}
-                    key={ele._id}
+            {data.map((ele: any) => {
+              return (
+                <TableRow
+                  className="cursor-pointer hover:bg-slate-50"
+                  onClick={() => navigate(ele._id)}
+                  key={ele._id}
+                >
+                  <TableData title={ele._id} className="p-4">
+                    {ele._id.slice(15)}
+                  </TableData>
+                  <TableData className="p-4 capitalize">
+                    {ele.fullname}
+                  </TableData>
+                  <TableData className="p-4 capitalize">
+                    {ele.address?.city ?? "-"}
+                  </TableData>
+                  <TableData className="p-4 capitalize">
+                    {ele.gender ?? "-"}
+                  </TableData>
+                  <TableData className="p-4">{ele.email}</TableData>
+                  <TableData className="p-4">
+                    {new Date(ele.createdAt).toDateString()}
+                  </TableData>
+                  <TableData
+                    className={`p-4 capitalize ${ele.verify ? "text-green-500" : "text-red-500"}`}
                   >
-                    <TableData title={ele._id} className="p-4">
-                      {ele._id.slice(15)}
-                    </TableData>
-                    <TableData className="p-4 capitalize">
-                      {ele.fullname}
-                    </TableData>
-                    <TableData className="p-4 capitalize">
-                      {ele.address?.city ?? "-"}
-                    </TableData>
-                    <TableData className="p-4 capitalize">
-                      {ele.gender ?? "-"}
-                    </TableData>
-                    <TableData className="p-4">{ele.email}</TableData>
-                    <TableData className="p-4">
-                      {new Date(ele.createdAt).toDateString()}
-                    </TableData>
-                    <TableData
-                      className={`p-4 capitalize ${ele.verify ? "text-green-500" : "text-red-500"}`}
-                    >
-                      {ele.verify.toString()}
-                    </TableData>
-                    <TableData
-                      className={`p-4 capitalize ${ele.shopVerify ? "text-green-500" : "text-red-500"}`}
-                    >
-                      {ele.shopVerify.toString()}
-                    </TableData>
-                    <TableData className="p-4 capitalize">
-                      {ele.signUpAs}
-                    </TableData>
-                    <TableData className="p-4 capitalize">
-                      {ele.block ? (
-                        <Button
-                          onClick={(e) => unBlockHandler(e, ele._id)}
-                          className="bg-green-500 px-4 py-1 border-none"
-                        >
-                          UnBlock
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={(e) => blockHandler(e, ele._id)}
-                          className="bg-red-500 px-4 py-1 border-none"
-                        >
-                          Block
-                        </Button>
-                      )}
-                    </TableData>
-                  </TableRow>
-                );
-              })}
+                    {ele.verify.toString()}
+                  </TableData>
+                  <TableData
+                    className={`p-4 capitalize ${ele.shopVerify ? "text-green-500" : "text-red-500"}`}
+                  >
+                    {ele.shopVerify.toString()}
+                  </TableData>
+                  <TableData className="p-4 capitalize">
+                    {ele.signUpAs}
+                  </TableData>
+                  <TableData className="p-4 capitalize">
+                    {ele.block ? (
+                      <Button
+                        onClick={(e) => unBlockHandler(e, ele._id)}
+                        className="bg-green-500 px-4 py-1 border-none"
+                      >
+                        UnBlock
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={(e) => blockHandler(e, ele._id)}
+                        className="bg-red-500 px-4 py-1 border-none"
+                      >
+                        Block
+                      </Button>
+                    )}
+                  </TableData>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       )}

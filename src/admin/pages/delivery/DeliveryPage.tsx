@@ -7,8 +7,8 @@ import ParaTypo from "../../../components/common/ParaTypo";
 import SearchBox from "../../../components/common/Search";
 import Label from "../../../components/common/Label";
 import AddDeleveryPerson from "./AddDeleveryPerson";
-import { useQuery } from "../../../utils/useQuery";
-import { useMutation } from "../../../utils/useMutation";
+import { useQuery } from "../../../hooks/useQuery";
+import { useMutation } from "../../../hooks/useMutation";
 import Shimmer from "../../../components/common/Shimmer";
 
 const DeliveryPage = () => {

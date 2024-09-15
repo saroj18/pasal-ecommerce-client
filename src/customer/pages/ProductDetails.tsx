@@ -7,8 +7,8 @@ import ProductCard from "../../components/ProductCard";
 import { HeaderBar } from "./Wishlist";
 import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
-import { useQuery } from "../../utils/useQuery";
-import { useMutation } from "../../utils/useMutation";
+import { useQuery } from "../../hooks/useQuery";
+import { useMutation } from "../../hooks/useMutation";
 import { useCallback, useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
@@ -53,7 +53,7 @@ const ProductDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!data) return;
-    refetch();
+    // refetch();
   }, [id]);
 
   useEffect(() => {
@@ -201,13 +201,13 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className=" gap-2 flex flex-col lg:flex-row ">
-                <Button className="bg-red-500  rounded-md text-white py-2 px-4 ">
+                <Button className="bg-red-500  rounded-md text-white py-2 px-4 min-w-fit ">
                   Buy Now
                 </Button>
                 <Button
                   disabled={data?.stock === 0 || loading}
                   onClick={() => addToCartHandler(data._id)}
-                  className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2"
+                  className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2 min-w-fit"
                 >
                   Add to Cart
                   <BaggageClaim strokeWidth={1} />

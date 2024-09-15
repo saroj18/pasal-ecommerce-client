@@ -14,7 +14,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useContextProvider } from "../../../../context/Context";
-import { useMutation } from "../../../../utils/useMutation";
+import { useMutation } from "../../../../hooks/useMutation";
 import { useEffect } from "react";
 import { zodErrorFormatter } from "../../../../utils/errorFormatter";
 import { toast } from "react-toastify";

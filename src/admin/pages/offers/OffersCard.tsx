@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../../components/common/Button";
 import ParaTypo from "../../../components/common/ParaTypo";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 import OfferProductPopup from "./OfferProductPopup";
 
 const OffersCard = ({ data, refetch }: { data: any; refetch: () => void }) => {

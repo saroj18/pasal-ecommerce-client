@@ -4,17 +4,17 @@ import DetailsCard from "../vendor/DetailsCard";
 import TextArea from "../../../components/common/TextArea";
 import Button from "../../../components/common/Button";
 import Map from "./Map";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 
 const VendorDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState("");
   const [shop, setShop] = useState<{ [key: string]: string }>({});
-  const { data,refetch } = useQuery<any>(`/vendor/${id}`);
+  const { data, refetch } = useQuery<any>(`/vendor/${id}`);
   const { mutate } = useMutation();
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +22,7 @@ const VendorDetail = () => {
   };
 
   const clickHandler = (param: string) => {
-    mutate("/vendor/verify", "POST", { flag: param, shopId: id },refetch);
+    mutate("/vendor/verify", "POST", { flag: param, shopId: id }, refetch);
   };
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import Button from "../../../../components/common/Button";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Option from "../../../../components/common/Option";
 import Select from "../../../../components/common/Select";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import { OrderType } from "../../OrderCheckout";
 import Shimmer from "../../../../components/common/Shimmer";
 
@@ -12,12 +12,12 @@ type addressProps = {
   billing: boolean;
 };
 
-type AddressProps={
-orderDetails:OrderType
-setOrderDetails:React.Dispatch<React.SetStateAction<OrderType>>
-}
+type AddressProps = {
+  orderDetails: OrderType;
+  setOrderDetails: React.Dispatch<React.SetStateAction<OrderType>>;
+};
 
-const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
+const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
   const [open, setOpen] = useState<addressProps>({
     delevery: false,
     billing: false,
@@ -27,68 +27,85 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
     billingAddress: "",
   });
 
-  const delevery:any[] = [];
-  const billing:any[] = [];
-  const {data,loading} = useQuery<any>("/user/address");
+  const delevery: any[] = [];
+  const billing: any[] = [];
+  const { data, loading } = useQuery<any>("/user/address");
 
-  data && data.forEach((ele:any) => {
-    if (
-      ele.defaultAddress == "delevery" ||
-      ele.defaultAddress == "deleveryandbilling"
-    ) {
-      delevery.push(ele);
-    }
-    if (
-      ele.defaultAddress == "billing" ||
-      ele.defaultAddress == "deleveryandbilling"
-    ) {
-      billing.push(ele);
-    }
-  });
+  data &&
+    data.forEach((ele: any) => {
+      if (
+        ele.defaultAddress == "delevery" ||
+        ele.defaultAddress == "deleveryandbilling"
+      ) {
+        delevery.push(ele);
+      }
+      if (
+        ele.defaultAddress == "billing" ||
+        ele.defaultAddress == "deleveryandbilling"
+      ) {
+        billing.push(ele);
+      }
+    });
 
-  useEffect(()=>{
-    let dele=`${delevery[0]?.state} Province,${delevery[0]?.district} District,${delevery[0]?.city}-${delevery[0]?.ward},${delevery[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`
-    let bill=`${billing[0]?.state} Province,${billing[0]?.district} District,${billing[0]?.city}-${billing[0]?.ward},${billing[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`
-  setAddress((prv)=>({...prv,deleveryAddress:dele}))
-  setAddress((prv)=>({...prv,billingAddress:bill}))
-  setOrderDetails((prv)=>({...prv,billingAddress:billing[0]?._id,deleveryAddress:delevery[0]?._id}))
-  },[data])
+  useEffect(() => {
+    let dele = `${delevery[0]?.state} Province,${delevery[0]?.district} District,${delevery[0]?.city}-${delevery[0]?.ward},${delevery[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`;
+    let bill = `${billing[0]?.state} Province,${billing[0]?.district} District,${billing[0]?.city}-${billing[0]?.ward},${billing[0]?.tole} Tole,NearBy ${delevery[0]?.nearBy}`;
+    setAddress((prv) => ({ ...prv, deleveryAddress: dele }));
+    setAddress((prv) => ({ ...prv, billingAddress: bill }));
+    setOrderDetails((prv) => ({
+      ...prv,
+      billingAddress: billing[0]?._id,
+      deleveryAddress: delevery[0]?._id,
+    }));
+  }, [data]);
 
-  const billingHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
-    setOrderDetails((prv)=>({...prv,billingAddress:e.target.value}))
-    setAddress((prv)=>({...prv,billingAddress:e.target.title}))
-  }
-  const deleveryHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
-    console.log(e.target)
-    setOrderDetails((prv)=>({...prv,deleveryAddress:e.target.value}))
-    setAddress((prv)=>({...prv,deleveryAddress:e.target.title}))
-  }
+  const billingHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOrderDetails((prv) => ({ ...prv, billingAddress: e.target.value }));
+    setAddress((prv) => ({ ...prv, billingAddress: e.target.title }));
+  };
+  const deleveryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target);
+    setOrderDetails((prv) => ({ ...prv, deleveryAddress: e.target.value }));
+    setAddress((prv) => ({ ...prv, deleveryAddress: e.target.title }));
+  };
 
   console.log(data);
   return (
     <div className="p-2 border-2 border-gray-200 shadow-md mb-2">
       <div className="border-2 p-2 rounded-md shadow-md">
         <HeadingTypo className="text-xl mb-2  ">Delevery Address</HeadingTypo>
-        {loading?<Shimmer shape="rectange"/>:<div className="flex items-center gap-x-3">
-          <HeadingTypo className="opacity-60 capitalize">
-            {address.deleveryAddress}
-          </HeadingTypo>
-          <Button
-            onClick={() => setOpen((prv) => ({ ...prv, delevery: true }))}
-            className="bg-red-500 text-white px-3 py-2 rounded-md"
-          >
-            Change
-          </Button>
-        </div>}
+        {loading ? (
+          <Shimmer shape="rectange" />
+        ) : (
+          <div className="flex items-center gap-x-3">
+            <HeadingTypo className="opacity-60 capitalize">
+              {address.deleveryAddress}
+            </HeadingTypo>
+            <Button
+              onClick={() => setOpen((prv) => ({ ...prv, delevery: true }))}
+              className="bg-red-500 text-white px-3 py-2 rounded-md"
+            >
+              Change
+            </Button>
+          </div>
+        )}
         {open.delevery && (
           <div>
-            <Select onChange={deleveryHandler} className="w-full mt-4 capitalize">
+            <Select
+              onChange={deleveryHandler}
+              className="w-full mt-4 capitalize"
+            >
               {data.map((ele: any, index: number) => {
                 const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
                 return (
                   (ele.defaultAddress == "delevery" ||
                     ele.defaultAddress == "deleveryandbilling") && (
-                    <Option title={address} value={ele._id} key={index} className="capitalize">
+                    <Option
+                      title={address}
+                      value={ele._id}
+                      key={index}
+                      className="capitalize"
+                    >
                       {address}
                     </Option>
                   )
@@ -106,26 +123,33 @@ const SelectAndViewAddress = ({setOrderDetails}:AddressProps) => {
       </div>
       <div className="border-2 p-2 rounded-md shadow-md my-2">
         <HeadingTypo className="text-xl mb-2  ">Billing Address</HeadingTypo>
-        {loading?<Shimmer shape="rectange"/>:<div className="flex items-center gap-x-3">
-          <HeadingTypo className="opacity-60 capitalize">
-            {address.billingAddress}
-          </HeadingTypo>
-          <Button
-            onClick={() => setOpen((prv) => ({ ...prv, billing: true }))}
-            className="bg-red-500 text-white px-3 py-2 rounded-md"
-          >
-            Change
-          </Button>
-        </div>}
+        {loading ? (
+          <Shimmer shape="rectange" />
+        ) : (
+          <div className="flex items-center gap-x-3">
+            <HeadingTypo className="opacity-60 capitalize">
+              {address.billingAddress}
+            </HeadingTypo>
+            <Button
+              onClick={() => setOpen((prv) => ({ ...prv, billing: true }))}
+              className="bg-red-500 text-white px-3 py-2 rounded-md"
+            >
+              Change
+            </Button>
+          </div>
+        )}
         {open.billing && (
           <div>
-            <Select onChange={billingHandler} className="w-full mt-4 capitalize">
+            <Select
+              onChange={billingHandler}
+              className="w-full mt-4 capitalize"
+            >
               {data.map((ele: any, index: number) => {
                 const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
                 return (
                   (ele.defaultAddress == "billing" ||
                     ele.defaultAddress == "deleveryandbilling") && (
-                    <Option  value={ele._id} key={index} className="capitalize">
+                    <Option value={ele._id} key={index} className="capitalize">
                       {address}
                     </Option>
                   )

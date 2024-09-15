@@ -1,5 +1,5 @@
 import OrderCard from "../../../components/OrderCard";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 
 const Order = () => {
   const id = window.location.pathname.split("/")[3];

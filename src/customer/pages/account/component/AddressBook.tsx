@@ -1,7 +1,7 @@
 import { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import AddAddressForm from "../page/AddAddressForm";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 type AddressBookProps = {
   setOpen: (open: boolean) => void;

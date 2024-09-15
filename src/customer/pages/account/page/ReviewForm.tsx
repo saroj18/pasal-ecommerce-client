@@ -4,7 +4,7 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import { RefreshCcw, Star, X } from "lucide-react";
 import TextArea from "../../../../components/common/TextArea";
 import Button from "../../../../components/common/Button";
-import { useMutation } from "../../../../utils/useMutation";
+import { useMutation } from "../../../../hooks/useMutation";
 
 type reviewFormProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;

@@ -2,12 +2,12 @@ import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import SearchBox from "../../../../components/common/Search";
 import Button from "../../../../components/common/Button";
-import { useMutation } from "../../../../utils/useMutation";
-import { useQuery } from "../../../../utils/useQuery";
+import { useMutation } from "../../../../hooks/useMutation";
+import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const Order = () => {
-  const { data, refetch,loading } = useQuery<any>("/order/sellerorder");
+  const { data, refetch, loading } = useQuery<any>("/order/sellerorder");
   const { mutate } = useMutation<any>();
   console.log(data);
 
@@ -30,9 +30,7 @@ const Order = () => {
         </div>
         <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
       </div>
-{
-  loading?<Shimmer height="70px" count={9} shape="rectange"/>:null
-}
+      {loading ? <Shimmer height="70px" count={9} shape="rectange" /> : null}
       {data?.length > 0 && (
         <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
           <thead>

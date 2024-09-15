@@ -4,15 +4,15 @@ import SearchBox from "../../../../components/common/Search";
 import Button from "../../../../components/common/Button";
 import TableHead from "../../../../components/common/TableHead";
 import Table from "../../../../components/common/Table";
-import {  tableHeadData } from "./tableData";
+import { tableHeadData } from "./tableData";
 import TableData from "../../../../components/common/TableData";
 import TableBody from "../../../../components/common/TableBody";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const Inventory = () => {
-  const { data,loading } = useQuery<any>("/product/inventory");
+  const { data, loading } = useQuery<any>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">
@@ -35,44 +35,54 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-{
-  loading?<Shimmer height="60px" count={8} shape="rectange"/>:null
-}
-      {data?.length>0&&<Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
-        <TableHead
-          tableHeadStyle="p-2"
-          className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
-          tableHeadData={tableHeadData}
-        />
-        <TableBody>
-          {data?.map((ele: any, index: number) => {
-            return (
-              <TableRow
-                key={index}
-                className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0"
-              >
-                <TableData title={ele._id} className="p-3">
-                  {ele._id.slice(15)}
-                </TableData>
-                <TableData title={ele.name} className="p-3 truncate max-w-xs">
-                  {ele.name.slice(0, 30)}
-                </TableData>
-                <TableData className="p-3">{ele.category}</TableData>
-                <TableData className="p-3">{ele.stock!=0?ele.stock:<span className="text-red-500 font-semibold">Out of Stock</span>}</TableData>
-                <TableData className="p-3">
-                  {new Date(ele.createdAt).toDateString()}
-                </TableData>
-                <TableData className="p-3">{ele.price}</TableData>
-                <TableData className="p-3">{ele.discount}%</TableData>
-                <TableData className="p-3">Rs {ele.priceAfterDiscount}</TableData>
-                <TableData className="p-3">{ele.brand}</TableData>
-                <TableData className="p-3">{ele.totalSale}</TableData>
-                <TableData className="p-3">{ele.totalSaleAmount}</TableData>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>}
+      {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
+      {data?.length > 0 && (
+        <Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
+          <TableHead
+            tableHeadStyle="p-2"
+            className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
+            tableHeadData={tableHeadData}
+          />
+          <TableBody>
+            {data?.map((ele: any, index: number) => {
+              return (
+                <TableRow
+                  key={index}
+                  className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0"
+                >
+                  <TableData title={ele._id} className="p-3">
+                    {ele._id.slice(15)}
+                  </TableData>
+                  <TableData title={ele.name} className="p-3 truncate max-w-xs">
+                    {ele.name.slice(0, 30)}
+                  </TableData>
+                  <TableData className="p-3">{ele.category}</TableData>
+                  <TableData className="p-3">
+                    {ele.stock != 0 ? (
+                      ele.stock
+                    ) : (
+                      <span className="text-red-500 font-semibold">
+                        Out of Stock
+                      </span>
+                    )}
+                  </TableData>
+                  <TableData className="p-3">
+                    {new Date(ele.createdAt).toDateString()}
+                  </TableData>
+                  <TableData className="p-3">{ele.price}</TableData>
+                  <TableData className="p-3">{ele.discount}%</TableData>
+                  <TableData className="p-3">
+                    Rs {ele.priceAfterDiscount}
+                  </TableData>
+                  <TableData className="p-3">{ele.brand}</TableData>
+                  <TableData className="p-3">{ele.totalSale}</TableData>
+                  <TableData className="p-3">{ele.totalSaleAmount}</TableData>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 };

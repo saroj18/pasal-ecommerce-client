@@ -3,7 +3,7 @@ import Table from "../../../components/common/Table";
 import TableData from "../../../components/common/TableData";
 import TableHead from "../../../components/common/TableHead";
 import TableRow from "../../../components/common/TableRow";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import { tableHeadDataForPayment } from "./constant";
 
 const Payment = () => {

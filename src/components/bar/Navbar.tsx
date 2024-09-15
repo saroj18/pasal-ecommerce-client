@@ -6,7 +6,7 @@ import AccountDropdown from "../popup/AccountDropdown";
 import logo from "../../assets/logo.jpg";
 import SearchBox from "../common/Search";
 import ParaTypo from "../common/ParaTypo";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 import { useContextProvider } from "../../context/Context";
 
 // type CountType={
@@ -21,6 +21,7 @@ const Navbar = () => {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const { data } = useQuery<any>("/product/cartandwishlist/count");
   const { user } = useContextProvider();
+  const [focus, setFocus] = useState(false);
 
   const popupCloser = (e: MouseEvent) => {
     if (
@@ -78,58 +79,61 @@ const Navbar = () => {
           );
         })}
       </ul>
+
       <div className="flex items-center w-full md:w-[35%]  ">
-        <SearchBox className="w-full" />
+        <SearchBox className="w-full" focus={focus} setFocus={setFocus} />
 
-        {user && (user.role == "customer" || user?.role == "seller") && (
-          <div className="flex gap-x-6">
-            {user.role == "seller" && (
-              <Store
-                onClick={() => navigate("/dashboard")}
-                className="cursor-pointer hidden lg:block"
-                opacity={0.7}
-              />
-            )}
-
-            <div className="relative">
-              <Heart
-                onClick={() => navigate("/wishlist")}
-                className="cursor-pointer hidden lg:block"
-                opacity={0.7}
-              />
-              <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
-                {data?.wishListCount}
-              </ParaTypo>
-            </div>
-            <div className="relative">
-              <ShoppingCart
-                onClick={() => navigate("/cart")}
-                className="cursor-pointer hidden lg:block"
-                opacity={0.7}
-              />
-              <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
-                {cart}
-              </ParaTypo>
-            </div>
-            <div className="relative">
-              <User
-                onClick={(e) => {
-                  setDropdown(!dropdown), e.stopPropagation();
-                }}
-                className="cursor-pointer"
-                opacity={0.7}
-              />
-              {dropdown && (
-                <AccountDropdown
-                  cartCount={data?.cartCount}
-                  wishListCount={data?.wishListCount}
-                  ref={dropDownRef}
-                  className="absolute -left-[212px]  top-10 z-10"
+        {!focus &&
+          user &&
+          (user.role == "customer" || user?.role == "seller") && (
+            <div className="flex gap-x-6">
+              {user.role == "seller" && (
+                <Store
+                  onClick={() => navigate("/dashboard")}
+                  className="cursor-pointer hidden lg:block"
+                  opacity={0.7}
                 />
               )}
+
+              <div className="relative">
+                <Heart
+                  onClick={() => navigate("/wishlist")}
+                  className="cursor-pointer hidden lg:block"
+                  opacity={0.7}
+                />
+                <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
+                  {data?.wishListCount}
+                </ParaTypo>
+              </div>
+              <div className="relative">
+                <ShoppingCart
+                  onClick={() => navigate("/cart")}
+                  className="cursor-pointer hidden lg:block"
+                  opacity={0.7}
+                />
+                <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
+                  {cart}
+                </ParaTypo>
+              </div>
+              <div className="relative">
+                <User
+                  onClick={(e) => {
+                    setDropdown(!dropdown), e.stopPropagation();
+                  }}
+                  className="cursor-pointer"
+                  opacity={0.7}
+                />
+                {dropdown && (
+                  <AccountDropdown
+                    cartCount={data?.cartCount}
+                    wishListCount={data?.wishListCount}
+                    ref={dropDownRef}
+                    className="absolute -left-[212px]  top-10 z-10"
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </nav>
   );

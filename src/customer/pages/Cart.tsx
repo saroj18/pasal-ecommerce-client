@@ -2,9 +2,9 @@ import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Link } from "react-router-dom";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 import { Trash } from "lucide-react";
-import { useMutation } from "../../utils/useMutation";
+import { useMutation } from "../../hooks/useMutation";
 import Shimmer from "../../components/common/Shimmer";
 import { useEffect } from "react";
 
@@ -18,7 +18,7 @@ const Cart = () => {
     data,
     refetch,
     loading: cartLoading,
-  } = useQuery<any>("/product/cart",false);
+  } = useQuery<any>("/product/cart", false);
   const { mutate, data: cartData } = useMutation();
 
   const cartDeleteHandler = (id: string) => {

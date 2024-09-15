@@ -3,12 +3,12 @@ import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import OrderCard from "../../components/OrderCard";
 import Button from "../../components/common/Button";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 import Shimmer from "../../components/common/Shimmer";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data,loading } = useQuery<any>("/order/myorder");
+  const { data, loading } = useQuery<any>("/order/myorder");
 
   const clickHandler = (params: string) => {
     setOrderState(params);
@@ -44,56 +44,68 @@ const MyOrder = () => {
           Canceled
         </Button>
       </div>
-      {loading?<Shimmer shape="rectange"/>:orderState == "shipping" && (
-        <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {data?.map((ele: any, index: number) => {
-            return (
-              ele?._id == "pending" && (
-                <OrderCard
-                  background="blue"
-                  key={index}
-                  info={ele.info}
-                  date={`Estd. ${new Date(ele.createdAt).toDateString()}`}
-                  element={ele?._id}
-                />
-              )
-            );
-          })}
-        </div>
+      {loading ? (
+        <Shimmer shape="rectange" />
+      ) : (
+        orderState == "shipping" && (
+          <div className="mt-7 flex flex-wrap justify-center gap-5">
+            {data?.map((ele: any, index: number) => {
+              return (
+                ele?._id == "pending" && (
+                  <OrderCard
+                    background="blue"
+                    key={index}
+                    info={ele.info}
+                    date={`Estd. ${new Date(ele.createdAt).toDateString()}`}
+                    element={ele?._id}
+                  />
+                )
+              );
+            })}
+          </div>
+        )
       )}
-      {loading?<Shimmer shape="rectange"/>:orderState == "arrived" && (
-        <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {data?.map((ele: any, index: number) => {
-            return (
-              ele?._id == "complete" && (
-                <OrderCard
-                  background="green"
-                  key={index}
-                  info={ele.info}
-                  date={`Arrived on ${new Date(ele.updatedAt).toDateString()}`}
-                  element={ele?._id}
-                />
-              )
-            );
-          })}
-        </div>
+      {loading ? (
+        <Shimmer shape="rectange" />
+      ) : (
+        orderState == "arrived" && (
+          <div className="mt-7 flex flex-wrap justify-center gap-5">
+            {data?.map((ele: any, index: number) => {
+              return (
+                ele?._id == "complete" && (
+                  <OrderCard
+                    background="green"
+                    key={index}
+                    info={ele.info}
+                    date={`Arrived on ${new Date(ele.updatedAt).toDateString()}`}
+                    element={ele?._id}
+                  />
+                )
+              );
+            })}
+          </div>
+        )
       )}
-      {loading?<Shimmer shape="rectange"/>:orderState == "canceled" && (
-        <div className="mt-7 flex flex-wrap justify-center gap-5">
-          {data?.map((ele: any, index: number) => {
-            return (
-              ele?._id == "cancled" && (
-                <OrderCard
-                  background="red"
-                  key={index}
-                  date={`Cancled on ${new Date(ele.updatedAt).toDateString()}`}
-                  info={ele.info}
-                  element={ele?._id}
-                />
-              )
-            );
-          })}
-        </div>
+      {loading ? (
+        <Shimmer shape="rectange" />
+      ) : (
+        orderState == "canceled" && (
+          <div className="mt-7 flex flex-wrap justify-center gap-5">
+            {data?.map((ele: any, index: number) => {
+              return (
+                ele?._id == "cancled" && (
+                  <OrderCard
+                    background="red"
+                    key={index}
+                    date={`Cancled on ${new Date(ele.updatedAt).toDateString()}`}
+                    info={ele.info}
+                    element={ele?._id}
+                  />
+                )
+              );
+            })}
+          </div>
+        )
       )}
     </div>
   );

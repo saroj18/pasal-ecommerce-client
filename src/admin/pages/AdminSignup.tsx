@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignUpZodSchema } from "../../customer/zodschema/user";
-import { useMutation } from "../../utils/useMutation";
+import { useMutation } from "../../hooks/useMutation";
 import { FormInput } from "../../customer/pages/Signup";
 
 const AdminSignup = () => {

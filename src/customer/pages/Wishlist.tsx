@@ -1,7 +1,7 @@
 import Button from "../../components/common/Button";
 import ProductCard from "../../components/ProductCard";
 import HeadingTypo from "../../components/common/HeadingTypo";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 import Shimmer from "../../components/common/Shimmer";
 
 type barProps = {

@@ -2,10 +2,10 @@ import FilterBar from "../../components/FilterBar";
 import AmountCard from "../../components/AmountCard";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import SetChart from "../../../../admin/pages/vendor/SetChart";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import MostSellingProductCard from "../../components/MostSellingProductCard";
 import { useEffect, useState } from "react";
-import { useMutation } from "../../../../utils/useMutation";
+import { useMutation } from "../../../../hooks/useMutation";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const Dashboard = () => {

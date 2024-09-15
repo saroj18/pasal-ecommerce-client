@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -9,9 +9,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignUpZodSchema } from "../zodschema/user";
 import { z } from "zod";
-import { useMutation } from "../../utils/useMutation";
+import { useMutation } from "../../hooks/useMutation";
 
-export type FormInput=z.infer<typeof UserSignUpZodSchema>
+export type FormInput = z.infer<typeof UserSignUpZodSchema>;
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -22,19 +22,27 @@ const Signup = () => {
   //   email:'',
   //   role:''
   // })
-  const{mutate}=useMutation()
-  
-  const{register,handleSubmit,formState:{errors}}=useForm<FormInput>({
-    resolver:zodResolver(UserSignUpZodSchema)
-  })
+  const { mutate } = useMutation();
 
-  const onSubmit:SubmitHandler<FormInput>=async(item)=>{
-    console.log(item)
-    const{fullname,password,username,email}=item
-   mutate('/user/signup','POST',{fullname,password,email,username,role:'customer'})
-  }
-  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInput>({
+    resolver: zodResolver(UserSignUpZodSchema),
+  });
 
+  const onSubmit: SubmitHandler<FormInput> = async (item) => {
+    console.log(item);
+    const { fullname, password, username, email } = item;
+    mutate("/user/signup", "POST", {
+      fullname,
+      password,
+      email,
+      username,
+      role: "customer",
+    });
+  };
 
   return (
     <div className="flex justify-around mt-10 gap-3 flex-col w-full sm:max-w-[60%] md:max-w-[70%]  mx-auto  lg:flex-row">
@@ -47,34 +55,53 @@ const Signup = () => {
         <HeadingTypo className="text-2xl">Create an Account</HeadingTypo>
         <ParaTypo className="mt-2">Enter your details below</ParaTypo>
         <Input
-        {...register('fullname')}
+          {...register("fullname")}
           type="text"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Name"
         />
-        {errors.fullname?.message && <ParaTypo className="text-sm text-red-500">{errors.fullname?.message}</ParaTypo>}
+        {errors.fullname?.message && (
+          <ParaTypo className="text-sm text-red-500">
+            {errors.fullname?.message}
+          </ParaTypo>
+        )}
         <Input
-        {...register('username')}
+          {...register("username")}
           type="text"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Username"
         />
-        {errors.username?.message && <ParaTypo className="text-sm text-red-500">{errors.username?.message}</ParaTypo>}
+        {errors.username?.message && (
+          <ParaTypo className="text-sm text-red-500">
+            {errors.username?.message}
+          </ParaTypo>
+        )}
         <Input
-        {...register('email')}
+          {...register("email")}
           type="text"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Email"
         />
-        {errors.email?.message && <ParaTypo className="text-sm text-red-500">{errors.email?.message}</ParaTypo>}
+        {errors.email?.message && (
+          <ParaTypo className="text-sm text-red-500">
+            {errors.email?.message}
+          </ParaTypo>
+        )}
         <Input
-        {...register('password')}
+          {...register("password")}
           type="password"
           className="border-b-2 border-b-neutral-500 border-t-0 border-l-0 border-r-0 rounded-none my-2"
           placeholder="Password"
         />
-        {errors.password?.message && <ParaTypo className="text-sm text-red-500">{errors.password?.message}</ParaTypo>}
-        <Button type="submit" className="w-full bg-red-500 text-white py-3 rounded-md mt-5">
+        {errors.password?.message && (
+          <ParaTypo className="text-sm text-red-500">
+            {errors.password?.message}
+          </ParaTypo>
+        )}
+        <Button
+          type="submit"
+          className="w-full bg-red-500 text-white py-3 rounded-md mt-5"
+        >
           Create Account
         </Button>
         <Button className="w-full border-neutral-500 border-2 py-3 rounded-md mt-3">

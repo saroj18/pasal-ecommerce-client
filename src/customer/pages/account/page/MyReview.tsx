@@ -1,17 +1,17 @@
-import  { useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Button from "../../../../components/common/Button";
 import ReviewHistory from "./ReviewHistory";
 import Popup from "reactjs-popup";
 import ReviewForm from "./ReviewForm";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const ReviewComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [reviewInfo, setReviewInfo] = useState<any>({});
-  const { data,loading } = useQuery<any>("/review/reviewneed");
+  const { data, loading } = useQuery<any>("/review/reviewneed");
   console.log(data);
   const clickHandler = (info: any) => {
     setOpen(true);
@@ -19,7 +19,9 @@ const ReviewComponent = () => {
   };
   return (
     <>
-      {loading?<Shimmer height="150px" count={3} shape="rectange"/>:
+      {loading ? (
+        <Shimmer height="150px" count={3} shape="rectange" />
+      ) : (
         data?.map((ele: any) => {
           return (
             <div
@@ -50,7 +52,8 @@ const ReviewComponent = () => {
               </div>
             </div>
           );
-        })}
+        })
+      )}
       <Popup
         contentStyle={{ width: "100%", maxWidth: "700px", padding: "0px" }}
         open={open}

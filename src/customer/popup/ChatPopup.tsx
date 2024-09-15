@@ -6,7 +6,7 @@ import { Send } from "lucide-react";
 import MessageCard, { message } from "./MessageCard";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../context/Context";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 
 type ChatPopupProps = {
   open: boolean;

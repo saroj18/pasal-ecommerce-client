@@ -4,7 +4,7 @@ import {
   VerifyForm,
   VerifyInfoTyype,
 } from "../customer/pages/account/component/VerifyForm";
-import { useQuery } from "../utils/useQuery";
+import { useQuery } from "../hooks/useQuery";
 
 export type UserType = {
   fullname: string;

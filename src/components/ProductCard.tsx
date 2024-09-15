@@ -2,7 +2,7 @@ import { Star, Trash } from "lucide-react";
 import React, { useCallback } from "react";
 import ParaTypo from "./common/ParaTypo";
 import { Link } from "react-router-dom";
-import { useMutation } from "../utils/useMutation";
+import { useMutation } from "../hooks/useMutation";
 
 type cardProps = {
   hideBtn?: string;
@@ -11,11 +11,7 @@ type cardProps = {
   remove?: boolean;
 };
 
-const ProductCard = ({
-  remove = false,
-  icon,
-  product,
-}: cardProps) => {
+const ProductCard = ({ remove = false, icon, product }: cardProps) => {
   const { mutate } = useMutation();
 
   const deleteHandler = (e: React.MouseEvent<SVGSVGElement>, id: string) => {
@@ -23,7 +19,6 @@ const ProductCard = ({
     mutate("/product/wishlist", "DELETE", { productId: id });
   };
 
- 
   return (
     <>
       <Link to={`/details/${product?._id}`} className=" h-fit shadow-md ">

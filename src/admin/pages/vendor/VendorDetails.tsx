@@ -5,7 +5,7 @@ import Button from "../../../components/common/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import DetailsCard from "./DetailsCard";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 import Shimmer from "../../../components/common/Shimmer";
 
@@ -14,14 +14,13 @@ const VendorDetails = () => {
   const [vendor, setVendor] = useState<any>();
   const [shop, setShop] = useState<{ [key: string]: string }>({});
   const { id } = useParams();
-  const { data,loading } = useQuery(`/vendor/${id}`);
+  const { data, loading } = useQuery(`/vendor/${id}`);
 
   useEffect(() => {
     if (data) {
       setVendor(data);
       const shopInfo = shopDataFormatter(data);
-      if(shopInfo)
-      setShop(shopInfo);
+      if (shopInfo) setShop(shopInfo);
     }
   }, [data]);
 
@@ -50,11 +49,15 @@ const VendorDetails = () => {
           </Button>
         </div>
       </div>
-      {loading?<Shimmer shape="rectange"/>:<div className="flex flex-wrap justify-between gap-3 my-6">
-        {Object.entries(shop).map(([key, value]: [string, string]) => {
-          return <DetailsCard key={key} heading={key} value={value} />;
-        })}
-      </div>}
+      {loading ? (
+        <Shimmer shape="rectange" />
+      ) : (
+        <div className="flex flex-wrap justify-between gap-3 my-6">
+          {Object.entries(shop).map(([key, value]: [string, string]) => {
+            return <DetailsCard key={key} heading={key} value={value} />;
+          })}
+        </div>
+      )}
       <div>
         <HeadingTypo className="text-3xl font-semibold">
           Top Products

@@ -4,10 +4,10 @@ import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Select from "../../../components/common/Select";
 import Option from "../../../components/common/Option";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 
 type OfferType = {
   name: string;

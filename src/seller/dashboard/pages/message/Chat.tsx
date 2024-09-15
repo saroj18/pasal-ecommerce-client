@@ -7,7 +7,7 @@ import jacket from "../../../../assets/jacket.png";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 
 const Chat = () => {
   const [text, setText] = useState("");
@@ -98,7 +98,6 @@ const Chat = () => {
       setChat([...data]);
     }
   }, [data]);
-
 
   return (
     <div className="flex gap-x-2">

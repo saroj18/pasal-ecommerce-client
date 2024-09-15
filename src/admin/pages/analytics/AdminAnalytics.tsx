@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FilterBar from "../../../seller/dashboard/components/FilterBar";
 import SetChart from "../vendor/SetChart";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 import Shimmer from "../../../components/common/Shimmer";
 
 const AdminAnalytics = () => {

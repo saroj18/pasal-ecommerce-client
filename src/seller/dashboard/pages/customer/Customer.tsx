@@ -5,16 +5,14 @@ import TableHead from "../../../../components/common/TableHead";
 import { tableHeadData } from "./data";
 import TableBody from "../../../../components/common/TableBody";
 import TableData from "../../../../components/common/TableData";
-import { useQuery } from "../../../../utils/useQuery";
+import { useQuery } from "../../../../hooks/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 import dayjs from "dayjs";
-import {
-  formatDistanceToNow,
-} from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const Customer = () => {
-  const { data,loading } = useQuery<any>("/user/allmycustomer");
+  const { data, loading } = useQuery<any>("/user/allmycustomer");
 
   console.log(data);
 
@@ -28,15 +26,13 @@ const Customer = () => {
           all customers lists
         </ParaTypo>
       </div>
-      {
-        loading?<Shimmer height="50px" count={8} shape="rectange"/>:null
-      }
-      {data?.length>0&&<div className="text-sm md:text-base">
-        <Table>
-          <TableHead tableHeadData={tableHeadData} />
-          <TableBody>
-            {
-              data.map((ele: any) => {
+      {loading ? <Shimmer height="50px" count={8} shape="rectange" /> : null}
+      {data?.length > 0 && (
+        <div className="text-sm md:text-base">
+          <Table>
+            <TableHead tableHeadData={tableHeadData} />
+            <TableBody>
+              {data.map((ele: any) => {
                 return (
                   <TableRow key={ele._id}>
                     <TableData title={ele._id} className="p-2">
@@ -72,9 +68,10 @@ const Customer = () => {
                   </TableRow>
                 );
               })}
-          </TableBody>
-        </Table>
-      </div>}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </div>
   );
 };

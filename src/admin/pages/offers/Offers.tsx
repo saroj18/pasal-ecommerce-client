@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import OffersCard from "./OffersCard";
-import { useQuery } from "../../../utils/useQuery";
+import { useQuery } from "../../../hooks/useQuery";
 import Shimmer from "../../../components/common/Shimmer";
 
 const Offers = () => {
-  const { data, refetch,loading } = useQuery<any>("/offers");
+  const { data, refetch, loading } = useQuery<any>("/offers");
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -20,10 +20,13 @@ const Offers = () => {
         </Link>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {loading?<Shimmer height="300px" count={6} shape="rectange"/>:
+        {loading ? (
+          <Shimmer height="300px" count={6} shape="rectange" />
+        ) : (
           data?.map((ele: any) => {
             return <OffersCard key={ele._id} data={ele} refetch={refetch} />;
-          })}
+          })
+        )}
       </div>
     </div>
   );

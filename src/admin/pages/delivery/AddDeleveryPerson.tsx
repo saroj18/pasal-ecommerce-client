@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { DeleveryPersonZodSchema } from "../../zodSchema/deleveryPerson";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "../../../utils/useMutation";
+import { useMutation } from "../../../hooks/useMutation";
 
 export type FormInputs = z.infer<typeof DeleveryPersonZodSchema>;
 

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ShopDetailsZodSchema } from "../zodschema/product";
 import { z } from "zod";
 import ParaTypo from "../../components/common/ParaTypo";
-import { useMutation } from "../../utils/useMutation";
+import { useMutation } from "../../hooks/useMutation";
 import { useNavigate } from "react-router-dom";
 
 type ShopType = z.infer<typeof ShopDetailsZodSchema>;

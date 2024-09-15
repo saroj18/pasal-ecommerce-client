@@ -4,7 +4,7 @@ import ProductSectionBar from "../../components/bar/ProductSectionBar";
 import CategoryCard from "../../components/CategoryCard";
 import { TabletSmartphone } from "lucide-react";
 import { VerifyPopup } from "../popup/VerifyPopup";
-import { useQuery } from "../../utils/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 import "swiper/css";
 import Slider from "../../customer/pages/account/component/Slider";
 import Shimmer from "../../components/common/Shimmer";
@@ -12,16 +12,21 @@ import { Fragment } from "react/jsx-runtime";
 
 const Home = () => {
   const { data } = useQuery<any>("/user");
-  const { data: offerList,loading:offerListLoading } = useQuery<any>("/offers");
-  const { data: bestSellingProducts,loading:bestSellingProductLoading } = useQuery<any>("/product/bestselling");
-  const { data: randomProducts,loading:randomProductsLoading } = useQuery<any>("/product/randomproducts");
+  const { data: offerList, loading: offerListLoading } =
+    useQuery<any>("/offers");
+  const { data: bestSellingProducts, loading: bestSellingProductLoading } =
+    useQuery<any>("/product/bestselling");
+  const { data: randomProducts, loading: randomProductsLoading } =
+    useQuery<any>("/product/randomproducts");
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
         {/* <CategorySideBar /> */}
         <Crousel />
       </section>
-      {offerListLoading?<Shimmer height="350px" count={5} shape="rectange"/>:
+      {offerListLoading ? (
+        <Shimmer height="350px" count={5} shape="rectange" />
+      ) : (
         offerList?.map((ele: any) => {
           return (
             <Fragment key={ele._id}>
@@ -30,10 +35,10 @@ const Home = () => {
                 option={false}
               />
               <Slider productList={ele?.product} />
-              
             </Fragment>
           );
-        })}
+        })
+      )}
       <ProductSectionBar option={false} heading="Browse By Category" />
       <div className="flex flex-wrap gap-3 justify-center my-5 ">
         <CategoryCard
@@ -70,7 +75,10 @@ const Home = () => {
         />
       </div>
       <ProductSectionBar option={false} heading="Best Selling Products" />
-      <Slider loadingState={bestSellingProductLoading}  productList={bestSellingProducts?.product} />
+      <Slider
+        loadingState={bestSellingProductLoading}
+        productList={bestSellingProducts?.product}
+      />
 
       <section className="mt-7">
         <Crousel />
@@ -78,7 +86,10 @@ const Home = () => {
 
       <section>
         <ProductSectionBar option={false} heading="Explore Our Products" />
-        <Slider loadingState={randomProductsLoading} productList={randomProducts} />
+        <Slider
+          loadingState={randomProductsLoading}
+          productList={randomProducts}
+        />
 
         {data && !data?.verify && <VerifyPopup />}
       </section>
