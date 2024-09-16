@@ -89,8 +89,6 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   });
 
   const { data } = useQuery<UserType>("/user");
-  console.log("context call");
-  console.log(data);
 
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);
@@ -103,7 +101,6 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    console.log("demo");
     setUser(data as UserType);
   }, [data]);
 

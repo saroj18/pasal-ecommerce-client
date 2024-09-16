@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import SearchSuggetion from "../SearchSuggetion";
 import useDebounce from "../../hooks/useDebounce";
+import { useNavigate } from "react-router-dom";
 
 type SearchBoxTypeProps = {
   className: string;
@@ -18,6 +19,11 @@ const SearchBox = ({ className, focus, setFocus }: SearchBoxTypeProps) => {
   const [searchHistory, setSearchhistory] = useState<string[]>([]);
   const suggetionRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [highlightProduct, setHighlightProduct] = useState<(null | boolean)[]>(
+    Array(6).fill(null),
+  );
+  const count = useRef(-1);
+  const navigate = useNavigate();
 
   const focusHandler = useCallback(() => {
     setFocus(true);
@@ -31,37 +37,16 @@ const SearchBox = ({ className, focus, setFocus }: SearchBoxTypeProps) => {
 
   const blurHandler = () => {
     if (search) {
-      let data = [search,...searchHistory].slice(0,6);
+      let data = [search, ...searchHistory].slice(0, 6);
       localStorage.setItem("productSearchHistory", JSON.stringify(data));
-      // setSearchhistory([]);
     }
+    count.current = -1;
+    setHighlightProduct(Array(6).fill(null));
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        suggetionRef.current &&
-        !suggetionRef.current.contains(event.target as Node) && 
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setFocus(false);
-        setSearchhistory([]);
-        setProducts(null);
-        setSearch("");
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     async function searchProduct() {
@@ -81,9 +66,62 @@ const SearchBox = ({ className, focus, setFocus }: SearchBoxTypeProps) => {
     }
   }, [debounce]);
 
+  const keyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown") {
+      if (count.current <= 4) {
+        count.current++;
+        setHighlightProduct(() => {
+          let data = Array(6).fill(null);
+          data[count.current] = true;
+          return data;
+        });
+      } else {
+        setHighlightProduct(() => {
+          let data = Array(6).fill(null);
+          data[0] = true;
+          return data;
+        });
+        count.current = 0;
+      }
+    }
+
+    if (e.key === "ArrowUp") {
+      if (count.current >= 1) {
+        count.current--;
+        setHighlightProduct(() => {
+          let data = Array(6).fill(null);
+          data[count.current] = true;
+          return data;
+        });
+      } else {
+        setHighlightProduct(() => {
+          let data = Array(6).fill(null);
+          data[5] = true;
+          return data;
+        });
+        count.current = 5;
+      }
+    }
+
+    if (e.key === "Enter") {
+      if (products) {
+        navigate("/details/" + products[count.current]._id);
+        setSearch("");
+        setFocus(false);
+        setProducts(null);
+        setSearchhistory([]);
+        inputRef.current?.blur();
+      } else {
+        setSearch(searchHistory[count.current]);
+        setProducts(null);
+      }
+    }
+  };
+
   return (
     <div className={twMerge(className, "relative")}>
       <Input
+        onKeyDown={keyHandler}
         ref={inputRef}
         onChange={changeHandler}
         onFocus={focusHandler}
@@ -107,6 +145,10 @@ const SearchBox = ({ className, focus, setFocus }: SearchBoxTypeProps) => {
           product={products}
           setFocus={setFocus}
           setSearch={setSearch}
+          setProducts={setProducts}
+          inputRef={inputRef}
+          highlightProduct={highlightProduct}
+          setHighlightProduct={setHighlightProduct}
         />
       )}
     </div>
