@@ -34,7 +34,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
     method: string,
     bodyData?: any,
     refetch?: () => void,
-    cache = true,
+    cache = false,
   ) => {
     console.log(
       "url>>",

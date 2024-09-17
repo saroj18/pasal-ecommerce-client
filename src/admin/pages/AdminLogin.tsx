@@ -41,7 +41,7 @@ const AdminLogin = () => {
       } else {
         setUser(response.data);
         navigate("/admin/dashboard");
-        // window.location.reload();
+        window.location.reload();
       }
       localStorage.setItem("role", "ADMIN");
     }

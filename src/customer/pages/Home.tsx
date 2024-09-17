@@ -18,6 +18,7 @@ const Home = () => {
     useQuery<any>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
     useQuery<any>("/product/randomproducts");
+  console.log(bestSellingProducts);
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
@@ -39,45 +40,17 @@ const Home = () => {
           );
         })
       )}
-      <ProductSectionBar option={false} heading="Browse By Category" />
+      {/* <ProductSectionBar option={false} heading="Browse By Category" />
       <div className="flex flex-wrap gap-3 justify-center my-5 ">
         <CategoryCard
           icon={<TabletSmartphone size={60} strokeWidth={1} />}
           category="Phones"
         />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-        <CategoryCard
-          icon={<TabletSmartphone size={60} strokeWidth={1} />}
-          category="Phones"
-        />
-      </div>
+      </div> */}
       <ProductSectionBar option={false} heading="Best Selling Products" />
       <Slider
         loadingState={bestSellingProductLoading}
-        productList={bestSellingProducts?.product}
+        productList={bestSellingProducts?.product || bestSellingProducts}
       />
 
       <section className="mt-7">

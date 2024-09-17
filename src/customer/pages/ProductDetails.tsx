@@ -9,22 +9,18 @@ import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
+import { useContextProvider } from "../../context/Context";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const { mutate, loading, data: cartData } = useMutation();
+  const { mutate, loading, data: cartData, response } = useMutation();
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
-  const [cart, setCart] = useState(Number(localStorage.getItem("cartCount")));
-
-  const customEvent = (eventName: string) => {
-    const event = new CustomEvent<CustomEvent>(eventName);
-    window.dispatchEvent(event);
-  };
+  const { setCart } = useContextProvider();
 
   let {
     data,
@@ -57,15 +53,10 @@ const ProductDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    localStorage.setItem("cartCount", cart.toString());
-    customEvent("cartCount");
-  }, [cart]);
-
-  useEffect(() => {
-    if (data) {
-      setCart(cart + 1);
+    if (response?.success) {
+      setCart((prv) => prv + 1);
     }
-  }, [cartData]);
+  }, [response]);
 
   return (
     <>

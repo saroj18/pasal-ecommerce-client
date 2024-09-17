@@ -32,11 +32,11 @@ export const generalSideBarList = [
     url: "offers",
     icon: <HandCoins />,
   },
-  {
-    name: "Revenue",
-    url: "revenue",
-    icon: <DollarSignIcon />,
-  },
+  // {
+  //   name: "Revenue",
+  //   url: "revenue",
+  //   icon: <DollarSignIcon />,
+  // },
   {
     name: "Analytics",
     url: "analytics",

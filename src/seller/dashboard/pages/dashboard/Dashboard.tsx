@@ -124,7 +124,7 @@ const Dashboard = () => {
             {bestSellingProductLoading ? (
               <Shimmer height="70px" count={3} shape="rectange" />
             ) : (
-              bestSellingProducts?.product.map((ele: any) => {
+              bestSellingProducts?.product?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -144,7 +144,7 @@ const Dashboard = () => {
             {bestSellingProductLoading ? (
               <Shimmer height="70px" count={3} shape="rectange" />
             ) : (
-              bestSellingProducts?.topCategory.map((ele: any) => {
+              bestSellingProducts?.topCategory?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -181,7 +181,7 @@ const Dashboard = () => {
                 </thead>
                 <tbody>
                   {orders &&
-                    orders.map((ele: any) => {
+                    orders?.map((ele: any) => {
                       return (
                         <tr key={ele._id} className="border-b-2 border-t-2 ">
                           <td className="p-2 flex items-center justify-center gap-x-2 flex-col">

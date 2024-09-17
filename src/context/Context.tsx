@@ -43,6 +43,8 @@ type ProvideProps = {
   socketServer: WebSocket | null;
   user: UserType | null;
   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
+  cart: number;
+  setCart: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
@@ -54,6 +56,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [zodError, setZodError] = useState<{ [key: string]: string }>({});
   const [socketServer, setSocketServer] = useState<WebSocket | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
+  const [cart, setCart] = useState(0);
   const [productInfo, setProductInfo] = useState<ProductType>({
     name: "",
     description: "",
@@ -89,6 +92,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   });
 
   const { data } = useQuery<UserType>("/user");
+  
 
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);
@@ -123,6 +127,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         socketServer,
         user,
         setUser,
+        setCart,
+        cart,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { navList } from "../../constants/NavList";
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, ShoppingCart, Store, User, UserCheck } from "lucide-react";
+import { Heart, ShoppingCart, Store, User } from "lucide-react";
 import AccountDropdown from "../popup/AccountDropdown";
 import logo from "../../assets/logo.jpg";
 import SearchBox from "../common/Search";
@@ -16,40 +16,15 @@ import { useContextProvider } from "../../context/Context";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
-  const [cart, setCart] = useState(0);
   const navigate = useNavigate();
-  const dropDownRef = useRef<HTMLDivElement>(null);
   const { data } = useQuery<any>("/product/cartandwishlist/count");
-  const { user } = useContextProvider();
+  const { user, cart, setCart } = useContextProvider();
   const [focus, setFocus] = useState(false);
-
-  const popupCloser = (e: MouseEvent) => {
-    if (
-      !dropDownRef.current?.contains(e.target as Node) ||
-      dropDownRef.current?.contains(e.target as Node)
-    ) {
-      setDropdown(false);
-    }
-  };
-
-  useEffect(() => {
-    function storageHandler() {
-      let cartCount = Number(localStorage.getItem("cartCount"));
-      setCart(cartCount);
-    }
-    document.addEventListener("click", popupCloser);
-    window.addEventListener("cartCount", storageHandler);
-
-    return () => {
-      document.removeEventListener("click", popupCloser);
-      window.removeEventListener("cartCount", storageHandler);
-    };
-  }, []);
+  console.log(data);
 
   useEffect(() => {
     if (data) {
       setCart(data?.cartCount);
-      localStorage.setItem("cartCount", data?.cartCount);
     }
   }, [data]);
 
@@ -127,8 +102,8 @@ const Navbar = () => {
                   <AccountDropdown
                     cartCount={data?.cartCount}
                     wishListCount={data?.wishListCount}
-                    ref={dropDownRef}
                     className="absolute -left-[212px]  top-10 z-10"
+                    setDropdown={setDropdown}
                   />
                 )}
               </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ParaTypo from "../common/ParaTypo";
 import { twMerge } from "tailwind-merge";
 import {
@@ -18,12 +18,31 @@ type dropdownProps = {
   className: string;
   cartCount: number;
   wishListCount: number;
+  setDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
-  ({ className, cartCount, wishListCount }, ref) => {
+  ({ className, cartCount, wishListCount, setDropdown }, ref) => {
     const navigate = useNavigate();
     const { setUser } = useContextProvider();
+    const dropDownRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+      const popupCloser = (e: MouseEvent) => {
+        if (
+          !dropDownRef.current?.contains(e.target as Node) ||
+          dropDownRef.current?.contains(e.target as Node)
+        ) {
+          setDropdown(false);
+        }
+      };
+
+      document.addEventListener("click", popupCloser);
+
+      return () => {
+        document.removeEventListener("click", popupCloser);
+      };
+    }, []);
 
     const logOutHandler = async () => {
       try {
@@ -44,6 +63,7 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
         toast.error(error.message);
       }
     };
+    console.log("hello dear i am here");
     return (
       <div
         ref={ref}

@@ -4,14 +4,6 @@ export const navList = [
     path: "/",
   },
   {
-    name: "Contact",
-    path: "/contact",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
     name: "Log In",
     path: "login",
   },

@@ -3,6 +3,8 @@ import ParaTypo from "./common/ParaTypo";
 import HeadingTypo from "./common/HeadingTypo";
 import { MapPin, Truck } from "lucide-react";
 import Button from "./common/Button";
+import { useMutation } from "../hooks/useMutation";
+import { useContextProvider } from "../context/Context";
 
 const OrderCard = ({
   background,
@@ -15,10 +17,14 @@ const OrderCard = ({
   date: string;
   element?: any;
 }) => {
+  const { mutate } = useMutation();
+  const { user } = useContextProvider();
+  const clickHandler = (id: string) => {
+    mutate("/order/cancled", "POST", { id });
+  };
   return (
     <>
       {info?.map((ele: any, index: number) => {
-        console.log("sora", element);
         return (
           <Fragment key={index}>
             <div className="w-full relative text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
@@ -27,17 +33,19 @@ const OrderCard = ({
                   <ParaTypo className="opacity-75 text-sm">Order ID</ParaTypo>
                   <HeadingTypo className="text-sm">#{ele._id}</HeadingTypo>
                 </div>
-                <div>
-                  <ParaTypo
-                    className={`opacity-75 text-sm border-2 text-white  rounded-full px-2 py-1 bg-${background}-500`}
-                  >
-                    {element === "complete"
-                      ? `Arrived On ${new Date(ele.updatedAt).toDateString()}`
-                      : element === "pending"
-                        ? `Estd.on ${new Date(ele.updatedAt).toDateString()}`
-                        : `Cancelled On ${new Date(ele.updatedAt).toDateString()}`}
-                  </ParaTypo>
-                </div>
+                {user?.role !== "admin" && (
+                  <div>
+                    <ParaTypo
+                      className={`opacity-75 text-sm border-2 text-white  rounded-full px-2 py-1 bg-${background}-500`}
+                    >
+                      {element === "complete"
+                        ? `Arrived On ${new Date(ele.updatedAt).toDateString()}`
+                        : element === "pending"
+                          ? `Estd.on ${new Date(ele.updatedAt).toDateString()}`
+                          : `Cancelled On ${new Date(ele.updatedAt).toDateString()}`}
+                    </ParaTypo>
+                  </div>
+                )}
               </div>
               <div className="flex justify-between border-gray-50o p-2 border-2 rounded-full my-2">
                 <div className="flex items-center gap-x-2">
@@ -59,17 +67,20 @@ const OrderCard = ({
                 <div className="w-full max-w-[60%] ">
                   <HeadingTypo
                     title={ele.product.name}
-                    className="text-base font-semibold w-full truncate"
+                    className="text-base  w-full truncate"
                   >
-                    {ele.name}
+                    {ele.product.name}
                   </HeadingTypo>
                   <ParaTypo className="opacity-80">
                     Rs {ele.product.priceAfterDiscount}
                   </ParaTypo>
                 </div>
               </div>
-              {ele.status == "pending" && (
-                <Button className="bg-red-500 text-sm p-2 absolute left-[83%] top-[80%]">
+              {ele.status == "pending" && user?.role !== "admin" && (
+                <Button
+                  onClick={() => clickHandler(ele._id)}
+                  className="bg-red-500 text-sm p-2 absolute left-[83%] top-[80%]"
+                >
                   Cancle Order
                 </Button>
               )}

@@ -83,19 +83,19 @@ export const dashboardList: listProps[] = [
 ];
 
 export const accountList: listProps[] = [
-  {
-    name: "Setting",
-    url: "/setting",
-    icon: <Settings />,
-  },
-  {
-    name: "Help",
-    url: "/help",
-    icon: <HelpCircle />,
-  },
-  {
-    name: "Manage User",
-    url: "/manageuser",
-    icon: <MoveDiagonal />,
-  },
+  // {
+  //   name: "Setting",
+  //   url: "/setting",
+  //   icon: <Settings />,
+  // },
+  // {
+  //   name: "Help",
+  //   url: "/help",
+  //   icon: <HelpCircle />,
+  // },
+  // {
+  //   name: "Manage User",
+  //   url: "/manageuser",
+  //   icon: <MoveDiagonal />,
+  // },
 ];
