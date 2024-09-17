@@ -14,11 +14,15 @@ const MyOrder = () => {
     setOrderState(params);
   };
 
+  if(data?.length<1){
+return <ParaTypo className="text-center text-4xl font-semibold my-3">0 Orders Found</ParaTypo>
+  }
+
   return (
     <div className="mt-4">
       <HeadingTypo className="text-3xl">My Orders</HeadingTypo>
       <ParaTypo className="opacity-75">my all orders</ParaTypo>
-      <div className="flex text-xs justify-around md:text-xl shadow-md mt-3 font-bold rounded-full bg-gray-100 gap-x-6 ">
+      {data&&<div className="flex text-xs justify-around md:text-xl shadow-md mt-3 font-bold rounded-full bg-gray-100 gap-x-6 ">
         <Button
           onClick={() => clickHandler("shipping")}
           className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
@@ -43,7 +47,7 @@ const MyOrder = () => {
         >
           Canceled
         </Button>
-      </div>
+      </div>}
       {loading ? (
         <Shimmer shape="rectange" />
       ) : (

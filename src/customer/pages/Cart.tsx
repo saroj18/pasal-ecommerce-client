@@ -85,16 +85,26 @@ const Cart = () => {
           </tbody>
         </table>
       )}
-      <Link className="sm:place-self-end place-self-start" to={"/checkout"}>
-        <Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">
-          Go to Checkout
-        </Button>
-      </Link>
+
+      {!data && (
+        <ParaTypo className="text-center text-4xl font-semibold">
+          0 Item on Cart
+        </ParaTypo>
+      )}
+      {data && (
+        <Link className="sm:place-self-end place-self-start" to={"/checkout"}>
+          <Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">
+            Go to Checkout
+          </Button>
+        </Link>
+      )}
 
       <div className="w-fit mx-auto">
+        <Link to={'/allproducts'}>
         <Button className="bg-red-500 text-white py-2 px-4 rounded-md mt-6 ">
           Back to Shopping
         </Button>
+        </Link>
       </div>
     </div>
   );

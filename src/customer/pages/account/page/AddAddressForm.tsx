@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useContextProvider } from "../../../../context/Context";
 import { useMutation } from "../../../../hooks/useMutation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodErrorFormatter } from "../../../../utils/errorFormatter";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,11 @@ type formProps = {
 
 const AddAddressForm = ({ setOpen, close = false }: formProps) => {
   const { mutate, response } = useMutation();
+  const [loc, setLoc] = useState({
+    lat: 0,
+    lng: 0,
+  });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -45,21 +50,25 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
       nearBy: "Sarswati Mandir",
       tole: "Ramlila",
       ward: "14",
-      location: {
-        lat: 0.333,
-        lng: 4.33,
-      },
+      // location: {
+      //   lat: 0.333,
+      //   lng: 4.33,
+      // },
     },
   });
   const { verifyInfo } = useContextProvider();
 
   const clickHandler = () => {
+    if(loc.lat > 0 || loc.lng > 0) return
+    setLoading(true);
     let locationCordinate;
     navigator.geolocation.getCurrentPosition((position) => {
       locationCordinate = { lat: 0, lng: 0 };
       locationCordinate.lat = position.coords.latitude;
       locationCordinate.lng = position.coords.longitude;
       setValue("location", locationCordinate);
+      setLoading(false);
+      setLoc(locationCordinate);
     });
   };
 
@@ -202,9 +211,14 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
             <Label>Exact Location</Label>
             <ParaTypo
               onClick={clickHandler}
-              className="bg-blue-500 text-white py-3 text-sm cursor-pointer select-none rounded-md flex items-center px-4 gap-x-2"
+              className={` text-white py-3 text-sm  select-none rounded-md flex items-center px-4 gap-x-2 ${loc.lat > 0 || loc.lng > 0 ? "cursor-not-allowed bg-green-500" : "cursor-pointer bg-blue-500"}`}
             >
-              Click here to get exact location <MapPinIcon />
+              {loading
+                ? "loading......"
+                : loc.lat > 0 || loc.lng > 0
+                  ? "Location Got Successfully"
+                  : `Click here to get exact location `}
+              {(loc.lat < 0 || loc.lng < 0) && <MapPinIcon />}
             </ParaTypo>
             {errors.location?.message && (
               <ParaTypo className="text-sm text-red-500">

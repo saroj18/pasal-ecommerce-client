@@ -34,7 +34,6 @@ const AdminLogin = () => {
   };
 
   useEffect(() => {
-    console.log(response);
     if (response && response?.data.verify) {
       if (!response.data.shopVerify) {
         navigate("/otp");

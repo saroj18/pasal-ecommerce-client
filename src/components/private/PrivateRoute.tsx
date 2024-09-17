@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useContextProvider } from "../../context/Context";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import loading from "../../../src/assets/loading.gif";
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useContextProvider();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  console.log(user);
 
   useLayoutEffect(() => {
     const checkUser = () => {
@@ -21,7 +21,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   }, [navigate, user]);
 
   if (isLoading) {
-    return null;
+    return <img className="mx-auto w-[350px]" src={loading} alt="" />;
   }
 
   return children;
