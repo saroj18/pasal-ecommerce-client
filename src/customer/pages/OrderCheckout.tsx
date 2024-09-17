@@ -25,7 +25,7 @@ type Product = {
 };
 
 const OrderCheckout = () => {
-  const { mutate, data, loading } = useMutation();
+  const { mutate,  loading } = useMutation();
   const {
     data: productData,
     refetch,

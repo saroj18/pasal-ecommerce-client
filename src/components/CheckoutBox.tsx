@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeadingTypo from "./common/HeadingTypo";
 import ParaTypo from "./common/ParaTypo";
 import Button from "./common/Button";
@@ -25,7 +25,6 @@ const CheckoutBox = ({
   const [wallet, setWallet] = useState("");
   const { mutate, data, loading } = useMutation<{ [key: string]: string }>();
   let totalPrice = 0;
-  console.log(data);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value == "onlinepay") {
@@ -36,33 +35,42 @@ const CheckoutBox = ({
   };
 
   const walletHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
     setWallet(e.target.value);
   };
 
   useEffect(() => {
     totalPrice = cartData?.reduce((acc: number, cur: any) => {
-      console.log(cur);
       acc += cur.product.priceAfterDiscount * cur.productCount;
       return acc;
     }, 0);
     setOrderDetails((prv) => ({
       ...prv,
       totalPrice: totalPrice,
-      payMethod: payment ? wallet : "cash",
     }));
   }, [cartData]);
 
-  console.log(orderDetails);
+  useEffect(() => {
+    if (wallet) {
+      setOrderDetails((prv) => ({
+        ...prv,
+        payMethod: payment ? wallet : "cash",
+      }));
+    }
+  }, [wallet]);
 
   const clickHandler = () => {
-    console.log(orderDetails);
     if (!orderDetails.payMethod) {
       toast.error("please select payment method");
     }
-    mutate("/order/esewa", "POST", { orderDetails });
+    if (orderDetails.payMethod === "esewa") {
+      mutate("/order/esewa", "POST", { orderDetails });
+    }
+    if (orderDetails.payMethod === "khalti") {
+      mutate("/order/khalti", "POST", { orderDetails });
+    }
   };
 
-  console.log(totalPrice);
   return (
     <div className="rounded-md  border-2 border-gray-200 shadow-md  p-4 ">
       <HeadingTypo className="text-2xl font-semibold">
@@ -103,7 +111,6 @@ const CheckoutBox = ({
           </Option>
           <Option value="khalti">Khalti</Option>
           <Option value="esewa">Esewa</Option>
-          <Option value="imepay">IME Pay</Option>
         </Select>
       )}
       <div className="flex items-center gap-x-2">
@@ -136,7 +143,12 @@ const CheckoutBox = ({
       >
         {loading ? "loading............." : "Proceed to Checkout"}
       </Button>
-      {data && <EsewaPay data={data} />}
+      {orderDetails.payMethod === "esewa" &&
+        data &&
+        data.product_code === "EPAYTEST" && <EsewaPay data={data} />}
+      {data && data.method === "khalti"
+        ? (window.location.href = data.payment_url)
+        : null}
     </div>
   );
 };

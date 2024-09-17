@@ -7,8 +7,8 @@ import useDebounce from "../../hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
 
 type SearchBoxTypeProps = {
-  className: string;
-  focus: boolean;
+  className?: string;
+  focus?: boolean;
   setFocus: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

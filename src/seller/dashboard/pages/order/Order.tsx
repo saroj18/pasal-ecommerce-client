@@ -7,7 +7,7 @@ import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 
 const Order = () => {
-  const { data, refetch, loading } = useQuery<any>("/order/sellerorder");
+  const { data, refetch, loading } = useQuery<any>("/order/sellerorder", false);
   const { mutate } = useMutation<any>();
   console.log(data);
 

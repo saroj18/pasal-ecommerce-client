@@ -64,6 +64,7 @@ import PublicRouteForSeller from "./components/private/PublicRouteForSeller";
 import PrivateRouteForSeller from "./components/private/PrivateRouteForSeller";
 import PrivateRouteForAdmin from "./components/private/PrivateRouteForAdmin";
 import PublicRouteForAdmin from "./components/private/PublicRouteForAdmin";
+import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -79,7 +80,7 @@ const App = () => {
         {
           path: "login",
           element: (
-          <PublicRoute>
+            <PublicRoute>
               <Login />
             </PublicRoute>
           ),
@@ -195,6 +196,10 @@ const App = () => {
     {
       path: "/esewa-success",
       element: <EsewaSuccess />,
+    },
+    {
+      path: "/khalticallback",
+      element: <KhaltiPaymentVerify />,
     },
     {
       path: "/dashboard",
