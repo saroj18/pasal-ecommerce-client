@@ -46,6 +46,10 @@ const Login = () => {
     const { email, password } = item;
     mutate("/user/login", "POST", { email, password, role: "customer" });
   };
+
+  const clickHandler = async () => {
+    window.location.href = import.meta.env.VITE_LOGIN_WITH_GOOGLE_URL;
+  };
   return (
     <div className="flex justify-around mt-10 flex-col gap-4 md:flex-row lg:max-w-[75%] mx-auto">
       <img className="md:max-w-[45%] mx-auto" src={ecommerseImage} alt="" />
@@ -77,9 +81,12 @@ const Login = () => {
         <Button className="w-full bg-red-500 text-white py-3 rounded-md mt-5">
           Login
         </Button>
-        <Button className="w-full border-neutral-500 border-2 py-3 rounded-md mt-3">
-          Sign up with Google
-        </Button>
+        <ParaTypo
+          onClick={clickHandler}
+          className="w-full cursor-pointer select-none py-3 rounded-md mt-3 bg-blue-500 text-center text-white"
+        >
+          Login with Google
+        </ParaTypo>
         <div className="flex items-center gap-x-3 mt-4 justify-center">
           <ParaTypo className="text-center">Not account </ParaTypo>{" "}
           <span

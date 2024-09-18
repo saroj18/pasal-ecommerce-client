@@ -44,6 +44,10 @@ const Signup = () => {
     });
   };
 
+  const clickHandler = async () => {
+    window.location.href = import.meta.env.VITE_LOGIN_WITH_GOOGLE_URL;
+  };
+
   return (
     <div className="flex justify-around mt-10 gap-3 flex-col w-full sm:max-w-[60%] md:max-w-[70%]  mx-auto  lg:flex-row">
       <img
@@ -104,9 +108,12 @@ const Signup = () => {
         >
           Create Account
         </Button>
-        <Button className="w-full border-neutral-500 border-2 py-3 rounded-md mt-3">
-          Sign up with Google
-        </Button>
+        <ParaTypo
+          onClick={clickHandler}
+          className="w-full cursor-pointer select-none py-3 rounded-md mt-3 bg-blue-500 text-center text-white"
+        >
+          Login with Google
+        </ParaTypo>
         <div className="flex items-center gap-3 mt-4 justify-center">
           <ParaTypo className="text-center">Already have Account </ParaTypo>{" "}
           <span

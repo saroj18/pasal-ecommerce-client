@@ -37,11 +37,11 @@ const SideBar = () => {
           My Reviews
         </HeadingTypo>
       </Link>
-      <Link to={"/account/message"}>
+      {/* <Link to={"/account/message"}>
         <HeadingTypo className="text-lg cursor-pointer my-2">
           Message
         </HeadingTypo>
-      </Link>
+      </Link> */}
       <Link to={"/sellerlogin"}>
         <HeadingTypo className="text-lg cursor-pointer my-2">
           Sell On Pasal

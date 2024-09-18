@@ -56,7 +56,7 @@ const fullnameZodSchema = z
     invalid_type_error: "name must be string",
   })
   .trim()
-  .regex(/^[a-zA-Z0-9]+$/, { message: "invalid name format" })
+  .regex(/^[a-zA-Z0-9 ]+$/, { message: "invalid name format" })
   .min(4, { message: "name must be 4 character" })
   .max(25, { message: "name must be less than 25 character" });
 
@@ -67,7 +67,8 @@ export const UserSignUpZodSchema = z.object({
       required_error: "username must be required",
       invalid_type_error: "username must be string",
     })
-    .trim().regex(/^[a-zA-Z0-9]+$/,{message:"invalid name format"})
+    .trim()
+    .regex(/^[a-zA-Z0-9]+$/, { message: "invalid name format" })
     .min(4, { message: "username must be 4 character" })
     .max(25, { message: "username must be less than 25 character" }),
   email: emailZodeSchema,

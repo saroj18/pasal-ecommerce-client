@@ -59,7 +59,7 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
   const { verifyInfo } = useContextProvider();
 
   const clickHandler = () => {
-    if(loc.lat > 0 || loc.lng > 0) return
+    if (loc.lat > 0 || loc.lng > 0) return;
     setLoading(true);
     let locationCordinate;
     navigator.geolocation.getCurrentPosition((position) => {

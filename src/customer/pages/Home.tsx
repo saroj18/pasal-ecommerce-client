@@ -9,16 +9,17 @@ import "swiper/css";
 import Slider from "../../customer/pages/account/component/Slider";
 import Shimmer from "../../components/common/Shimmer";
 import { Fragment } from "react/jsx-runtime";
+import { useContextProvider } from "../../context/Context";
 
 const Home = () => {
-  const { data } = useQuery<any>("/user");
+  const { user: data } = useContextProvider();
   const { data: offerList, loading: offerListLoading } =
     useQuery<any>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
     useQuery<any>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
     useQuery<any>("/product/randomproducts");
-  console.log(bestSellingProducts);
+    
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">

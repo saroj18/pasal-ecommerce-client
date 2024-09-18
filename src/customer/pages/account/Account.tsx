@@ -2,13 +2,11 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import PersonalProfile from "./component/box/PersonalProfile";
 import AddressBox from "./component/box/AddressBox";
 import BillingAddress from "./component/box/BillingAddress";
-import RecentOrders from "./component/RecentOrders";
 import { useQuery } from "../../../hooks/useQuery";
 import Shimmer from "../../../components/common/Shimmer";
 
 const Account = () => {
   const { data, loading } = useQuery<any>("/user");
-  console.log(">>dora");
   return (
     <div className=" p-2">
       <div className="flex items-center justify-between">
@@ -23,12 +21,14 @@ const Account = () => {
           mobile={data?.mobile}
           gender={data?.gender}
           dob={data?.dob}
+          user={data}
         />
         <AddressBox
           loading={loading}
           cityWard={`${data?.address?.city}-${data?.address?.ward}`}
           mobile={data?.mobile}
           address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`}
+          user={data}
         />
         {loading ? (
           <Shimmer shape="rectange" />
@@ -37,11 +37,12 @@ const Account = () => {
             loading={true}
             cityWard={`${data?.address?.city}-${data?.address?.ward}`}
             mobile={data?.mobile}
+            user={data}
             address={`${data?.address?.state} Province-${data?.address?.city}-${data?.address?.nearBy}`}
           />
         )}
       </div>
-      <RecentOrders />
+      {/* <RecentOrders /> */}
     </div>
   );
 };

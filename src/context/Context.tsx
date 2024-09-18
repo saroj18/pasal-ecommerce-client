@@ -9,6 +9,7 @@ import { useQuery } from "../hooks/useQuery";
 export type UserType = {
   fullname: string;
   role: "customer" | "admin" | "seller";
+  verify: boolean;
 };
 
 type ProductType = {
@@ -91,8 +92,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const { data } = useQuery<UserType>("/user");
-  
+  const { data } = useQuery<UserType>("/user",false);
 
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);

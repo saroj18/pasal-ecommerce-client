@@ -20,7 +20,7 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
-  const { setCart } = useContextProvider();
+  const { setCart, user } = useContextProvider();
 
   let {
     data,
@@ -192,9 +192,9 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className=" gap-2 flex flex-col lg:flex-row ">
-                <Button className="bg-red-500  rounded-md text-white py-2 px-4 min-w-fit ">
+                {/* <Button className="bg-red-500  rounded-md text-white py-2 px-4 min-w-fit ">
                   Buy Now
-                </Button>
+                </Button> */}
                 <Button
                   disabled={data?.stock === 0 || loading}
                   onClick={() => addToCartHandler(data._id)}
@@ -213,12 +213,14 @@ const ProductDetails = () => {
               {/* <Button className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4">
               Bargaining On Video Call <Video fill="white" color="white" />{" "}
             </Button> */}
-              <Button
-                onClick={() => setOpen(true)}
-                className="rounded-md py-2 px-3 justify-center bg-blue-500 text-white flex gap-x-2"
-              >
-                Chat with Shop Owner <MessageCircle />{" "}
-              </Button>
+              {user?.verify && (
+                <Button
+                  onClick={() => setOpen(true)}
+                  className="rounded-md py-2 px-3 justify-center bg-blue-500 text-white flex gap-x-2"
+                >
+                  Chat with Shop Owner <MessageCircle />{" "}
+                </Button>
+              )}
             </div>
           )}
         </div>

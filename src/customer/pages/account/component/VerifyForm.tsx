@@ -24,6 +24,7 @@ const VerifyForm = () => {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<VerifyForm>({
     resolver: zodResolver(UserVefifyZodSchema),
@@ -55,6 +56,7 @@ const VerifyForm = () => {
       });
     }
   }, [data]);
+  console.log(">>>", getValues("fullname"));
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
       <HeadingTypo className="text-3xl my-3">Verify Yourself</HeadingTypo>
