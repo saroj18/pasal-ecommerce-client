@@ -15,8 +15,18 @@ const passwordZodSchema = z
     invalid_type_error: "password must be string",
   })
   .trim()
-  .min(8, { message: "password length must be >8 character" })
-  .max(15, { message: "password length must be <15 character" });
+  .refine(
+    (val) => {
+      if (val == "ignore") {
+        return true;
+      }
+      return val.length >= 8 && val.length <= 15;
+    },
+    {
+      message:
+        "Password must be between 8 and 15 characters long, unless it is 'ignore'",
+    },
+  );
 
 const roleZodeSchema = z
   .string({

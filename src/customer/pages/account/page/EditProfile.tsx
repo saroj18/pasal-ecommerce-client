@@ -11,16 +11,21 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useQuery } from "../../../../hooks/useQuery";
+import { useEffect } from "react";
+import { useMutation } from "../../../../hooks/useMutation";
 
 type EditProfileType = z.infer<typeof EditProfileZodSchema>;
 
 const EditProfile = () => {
   const navigate = useNavigate();
   const { data } = useQuery<any>("/user");
+  const { mutate } = useMutation();
   console.log(data);
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm<EditProfileType>({
     resolver: zodResolver(EditProfileZodSchema),
@@ -32,8 +37,26 @@ const EditProfile = () => {
     },
   });
 
+  useEffect(() => {
+    if (data) {
+      setValue("email", data?.email);
+      setValue("fullname", data?.fullname);
+      setValue("confirmPassword", data?.oAuthLogin ? "ignore" : "");
+      setValue("currentPassword", data?.oAuthLogin ? "ignore" : "");
+      setValue("newPassword", data?.oAuthLogin ? "ignore" : "");
+      reset({
+        email: data?.email,
+        fullname: data?.fullname,
+        mobile: data?.mobile,
+        dob: data?.dob,
+        gender: data?.gender,
+      });
+    }
+  }, [data]);
+
   const onSubmit = (data: EditProfileType) => {
     console.log(data);
+    mutate("/user/edit", "POST", data);
   };
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
@@ -45,6 +68,7 @@ const EditProfile = () => {
         <div>
           <Label className="flex flex-col">Full Name</Label>
           <Input
+            disabled={true}
             {...register("fullname")}
             className="w-full h-[50px]"
             placeholder="enter your fullname"
@@ -59,6 +83,7 @@ const EditProfile = () => {
         <div>
           <Label className="flex flex-col">Email Address</Label>
           <Input
+            disabled={true}
             {...register("email")}
             className="w-full h-[50px]"
             placeholder="enter your email address"
@@ -113,48 +138,52 @@ const EditProfile = () => {
             </ParaTypo>
           )}
         </div>
-        <div>
-          <Label className="flex flex-col">Current Password</Label>
-          <Input
-            {...register("currentPassword")}
-            className="w-full h-[50px]"
-            placeholder="enter your current password"
-            type="password"
-          />
-          {errors.currentPassword?.message && (
-            <ParaTypo className="text-sm text-red-500">
-              {errors.currentPassword?.message}
-            </ParaTypo>
-          )}
-        </div>
-        <div>
-          <Label className="flex flex-col">New Password</Label>
-          <Input
-            {...register("newPassword")}
-            className="w-full h-[50px]"
-            placeholder="enter your new password"
-            type="password"
-          />
-          {errors.newPassword?.message && (
-            <ParaTypo className="text-sm text-red-500">
-              {errors.newPassword?.message}
-            </ParaTypo>
-          )}
-        </div>
-        <div>
-          <Label className="flex flex-col">Confirm Password</Label>
-          <Input
-            {...register("confirmPassword")}
-            className="w-full h-[50px]"
-            placeholder="enter your confirm password"
-            type="password"
-          />
-          {errors.confirmPassword?.message && (
-            <ParaTypo className="text-sm text-red-500">
-              {errors.confirmPassword?.message}
-            </ParaTypo>
-          )}
-        </div>
+        {!data?.oAuthLogin ? (
+          <>
+            <div>
+              <Label className="flex flex-col">Current Password</Label>
+              <Input
+                {...register("currentPassword")}
+                className="w-full h-[50px]"
+                placeholder="enter your current password"
+                type="password"
+              />
+              {errors.currentPassword?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.currentPassword?.message}
+                </ParaTypo>
+              )}
+            </div>
+            <div>
+              <Label className="flex flex-col">New Password</Label>
+              <Input
+                {...register("newPassword")}
+                className="w-full h-[50px]"
+                placeholder="enter your new password"
+                type="password"
+              />
+              {errors.newPassword?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.newPassword?.message}
+                </ParaTypo>
+              )}
+            </div>
+            <div>
+              <Label className="flex flex-col">Confirm Password</Label>
+              <Input
+                {...register("confirmPassword")}
+                className="w-full h-[50px]"
+                placeholder="enter your confirm password"
+                type="password"
+              />
+              {errors.confirmPassword?.message && (
+                <ParaTypo className="text-sm text-red-500">
+                  {errors.confirmPassword?.message}
+                </ParaTypo>
+              )}
+            </div>
+          </>
+        ) : null}
         <div className="my-7 flex flex-col gap-2 justify-center sm:items-start">
           <Button className="border-2 bg-blue-500 rounded-md text-white px-3 py-2">
             Save Changes
