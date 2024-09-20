@@ -66,7 +66,7 @@ const AdminDashboard = () => {
           />
           <AmountCard
             heading="Total Products"
-            amount={data && data.totalProducts}
+            amount={data && data?.totalProducts}
             className="grow bg-blue-100"
           />
           <AmountCard

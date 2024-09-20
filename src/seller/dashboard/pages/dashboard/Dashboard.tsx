@@ -34,32 +34,32 @@ const Dashboard = () => {
             <AmountCard
               className={"grow bg-green-50"}
               heading="Total Products"
-              amount={data?.products.totalProducts}
+              amount={data?.products?.totalProducts||'0'}
             />
             <AmountCard
               className={"grow bg-red-50"}
               heading="Total Orders"
-              amount={data?.orders.totalOrders}
+              amount={data?.orders?.totalOrders||'0'}
             />
             <AmountCard
               className={"grow bg-gray-50"}
               heading="Total Sale"
-              amount={data?.products.totalSale}
+              amount={data?.products?.totalSale||'0'}
             />
             <AmountCard
               className={"grow bg-orange-50"}
               heading="Total SaleAmount"
-              amount={"Rs " + data?.orders.totalSaleAmount}
+              amount={"Rs " + (data?.orders?.totalSaleAmount||'0')}
             />
             <AmountCard
               className={"grow bg-blue-50"}
               heading="Total Brands"
-              amount={data?.products.totalBrands}
+              amount={data?.products?.totalBrands||'0'}
             />
             <AmountCard
               className={"grow bg-blue-50"}
               heading="Total Category"
-              amount={data?.products.totalCategory}
+              amount={data?.products?.totalCategory||'0'}
             />
           </>
         )}

@@ -13,7 +13,7 @@ import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 const VendorDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState("");
-  const [shop, setShop] = useState<{ [key: string]: string }>({});
+  const [shop, setShop] = useState<{ [key: string]: string }>();
   const { data, refetch } = useQuery<any>(`/vendor/${id}`);
   const { mutate } = useMutation();
 
@@ -22,7 +22,12 @@ const VendorDetail = () => {
   };
 
   const clickHandler = (param: string) => {
-    mutate("/vendor/verify", "POST", { flag: param, shopId: id }, refetch);
+    mutate(
+      "/vendor/verify",
+      "POST",
+      { flag: param, shopId: id, report },
+      refetch,
+    );
   };
 
   useEffect(() => {
@@ -43,9 +48,10 @@ const VendorDetail = () => {
       </HeadingTypo>
       <div>
         <div className="flex flex-wrap justify-between gap-3 my-6 border-2 border-gray-300 p-2 shadow-md rounded-md">
-          {Object.entries(shop).map(([key, value]: [string, string]) => {
-            return <DetailsCard key={key} heading={key} value={value} />;
-          })}
+          {shop &&
+            Object.entries(shop).map(([key, value]: [string, string]) => {
+              return <DetailsCard key={key} heading={key} value={value} />;
+            })}
         </div>
       </div>
       <div>
