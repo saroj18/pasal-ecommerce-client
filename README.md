@@ -61,15 +61,45 @@ To get started with the project, follow these steps:
 Here are some screenshots showcasing the platform's features and user interface:
 
 ### Home Page
-![Home Page](path/to/homepage-screenshot.png)
+![Home Page](src/assets/homepage.png)
 
 ### Vendor Dashboard
-![Vendor Dashboard](path/to/vendor-dashboard-screenshot.png)
+![Vendor Dashboard](src/assets/seller-dashboard.png)
 
-### Product Page
-![Product Page](path/to/product-page-screenshot.png)
+### Admin Dashboard
+![Vendor Dashboard](src/assets/admin-dashboard.png)
 
-### Admin Analytics
-![Admin Analytics](path/to/admin-analytics-screenshot.png)
+### Product Details Page
+![Product Page](src/assets/product-details%20page.png)
+
+### Vendor Info Page
+![Product Page](src/assets/vendor-info-page.png)
+
+### Vendor Analytics
+![Admin Analytics](src/assets/vendor-analytics-graph.png)
+
+### Vendor List 
+![Admin Analytics](src/assets/vendor%20list%20page.png)
+
+### User List 
+![Admin Analytics](src/assets/user%20list%20page.png)
+
+### Seller Inventory Page
+![Admin Analytics](src/assets/seller-inventorypage.png)
+
+### Review Part
+![Admin Analytics](src/assets/review-part.png)
+
+### Profile Page
+![Admin Analytics](src/assets/profile-page.png)
+
+### Offer Create Page
+![Admin Analytics](src/assets/offer%20create%20page.png)
+
+### Seller Chat Page
+![Admin Analytics](src/assets/seller-chatpage.png)
+
+### Chat Popup
+![Admin Analytics](src/assets/chat-box.png)
 
 > **Tip:** Add screenshots to the `assets` folder in your repository and use the relative path, e.g., `assets/homepage-screenshot.png`.
