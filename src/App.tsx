@@ -65,6 +65,7 @@ import PrivateRouteForSeller from "./components/private/PrivateRouteForSeller";
 import PrivateRouteForAdmin from "./components/private/PrivateRouteForAdmin";
 import PublicRouteForAdmin from "./components/private/PublicRouteForAdmin";
 import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
+import ResetPassword from "./customer/pages/ResetPassword";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -132,6 +133,10 @@ const App = () => {
         {
           path: "details/:id",
           element: <ProductDetails />,
+        },
+        {
+          path: "resetpassword",
+          element: <ResetPassword />,
         },
         {
           path: "account",

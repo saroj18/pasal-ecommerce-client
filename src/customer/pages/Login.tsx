@@ -9,8 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserLoginZodSchema } from "../zodschema/user";
 import { z } from "zod";
 import { useMutation } from "../../hooks/useMutation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useContextProvider } from "../../context/Context";
+import PasswordResetPopup from "../popup/PasswordResetPopup";
 
 export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 
@@ -18,6 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { mutate, data } = useMutation<any>();
   const { setUser } = useContextProvider();
+  const [open, setOpen] = useState(false);
 
   const {
     register,
@@ -95,11 +97,15 @@ const Login = () => {
           >
             Sign up
           </span>
-          <ParaTypo className="underline text-blue-500 cursor-pointer">
+          <ParaTypo
+            onClick={() => setOpen(true)}
+            className="underline text-blue-500 cursor-pointer"
+          >
             forgot password
           </ParaTypo>
         </div>
       </form>
+      {open && <PasswordResetPopup open={open} setOpen={setOpen} />}
     </div>
   );
 };

@@ -24,7 +24,7 @@ const passwordZodSchema = z
     },
     {
       message:
-        "Password must be between 8 and 15 characters long, unless it is 'ignore'",
+        "Password must be between 8 and 15 characters long",
     },
   );
 
@@ -156,6 +156,16 @@ export const AddressZodSchema = z.object({
       message: "location must be required",
     }),
 });
+
+export const ResetPasswordZodSchema = z
+  .object({
+    newPassword: passwordZodSchema,
+    confirmPassword: passwordZodSchema,
+  })
+  .refine((val) => val.newPassword === val.confirmPassword, {
+    message: "password not match",
+    path: ["confirmPassword"],
+  });
 
 export const EditProfileZodSchema = z
   .object({
