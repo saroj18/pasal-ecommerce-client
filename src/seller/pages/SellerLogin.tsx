@@ -35,7 +35,7 @@ const SellerLogin = () => {
 
   useEffect(() => {
     console.log(response);
-    if (response && response?.data.verify) {
+    if (response?.success && response?.data?.verify) {
       if (!response.data.shopVerify) {
         navigate("/otp");
       } else {
@@ -45,7 +45,7 @@ const SellerLogin = () => {
       }
       localStorage.setItem("role", "SELLER");
     }
-    if (response && !response?.data.verify) {
+    if (response?.success && !response?.data?.verify) {
       navigate("/account/verify");
       localStorage.setItem("role", "SELLER");
     }
@@ -102,9 +102,6 @@ const SellerLogin = () => {
                 </ParaTypo>
               )}
             </div>
-            <ParaTypo className="text-right cursor-pointer">
-              Forgot Password
-            </ParaTypo>
             <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
               Login as a Seller
             </Button>

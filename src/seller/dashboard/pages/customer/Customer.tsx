@@ -16,7 +16,7 @@ const Customer = () => {
 
   console.log(data);
 
-  const value = dayjs(data?.[0].createdAt).format("YYYY//MM/DD");
+  const value = dayjs(data?.[0]?.createdAt).format("YYYY//MM/DD");
   console.log(value);
   return (
     <div className="overflow-auto">
@@ -27,12 +27,12 @@ const Customer = () => {
         </ParaTypo>
       </div>
       {loading ? <Shimmer height="50px" count={8} shape="rectange" /> : null}
-      {data?.length > 0 && (
+      {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Customer Found</HeadingTypo> : (
         <div className="text-sm md:text-base">
           <Table>
             <TableHead tableHeadData={tableHeadData} />
             <TableBody>
-              {data.map((ele: any) => {
+              {data?.map((ele: any) => {
                 return (
                   <TableRow key={ele._id}>
                     <TableData title={ele._id} className="p-2">
@@ -54,10 +54,10 @@ const Customer = () => {
                       Rs {ele.productList.price}
                     </TableData>
                     <TableData className="p-2">
-                      {new Date(ele.createdAt).toDateString()}
+                      {new Date(ele?.createdAt).toDateString()}
                     </TableData>
                     <TableData className="p-2 capitalize">
-                      {formatDistanceToNow(new Date(ele.createdAt), {
+                      {formatDistanceToNow(new Date(ele?.createdAt), {
                         addSuffix: true,
                       })}
                     </TableData>

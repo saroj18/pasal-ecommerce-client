@@ -25,16 +25,42 @@ export type ElementType = {
 
 const AllProducts = () => {
   const [product, setProduct] = useState<any[]>([]);
-  const { data, loading } = useQuery<any>("/product");
-  console.log("loading>>", loading);
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(8);
+  const { data, loading,refetch } = useQuery<any>(
+    `/product?skip=${skip}&limit=${limit}`,
+  );
+
   useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0 });
-    }, 0);
+    // setTimeout(() => {
+    //   window.scrollTo({ top: 0 });
+    // }, 0);
     if (data) {
-      setProduct(data);
+      setProduct((prv) => [...prv, ...data]);
     }
   }, [data]);
+
+
+  useEffect(() => {
+    function scrollHandler() {
+      if (
+        window.innerHeight + document.documentElement.scrollTop+3  >
+          document.documentElement.offsetHeight &&
+        !loading
+      ) {
+        console.log("hit");
+        setSkip((prv) => prv + 8);
+        // return;
+      }
+
+      // console.log(document.documentElement.offsetHeight);
+      // console.log(window.innerHeight + document.documentElement.scrollTop);
+    }
+
+    window.addEventListener("scroll", scrollHandler);
+
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [skip]);
   return (
     <div>
       <HeadingTypo className="text-2xl my-4">All Products</HeadingTypo>

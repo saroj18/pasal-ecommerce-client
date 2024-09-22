@@ -3,6 +3,7 @@ import { useQuery } from "../../../../hooks/useQuery";
 import React, { useEffect, useState } from "react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Shimmer from "../../../../components/common/Shimmer";
+import HeadingTypo from "../../../../components/common/HeadingTypo";
 
 const Sidebar = ({
   setId,
@@ -29,7 +30,7 @@ const Sidebar = ({
       {loading ? (
         <Shimmer count={8} height="60px" shape="rectange" />
       ) : (
-        data?.map((ele) => {
+        data&&data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 User Found</HeadingTypo> :data?.map((ele) => {
           return (
             <UserCard
               className={ele._id == current ? "bg-green-200" : ""}

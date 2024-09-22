@@ -52,11 +52,11 @@ export const generalSideBarList = [
     url: "user",
     icon: <User />,
   },
-  {
-    name: "Notification",
-    url: "notification",
-    icon: <Bell />,
-  },
+  // {
+  //   name: "Notification",
+  //   url: "notification",
+  //   icon: <Bell />,
+  // },
   {
     name: "Home",
     url: "/",

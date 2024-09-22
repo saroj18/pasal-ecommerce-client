@@ -92,7 +92,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  const { data } = useQuery<UserType>("/user",false);
+  const { data } = useQuery<UserType>("/user", false);
 
   useEffect(() => {
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);
@@ -107,6 +107,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     setUser(data as UserType);
   }, [data]);
+  console.log("context called");
 
   return (
     <ContextProvider.Provider

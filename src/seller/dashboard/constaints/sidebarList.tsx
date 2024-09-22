@@ -50,11 +50,11 @@ export const dashboardList: listProps[] = [
     url: "/dashboard/review",
     icon: <Star />,
   },
-  {
-    name: "Delevery",
-    url: "/dashboard/delevery",
-    icon: <Truck />,
-  },
+  // {
+  //   name: "Delevery",
+  //   url: "/dashboard/delevery",
+  //   icon: <Truck />,
+  // },
   {
     name: "Delevery Person",
     url: "/dashboard/delevery-person",
@@ -70,11 +70,11 @@ export const dashboardList: listProps[] = [
     url: "/dashboard/message",
     icon: <Send />,
   },
-  {
-    name: "Notification",
-    url: "/dashboard/notification",
-    icon: <Bell />,
-  },
+  // {
+  //   name: "Notification",
+  //   url: "/dashboard/notification",
+  //   icon: <Bell />,
+  // },
   {
     name: "Go to Home",
     url: "/",

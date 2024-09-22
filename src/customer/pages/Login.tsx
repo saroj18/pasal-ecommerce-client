@@ -48,6 +48,7 @@ const Login = () => {
     const { email, password } = item;
     mutate("/user/login", "POST", { email, password, role: "customer" });
   };
+  console.log("i am login");
 
   const clickHandler = async () => {
     window.location.href = import.meta.env.VITE_LOGIN_WITH_GOOGLE_URL;

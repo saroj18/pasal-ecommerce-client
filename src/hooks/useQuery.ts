@@ -17,9 +17,10 @@ type UseQueryResult<T> = {
 export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | any>(null);
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = useCallback(async () => {
+    console.log("hey");
     setError(false);
     setLoading(true);
     try {
@@ -50,6 +51,7 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
     const dataFromCache = getFromCache(url as string);
     if (cache && dataFromCache) {
       setData(dataFromCache);
+      setLoading(false);
     } else {
       fetchData();
     }

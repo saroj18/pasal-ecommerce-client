@@ -27,11 +27,11 @@ const Review = () => {
             Your's all products review
           </ParaTypo>
         </div>
-        <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
+        {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
       </div>
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
       <div>
-        {data?.length > 0 && (
+        {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Review Found</HeadingTypo> :(
           <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
             <thead>
               <tr className="sticky top-0 left-0 bg-white border-t-2">

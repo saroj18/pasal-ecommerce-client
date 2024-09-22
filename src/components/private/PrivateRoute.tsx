@@ -1,27 +1,43 @@
 import { useNavigate } from "react-router-dom";
-import { useContextProvider } from "../../context/Context";
-import React, { useLayoutEffect, useState } from "react";
-import loading from "../../../src/assets/loading.gif";
+import { useContextProvider, UserType } from "../../context/Context";
+import React, { useLayoutEffect } from "react";
+import dd from "../../../src/assets/loading.gif";
+import { useAuth } from "../../context/AuthProvider";
 
-const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
+const PrivateRoute = ({
+  children,
+  role,
+}: {
+  children: React.ReactNode;
+  role: string[];
+}) => {
   const { user } = useContextProvider();
+  const { data, loading } = useAuth();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
     const checkUser = () => {
-      if (!user || (user && user.role == "admin")) {
-        navigate("/login", { replace: true });
-      } else {
-        setIsLoading(false);
+      if (
+        (!loading && !data) ||
+        (data && !role.includes((data as UserType).role))
+      ) {
+        if ((data as UserType).role == "customer") {
+          navigate("/login", { replace: true });
+        }
+        if ((data as UserType).role == "seller") {
+          navigate("/sellerlogin", { replace: true });
+        }
+        if ((data as UserType).role == "admin") {
+          navigate("/adminlogin", { replace: true });
+        }
       }
     };
 
     checkUser();
-  }, [navigate, user]);
+  }, [user, loading]);
 
-  if (isLoading) {
-    return <img className="mx-auto w-[350px]" src={loading} alt="" />;
+  if (loading) {
+    return <img className="mx-auto w-[350px]" src={dd} alt="" />;
   }
 
   return children;

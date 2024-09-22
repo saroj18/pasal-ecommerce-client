@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
 import { useContextProvider } from "../../context/Context";
+import { useAuth } from "../../context/AuthProvider";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -64,7 +65,7 @@ const ProductDetails = () => {
         {productLoading ? (
           <Shimmer height="600px" width="600px" shape="rectange" />
         ) : (
-          <div className="border-2 relative border-gray-500 rounded-md shadow-md w-full max-w-md p-3 flex-col flex items-center justify-center">
+          <div className="border-2 relative border-gray-500 rounded-md shadow-md w-full mx-auto max-w-md p-3 flex-col flex items-center justify-center">
             <img src={image || data?.images?.[0]} alt="product image" />
 
             <div className="flex w-full justify-center gap-x-4 mt-3 overflow-hidden">
@@ -86,7 +87,9 @@ const ProductDetails = () => {
           {productLoading ? (
             <Shimmer shape="rectange" height="100px" />
           ) : (
-            <HeadingTypo className="text-3xl">{data?.name}</HeadingTypo>
+            <HeadingTypo className="text-xl md:text-3xl">
+              {data?.name}
+            </HeadingTypo>
           )}
           {productLoading ? (
             <Shimmer height="50px" shape="rectange" />
@@ -195,14 +198,16 @@ const ProductDetails = () => {
                 {/* <Button className="bg-red-500  rounded-md text-white py-2 px-4 min-w-fit ">
                   Buy Now
                 </Button> */}
-                <Button
-                  disabled={data?.stock === 0 || loading}
-                  onClick={() => addToCartHandler(data._id)}
-                  className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2 min-w-fit"
-                >
-                  Add to Cart
-                  <BaggageClaim strokeWidth={1} />
-                </Button>
+                {user?.role === "customer" && (
+                  <Button
+                    disabled={data?.stock === 0 || loading}
+                    onClick={() => addToCartHandler(data._id)}
+                    className="bg-red-500 rounded-md text-white py-2 px-4  flex gap-x-2 min-w-fit"
+                  >
+                    Add to Cart
+                    <BaggageClaim strokeWidth={1} />
+                  </Button>
+                )}
               </div>
             </div>
           )}
@@ -213,7 +218,7 @@ const ProductDetails = () => {
               {/* <Button className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4">
               Bargaining On Video Call <Video fill="white" color="white" />{" "}
             </Button> */}
-              {user?.verify && (
+              {user?.verify && user.role == "customer" && (
                 <Button
                   onClick={() => setOpen(true)}
                   className="rounded-md py-2 px-3 justify-center bg-blue-500 text-white flex gap-x-2"

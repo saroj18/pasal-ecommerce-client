@@ -175,26 +175,26 @@ const Product = () => {
             See all your's products
           </ParaTypo>
         </div>
-        <SearchBox className="sm:max-w-[55%] md:max-w-[50%] lg:max-w-[30%] w-full" />
+        {/* <SearchBox className="sm:max-w-[55%] md:max-w-[50%] lg:max-w-[30%] w-full" /> */}
       </div>
       <hr />
       {loading ? <Shimmer height="100px" count={5} shape="rectange" /> : null}
-      {data?.length > 0 && (
-        <div className="bg-white ">
-          <table className="w-full overflow-auto text-base text-center rounded-md shadow-md">
+      {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Product Found</HeadingTypo> : (
+        <div className="bg-white overflow-auto ">
+          <table className="w-full text-base text-center rounded-md shadow-md">
             <thead>
               <tr className="border-2 border-gray-300">
-                <th className="p-3">Product</th>
-                <th className="p-3">Product Id</th>
-                <th className="p-3">Price</th>
-                <th className="p-3">Discount</th>
-                <th className="p-3">PAD</th>
-                <th className="p-3">Brand</th>
-                <th className="p-3">Category</th>
-                <th className="p-3">Review</th>
-                <th className="p-3">Total Sale</th>
-                <th className="p-3">Added Date</th>
-                <th className="p-3">Action</th>
+                <th className="p-3 whitespace-nowrap">Product</th>
+                <th className="p-3 whitespace-nowrap">Product Id</th>
+                <th className="p-3 whitespace-nowrap">Price</th>
+                <th className="p-3 whitespace-nowrap">Discount</th>
+                <th className="p-3 whitespace-nowrap">PAD</th>
+                <th className="p-3 whitespace-nowrap">Brand</th>
+                <th className="p-3 whitespace-nowrap">Category</th>
+                <th className="p-3 whitespace-nowrap">Review</th>
+                <th className="p-3 whitespace-nowrap">Total Sale</th>
+                <th className="p-3 whitespace-nowrap">Added Date</th>
+                <th className="p-3 whitespace-nowrap">Action</th>
               </tr>
             </thead>
 
@@ -205,7 +205,7 @@ const Product = () => {
                     key={product?._id}
                     className="border-2 border-gray-300  text-base"
                   >
-                    <td className="flex flex-col items-center p-2">
+                    <td className="flex flex-col items-center p-2 whitespace-nowrap">
                       <img
                         className="lg:h-[80px] h-[40px] rounded-md"
                         src={product.images[0]}
@@ -219,14 +219,14 @@ const Product = () => {
                       </ParaTypo>
                     </td>
                     <td title={product._id}>{product._id.slice(15)}</td>
-                    <td>Rs {product.price}</td>
+                    <td className="whitespace-nowrap">Rs {product.price}</td>
                     <td>{product.discount}%</td>
-                    <td>Rs {product.priceAfterDiscount}</td>
-                    <td>{product.brand}</td>
-                    <td>{product.category}</td>
-                    <td>{product?.review?.length}</td>
-                    <td>{product.totalSale}</td>
-                    <td>2024-03-11</td>
+                    <td className="whitespace-nowrap">Rs {product.priceAfterDiscount}</td>
+                    <td className="whitespace-nowrap">{product.brand}</td>
+                    <td className="whitespace-nowrap">{product.category}</td>
+                    <td className="whitespace-nowrap">{product?.review?.length}</td>
+                    <td className="whitespace-nowrap">{product.totalSale}</td>
+                    <td className="whitespace-nowrap">2024-03-11</td>
                     <td className="flex justify-around items-start gap-x-1 px-3">
                       <Trash
                         onClick={() => productDeleteHandler(product._id)}

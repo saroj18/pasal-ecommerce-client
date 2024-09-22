@@ -1,28 +1,39 @@
 import { useNavigate } from "react-router-dom";
-import { useContextProvider } from "../../context/Context";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { UserType } from "../../context/Context";
+import React, { useLayoutEffect } from "react";
+import { useAuth } from "../../context/AuthProvider";
+import dd from "../../../src/assets/loading.gif";
 
-const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useContextProvider();
+const PublicRoute = ({
+  children,
+  role,
+}: {
+  children: React.ReactNode;
+  role: string[];
+}) => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  console.log(user);
+  const { loading, data } = useAuth();
 
   useLayoutEffect(() => {
-    console.log(user)
     const checkUser = () => {
-      if (user && user.role == "customer"||user?.role=='seller') {
-        navigate("/", { replace: true });
-      } else {
-        setIsLoading(false);
+      if (data && role.includes((data as UserType).role)) {
+        if ((data as UserType).role == "customer") {
+          navigate("/", { replace: true });
+        }
+        if ((data as UserType).role == "seller") {
+          navigate("/dashboard", { replace: true });
+        }
+        if ((data as UserType).role == "admin") {
+          navigate("/admin/dashboard", { replace: true });
+        }
       }
     };
 
     checkUser();
-  }, [user]);
+  }, [data]);
 
-  if (isLoading) {
-    return null;
+  if (loading) {
+    return <img className="mx-auto w-[350px]" src={dd} alt="" />;
   }
 
   return children;

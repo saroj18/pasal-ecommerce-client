@@ -24,20 +24,21 @@ const Inventory = () => {
           </ParaTypo>
         </div>
         <div className="flex flex-col md:flex-row justify-between w-full lg:max-w-[60%] xl:max-w-[40%] items-center gap-3 ">
-          <SearchBox className="w-full md:max-w-[60%]" />
-          <div className="flex w-full flex-col lg:flex-row gap-3">
-            <Button className="bg-green-500 px-4 py-2 text-white rounded-md">
+          {/* <SearchBox className="w-full md:max-w-[60%]" /> */}
+          {/* <div className="flex w-full flex-col lg:flex-row gap-3">
+            <Button className="bg-green-500 px-4 max-w-sm py-2 mx-auto text-white rounded-md">
               High Sale
             </Button>
-            <Button className="bg-red-500 px-4 py-2 text-white rounded-md">
+            <Button className="bg-red-500 px-4 max-w-sm mx-auto py-2 text-white rounded-md">
               Low Sale
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
-      {data?.length > 0 && (
-        <Table className=" text-xs md:text-base text-center bg-white shadow-md my-4">
+      {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Product Found</HeadingTypo> :(
+        <div >
+          <Table className=" text-sm md:text-base  text-center bg-white shadow-md my-4">
           <TableHead
             tableHeadStyle="p-2"
             className="border-gray-300 border-t-2 border-b-2 border-l-0 border-r-0 sticky top-0 left-0 bg-white"
@@ -82,6 +83,7 @@ const Inventory = () => {
             })}
           </TableBody>
         </Table>
+        </div>
       )}
     </div>
   );

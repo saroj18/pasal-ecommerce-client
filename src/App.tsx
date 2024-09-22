@@ -60,10 +60,6 @@ import Message from "./customer/pages/account/page/Message";
 import Chat from "./seller/dashboard/pages/message/Chat";
 import PrivateRoute from "./components/private/PrivateRoute";
 import PublicRoute from "./components/private/PublicRoute";
-import PublicRouteForSeller from "./components/private/PublicRouteForSeller";
-import PrivateRouteForSeller from "./components/private/PrivateRouteForSeller";
-import PrivateRouteForAdmin from "./components/private/PrivateRouteForAdmin";
-import PublicRouteForAdmin from "./components/private/PublicRouteForAdmin";
 import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
 import ResetPassword from "./customer/pages/ResetPassword";
 
@@ -81,7 +77,7 @@ const App = () => {
         {
           path: "login",
           element: (
-            <PublicRoute>
+            <PublicRoute role={["customer", "seller"]}>
               <Login />
             </PublicRoute>
           ),
@@ -89,7 +85,7 @@ const App = () => {
         {
           path: "signup",
           element: (
-            <PublicRoute>
+            <PublicRoute role={["customer"]}>
               <Signup />
             </PublicRoute>
           ),
@@ -97,7 +93,7 @@ const App = () => {
         {
           path: "wishlist",
           element: (
-            <PrivateRoute>
+            <PrivateRoute role={["customer"]}>
               <Wishlist />
             </PrivateRoute>
           ),
@@ -105,7 +101,7 @@ const App = () => {
         {
           path: "myorder",
           element: (
-            <PrivateRoute>
+            <PrivateRoute role={["customer"]}>
               <MyOrder />
             </PrivateRoute>
           ),
@@ -117,7 +113,7 @@ const App = () => {
         {
           path: "cart",
           element: (
-            <PrivateRoute>
+            <PrivateRoute role={["customer"]}>
               <Cart />
             </PrivateRoute>
           ),
@@ -125,7 +121,7 @@ const App = () => {
         {
           path: "checkout",
           element: (
-            <PrivateRoute>
+            <PrivateRoute role={["customer"]}>
               <OrderCheckout />
             </PrivateRoute>
           ),
@@ -141,7 +137,7 @@ const App = () => {
         {
           path: "account",
           element: (
-            <PrivateRoute>
+            <PrivateRoute role={["customer", "seller"]}>
               <AccountLayout />
             </PrivateRoute>
           ),
@@ -181,17 +177,17 @@ const App = () => {
     {
       path: "/sellersignup",
       element: (
-        <PublicRouteForSeller>
+        <PublicRoute role={["seller"]}>
           <SellerSignUp />
-        </PublicRouteForSeller>
+        </PublicRoute>
       ),
     },
     {
       path: "/sellerlogin",
       element: (
-        <PublicRouteForSeller>
+        <PublicRoute role={["seller"]}>
           <SellerLogin />
-        </PublicRouteForSeller>
+        </PublicRoute>
       ),
     },
     {
@@ -209,9 +205,9 @@ const App = () => {
     {
       path: "/dashboard",
       element: (
-        <PrivateRouteForSeller>
+        <PrivateRoute role={["seller"]}>
           <SellerLayout />
-        </PrivateRouteForSeller>
+        </PrivateRoute>
       ),
       children: [
         {
@@ -263,25 +259,25 @@ const App = () => {
     {
       path: "/adminsignup",
       element: (
-        <PublicRouteForAdmin>
+        <PublicRoute role={["customer", "admin", "seller"]}>
           <AdminSignup />
-        </PublicRouteForAdmin>
+        </PublicRoute>
       ),
     },
     {
       path: "/adminlogin",
       element: (
-        <PublicRouteForAdmin>
+        <PublicRoute role={["customer", "admin", "seller"]}>
           <AdminLogin />
-        </PublicRouteForAdmin>
+        </PublicRoute>
       ),
     },
     {
       path: "/admin",
       element: (
-        <PrivateRouteForAdmin>
+        <PrivateRoute role={["admin"]}>
           <AdminLayout />
-        </PrivateRouteForAdmin>
+        </PrivateRoute>
       ),
       children: [
         {
