@@ -58,7 +58,7 @@ const ProductDescription = ({
               })}
           </div>
         </div>
-        <div className="flex flex-col gap-4 sm:flex-row w-full gap-x-5">
+        {/* <div className="flex flex-col gap-4 sm:flex-row w-full gap-x-5">
           <div>
             {Array(5)
               .fill(null)
@@ -92,7 +92,7 @@ const ProductDescription = ({
                 );
               })}
           </div>
-        </div>
+        </div> */}
       </div>
       <hr />
       {review &&

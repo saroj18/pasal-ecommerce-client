@@ -13,7 +13,7 @@ const Slider = ({ productList,loadingState }: { productList: any[],loadingState?
     <>
       <Swiper
         spaceBetween={10}
-        slidesPerView={4}
+        // slidesPerView={1}
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,
@@ -21,18 +21,27 @@ const Slider = ({ productList,loadingState }: { productList: any[],loadingState?
         }}
         loop={true}
         modules={[Autoplay]}
+        breakpoints={{
+            640: {
+              slidesPerView: 2, 
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4, 
+            },
+          }}
       >
-        <section className="flex flex-col items-center mt-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-x-3 ">
+        <section className="flex flex-col items-center mt-5 border-2 border-red-500">
             {loadingState?<Shimmer shape="rectange" width="300px" height="300px" count={4}/>:
               productList?.map((ele: any) => {
                 return (
-                  <SwiperSlide key={ele._id}>
+                  <SwiperSlide key={ele._id} className="">
                     <ProductCard  key={ele._id} product={ele} />
                   </SwiperSlide>
                 );
               })}
-          </div>
         </section>
       </Swiper>
       <Link to={"/allproducts"} className="flex justify-center">

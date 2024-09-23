@@ -14,20 +14,22 @@ const PrivateRoute = ({
   const { user } = useContextProvider();
   const { data, loading } = useAuth();
   const navigate = useNavigate();
+  console.log(data);
+  console.log((data as UserType)?.role);
 
   useLayoutEffect(() => {
     const checkUser = () => {
       if (
         (!loading && !data) ||
-        (data && !role.includes((data as UserType).role))
+        (data && !role?.includes((data as UserType).role))
       ) {
-        if ((data as UserType).role == "customer") {
+        if ((data as UserType)?.role == "customer") {
           navigate("/login", { replace: true });
         }
-        if ((data as UserType).role == "seller") {
+        if ((data as UserType)?.role == "seller") {
           navigate("/sellerlogin", { replace: true });
         }
-        if ((data as UserType).role == "admin") {
+        if ((data as UserType)?.role == "admin") {
           navigate("/adminlogin", { replace: true });
         }
       }

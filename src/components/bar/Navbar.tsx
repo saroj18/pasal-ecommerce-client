@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center container ">
       <Link to={"/"}>
-        <img src={logo} className="w-[80px] mr-10 hidden sm:block" alt="" />
+        <img src={logo} className="md:w-[80px] mr-10 w-[50px]" alt="" />
       </Link>
       <ul className=" hidden md:flex items-center gap-x-7">
         {navList.map((ele, index) => {
@@ -70,26 +70,30 @@ const Navbar = () => {
                 />
               )}
 
-              <div className="relative">
-                <Heart
-                  onClick={() => navigate("/wishlist")}
-                  className="cursor-pointer hidden lg:block"
-                  opacity={0.7}
-                />
-                <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
-                  {data?.wishListCount}
-                </ParaTypo>
-              </div>
-              <div className="relative">
-                <ShoppingCart
-                  onClick={() => navigate("/cart")}
-                  className="cursor-pointer hidden lg:block"
-                  opacity={0.7}
-                />
-                <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
-                  {cart}
-                </ParaTypo>
-              </div>
+              {user.role == "customer" && (
+                <>
+                  <div className="relative">
+                    <Heart
+                      onClick={() => navigate("/wishlist")}
+                      className="cursor-pointer hidden lg:block"
+                      opacity={0.7}
+                    />
+                    <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
+                      {data?.wishListCount}
+                    </ParaTypo>
+                  </div>
+                  <div className="relative">
+                    <ShoppingCart
+                      onClick={() => navigate("/cart")}
+                      className="cursor-pointer hidden lg:block"
+                      opacity={0.7}
+                    />
+                    <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
+                      {cart}
+                    </ParaTypo>
+                  </div>
+                </>
+              )}
               <div className="relative">
                 <User
                   onClick={(e) => {

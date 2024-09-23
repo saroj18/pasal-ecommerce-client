@@ -18,6 +18,7 @@ const Crousel = () => {
             pauseOnMouseEnter: true,
           }}
           modules={[Autoplay]}
+          style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}
         >
           <SwiperSlide>
             <img

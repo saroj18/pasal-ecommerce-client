@@ -5,11 +5,17 @@ import Option from "../../../../components/common/Option";
 import Button from "../../../../components/common/Button";
 import { useMutation } from "../../../../hooks/useMutation";
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { X } from "lucide-react";
 
 const FilterBar = ({
   setProduct,
+  className,
+  setOpen,
 }: {
   setProduct: React.Dispatch<React.SetStateAction<any[]>>;
+  className: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [filter, setFilter] = useState({
     category: "",
@@ -29,6 +35,7 @@ const FilterBar = ({
   useEffect(() => {
     if (data) {
       setProduct(data);
+      setOpen(false);
     }
   }, [data]);
 
@@ -38,10 +45,18 @@ const FilterBar = ({
   };
 
   return (
-    <section className="border-gray-300 border-2 h-fit sticky top-28 left-0 w-full max-w-[250px] rounded-md shadow-md mr-5 px-4 py-2">
+    <section
+      className={twMerge(
+        "border-gray-300 border-2 h-fit sticky top-28 left-0 w-full max-w-[250px] rounded-md shadow-md mr-5 px-4 py-2",
+        className,
+      )}
+    >
       <div className="flex justify-between relative items-center border-b-2 py-2">
         <HeadingTypo className=" text-xl">Filter</HeadingTypo>
-        {/* <X className="absolute cursor-pointer top-1 left-[90%]" /> */}
+        <X
+          onClick={() => setOpen(false)}
+          className="absolute cursor-pointer top-1 left-[90%] md:hidden"
+        />
       </div>
       <div className="my-3">
         <ParaTypo className="font-semibold text-xl my-3">Sort Price</ParaTypo>

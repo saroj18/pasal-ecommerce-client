@@ -1,8 +1,5 @@
-import CategorySideBar from "../../components/bar/CategorySideBar";
 import Crousel from "../../components/Crousel";
 import ProductSectionBar from "../../components/bar/ProductSectionBar";
-import CategoryCard from "../../components/CategoryCard";
-import { TabletSmartphone } from "lucide-react";
 import { VerifyPopup } from "../popup/VerifyPopup";
 import { useQuery } from "../../hooks/useQuery";
 import "swiper/css";
