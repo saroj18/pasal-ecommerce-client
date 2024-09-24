@@ -12,11 +12,13 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "chart.js": "^4.4.3",
+    "cohere-ai": "^7.13.2",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.12",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.376.0",
     "multi-range-slider-react": "^2.0.7",
+    "openai": "^4.63.0",
     "rc-slider": "^11.1.5",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

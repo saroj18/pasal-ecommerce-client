@@ -36,6 +36,7 @@ const Product = () => {
     setValue,
     reset,
     setError,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<ProductType>({
@@ -140,7 +141,7 @@ const Product = () => {
       {open && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col lg:flex-row gap-7 mt-5">
-            <ProductInfo errors={errors} register={register} />
+            <ProductInfo setValue={setValue} getValues={getValues} errors={errors} register={register} />
             <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
               <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
                 <ProductImage

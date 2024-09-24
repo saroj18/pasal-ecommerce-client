@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { addOnCache, getFromCache } from "../utils/cacheHolder";
 
@@ -18,9 +18,14 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | any>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = useCallback(async () => {
-    console.log("hey");
+    if (abortRef.current) {
+      abortRef.current?.abort();
+    }
+    abortRef.current = new AbortController();
+    const signal = abortRef.current.signal;
     setError(false);
     setLoading(true);
     try {
@@ -30,6 +35,7 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        signal,
       });
       const respData: ApiResponse<T> = await resp.json();
       setData(respData.data ?? null);
@@ -41,6 +47,10 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
         toast.success(respData.message);
       }
     } catch (err: any) {
+      if (err.name == "AbortError") {
+        console.log("abort");
+        return;
+      }
       setLoading(false);
       setError(true);
       toast.error("server started soon!!!");

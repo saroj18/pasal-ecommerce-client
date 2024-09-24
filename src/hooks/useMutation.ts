@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { addOnCache, getFromCache } from "../utils/cacheHolder";
 
@@ -28,6 +28,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [response, setResponse] = useState<any>();
+  const abortRef = useRef<AbortController | null>(null);
 
   const mutate = async (
     url: string,
@@ -36,12 +37,12 @@ export const useMutation = <T>(): UseMutationResult<T> => {
     refetch?: () => void,
     cache = false,
   ) => {
-    console.log(
-      "url>>",
-      url +
-        Object.keys(bodyData).toString() +
-        Object.values(bodyData).toString(),
-    );
+    if (abortRef.current) {
+      abortRef.current.abort();
+    }
+    abortRef.current = new AbortController();
+    const signal = abortRef.current?.signal;
+
     const payload =
       url +
       Object.keys(bodyData).toString() +
@@ -57,6 +58,7 @@ export const useMutation = <T>(): UseMutationResult<T> => {
       const resp = await fetch(`${import.meta.env.VITE_HOST}${url}`, {
         method,
         credentials: "include",
+        signal,
         body:
           bodyData instanceof FormData ? bodyData : JSON.stringify(bodyData),
         headers:
@@ -88,6 +90,10 @@ export const useMutation = <T>(): UseMutationResult<T> => {
       }
       setLoading(false);
     } catch (error: any) {
+      if (error.name == "AbortError") {
+        console.log("abort");
+        return;
+      }
       console.log(error);
       setLoading(false);
       setError(true);

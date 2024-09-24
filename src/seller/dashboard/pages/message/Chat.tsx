@@ -7,7 +7,6 @@ import jacket from "../../../../assets/jacket.png";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
-import { useQuery } from "../../../../hooks/useQuery";
 
 const Chat = () => {
   const [text, setText] = useState("");
@@ -16,7 +15,6 @@ const Chat = () => {
   const { socketServer } = useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
   const [id, setId] = useState("");
-  const { data, refetch } = useQuery<any[]>(`/chats?id=${id}`);
   const [client, setClient] = useState("");
   const [product, setProduct] = useState<{ sender: string; product: any }>({
     sender: "",
@@ -25,7 +23,16 @@ const Chat = () => {
 
   useEffect(() => {
     if (id) {
-      refetch();
+      getUser();
+    }
+    async function getUser() {
+      const resp = await fetch(import.meta.env.VITE_HOST + "/chats?id=" + id, {
+        method: "GET",
+        credentials: "include",
+      });
+      const info = await resp.json();
+      console.log(info);
+      setChat([...info.data]);
     }
   }, [id]);
 
@@ -92,12 +99,6 @@ const Chat = () => {
       });
     }
   }, [typing, chat]);
-
-  useEffect(() => {
-    if (data) {
-      setChat([...data]);
-    }
-  }, [data]);
 
   return (
     <div className="flex gap-x-2">

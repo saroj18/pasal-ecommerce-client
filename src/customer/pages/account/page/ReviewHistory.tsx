@@ -46,13 +46,13 @@ export const ReviewComponent = ({
             })}
         </section>
         <div className="flex gap-x-4 items-center">
-          <ThumbsUp className="cursor-pointer" />
-          <ThumbsDown className="cursor-pointer" />
-          {flag && (
+          {/* <ThumbsUp className="cursor-pointer" />
+          <ThumbsDown className="cursor-pointer" /> */}
+          {/* {flag && (
             <Button className="border-2 border-gray-500 rounded-md py-1 px-2">
               Edit
             </Button>
-          )}
+          )} */}
         </div>
       </div>
       <ParaTypo>{info?.reviewMessage}</ParaTypo>

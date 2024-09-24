@@ -4,6 +4,7 @@ import ParaTypo from "../../../components/common/ParaTypo";
 import Input from "../../../components/common/Input";
 import { FormProps, ProductType } from "../pages/product/Product";
 import { UseFormSetValue, UseFormTrigger } from "react-hook-form";
+import { Sparkles } from "lucide-react";
 
 interface ProductImageProps extends FormProps {
   setValue: UseFormSetValue<ProductType>;
@@ -34,6 +35,22 @@ const ProductImage = ({
     }
   };
 
+  const imageGenerateHandler = async () => {
+    const resp = await fetch("https://api.picogen.io/v1/job/generate", {
+      method: "POST",
+      body: JSON.stringify({
+        prompt: "A beautiful landscape with mountains and a lake",
+        ratio: "16:9",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "API-Token": 'apiToken',
+      },
+    });
+    const data = await resp.json();
+    console.log(data);
+  };
+
   useEffect(() => {
     if (updateData) {
       setValue("images", "UPDATE");
@@ -42,9 +59,18 @@ const ProductImage = ({
 
   return (
     <div className="border-2 border-gray-300 rounded-md p-2 grow w-full">
-      <HeadingTypo className="text-2xl font-semibold">
-        Product Image
-      </HeadingTypo>
+      <div className="flex items-center justify-between">
+        <HeadingTypo className="text-xl font-semibold">
+          Product Image
+        </HeadingTypo>
+        {/* <ParaTypo
+          onClick={imageGenerateHandler}
+          className="w-fit rounded-md text-white px-2 text-sm cursor-pointer select-none flex items-center py-1 border-2 border-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-border"
+        >
+          Generate
+          <Sparkles size={20} />
+        </ParaTypo> */}
+      </div>
       <ParaTypo className="opacity-75 mb-2 text-[15px]">
         (5 images required)
       </ParaTypo>

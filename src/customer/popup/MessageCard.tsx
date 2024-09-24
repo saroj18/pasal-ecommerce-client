@@ -4,7 +4,7 @@ type MessageCardProps = {
   message: string | boolean;
   messageType: string | undefined;
   user: string;
-  msg: MessageProps;
+  msg?: MessageProps;
 };
 
 const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
@@ -17,7 +17,7 @@ const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
         <p className="text-sm">{user}</p>
         <p
           className={` p-2 rounded-lg ${messageType == msg?.receiver ? "bg-blue-500 text-white" : "bg-gray-500 text-white"}`}
-          title={new Date(msg.createdAt as string).toLocaleTimeString()}
+          title={new Date(msg!.createdAt as string).toLocaleTimeString()}
         >
           {message}
         </p>
