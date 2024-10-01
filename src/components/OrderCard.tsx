@@ -4,12 +4,11 @@ import HeadingTypo from "./common/HeadingTypo";
 import { MapPin, Truck } from "lucide-react";
 import Button from "./common/Button";
 import { useMutation } from "../hooks/useMutation";
-import { useContextProvider } from "../context/Context";
+import { useAuth, UserType } from "../context/AuthProvider";
 
 const OrderCard = ({
   background,
   info,
-  date,
   element,
 }: {
   background: string;
@@ -18,7 +17,8 @@ const OrderCard = ({
   element?: any;
 }) => {
   const { mutate } = useMutation();
-  const { user } = useContextProvider();
+  let {data:user}=useAuth()
+  user=user as UserType
   const clickHandler = (id: string) => {
     mutate("/order/cancled", "POST", { id });
   };

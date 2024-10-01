@@ -10,15 +10,16 @@ import { EditProfileZodSchema } from "../../../zodschema/user";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import { useQuery } from "../../../../hooks/useQuery";
 import { useEffect } from "react";
 import { useMutation } from "../../../../hooks/useMutation";
+import { useAuth, UserType } from "../../../../context/AuthProvider";
 
 type EditProfileType = z.infer<typeof EditProfileZodSchema>;
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { data } = useQuery<any>("/user");
+  let{data}=useAuth()
+  data=data as UserType
   const { mutate } = useMutation();
   console.log(data);
   const {

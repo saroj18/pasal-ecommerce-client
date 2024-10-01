@@ -7,15 +7,19 @@ import jacket from "../../../../assets/jacket.png";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
+// import VideoCallPopup from "../../../components/VideoCallPopup";
 
 const Chat = () => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
-  const { socketServer } = useContextProvider();
+  const { socketServer } =
+    useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
+  // const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
   const [id, setId] = useState("");
   const [client, setClient] = useState("");
+  // const [open, setOpen] = useState(false);
   const [product, setProduct] = useState<{ sender: string; product: any }>({
     sender: "",
     product: "",
@@ -73,12 +77,29 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    if (socketServer)
-      socketServer.onmessage = (info) => {
-        const serverData = JSON.parse(info.data);
-        if (serverData.type == "typing") {
-          setTyping(serverData.message);
-        }
+    const handleMessage = async (info: MessageEvent) => {
+      console.log(info);
+      const serverData = JSON.parse(info.data);
+      if (serverData.type == "typing") {
+        setTyping(serverData.message);
+      }
+      // if (rtcConnection) {
+        // if (serverData.type == "rtcOffer") {
+        //   await rtcConnection?.setRemoteDescription(
+        //     new RTCSessionDescription(serverData.sdp),
+        //   );
+        //   setRtcOffer(serverData);
+        // }
+        // if (serverData.type == "ice-candidate") {
+        //   console.log(serverData);
+        //   console.log(new RTCIceCandidate(serverData.candidate));
+        //   if (serverData.candidate) {
+        //     rtcConnection.addIceCandidate(
+        //       new RTCIceCandidate(serverData.candidate),
+        //     );
+        //   }
+        //   console.log("ice fireddddddddddd");
+        // }
         if (serverData.type == "customer_and_vendor_chat") {
           setChat((prv) => [...prv, serverData]);
           if (product?.product?._id !== serverData.product._id) {
@@ -88,7 +109,28 @@ const Chat = () => {
             });
           }
         }
-      };
+      // }
+    };
+
+    if (socketServer ) {
+      socketServer.addEventListener("message", handleMessage);
+      // rtcConnection.ontrack = (event) => {
+      //   console.log("video receive");
+
+      //   event.streams[0].getTracks().forEach((track) => {
+      //     (remoteVideoRef.current!.srcObject as MediaStream).addTrack(track);
+      //   });
+      //   if (remoteVideoRef.current) {
+      //     remoteVideoRef.current.srcObject = event.streams[0];
+      //   }
+      // };
+    }
+
+    return () => {
+      if (socketServer) {
+        socketServer.removeEventListener("message", handleMessage);
+      }
+    };
   }, [socketServer]);
 
   useEffect(() => {
@@ -100,8 +142,14 @@ const Chat = () => {
     }
   }, [typing, chat]);
 
+  // useEffect(() => {
+  //   setOpen(rtcOffer?.sdp ? true : false);
+  // }, [rtcOffer]);
+console.log(chat)
   return (
     <div className="flex gap-x-2">
+    
+      {/* <VideoCallPopup open={open} setOpen={setOpen} /> */}
       <Sidebar setId={setId} setClient={setClient} />
       <div className="rounded-md p-1 w-full">
         <div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
@@ -122,10 +170,11 @@ const Chat = () => {
         >
           {chat.map(
             (msg, index) =>
-              (msg.receiver == id || msg.sender == id) && (
+              (msg.receiver._id == id || msg.sender._id == id) &&
+              msg.message && (
                 <MessageCard
                   key={index}
-                  user={"bhola"}
+                  user={msg.sender.fullname}
                   message={msg.message}
                   messageType={id}
                   msg={msg}

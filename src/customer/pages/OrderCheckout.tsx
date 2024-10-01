@@ -37,7 +37,7 @@ const OrderCheckout = () => {
 
   const [orderDetails, setOrderDetails] = useState<OrderType>({
     product: [],
-    payMethod: "cash",
+    payMethod: "",
     deleveryAddress: "",
     billingAddress: "",
     totalPrice: 0,

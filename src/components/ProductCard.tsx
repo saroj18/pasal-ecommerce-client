@@ -14,10 +14,13 @@ type cardProps = {
 const ProductCard = ({ remove = false, icon, product }: cardProps) => {
   const { mutate } = useMutation();
 
-  const deleteHandler = (e: React.MouseEvent<SVGSVGElement>, id: string) => {
-    e.preventDefault();
-    mutate("/product/wishlist", "DELETE", { productId: id });
-  };
+  const deleteHandler = useCallback(
+    (e: React.MouseEvent<SVGSVGElement>, id: string) => {
+      e.preventDefault();
+      mutate("/product/wishlist", "DELETE", { productId: id });
+    },
+    [],
+  );
 
   return (
     <>

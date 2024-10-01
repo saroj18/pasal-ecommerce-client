@@ -1,5 +1,4 @@
 import HeadingTypo from "../../../components/common/HeadingTypo";
-import SearchBox from "../../../components/common/Search";
 import TableHead from "../../../components/common/TableHead";
 import TableBody from "../../../components/common/TableBody";
 import TableRow from "../../../components/common/TableRow";
@@ -15,7 +14,7 @@ import Shimmer from "../../../components/common/Shimmer";
 
 const User = () => {
   const { data, refetch, loading } = useQuery<any>("/user/allcustomer");
-  const { mutate, data: deleteData } = useMutation();
+  const { mutate, } = useMutation();
   const navigate = useNavigate();
 
   const blockHandler = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
@@ -33,7 +32,7 @@ const User = () => {
     <div>
       <div className="flex justify-between items-center">
         <HeadingTypo className="text-2xl p-3">All Users</HeadingTypo>
-        <SearchBox className="w-[300px]" />
+        {/* <SearchBox className="w-[300px]" /> */}
       </div>
       <hr />
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}

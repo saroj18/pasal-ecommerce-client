@@ -1,10 +1,17 @@
 import React, { createContext, useContext } from "react";
 import { useQuery } from "../hooks/useQuery";
+import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
 
 export interface UserType {
   fullname: string;
   role: "customer" | "admin" | "seller";
   verify: boolean;
+  email:string
+  dob:string
+  mobile:string
+  gender:"male"|"female"
+  address:AddressForm
+  oAuthLogin:boolean
 }
 
 interface ContextType {

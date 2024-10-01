@@ -11,8 +11,8 @@ const Table = ({
   return (
     <table
       className={twMerge(
-        className,
         "w-full text-center mt-5 bg-white shadow-lg",
+        className,
       )}
     >
       {children}

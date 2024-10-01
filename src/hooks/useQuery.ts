@@ -21,6 +21,7 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = useCallback(async () => {
+    console.log(navigator.onLine);
     if (abortRef.current) {
       abortRef.current?.abort();
     }

@@ -15,7 +15,7 @@ import { useContextProvider } from "../../context/Context";
 const SellerLogin = () => {
   const navigate = useNavigate();
   const { mutate, response } = useMutation<any>();
-  const { setUser } = useContextProvider();
+  // const { setUser } = useContextProvider();
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ console.log('damm')
       if (!response.data.shopVerify) {
         navigate("/otp");
       } else {
-        setUser(response.data);
+        // setUser(response.data);
         navigate("/dashboard");
         window.location.reload();
       }

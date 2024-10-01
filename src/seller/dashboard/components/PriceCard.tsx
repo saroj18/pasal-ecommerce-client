@@ -7,25 +7,18 @@ import AddFeatures from "./AddFeatures";
 import { useContextProvider } from "../../../context/Context";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { FormProps, ProductType } from "../pages/product/Product";
-import { UseFormReset, UseFormSetValue } from "react-hook-form";
+import {  UseFormSetValue } from "react-hook-form";
 
 export interface PriceCardProps extends FormProps {
   setValue:UseFormSetValue<ProductType>
   updateData?: any;
 }
 
-const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => {
-  const { setProductInfo, zodError } = useContextProvider();
+const PriceCard = ({ register, errors,setValue,updateData}: PriceCardProps) => {
+  const {  zodError } = useContextProvider();
   console.log(zodError);
 
-  const changeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    setProductInfo((prv) => ({
-      ...prv,
-      [e.target.name]: e.target.value,
-    }));
-  };
+ 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 border-2 border-gray-300 rounded-md p-3">
@@ -34,7 +27,6 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
           <div className="flex flex-col">
             <Input
               {...register("price")}
-              onChange={changeHandler}
               name="price"
               className="h-[50px]"
               placeholder="enter price"
@@ -51,7 +43,6 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
             <Input
               {...register("discount")}
               name="discount"
-              onChange={changeHandler}
               className="h-[50px]"
               placeholder="enter discount(%)"
               type="text"
@@ -66,7 +57,6 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
           <div className="flex flex-col">
             <Input
               {...register("stock")}
-              onChange={changeHandler}
               name="stock"
               className="h-[50px]"
               placeholder="enter stock"
@@ -81,7 +71,6 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
           <Label className="text-2xl font-semibold ">Barganing</Label>
           <Select
             {...register("barganing")}
-            onChange={changeHandler}
             name="barganing"
             className="h-[50px]"
           >
@@ -97,7 +86,6 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
           <Label className="text-2xl font-semibold ">Chating</Label>
           <Select
             {...register("chating")}
-            onChange={changeHandler}
             name="chating"
             className="h-[50px]"
           >
@@ -110,7 +98,7 @@ const PriceCard = ({ register, errors,setValue,updateData }: PriceCardProps) => 
           </ParaTypo>
         </div>
       </div>
-      <AddFeatures updateData={updateData} setValue={setValue} errors={errors} register={register} />
+      <AddFeatures  updateData={updateData} setValue={setValue} errors={errors} register={register} />
     </>
   );
 };

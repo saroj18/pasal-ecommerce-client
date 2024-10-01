@@ -13,21 +13,22 @@ import {
 } from "../../../zodschema/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import { useContextProvider } from "../../../../context/Context";
 import { useMutation } from "../../../../hooks/useMutation";
 import { useEffect, useState } from "react";
 import { zodErrorFormatter } from "../../../../utils/errorFormatter";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { VerifyForm, VerifyInfoTyype } from "../component/VerifyForm";
 
 export type AddressForm = z.infer<typeof AddressZodSchema>;
 
 type formProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   close?: boolean;
+  verifyInfo:VerifyInfoTyype | VerifyForm | AddressForm
 };
 
-const AddAddressForm = ({ setOpen, close = false }: formProps) => {
+const AddAddressForm = ({ setOpen, close = false,verifyInfo }: formProps) => {
   const { mutate, response } = useMutation();
   const [loc, setLoc] = useState({
     lat: 0,
@@ -56,7 +57,7 @@ const AddAddressForm = ({ setOpen, close = false }: formProps) => {
       // },
     },
   });
-  const { verifyInfo } = useContextProvider();
+  // const { verifyInfo } = useContextProvider();
 
   const clickHandler = () => {
     if (loc.lat > 0 || loc.lng > 0) return;

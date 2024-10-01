@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useContextProvider, UserType } from "../../context/Context";
 import React, { useLayoutEffect } from "react";
 import dd from "../../../src/assets/loading.gif";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth, UserType } from "../../context/AuthProvider";
 
 const PrivateRoute = ({
   children,
@@ -11,11 +10,9 @@ const PrivateRoute = ({
   children: React.ReactNode;
   role: string[];
 }) => {
-  const { user } = useContextProvider();
-  const { data, loading } = useAuth();
+  let { data, loading } = useAuth();
+  data=data as UserType
   const navigate = useNavigate();
-  console.log(data);
-  console.log((data as UserType)?.role);
 
   useLayoutEffect(() => {
     const checkUser = () => {
@@ -36,7 +33,7 @@ const PrivateRoute = ({
     };
 
     checkUser();
-  }, [user, loading]);
+  }, [data, loading]);
 
   if (loading) {
     return <img className="mx-auto w-[350px]" src={dd} alt="" />;

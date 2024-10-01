@@ -16,8 +16,8 @@ type ChatPopupProps = {
 };
 
 export type MessageProps = {
-  sender?: string;
-  receiver: string;
+  sender?: any;
+  receiver: any;
   message: string | boolean;
   type: string;
   createdAt?: string;
@@ -97,6 +97,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
       setChat([...data]);
     }
   }, [data]);
+  console.log(chat);
 
   return (
     <Popup
@@ -119,15 +120,18 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
           ref={messageBodyRef}
           className="flex flex-col w-full h-[330px] overflow-y-auto"
         >
-          {chat.map((msg, index) => (
-            <MessageCard
-              key={index}
-              user={"chola"}
-              message={msg.message}
-              messageType={userId}
-              msg={msg}
-            />
-          ))}
+          {chat&&chat.map((msg, index) => {
+            if (!msg.message) return;
+            return (
+              <MessageCard
+                key={index}
+                user={msg.sender.fullname}
+                message={msg.message}
+                messageType={userId}
+                msg={msg}
+              />
+            );
+          })}
           {typing && (
             <ParaTypo className="text-center text-sm text-green-500">
               typing.....

@@ -4,7 +4,6 @@ import ParaTypo from "../../../components/common/ParaTypo";
 import Input from "../../../components/common/Input";
 import { FormProps, ProductType } from "../pages/product/Product";
 import { UseFormSetValue, UseFormTrigger } from "react-hook-form";
-import { Sparkles } from "lucide-react";
 
 interface ProductImageProps extends FormProps {
   setValue: UseFormSetValue<ProductType>;
@@ -35,21 +34,7 @@ const ProductImage = ({
     }
   };
 
-  const imageGenerateHandler = async () => {
-    const resp = await fetch("https://api.picogen.io/v1/job/generate", {
-      method: "POST",
-      body: JSON.stringify({
-        prompt: "A beautiful landscape with mountains and a lake",
-        ratio: "16:9",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "API-Token": 'apiToken',
-      },
-    });
-    const data = await resp.json();
-    console.log(data);
-  };
+  
 
   useEffect(() => {
     if (updateData) {

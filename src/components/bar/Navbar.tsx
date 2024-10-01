@@ -8,6 +8,7 @@ import SearchBox from "../common/Search";
 import ParaTypo from "../common/ParaTypo";
 import { useQuery } from "../../hooks/useQuery";
 import { useContextProvider } from "../../context/Context";
+import { useAuth, UserType } from "../../context/AuthProvider";
 
 // type CountType={
 //   wishListCount:number
@@ -18,7 +19,9 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const navigate = useNavigate();
   const { data } = useQuery<any>("/product/cartandwishlist/count");
-  const { user, cart, setCart } = useContextProvider();
+  const {  cart, setCart } = useContextProvider();
+  let{data:user}=useAuth()
+  user=user as UserType
   const [focus, setFocus] = useState(false);
   console.log(data);
 

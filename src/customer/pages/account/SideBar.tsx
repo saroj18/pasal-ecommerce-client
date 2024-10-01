@@ -2,9 +2,12 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { useContextProvider } from "../../../context/Context";
+import { useAuth, UserType } from "../../../context/AuthProvider";
 
 const SideBar = () => {
   const { accountSideBar, setAccountSideBar } = useContextProvider();
+  let {data:user}=useAuth()
+user=user as UserType
 
   return (
     <aside
@@ -26,11 +29,9 @@ const SideBar = () => {
         <Link to={"/account/addressbook"}>
           <li className="cursor-pointer">Address Book</li>
         </Link>
-        <Link to={"/account/verify"}>
-          <li className="cursor-pointer">
-            Verify Yourself
-          </li>
-        </Link>
+        {!user.verify&&<Link to={"/account/verify"}>
+          <li className="cursor-pointer">Verify Yourself</li>
+        </Link>}
       </ul>
       <Link to={"/account/myreview"}>
         <HeadingTypo className="text-lg cursor-pointer my-2">

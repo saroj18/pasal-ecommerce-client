@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useContextProvider } from "../../context/Context";
 
 type dropdownProps = {
   className: string;
@@ -24,7 +23,7 @@ type dropdownProps = {
 const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
   ({ className, cartCount, wishListCount, setDropdown }, ref) => {
     const navigate = useNavigate();
-    const { setUser } = useContextProvider();
+    // const { setUser } = useContextProvider();
     const dropDownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -53,7 +52,7 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
         const data = await resp.json();
         if (data.success) {
           toast.success(data.message);
-          setUser(null);
+          // setUser(null);
           navigate("/login", { replace: true });
           window.location.reload();
         } else {

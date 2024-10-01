@@ -1,51 +1,30 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
-import {
-  VerifyForm,
-  VerifyInfoTyype,
-} from "../customer/pages/account/component/VerifyForm";
-import { useQuery } from "../hooks/useQuery";
+// type RtcOfferType = {
+//   sdp: RTCSessionDescriptionInit;
+//   type: string;
+//   sender: string;
+//   receiver: string;
+// };
 
-export type UserType = {
-  fullname: string;
-  role: "customer" | "admin" | "seller";
-  verify: boolean;
-};
 
-type ProductType = {
-  name: string;
-  description: string;
-  brand: string;
-  category: string;
-  barganing: string;
-  chating: string;
-  stock: string;
-  discount: string;
-  price: string;
-  features: string[];
-  images?: File[];
-};
 type ProvideProps = {
   sidebar: boolean;
   setSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   accountSideBar: boolean;
   setAccountSideBar: React.Dispatch<React.SetStateAction<boolean>>;
-  productInfo: ProductType;
-  setProductInfo: React.Dispatch<React.SetStateAction<ProductType>>;
   zodError: { [key: string]: string };
   setZodError: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
   verifyPopup: boolean;
   setVerifyPopup: React.Dispatch<React.SetStateAction<boolean>>;
-  setVerifyInfo: React.Dispatch<
-    React.SetStateAction<AddressForm | VerifyForm | VerifyInfoTyype>
-  >;
-  verifyInfo: AddressForm | VerifyForm | VerifyInfoTyype;
-  data: any;
   socketServer: WebSocket | null;
-  user: UserType | null;
-  setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
   cart: number;
   setCart: React.Dispatch<React.SetStateAction<number>>;
+  // rtcConnection: RTCPeerConnection | null;
+  // setRtcConnection: React.Dispatch<
+  //   React.SetStateAction<RTCPeerConnection | null>
+  // >;
+  // rtcOffer: RtcOfferType | null;
+  // setRtcOffer: React.Dispatch<React.SetStateAction<RtcOfferType | null>>;
 };
 
 const ContextProvider = createContext<ProvideProps | null>(null);
@@ -56,45 +35,15 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [accountSideBar, setAccountSideBar] = useState<boolean>(false);
   const [zodError, setZodError] = useState<{ [key: string]: string }>({});
   const [socketServer, setSocketServer] = useState<WebSocket | null>(null);
-  const [user, setUser] = useState<UserType | null>(null);
   const [cart, setCart] = useState(0);
-  const [productInfo, setProductInfo] = useState<ProductType>({
-    name: "",
-    description: "",
-    brand: "",
-    category: "",
-    barganing: "",
-    chating: "",
-    stock: "",
-    discount: "",
-    price: "",
-    features: [],
-    images: [],
-  });
-  const [verifyInfo, setVerifyInfo] = useState<
-    VerifyInfoTyype | VerifyForm | AddressForm
-  >({
-    fullname: "",
-    email: "",
-    mobile: "",
-    dob: "",
-    state: "",
-    district: "",
-    tole: "",
-    city: "",
-    gender: "",
-    defaultAddress: "",
-    nearBy: "",
-    ward: "",
-    location: {
-      lat: 0,
-      lng: 0,
-    },
-  });
-
-  const { data } = useQuery<UserType>("/user", false);
+  // const [rtcConnection, setRtcConnection] = useState<RTCPeerConnection | null>(
+  //   null,
+  // );
+  // const [rtcOffer, setRtcOffer] = useState<RtcOfferType | null>(null);
+  
 
   useEffect(() => {
+    if (socketServer) return;
     const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL);
     socket.addEventListener("open", () => {
       console.log("socket connect with server successfully");
@@ -104,10 +53,19 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     return () => socket.close();
   }, []);
 
-  useEffect(() => {
-    setUser(data as UserType);
-  }, [data]);
-  console.log("context called");
+  // useEffect(() => {
+  //   const peer = new RTCPeerConnection({
+  //     iceServers: [
+  //       {
+  //         urls: [
+  //           "stun:stun.l.google.com:19302",
+  //           "stun:global.stun.twilio.com:3478",
+  //         ],
+  //       },
+  //     ],
+  //   });
+  //   setRtcConnection(peer);
+  // }, []);
 
   return (
     <ContextProvider.Provider
@@ -116,20 +74,17 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         setSidebar,
         accountSideBar,
         setAccountSideBar,
-        setProductInfo,
-        productInfo,
         zodError,
         setZodError,
         verifyPopup,
         setVerifyPopup,
-        setVerifyInfo,
-        verifyInfo,
-        data,
         socketServer,
-        user,
-        setUser,
         setCart,
         cart,
+        // rtcConnection,
+        // setRtcConnection,
+        // rtcOffer,
+        // setRtcOffer,
       }}
     >
       {children}

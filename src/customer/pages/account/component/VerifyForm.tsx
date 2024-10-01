@@ -11,26 +11,47 @@ import { UserVefifyZodSchema } from "../../../zodschema/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { z } from "zod";
-import { useContextProvider } from "../../../../context/Context";
+import { useAuth, UserType } from "../../../../context/AuthProvider";
 
 export type VerifyForm = z.infer<typeof UserVefifyZodSchema>;
 export type VerifyInfoTyype = VerifyForm & AddressForm;
 
 const VerifyForm = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { setVerifyInfo, data } = useContextProvider();
+  let {  data  } = useAuth()
+  data=data as UserType
+  const [verifyInfo, setVerifyInfo] = useState<
+    VerifyInfoTyype | VerifyForm | AddressForm
+  >({
+    fullname: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    state: "",
+    district: "",
+    tole: "",
+    city: "",
+    gender: "",
+    defaultAddress: "",
+    nearBy: "",
+    ward: "",
+    location: {
+      lat: 0,
+      lng: 0,
+    },
+  });
+
   console.log(data);
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors },
   } = useForm<VerifyForm>({
     resolver: zodResolver(UserVefifyZodSchema),
     defaultValues: {
-      fullname: data?.fullname,
-      email: data?.email,
+      fullname: data.fullname,
+      email: data.email,
       dob: "2000-01-05",
       gender: "male",
       mobile: "9876543210",
@@ -56,7 +77,7 @@ const VerifyForm = () => {
       });
     }
   }, [data]);
-  console.log(">>>", getValues("fullname"));
+  
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
       <HeadingTypo className="text-3xl my-3">Verify Yourself</HeadingTypo>
@@ -143,7 +164,7 @@ const VerifyForm = () => {
           </Button>
         </div>
       </form>
-      {open && <AddAddressForm setOpen={setOpen} />}
+      {open && <AddAddressForm verifyInfo={verifyInfo} setOpen={setOpen} />}
     </div>
   );
 };

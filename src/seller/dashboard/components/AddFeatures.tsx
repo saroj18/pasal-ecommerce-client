@@ -3,17 +3,14 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import Input from "../../../components/common/Input";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { X } from "lucide-react";
-import { useContextProvider } from "../../../context/Context";
 import { PriceCardProps } from "./PriceCard";
 
 const AddFeatures = ({
-  register,
   errors,
   setValue,
   updateData,
 }: PriceCardProps) => {
   const [features, setFeatures] = useState<string>("");
-  const { setProductInfo, productInfo } = useContextProvider();
   const [featuresCollection, setFeaturesCollection] = useState<string[]>([]);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFeatures(e.target.value);
@@ -24,7 +21,6 @@ const AddFeatures = ({
     setFeaturesCollection((prv) => [...prv, features]);
     setFeatures("");
   };
-  console.log(productInfo);
 
   useEffect(() => {
     setValue("features", featuresCollection);

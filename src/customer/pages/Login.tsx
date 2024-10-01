@@ -10,7 +10,6 @@ import { UserLoginZodSchema } from "../zodschema/user";
 import { z } from "zod";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect, useState } from "react";
-import { useContextProvider } from "../../context/Context";
 import PasswordResetPopup from "../popup/PasswordResetPopup";
 
 export type LoginInput = z.infer<typeof UserLoginZodSchema>;
@@ -18,7 +17,7 @@ export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 const Login = () => {
   const navigate = useNavigate();
   const { mutate, data } = useMutation<any>();
-  const { setUser } = useContextProvider();
+  // const { setUser } = useContextProvider();
   const [open, setOpen] = useState(false);
 
   const {
@@ -35,7 +34,7 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      setUser(data);
+      // setUser(data);
       navigate("/");
       window.location.reload();
       localStorage.setItem("role", "CUSTOMER");

@@ -19,8 +19,8 @@ const Customer = () => {
   const value = dayjs(data?.[0]?.createdAt).format("YYYY//MM/DD");
   console.log(value);
   return (
-    <div className="overflow-auto">
-      <div className="sticky left-0 top-0">
+    <div >
+      <div className="sticky left-0 top-0 bg-white z-0">
         <HeadingTypo className="text-3xl">Customers</HeadingTypo>
         <ParaTypo className="opacity-75 text-[15px]">
           all customers lists
@@ -34,7 +34,7 @@ const Customer = () => {
             <TableBody>
               {data?.map((ele: any) => {
                 return (
-                  <TableRow key={ele._id}>
+                  <TableRow key={ele._id} >
                     <TableData title={ele._id} className="p-2">
                       {ele.customer._id.slice(15)}
                     </TableData>

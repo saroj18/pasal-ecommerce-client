@@ -18,7 +18,7 @@ const DeleveryPerson = () => {
         <HeadingTypo className="text-2xl font-semibold  mt-6">
           All Delevery Person
         </HeadingTypo>
-        <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
+        {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
       </div>
       {loading ? <Shimmer height="60px" count={5} shape="rectange" /> : null}
       {data?.length > 0 && (

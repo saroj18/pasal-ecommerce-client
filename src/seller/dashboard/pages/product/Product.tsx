@@ -4,8 +4,7 @@ import ProductInfo from "../../components/ProductInfo";
 import ProductImage from "../../components/ProductImage";
 import CategoryCard from "../../components/CategoryCard";
 import PriceCard from "../../components/PriceCard";
-import SearchBox from "../../../../components/common/Search";
-import { Edit, Layers, Loader, Trash } from "lucide-react";
+import { Edit, Layers,  Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
 import { productZodSchema } from "../../../zodschema/product";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
@@ -26,10 +25,11 @@ const Product = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [updateData, setUpdateData] = useState<any>();
-  const { data, refetch, loading } = useQuery<any>("/product/myproduct");
-  const { mutate, data: mutateData } = useMutation();
 
-  console.log(updateData);
+  const { data, refetch, loading } = useQuery<any>("/product/myproduct");
+  const { mutate, data: mutateData,loading:mutateLoading } = useMutation();
+
+  console.log(mutateData);
   const {
     register,
     trigger,
@@ -141,7 +141,7 @@ const Product = () => {
       {open && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col lg:flex-row gap-7 mt-5">
-            <ProductInfo setValue={setValue} getValues={getValues} errors={errors} register={register} />
+            <ProductInfo  setValue={setValue} getValues={getValues} errors={errors} register={register} />
             <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
               <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
                 <ProductImage
@@ -161,7 +161,7 @@ const Product = () => {
               />
             </div>
           </div>
-          <Button className="bg-red-500 px-6 py-2 rounded-md text-white my-2">
+          <Button disabled={mutateLoading} className={`bg-red-500 px-6 py-2 rounded-md text-white my-2 ${mutateLoading?'cursor-progress':'cursor-pointer'}`}>
             {edit ? "Update Product" : "Add Product"}
           </Button>
         </form>

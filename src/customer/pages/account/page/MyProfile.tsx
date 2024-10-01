@@ -2,8 +2,8 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import Button from "../../../../components/common/Button";
 import { Link } from "react-router-dom";
-import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
+import { useAuth, UserType } from "../../../../context/AuthProvider";
 
 type detailsProps = {
   heading: string;
@@ -20,7 +20,8 @@ const DetailsBox = ({ heading, data }: detailsProps) => {
 };
 
 const MyProfile = () => {
-  const { data, loading } = useQuery<any>("/user");
+  let{data,loading}=useAuth()
+  data=data as UserType
   console.log(data);
   return (
     <div className="w-full p-4 bg-gray-50">

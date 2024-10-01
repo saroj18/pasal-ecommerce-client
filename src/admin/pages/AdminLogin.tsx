@@ -10,7 +10,6 @@ import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect } from "react";
-import { useContextProvider } from "../../context/Context";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const AdminLogin = () => {
       password: "password",
     },
   });
-  const { setUser } = useContextProvider();
+  // const { setUser } = useContextProvider();
 
   const onSubmit = (info: LoginInput) => {
     const { email, password } = info;
@@ -38,7 +37,7 @@ const AdminLogin = () => {
       if (!response.data.shopVerify) {
         navigate("/otp");
       } else {
-        setUser(response.data);
+        // setUser(response.data);
         navigate("/admin/dashboard");
         window.location.reload();
       }

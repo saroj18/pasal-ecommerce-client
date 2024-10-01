@@ -3,7 +3,6 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import Input from "../../../components/common/Input";
 import TextArea from "../../../components/common/TextArea";
 import Label from "../../../components/common/Label";
-import { useContextProvider } from "../../../context/Context";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { FormProps, ProductType } from "../pages/product/Product";
 import { Sparkles } from "lucide-react";
@@ -21,16 +20,7 @@ const ProductInfo = ({
   getValues,
   setValue,
 }: ProductProps) => {
-  const { setProductInfo } = useContextProvider();
   const [loading, setLoading] = useState(false);
-  const changeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setProductInfo((prv) => ({
-      ...prv,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const cohere = new CohereClient({
     token: "tyLKcseE30tYEopGs5vjnhaDiSY8s7QWaTWUUeDW",
@@ -62,7 +52,7 @@ const ProductInfo = ({
         <Label className="opacity-75">Input Your Product's Name</Label>
         <Input
           {...register("name")}
-          onChange={changeHandler}
+          // onChange={changeHandler}
           name="name"
           className="h-[50px]"
           placeholder="enter your product name"
@@ -86,7 +76,7 @@ const ProductInfo = ({
         </div>
         <TextArea
           {...register("description")}
-          onChange={changeHandler}
+          // onChange={changeHandler}
           name="description"
           className="rounded-md min-h-[200px] break-words p-2"
         />
@@ -97,7 +87,7 @@ const ProductInfo = ({
         <Label className="opacity-75">Input Your Product's Brand</Label>
         <Input
           {...register("brand")}
-          onChange={changeHandler}
+          // onChange={changeHandler}
           name="brand"
           className="h-[50px]"
           placeholder="enter your product brand"

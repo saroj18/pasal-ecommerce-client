@@ -2,11 +2,12 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import PersonalProfile from "./component/box/PersonalProfile";
 import AddressBox from "./component/box/AddressBox";
 import BillingAddress from "./component/box/BillingAddress";
-import { useQuery } from "../../../hooks/useQuery";
 import Shimmer from "../../../components/common/Shimmer";
+import { useAuth, UserType } from "../../../context/AuthProvider";
 
 const Account = () => {
-  const { data, loading } = useQuery<any>("/user");
+  let {data,loading}=useAuth()
+  data=data as UserType
   return (
     <div className=" p-2">
       <div className="flex items-center justify-between">

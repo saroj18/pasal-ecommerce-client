@@ -9,6 +9,6 @@ export const navList = [
   },
   {
     name: "I am Admin",
-    path: "/admin/dashboard",
+    path: "/adminlogin",
   },
 ];

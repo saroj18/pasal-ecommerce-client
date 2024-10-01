@@ -62,9 +62,14 @@ import PrivateRoute from "./components/private/PrivateRoute";
 import PublicRoute from "./components/private/PublicRoute";
 import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
 import ResetPassword from "./customer/pages/ResetPassword";
+// import VideoCall from "./customer/pages/account/page/VideoCall";
 
 const App = () => {
   const route = createBrowserRouter([
+    // {
+    //   path: "/call",
+    //   element: <VideoCall />,
+    // },
     {
       path: "/",
       element: <Layout />,
@@ -98,6 +103,7 @@ const App = () => {
             </PrivateRoute>
           ),
         },
+
         {
           path: "myorder",
           element: (

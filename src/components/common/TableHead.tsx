@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 
 const TableHead = ({
   tableHeadData,

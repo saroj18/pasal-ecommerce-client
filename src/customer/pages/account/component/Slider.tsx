@@ -33,7 +33,7 @@ const Slider = ({ productList,loadingState }: { productList: any[],loadingState?
             },
           }}
       >
-        <section className="flex flex-col items-center mt-5 border-2 border-red-500">
+        <section className="flex flex-col items-center mt-5 ">
             {loadingState?<Shimmer shape="rectange" width="300px" height="300px" count={4}/>:
               productList?.map((ele: any) => {
                 return (
