@@ -8,7 +8,7 @@ import Shimmer from "../../components/common/Shimmer";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data, loading } = useQuery<any>("/order/myorder");
+  const { data, loading } = useQuery<any>("/order/myorder",false);
 
   const clickHandler = (params: string) => {
     setOrderState(params);

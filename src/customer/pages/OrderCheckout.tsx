@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import SelectAndViewAddress from "./account/component/SelectAndViewAddress";
 import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Shimmer from "../../components/common/Shimmer";
 
 export type OrderType = {
@@ -30,24 +30,23 @@ const OrderCheckout = () => {
     data: productData,
     refetch,
     loading: cartLoading,
-  } = useQuery<Product[]>("/product/cart");
+  } = useQuery<Product[]>("/product/cart",false);
   const deleteFromCart = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };
 
   const [orderDetails, setOrderDetails] = useState<OrderType>({
     product: [],
-    payMethod: "",
+    payMethod: "cash",
     deleveryAddress: "",
     billingAddress: "",
     totalPrice: 0,
     deleveryCharge: 20,
     cartInfo: [],
   });
-  console.log("kera", productData);
 
   loading ? <h1>loading</h1> : null;
-  useLayoutEffect(() => {
+  useEffect(() => {
     let products: string[] = [];
     productData &&
       productData.forEach((ele: any) => {

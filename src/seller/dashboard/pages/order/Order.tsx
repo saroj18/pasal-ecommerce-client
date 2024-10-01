@@ -1,6 +1,5 @@
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import SearchBox from "../../../../components/common/Search";
 import Button from "../../../../components/common/Button";
 import { useMutation } from "../../../../hooks/useMutation";
 import { useQuery } from "../../../../hooks/useQuery";
@@ -8,7 +7,7 @@ import Shimmer from "../../../../components/common/Shimmer";
 
 const Order = () => {
   const { data, refetch, loading } = useQuery<any>("/order/sellerorder", false);
-  const { mutate } = useMutation<any>();
+  const { mutate,loading:orderLoading } = useMutation<any>();
   console.log(data);
 
   const orderPlacedHandler = (id: string) => {
@@ -85,12 +84,14 @@ const Order = () => {
                   </td>
                   <td className="p-2 flex gap-1 flex-col items-center">
                     <Button
+                      disabled={orderLoading}
                       onClick={() => orderPlacedHandler(ele._id)}
-                      className="bg-green-500 px-3 w-full py-2 text-white rounded-md"
+                      className={`bg-green-500 px-3 w-full py-2 text-white rounded-md `}
                     >
                       Placed
                     </Button>
                     <Button
+                      disabled={orderLoading}
                       onClick={() => orderCancledHandler(ele._id)}
                       className="bg-red-500 px-3 w-full py-2 text-white  rounded-md"
                     >

@@ -7,11 +7,9 @@ import { Trash } from "lucide-react";
 import { useMutation } from "../../hooks/useMutation";
 import Shimmer from "../../components/common/Shimmer";
 import { useEffect } from "react";
+import { useContextProvider } from "../../context/Context";
 
-const customEvent = (eventName: string) => {
-  const event = new CustomEvent<CustomEvent>(eventName);
-  window.dispatchEvent(event);
-};
+
 
 const Cart = () => {
   const {
@@ -20,9 +18,11 @@ const Cart = () => {
     loading: cartLoading,
   } = useQuery<any>("/product/cart", false);
   const { mutate, data: cartData } = useMutation();
+  const{setCart}=useContextProvider()
 
   const cartDeleteHandler = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
+    setCart((prv)=>prv-1)
   };
   useEffect(() => {
     let cartValue = Number(localStorage.getItem("cartCount"));
@@ -30,7 +30,6 @@ const Cart = () => {
     if (typeof cartData == "object") {
       localStorage.setItem("cartCount", JSON.stringify(cartValue - 1));
     }
-    customEvent("cartCount");
   }, [cartData]);
 
   return (

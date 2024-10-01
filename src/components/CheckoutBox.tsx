@@ -9,6 +9,8 @@ import { OrderType } from "../customer/pages/OrderCheckout";
 import { toast } from "react-toastify";
 import { useMutation } from "../hooks/useMutation";
 import EsewaPay from "./EsewaPay";
+import { useNavigate } from "react-router-dom";
+import { useContextProvider } from "../context/Context";
 
 type CheckoutBoxProps = {
   cartData: any;
@@ -23,19 +25,25 @@ const CheckoutBox = ({
 }: CheckoutBoxProps) => {
   const [payment, setPayment] = useState<boolean>(false);
   const [wallet, setWallet] = useState("");
-  const { mutate, data, loading } = useMutation<{ [key: string]: string }>();
+  const { mutate, data, loading,response } = useMutation<{ [key: string]: string }>();
   let totalPrice = 0;
+  const navigate = useNavigate()
+  const{setCart}=useContextProvider()
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
     if (e.target.value == "onlinepay") {
       setPayment(true);
     } else {
       setPayment(false);
+      setOrderDetails((prv)=>({
+        ...prv,
+        payMethod:'cash'
+      }))
     }
   };
 
   const walletHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setWallet(e.target.value);
   };
 
@@ -59,6 +67,13 @@ const CheckoutBox = ({
     }
   }, [wallet]);
 
+  useEffect(() => {
+    if (response && response.success) {
+      setCart(0)
+      navigate('/myorder')
+    }
+  },[response])
+
   const clickHandler = () => {
     if (!orderDetails.payMethod) {
       toast.error("please select payment method");
@@ -68,6 +83,9 @@ const CheckoutBox = ({
     }
     if (orderDetails.payMethod === "khalti") {
       mutate("/order/khalti", "POST", { orderDetails });
+    }
+    if (orderDetails.payMethod === "cash") {
+      mutate("/order/cash", "POST", { orderDetails });
     }
   };
 
