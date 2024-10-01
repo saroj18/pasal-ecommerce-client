@@ -11,7 +11,7 @@ const PrivateRoute = ({
   role: string[];
 }) => {
   let { data, loading } = useAuth();
-  data=data as UserType
+  data = data as UserType;
   const navigate = useNavigate();
 
   useLayoutEffect(() => {

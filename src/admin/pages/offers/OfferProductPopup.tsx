@@ -12,11 +12,19 @@ const OfferProductPopup = ({ open, setOpen, product }: PopupProps) => {
   return (
     <div>
       <Popup open={open} onClose={() => setOpen(false)}>
-        <ParaTypo className="text-center text-3xl mb-4">Offers Products List</ParaTypo>
+        <ParaTypo className="text-center text-3xl mb-4">
+          Offers Products List
+        </ParaTypo>
         {product &&
           product?.map((ele: any) => {
-            return  <img title={ele.name} className="h-[60px] border-2 rounded-md m-3 p-1 inline-block cursor-pointer" src={ele.images[0]} alt="" />
-            
+            return (
+              <img
+                title={ele.name}
+                className="h-[60px] border-2 rounded-md m-3 p-1 inline-block cursor-pointer"
+                src={ele.images[0]}
+                alt=""
+              />
+            );
           })}
       </Popup>
     </div>

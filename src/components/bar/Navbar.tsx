@@ -19,9 +19,9 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const navigate = useNavigate();
   const { data } = useQuery<any>("/product/cartandwishlist/count");
-  const {  cart, setCart } = useContextProvider();
-  let{data:user}=useAuth()
-  user=user as UserType
+  const { cart, setCart } = useContextProvider();
+  let { data: user } = useAuth();
+  user = user as UserType;
   const [focus, setFocus] = useState(false);
   console.log(data);
 

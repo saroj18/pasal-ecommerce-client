@@ -31,7 +31,11 @@ const Review = () => {
       </div>
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
       <div>
-        {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Review Found</HeadingTypo> :(
+        {data?.length < 1 ? (
+          <HeadingTypo className="text-center font-semibold text-xl">
+            0 Review Found
+          </HeadingTypo>
+        ) : (
           <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
             <thead>
               <tr className="sticky top-0 left-0 bg-white border-t-2">

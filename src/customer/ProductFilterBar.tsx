@@ -1,9 +1,7 @@
 import React from "react";
 
 const ProductFilterBar = () => {
-  return <div>
-    
-  </div>;
+  return <div></div>;
 };
 
 export default ProductFilterBar;

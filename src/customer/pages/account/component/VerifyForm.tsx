@@ -18,8 +18,8 @@ export type VerifyInfoTyype = VerifyForm & AddressForm;
 
 const VerifyForm = () => {
   const [open, setOpen] = useState<boolean>(false);
-  let {  data  } = useAuth()
-  data=data as UserType
+  let { data } = useAuth();
+  data = data as UserType;
   const [verifyInfo, setVerifyInfo] = useState<
     VerifyInfoTyype | VerifyForm | AddressForm
   >({
@@ -77,7 +77,7 @@ const VerifyForm = () => {
       });
     }
   }, [data]);
-  
+
   return (
     <div className="w-full max-w-[800px] shadow-md rounded-md p-2 m-2">
       <HeadingTypo className="text-3xl my-3">Verify Yourself</HeadingTypo>

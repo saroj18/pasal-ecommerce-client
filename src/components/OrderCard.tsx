@@ -17,8 +17,8 @@ const OrderCard = ({
   element?: any;
 }) => {
   const { mutate } = useMutation();
-  let {data:user}=useAuth()
-  user=user as UserType
+  let { data: user } = useAuth();
+  user = user as UserType;
   const clickHandler = (id: string) => {
     mutate("/order/cancled", "POST", { id });
   };

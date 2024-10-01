@@ -60,8 +60,17 @@ export const shopDetails = [
   },
 ];
 
+export const vendorMoreDetailsNav = [
+  "Orders",
+  "Reviews",
+  "Payment",
+  "Products",
+];
 
-export const vendorMoreDetailsNav=['Orders','Reviews','Payment','Products']
-
-
-export const tableHeadDataForPaymentHistory=["Id","Pay On","Pay Method","Product","Total",]
+export const tableHeadDataForPaymentHistory = [
+  "Id",
+  "Pay On",
+  "Pay Method",
+  "Product",
+  "Total",
+];

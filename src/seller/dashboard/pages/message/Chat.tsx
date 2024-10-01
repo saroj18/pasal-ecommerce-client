@@ -13,8 +13,7 @@ const Chat = () => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
-  const { socketServer } =
-    useContextProvider();
+  const { socketServer } = useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
   // const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
   const [id, setId] = useState("");
@@ -84,35 +83,35 @@ const Chat = () => {
         setTyping(serverData.message);
       }
       // if (rtcConnection) {
-        // if (serverData.type == "rtcOffer") {
-        //   await rtcConnection?.setRemoteDescription(
-        //     new RTCSessionDescription(serverData.sdp),
-        //   );
-        //   setRtcOffer(serverData);
-        // }
-        // if (serverData.type == "ice-candidate") {
-        //   console.log(serverData);
-        //   console.log(new RTCIceCandidate(serverData.candidate));
-        //   if (serverData.candidate) {
-        //     rtcConnection.addIceCandidate(
-        //       new RTCIceCandidate(serverData.candidate),
-        //     );
-        //   }
-        //   console.log("ice fireddddddddddd");
-        // }
-        if (serverData.type == "customer_and_vendor_chat") {
-          setChat((prv) => [...prv, serverData]);
-          if (product?.product?._id !== serverData.product._id) {
-            setProduct({
-              product: serverData.product,
-              sender: serverData.sender,
-            });
-          }
+      // if (serverData.type == "rtcOffer") {
+      //   await rtcConnection?.setRemoteDescription(
+      //     new RTCSessionDescription(serverData.sdp),
+      //   );
+      //   setRtcOffer(serverData);
+      // }
+      // if (serverData.type == "ice-candidate") {
+      //   console.log(serverData);
+      //   console.log(new RTCIceCandidate(serverData.candidate));
+      //   if (serverData.candidate) {
+      //     rtcConnection.addIceCandidate(
+      //       new RTCIceCandidate(serverData.candidate),
+      //     );
+      //   }
+      //   console.log("ice fireddddddddddd");
+      // }
+      if (serverData.type == "customer_and_vendor_chat") {
+        setChat((prv) => [...prv, serverData]);
+        if (product?.product?._id !== serverData.product._id) {
+          setProduct({
+            product: serverData.product,
+            sender: serverData.sender,
+          });
         }
+      }
       // }
     };
 
-    if (socketServer ) {
+    if (socketServer) {
       socketServer.addEventListener("message", handleMessage);
       // rtcConnection.ontrack = (event) => {
       //   console.log("video receive");
@@ -145,10 +144,9 @@ const Chat = () => {
   // useEffect(() => {
   //   setOpen(rtcOffer?.sdp ? true : false);
   // }, [rtcOffer]);
-console.log(chat)
+  console.log(chat);
   return (
     <div className="flex gap-x-2">
-    
       {/* <VideoCallPopup open={open} setOpen={setOpen} /> */}
       <Sidebar setId={setId} setClient={setClient} />
       <div className="rounded-md p-1 w-full">

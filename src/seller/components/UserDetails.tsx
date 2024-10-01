@@ -122,7 +122,9 @@ const UserDetails = () => {
           )}
         </div>
       </div>
-      <Button hidden className="w-full bg-red-500 text-white">Add</Button>
+      <Button hidden className="w-full bg-red-500 text-white">
+        Add
+      </Button>
     </form>
   );
 };

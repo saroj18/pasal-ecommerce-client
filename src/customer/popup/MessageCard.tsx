@@ -12,7 +12,9 @@ const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
     <div
       className={`flex gap-x-2 ${messageType == msg?.receiver._id ? " self-end" : "self-start"}`}
     >
-      <div className={`w-10 h-10 bg-gray-300 rounded-full ${messageType == msg?.receiver._id?'hidden':'block'}`}></div>
+      <div
+        className={`w-10 h-10 bg-gray-300 rounded-full ${messageType == msg?.receiver._id ? "hidden" : "block"}`}
+      ></div>
       <div className="flex flex-col gap-y-1">
         <p className="text-sm">{user}</p>
         <p

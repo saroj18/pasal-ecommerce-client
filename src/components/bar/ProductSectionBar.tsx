@@ -7,7 +7,6 @@ type productSectionProps = {
 };
 
 const ProductSectionBar = ({ heading, option = true }: productSectionProps) => {
-
   return (
     <div className="my-5">
       <p className="font-semibold text-red-500 text-xl text-center lg:text-left">
@@ -20,7 +19,6 @@ const ProductSectionBar = ({ heading, option = true }: productSectionProps) => {
           </TypoGraphy>
           {option && <Timmer />}
         </div>
-        
       </div>
     </div>
   );

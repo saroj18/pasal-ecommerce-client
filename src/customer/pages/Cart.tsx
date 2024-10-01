@@ -9,8 +9,6 @@ import Shimmer from "../../components/common/Shimmer";
 import { useEffect } from "react";
 import { useContextProvider } from "../../context/Context";
 
-
-
 const Cart = () => {
   const {
     data,
@@ -18,11 +16,11 @@ const Cart = () => {
     loading: cartLoading,
   } = useQuery<any>("/product/cart", false);
   const { mutate, data: cartData } = useMutation();
-  const{setCart}=useContextProvider()
+  const { setCart } = useContextProvider();
 
   const cartDeleteHandler = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
-    setCart((prv)=>prv-1)
+    setCart((prv) => prv - 1);
   };
   useEffect(() => {
     let cartValue = Number(localStorage.getItem("cartCount"));
@@ -99,10 +97,10 @@ const Cart = () => {
       )}
 
       <div className="w-fit mx-auto">
-        <Link to={'/allproducts'}>
-        <Button className="bg-red-500 text-white py-2 px-4 rounded-md mt-6 ">
-          Back to Shopping
-        </Button>
+        <Link to={"/allproducts"}>
+          <Button className="bg-red-500 text-white py-2 px-4 rounded-md mt-6 ">
+            Back to Shopping
+          </Button>
         </Link>
       </div>
     </div>

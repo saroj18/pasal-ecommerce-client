@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import OrderCard from "../../components/OrderCard";
@@ -8,46 +8,52 @@ import Shimmer from "../../components/common/Shimmer";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data, loading } = useQuery<any>("/order/myorder",false);
+  const { data, loading } = useQuery<any>("/order/myorder", false);
 
   const clickHandler = (params: string) => {
     setOrderState(params);
   };
 
-  if(data?.length<1){
-return <ParaTypo className="text-center text-4xl font-semibold my-3">0 Orders Found</ParaTypo>
+  if (data?.length < 1) {
+    return (
+      <ParaTypo className="text-center text-4xl font-semibold my-3">
+        0 Orders Found
+      </ParaTypo>
+    );
   }
 
   return (
     <div className="mt-4">
       <HeadingTypo className="text-3xl">My Orders</HeadingTypo>
       <ParaTypo className="opacity-75">my all orders</ParaTypo>
-      {data&&<div className="flex text-xs justify-around md:text-xl shadow-md mt-3 font-bold rounded-full bg-gray-100 gap-x-6 ">
-        <Button
-          onClick={() => clickHandler("shipping")}
-          className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
-            orderState == "shipping" ? "bg-red-500 text-white" : ""
-          }`}
-        >
-          On Shipping
-        </Button>
-        <Button
-          onClick={() => clickHandler("arrived")}
-          className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
-            orderState == "arrived" ? "bg-red-500 text-white" : ""
-          }`}
-        >
-          Arrived
-        </Button>
-        <Button
-          onClick={() => clickHandler("canceled")}
-          className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
-            orderState == "canceled" ? "bg-red-500 text-white" : ""
-          }`}
-        >
-          Canceled
-        </Button>
-      </div>}
+      {data && (
+        <div className="flex text-xs justify-around md:text-xl shadow-md mt-3 font-bold rounded-full bg-gray-100 gap-x-6 ">
+          <Button
+            onClick={() => clickHandler("shipping")}
+            className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
+              orderState == "shipping" ? "bg-red-500 text-white" : ""
+            }`}
+          >
+            On Shipping
+          </Button>
+          <Button
+            onClick={() => clickHandler("arrived")}
+            className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
+              orderState == "arrived" ? "bg-red-500 text-white" : ""
+            }`}
+          >
+            Arrived
+          </Button>
+          <Button
+            onClick={() => clickHandler("canceled")}
+            className={`w-full bg-white text-black p-3 rounded-full shadow-md hover:bg-red-500 hover:text-white ${
+              orderState == "canceled" ? "bg-red-500 text-white" : ""
+            }`}
+          >
+            Canceled
+          </Button>
+        </div>
+      )}
       {loading ? (
         <Shimmer shape="rectange" />
       ) : (

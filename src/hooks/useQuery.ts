@@ -17,7 +17,7 @@ type UseQueryResult<T> = {
 export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
   const [data, setData] = useState<T | T[] | any>(null);
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = useCallback(async () => {
@@ -55,6 +55,8 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
       setLoading(false);
       setError(true);
       toast.error("server started soon!!!");
+    } finally {
+      setLoading(false);
     }
   }, [url]);
 

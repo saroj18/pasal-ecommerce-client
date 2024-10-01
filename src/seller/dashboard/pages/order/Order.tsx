@@ -7,7 +7,7 @@ import Shimmer from "../../../../components/common/Shimmer";
 
 const Order = () => {
   const { data, refetch, loading } = useQuery<any>("/order/sellerorder", false);
-  const { mutate,loading:orderLoading } = useMutation<any>();
+  const { mutate, loading: orderLoading } = useMutation<any>();
   console.log(data);
 
   const orderPlacedHandler = (id: string) => {
@@ -30,7 +30,11 @@ const Order = () => {
         {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
       </div>
       {loading ? <Shimmer height="70px" count={9} shape="rectange" /> : null}
-      {data?.length <1?<HeadingTypo className="text-center font-semibold text-xl" >0 Orders Found </HeadingTypo>: (
+      {data?.length < 1 ? (
+        <HeadingTypo className="text-center font-semibold text-xl">
+          0 Orders Found{" "}
+        </HeadingTypo>
+      ) : (
         <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">
           <thead>
             <tr className="sticky top-0 left-0 bg-white border-t-2">

@@ -6,8 +6,8 @@ import Shimmer from "../../../components/common/Shimmer";
 import { useAuth, UserType } from "../../../context/AuthProvider";
 
 const Account = () => {
-  let {data,loading}=useAuth()
-  data=data as UserType
+  let { data, loading } = useAuth();
+  data = data as UserType;
   return (
     <div className=" p-2">
       <div className="flex items-center justify-between">

@@ -48,7 +48,10 @@ const ResetPassword = () => {
 
   const onSubmit = (data: InputType) => {
     console.log({ ...data, email: info?.data?.email });
-    mutate("/user/resetpassword", "POST", { ...data, email: info?.data?.email });
+    mutate("/user/resetpassword", "POST", {
+      ...data,
+      email: info?.data?.email,
+    });
   };
 
   return (

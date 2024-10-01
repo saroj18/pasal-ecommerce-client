@@ -6,20 +6,18 @@ interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-const Button =React.forwardRef<HTMLButtonElement,buttonProps>(({ children, className, ...rest },ref) => {
-  return (
-    <button
-      ref={ref}
-      {...rest}
-      className={twMerge(
-        "bg-blue-500 text-white p-3 rounded-md",
-        className
-      )}
-    >
-      {children}
-    </button>
-  );
-}
+const Button = React.forwardRef<HTMLButtonElement, buttonProps>(
+  ({ children, className, ...rest }, ref) => {
+    return (
+      <button
+        ref={ref}
+        {...rest}
+        className={twMerge("bg-blue-500 text-white p-3 rounded-md", className)}
+      >
+        {children}
+      </button>
+    );
+  },
 );
 
 export default Button;

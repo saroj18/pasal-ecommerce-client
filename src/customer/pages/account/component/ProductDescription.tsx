@@ -1,4 +1,4 @@
-import  { useCallback } from "react";
+import { useCallback } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { StarIcon } from "lucide-react";
@@ -8,19 +8,15 @@ type ProductDescriptionProps = {
   description: string;
   features: string[];
   review: any;
-  data:any
+  data: any;
 };
 
 const ProductDescription = ({
   description,
   features,
   review,
-  data
+  data,
 }: ProductDescriptionProps) => {
-
-
- 
-
   return (
     <div>
       <HeadingTypo className="text-2xl font-semibold mb-3 underline">
@@ -42,7 +38,7 @@ const ProductDescription = ({
       <div className="flex items-center gap-x-10 w-full max-w-[70%] mb-3">
         <div>
           <ParaTypo className="text-4xl font-semibold">
-            {data?.rating?.toFixed(1)||'0'}/5
+            {data?.rating?.toFixed(1) || "0"}/5
           </ParaTypo>
           <div className="flex items-center my-3">
             {Array(5)
@@ -51,8 +47,14 @@ const ProductDescription = ({
                 return (
                   <StarIcon
                     key={index}
-                    color={index < Math.floor(data?.rating) ? "orange" : "black"}
-                    fill={index < Math.floor(data?.rating) ? "orange" : "transparent"}
+                    color={
+                      index < Math.floor(data?.rating) ? "orange" : "black"
+                    }
+                    fill={
+                      index < Math.floor(data?.rating)
+                        ? "orange"
+                        : "transparent"
+                    }
                   />
                 );
               })}

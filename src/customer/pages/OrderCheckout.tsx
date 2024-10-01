@@ -25,12 +25,12 @@ type Product = {
 };
 
 const OrderCheckout = () => {
-  const { mutate,  loading } = useMutation();
+  const { mutate, loading } = useMutation();
   const {
     data: productData,
     refetch,
     loading: cartLoading,
-  } = useQuery<Product[]>("/product/cart",false);
+  } = useQuery<Product[]>("/product/cart", false);
   const deleteFromCart = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };

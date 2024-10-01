@@ -17,8 +17,6 @@ A full-featured multi-vendor eCommerce platform that allows multiple sellers to 
 - **Security:** 🔒 Robust security features including data validation, secure payments, and user authentication.
 - **Others:** 🛠 Additional features such as wish lists, product reviews, and more to enhance the shopping experience.
 
-
-
 ## 🛠️ Tech Stack
 
 - **Frontend:** React, Tailwind CSS
@@ -29,77 +27,93 @@ A full-featured multi-vendor eCommerce platform that allows multiple sellers to 
 - **Hosting:** Render, Vercel
 
 ## ✔️ Site URL
+
 🌐 [Pasal eCommerce Platform](https://pasal-ecommerce-client.vercel.app/)
 
 > **Note:** Our site is hosted on Render, so it may take a moment for the server to start. Please be patient while it loads. Thank you for your understanding!
 
 ## 🖥️ Server Repository
+
 📂 [Pasal eCommerce Server](https://github.com/saroj018/pasal-ecommerce-server)
 
 Explore the server-side codebase also.
-
 
 ## 🚀 Getting Started
 
 To get started with the project, follow these steps:
 
 1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/saroj018/multi-vendor-ecommerce.git
-    ```
+   ```bash
+   git clone https://github.com/saroj018/multi-vendor-ecommerce.git
+   ```
 2. **Install the dependencies**:
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 3. **Set up environment variables** for database connections and API keys.
 4. **Run the development server**:
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 ## 🖼️ Screenshots
+
 Here are some screenshots showcasing the platform's features and user interface:
 
 ### Home Page
+
 ![Home Page](src/assets/homepage.png)
 
 ### Vendor Dashboard
+
 ![Vendor Dashboard](src/assets/seller-dashboard.png)
 
 ### Admin Dashboard
+
 ![Vendor Dashboard](src/assets/admin-dashboard.png)
 
 ### Product Details Page
+
 ![Product Page](src/assets/product-details%20page.png)
 
 ### Vendor Info Page
+
 ![Product Page](src/assets/vendor-info-page.png)
 
 ### Vendor Analytics
+
 ![Admin Analytics](src/assets/vendor-analytics-graph.png)
 
-### Vendor List 
+### Vendor List
+
 ![Admin Analytics](src/assets/vendor%20list%20page.png)
 
-### User List 
+### User List
+
 ![Admin Analytics](src/assets/user%20list%20page.png)
 
 ### Seller Inventory Page
+
 ![Admin Analytics](src/assets/seller-inventorypage.png)
 
 ### Review Part
+
 ![Admin Analytics](src/assets/review-part.png)
 
 ### Profile Page
+
 ![Admin Analytics](src/assets/profile-page.png)
 
 ### Offer Create Page
+
 ![Admin Analytics](src/assets/offer%20create%20page.png)
 
 ### Seller Chat Page
+
 ![Admin Analytics](src/assets/seller-chatpage.png)
 
 ### Chat Popup
+
 ![Admin Analytics](src/assets/chat-box.png)
 
 > **Tip:** Add screenshots to the `assets` folder in your repository and use the relative path, e.g., `assets/homepage-screenshot.png`.

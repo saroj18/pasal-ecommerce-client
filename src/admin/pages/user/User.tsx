@@ -14,7 +14,7 @@ import Shimmer from "../../../components/common/Shimmer";
 
 const User = () => {
   const { data, refetch, loading } = useQuery<any>("/user/allcustomer");
-  const { mutate, } = useMutation();
+  const { mutate } = useMutation();
   const navigate = useNavigate();
 
   const blockHandler = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {

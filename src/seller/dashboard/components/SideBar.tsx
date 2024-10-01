@@ -1,9 +1,7 @@
 import { useState } from "react";
 import logo from "../../../assets/logo.jpg";
 import { AlignJustify, X } from "lucide-react";
-import {
-  listProps,
-} from "../constaints/sidebarList";
+import { listProps } from "../constaints/sidebarList";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { Link } from "react-router-dom";
 import { useContextProvider } from "../../../context/Context";

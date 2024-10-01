@@ -16,7 +16,7 @@ const Home = () => {
     useQuery<any>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
     useQuery<any>("/product/randomproducts");
-    
+
   return (
     <>
       <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">

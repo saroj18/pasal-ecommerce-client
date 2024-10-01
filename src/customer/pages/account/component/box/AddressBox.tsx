@@ -11,7 +11,13 @@ export type AddressProps = {
   user?: any;
 };
 
-const AddressBox = ({ address, cityWard, mobile, loading,user }: AddressProps) => {
+const AddressBox = ({
+  address,
+  cityWard,
+  mobile,
+  loading,
+  user,
+}: AddressProps) => {
   return (
     <div className="grow border-2 border-gray-300 rounded-md shadow-sm p-4">
       {loading ? (
@@ -24,11 +30,15 @@ const AddressBox = ({ address, cityWard, mobile, loading,user }: AddressProps) =
           <ParaTypo className="mb-2 font-semibold">
             Default Delvery Address
           </ParaTypo>
-          {user?.verify?<div className="flex flex-col gap-y-1 text-gray-500 ">
-            <ParaTypo>{cityWard}</ParaTypo>
-            <ParaTypo>{address}</ParaTypo>
-            <ParaTypo>{mobile}</ParaTypo>
-          </div>:<ParaTypo className="text-red-500">Please verify first</ParaTypo>}
+          {user?.verify ? (
+            <div className="flex flex-col gap-y-1 text-gray-500 ">
+              <ParaTypo>{cityWard}</ParaTypo>
+              <ParaTypo>{address}</ParaTypo>
+              <ParaTypo>{mobile}</ParaTypo>
+            </div>
+          ) : (
+            <ParaTypo className="text-red-500">Please verify first</ParaTypo>
+          )}
         </>
       )}
     </div>

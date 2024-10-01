@@ -5,11 +5,7 @@ import ParaTypo from "../../../components/common/ParaTypo";
 import { X } from "lucide-react";
 import { PriceCardProps } from "./PriceCard";
 
-const AddFeatures = ({
-  errors,
-  setValue,
-  updateData,
-}: PriceCardProps) => {
+const AddFeatures = ({ errors, setValue, updateData }: PriceCardProps) => {
   const [features, setFeatures] = useState<string>("");
   const [featuresCollection, setFeaturesCollection] = useState<string[]>([]);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

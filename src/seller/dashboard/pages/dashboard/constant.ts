@@ -1,5 +1,1 @@
-export const cardData=[
-    'Total Products',
-    'Total Sales',
-    'Total Orders',
-]
+export const cardData = ["Total Products", "Total Sales", "Total Orders"];

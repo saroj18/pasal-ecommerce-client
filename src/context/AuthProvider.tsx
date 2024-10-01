@@ -6,12 +6,12 @@ export interface UserType {
   fullname: string;
   role: "customer" | "admin" | "seller";
   verify: boolean;
-  email:string
-  dob:string
-  mobile:string
-  gender:"male"|"female"
-  address:AddressForm
-  oAuthLogin:boolean
+  email: string;
+  dob: string;
+  mobile: string;
+  gender: "male" | "female";
+  address: AddressForm;
+  oAuthLogin: boolean;
 }
 
 interface ContextType {

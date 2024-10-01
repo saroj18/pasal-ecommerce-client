@@ -23,8 +23,7 @@ const passwordZodSchema = z
       return val.length >= 8 && val.length <= 15;
     },
     {
-      message:
-        "Password must be between 8 and 15 characters long",
+      message: "Password must be between 8 and 15 characters long",
     },
   );
 

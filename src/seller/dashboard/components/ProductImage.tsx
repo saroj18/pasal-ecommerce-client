@@ -34,8 +34,6 @@ const ProductImage = ({
     }
   };
 
-  
-
   useEffect(() => {
     if (updateData) {
       setValue("images", "UPDATE");

@@ -7,8 +7,13 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import Shimmer from "../../../../components/common/Shimmer";
 
-const Slider = ({ productList,loadingState }: { productList: any[],loadingState?:boolean }) => {
-
+const Slider = ({
+  productList,
+  loadingState,
+}: {
+  productList: any[];
+  loadingState?: boolean;
+}) => {
   return (
     <>
       <Swiper
@@ -22,26 +27,29 @@ const Slider = ({ productList,loadingState }: { productList: any[],loadingState?
         loop={true}
         modules={[Autoplay]}
         breakpoints={{
-            640: {
-              slidesPerView: 2, 
-            },
-            768: {
-              slidesPerView: 3,
-            },
-            1024: {
-              slidesPerView: 4, 
-            },
-          }}
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
       >
         <section className="flex flex-col items-center mt-5 ">
-            {loadingState?<Shimmer shape="rectange" width="300px" height="300px" count={4}/>:
-              productList?.map((ele: any) => {
-                return (
-                  <SwiperSlide key={ele._id} className="">
-                    <ProductCard  key={ele._id} product={ele} />
-                  </SwiperSlide>
-                );
-              })}
+          {loadingState ? (
+            <Shimmer shape="rectange" width="300px" height="300px" count={4} />
+          ) : (
+            productList?.map((ele: any) => {
+              return (
+                <SwiperSlide key={ele._id} className="">
+                  <ProductCard key={ele._id} product={ele} />
+                </SwiperSlide>
+              );
+            })
+          )}
         </section>
       </Swiper>
       <Link to={"/allproducts"} className="flex justify-center">

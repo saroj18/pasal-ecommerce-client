@@ -1,10 +1,6 @@
 import React from "react";
 
-export const TableBody = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const TableBody = ({ children }: { children: React.ReactNode }) => {
   return <tbody>{children}</tbody>;
 };
 

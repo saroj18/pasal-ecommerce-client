@@ -29,8 +29,12 @@ const Sidebar = ({
       </ParaTypo>
       {loading ? (
         <Shimmer count={8} height="60px" shape="rectange" />
+      ) : data && data?.length < 1 ? (
+        <HeadingTypo className="text-center font-semibold text-xl">
+          0 User Found
+        </HeadingTypo>
       ) : (
-        data&&data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 User Found</HeadingTypo> :data?.map((ele) => {
+        data?.map((ele) => {
           return (
             <UserCard
               className={ele._id == current ? "bg-green-200" : ""}

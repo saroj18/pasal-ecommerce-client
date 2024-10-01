@@ -20,8 +20,8 @@ const DetailsBox = ({ heading, data }: detailsProps) => {
 };
 
 const MyProfile = () => {
-  let{data,loading}=useAuth()
-  data=data as UserType
+  let { data, loading } = useAuth();
+  data = data as UserType;
   console.log(data);
   return (
     <div className="w-full p-4 bg-gray-50">

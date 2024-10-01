@@ -1,11 +1,12 @@
 import React from "react";
 
-interface textAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface textAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className: string;
 }
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, textAreaProps>(
-  ({ className,...props }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <textarea
         className={

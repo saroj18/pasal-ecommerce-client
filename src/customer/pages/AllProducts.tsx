@@ -3,9 +3,10 @@ import HeadingTypo from "../../components/common/HeadingTypo";
 import ProductCard from "../../components/ProductCard";
 import { useQuery } from "../../hooks/useQuery";
 import FilterBar from "./account/component/FilterBar";
-import ProductFilterBar from "../ProductFilterBar";
 import Shimmer from "../../components/common/Shimmer";
 import Button from "../../components/common/Button";
+import { useThrottle } from "../../hooks/useThrottle";
+import ParaTypo from "../../components/common/ParaTypo";
 
 export type ElementType = {
   addedBy: { [key: string]: string };
@@ -27,42 +28,49 @@ export type ElementType = {
 const AllProducts = () => {
   const [product, setProduct] = useState<any[]>([]);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(8);
   const [open, setOpen] = useState(false);
-  const { data, loading, refetch } = useQuery<any>(
-    `/product?skip=${skip}&limit=${limit}`,
+  const [end,setEnd]=useState(false)
+  const { data, loading } = useQuery<any>(
+    `/product?skip=${skip}&limit=8`,
+    false,
   );
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   window.scrollTo({ top: 0 });
-    // }, 0);
-    if (data) {
+    if (product.length ===0) {
+      setTimeout(() => {
+      window.scrollTo({ top: 0 });
+    }, 0);
+    }
+    if (data && data.length <= 8) {
       setProduct((prv) => [...prv, ...data]);
-      console.log('hehe')
+    }
+    if (data&&data.length < 8) {
+      setEnd(true)
     }
   }, [data]);
 
-  useEffect(() => {
-    function scrollHandler() {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 3 >
-          document.documentElement.offsetHeight &&
-        !loading
-      ) {
-        console.log("hit");
-        setSkip((prv) => prv + 8);
-        // return;
-      }
-
-      // console.log(document.documentElement.offsetHeight);
-      // console.log(window.innerHeight + document.documentElement.scrollTop);
+  function scrollHandler() {
+    if (end) {
+      return;
     }
+   
+    if (
+      (!loading && data)&&
+      window.innerHeight + document.documentElement.scrollTop+500 >
+        document.documentElement.scrollHeight
+    ) {
+      setSkip((prv) => prv + 8);
+    }
+  }
 
-    window.addEventListener("scroll", scrollHandler);
+  const throttleFunction = useThrottle(scrollHandler, 300);
+  
+  useEffect(() => {
+    window.addEventListener("scroll", throttleFunction);
 
-    return () => window.removeEventListener("scroll", scrollHandler);
-  }, [skip]);
+    return () => window.removeEventListener("scroll", throttleFunction);
+  }, [skip,loading]);
+
   return (
     <div className="relative">
       <HeadingTypo className="text-2xl my-4">All Products</HeadingTypo>
@@ -75,21 +83,23 @@ const AllProducts = () => {
       {/* <ProductFilterBar /> */}
       <div className="flex  ">
         <FilterBar
-          className={`absolute top-0 ${open?'left-0':'-left-full'} bg-white z-10 md:sticky`}
+          className={`absolute top-0 ${open ? "left-0" : "-left-full"} bg-white z-10 md:sticky`}
           setProduct={setProduct}
           setOpen={setOpen}
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {loading ? (
+          {loading&&!data ? (
             <Shimmer count={6} width="320px" height="300px" shape="rectange" />
           ) : (
             product?.map((ele: ElementType, index: number) => {
               return <ProductCard product={ele} key={index} />;
             })
           )}
+
         </div>
       </div>
+          {loading&&data&&<ParaTypo className="text-4xl text-red-500 font-semibold text-center my-4">Loading...........</ParaTypo>}
     </div>
   );
 };

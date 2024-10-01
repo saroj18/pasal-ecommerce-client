@@ -28,8 +28,8 @@ const ProductDetails = () => {
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const { setCart } = useContextProvider();
-  let {data:user}=useAuth()
-  user=user as UserType
+  let { data: user } = useAuth();
+  user = user as UserType;
 
   let {
     data,

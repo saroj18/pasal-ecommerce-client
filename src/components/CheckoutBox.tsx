@@ -25,21 +25,23 @@ const CheckoutBox = ({
 }: CheckoutBoxProps) => {
   const [payment, setPayment] = useState<boolean>(false);
   const [wallet, setWallet] = useState("");
-  const { mutate, data, loading,response } = useMutation<{ [key: string]: string }>();
+  const { mutate, data, loading, response } = useMutation<{
+    [key: string]: string;
+  }>();
   let totalPrice = 0;
-  const navigate = useNavigate()
-  const{setCart}=useContextProvider()
+  const navigate = useNavigate();
+  const { setCart } = useContextProvider();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (e.target.value == "onlinepay") {
       setPayment(true);
     } else {
       setPayment(false);
-      setOrderDetails((prv)=>({
+      setOrderDetails((prv) => ({
         ...prv,
-        payMethod:'cash'
-      }))
+        payMethod: "cash",
+      }));
     }
   };
 
@@ -68,11 +70,11 @@ const CheckoutBox = ({
   }, [wallet]);
 
   useEffect(() => {
-    if (response && response.success) {
-      setCart(0)
-      navigate('/myorder')
+    if (response && response.success && orderDetails.payMethod == "cash") {
+      setCart(0);
+      navigate("/myorder");
     }
-  },[response])
+  }, [response]);
 
   const clickHandler = () => {
     if (!orderDetails.payMethod) {

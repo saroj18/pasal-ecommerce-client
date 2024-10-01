@@ -32,7 +32,7 @@ const SellerLogin = () => {
     const { email, password } = info;
     mutate("/user/login", "POST", { email, password, role: "seller" });
   };
-console.log('damm')
+  console.log("damm");
   useEffect(() => {
     console.log(response);
     if (response?.success && response?.data?.verify) {

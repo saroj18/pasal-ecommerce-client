@@ -4,7 +4,7 @@ import ProductInfo from "../../components/ProductInfo";
 import ProductImage from "../../components/ProductImage";
 import CategoryCard from "../../components/CategoryCard";
 import PriceCard from "../../components/PriceCard";
-import { Edit, Layers,  Trash } from "lucide-react";
+import { Edit, Layers, Trash } from "lucide-react";
 import Button from "../../../../components/common/Button";
 import { productZodSchema } from "../../../zodschema/product";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
@@ -27,7 +27,7 @@ const Product = () => {
   const [updateData, setUpdateData] = useState<any>();
 
   const { data, refetch, loading } = useQuery<any>("/product/myproduct");
-  const { mutate, data: mutateData,loading:mutateLoading } = useMutation();
+  const { mutate, data: mutateData, loading: mutateLoading } = useMutation();
 
   console.log(mutateData);
   const {
@@ -141,7 +141,12 @@ const Product = () => {
       {open && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col lg:flex-row gap-7 mt-5">
-            <ProductInfo  setValue={setValue} getValues={getValues} errors={errors} register={register} />
+            <ProductInfo
+              setValue={setValue}
+              getValues={getValues}
+              errors={errors}
+              register={register}
+            />
             <div className="flex grow flex-col border-2 border-gray-300 shadow-md rounded-md sm:p-5 gap-y-3 bg-white ">
               <div className=" gap-y-5 flex items-start flex-col md:flex-row gap-x-3">
                 <ProductImage
@@ -161,7 +166,10 @@ const Product = () => {
               />
             </div>
           </div>
-          <Button disabled={mutateLoading} className={`bg-red-500 px-6 py-2 rounded-md text-white my-2 ${mutateLoading?'cursor-progress':'cursor-pointer'}`}>
+          <Button
+            disabled={mutateLoading}
+            className={`bg-red-500 px-6 py-2 rounded-md text-white my-2 ${mutateLoading ? "cursor-progress" : "cursor-pointer"}`}
+          >
             {edit ? "Update Product" : "Add Product"}
           </Button>
         </form>
@@ -180,7 +188,11 @@ const Product = () => {
       </div>
       <hr />
       {loading ? <Shimmer height="100px" count={5} shape="rectange" /> : null}
-      {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Product Found</HeadingTypo> : (
+      {data?.length < 1 ? (
+        <HeadingTypo className="text-center font-semibold text-xl">
+          0 Product Found
+        </HeadingTypo>
+      ) : (
         <div className="bg-white overflow-auto ">
           <table className="w-full text-base text-center rounded-md shadow-md">
             <thead>
@@ -222,10 +234,14 @@ const Product = () => {
                     <td title={product._id}>{product._id.slice(15)}</td>
                     <td className="whitespace-nowrap">Rs {product.price}</td>
                     <td>{product.discount}%</td>
-                    <td className="whitespace-nowrap">Rs {product.priceAfterDiscount}</td>
+                    <td className="whitespace-nowrap">
+                      Rs {product.priceAfterDiscount}
+                    </td>
                     <td className="whitespace-nowrap">{product.brand}</td>
                     <td className="whitespace-nowrap">{product.category}</td>
-                    <td className="whitespace-nowrap">{product?.review?.length}</td>
+                    <td className="whitespace-nowrap">
+                      {product?.review?.length}
+                    </td>
                     <td className="whitespace-nowrap">{product.totalSale}</td>
                     <td className="whitespace-nowrap">2024-03-11</td>
                     <td className="flex justify-around items-start gap-x-1 px-3">

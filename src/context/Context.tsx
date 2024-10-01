@@ -6,7 +6,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 //   receiver: string;
 // };
 
-
 type ProvideProps = {
   sidebar: boolean;
   setSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,7 +39,6 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   //   null,
   // );
   // const [rtcOffer, setRtcOffer] = useState<RtcOfferType | null>(null);
-  
 
   useEffect(() => {
     if (socketServer) return;

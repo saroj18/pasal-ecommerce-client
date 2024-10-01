@@ -19,7 +19,7 @@ const Customer = () => {
   const value = dayjs(data?.[0]?.createdAt).format("YYYY//MM/DD");
   console.log(value);
   return (
-    <div >
+    <div>
       <div className="sticky left-0 top-0 bg-white z-0">
         <HeadingTypo className="text-3xl">Customers</HeadingTypo>
         <ParaTypo className="opacity-75 text-[15px]">
@@ -27,14 +27,18 @@ const Customer = () => {
         </ParaTypo>
       </div>
       {loading ? <Shimmer height="50px" count={8} shape="rectange" /> : null}
-      {data?.length < 1?<HeadingTypo className="text-center font-semibold text-xl">0 Customer Found</HeadingTypo> : (
+      {data?.length < 1 ? (
+        <HeadingTypo className="text-center font-semibold text-xl">
+          0 Customer Found
+        </HeadingTypo>
+      ) : (
         <div className="text-sm md:text-base">
           <Table>
             <TableHead tableHeadData={tableHeadData} />
             <TableBody>
               {data?.map((ele: any) => {
                 return (
-                  <TableRow key={ele._id} >
+                  <TableRow key={ele._id}>
                     <TableData title={ele._id} className="p-2">
                       {ele.customer._id.slice(15)}
                     </TableData>

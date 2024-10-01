@@ -73,11 +73,9 @@ export const productZodSchema = z.object({
       .trim()
       .min(1, { message: "features required" }),
   ),
-  images: z
-    .any()
-    .refine((val) => val?.length >= 3 || val === "UPDATE", {
-      message: "3 images required",
-    }),
+  images: z.any().refine((val) => val?.length >= 3 || val === "UPDATE", {
+    message: "3 images required",
+  }),
 });
 
 export const ShopDetailsZodSchema = z.object({

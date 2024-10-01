@@ -1,4 +1,3 @@
-
 type ShimmerShapType = {
   shape: "circle" | "rectange";
   height?: string;
@@ -6,12 +5,7 @@ type ShimmerShapType = {
   count?: number;
 };
 
-const Shimmer = ({
-  shape,
-  height,
-  width,
-  count = 1,
-}: ShimmerShapType) => {
+const Shimmer = ({ shape, height, width, count = 1 }: ShimmerShapType) => {
   const array = Array(count).fill(null);
   return (
     <>

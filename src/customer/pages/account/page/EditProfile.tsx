@@ -18,8 +18,8 @@ type EditProfileType = z.infer<typeof EditProfileZodSchema>;
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  let{data}=useAuth()
-  data=data as UserType
+  let { data } = useAuth();
+  data = data as UserType;
   const { mutate } = useMutation();
   console.log(data);
   const {

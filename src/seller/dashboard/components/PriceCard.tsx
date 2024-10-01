@@ -7,18 +7,22 @@ import AddFeatures from "./AddFeatures";
 import { useContextProvider } from "../../../context/Context";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { FormProps, ProductType } from "../pages/product/Product";
-import {  UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 
 export interface PriceCardProps extends FormProps {
-  setValue:UseFormSetValue<ProductType>
+  setValue: UseFormSetValue<ProductType>;
   updateData?: any;
 }
 
-const PriceCard = ({ register, errors,setValue,updateData}: PriceCardProps) => {
-  const {  zodError } = useContextProvider();
+const PriceCard = ({
+  register,
+  errors,
+  setValue,
+  updateData,
+}: PriceCardProps) => {
+  const { zodError } = useContextProvider();
   console.log(zodError);
 
- 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 border-2 border-gray-300 rounded-md p-3">
@@ -84,11 +88,7 @@ const PriceCard = ({ register, errors,setValue,updateData}: PriceCardProps) => {
         </div>
         <div className="grow flex flex-col">
           <Label className="text-2xl font-semibold ">Chating</Label>
-          <Select
-            {...register("chating")}
-            name="chating"
-            className="h-[50px]"
-          >
+          <Select {...register("chating")} name="chating" className="h-[50px]">
             <Option value="">Select Option</Option>
             <Option value="enable">Enable</Option>
             <Option value="disable">Disable</Option>
@@ -98,7 +98,12 @@ const PriceCard = ({ register, errors,setValue,updateData}: PriceCardProps) => {
           </ParaTypo>
         </div>
       </div>
-      <AddFeatures  updateData={updateData} setValue={setValue} errors={errors} register={register} />
+      <AddFeatures
+        updateData={updateData}
+        setValue={setValue}
+        errors={errors}
+        register={register}
+      />
     </>
   );
 };
