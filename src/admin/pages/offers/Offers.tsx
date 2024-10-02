@@ -3,31 +3,56 @@ import HeadingTypo from "../../../components/common/HeadingTypo";
 import OffersCard from "./OffersCard";
 import { useQuery } from "../../../hooks/useQuery";
 import Shimmer from "../../../components/common/Shimmer";
+import CoupenPopup from "./CoupenPopup";
+import { useState } from "react";
+import ParaTypo from "../../../components/common/ParaTypo";
 
 const Offers = () => {
   const { data, refetch, loading } = useQuery<any>("/offers");
+  const { data:coupenData, loading:coupenLoading } = useQuery<any>("/coupen");
+  const [open, setOpen] = useState(false)
+  
   return (
     <div>
       <div className="flex justify-between items-center">
         <HeadingTypo className="text-2xl font-semibold my-4">
           Offer Lists
         </HeadingTypo>
-        <Link
+        <div className="flex items-center gap-x-4">
+          <Link
           to={"createoffer"}
           className="bg-green-500 text-white p-2 rounded-md cursor-pointer"
         >
           + Create Offer
         </Link>
+          <ParaTypo
+            onClick={()=>setOpen(true)}
+          className="bg-blue-500 text-white p-2 rounded-md cursor-pointer text-md"
+        >
+          + Create Coupen
+        </ParaTypo>
+        </div>
       </div>
       <div className="grid grid-cols-3 gap-4">
         {loading ? (
           <Shimmer height="300px" count={6} shape="rectange" />
         ) : (
           data?.map((ele: any) => {
-            return <OffersCard key={ele._id} data={ele} refetch={refetch} />;
+            return <OffersCard key={ele._id} flag='offer' data={ele} refetch={refetch} />;
           })
         )}
       </div>
+
+      <div className="grid grid-cols-3 gap-4">
+        {coupenLoading ? (
+          <Shimmer height="300px" count={6} shape="rectange" />
+        ) : (
+          coupenData?.map((ele: any) => {
+            return <OffersCard key={ele._id} flag='coupen' data={ele} refetch={refetch} />;
+          })
+        )}
+      </div>
+      <CoupenPopup open={open}  setOpen={setOpen}/>
     </div>
   );
 };

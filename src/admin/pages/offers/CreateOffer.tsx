@@ -8,6 +8,7 @@ import { useQuery } from "../../../hooks/useQuery";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
 import { useMutation } from "../../../hooks/useMutation";
+import CoupenPopup from "./CoupenPopup";
 
 type OfferType = {
   name: string;
@@ -16,7 +17,7 @@ type OfferType = {
 };
 
 const CreateOffer = () => {
-  const { data } = useQuery<any>("/product");
+  const { data } = useQuery<any>("/product?skip=0");
   const { mutate } = useMutation();
   console.log(data);
   const [offer, setOffer] = useState<OfferType>({
@@ -25,6 +26,7 @@ const CreateOffer = () => {
     discount: "",
   });
   const [products, setProducts] = useState<any[]>([]);
+  
 
   const selectRef = useRef<HTMLSelectElement | null>(null);
 
@@ -65,8 +67,8 @@ const CreateOffer = () => {
         onClick={() => history.back()}
         className="mt-2 cursor-pointer"
       />
-      <div className="w-full max-w-lg mx-auto flex flex-col justify-center items-center ">
-        <form className="bg-white border-2 p-2 rounded-md">
+      <div className="w-full mx-auto flex flex-col justify-center items-center ">
+        <form className="bg-white p-2 max-w-lg w-full rounded-md">
           <h1 className="text-center my-3 text-2xl">Create Offer</h1>
           <div className="flex flex-col">
             <Label>Offer Name</Label>
@@ -135,6 +137,7 @@ const CreateOffer = () => {
               );
             })}
         </div>
+        
       </div>
     </>
   );
