@@ -38,7 +38,7 @@ const Slider = ({
           },
         }}
       >
-        <section className="flex flex-col items-center mt-5 ">
+        <section className="flex flex-col md:flex-row items-center mt-5 ">
           {loadingState ? (
             <Shimmer shape="rectange" width="300px" height="300px" count={4} />
           ) : (

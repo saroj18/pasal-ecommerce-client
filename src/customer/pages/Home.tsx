@@ -6,16 +6,17 @@ import "swiper/css";
 import Slider from "../../customer/pages/account/component/Slider";
 import Shimmer from "../../components/common/Shimmer";
 import { Fragment } from "react/jsx-runtime";
-import { useContextProvider } from "../../context/Context";
+import { useAuth, UserType } from "../../context/AuthProvider";
 
 const Home = () => {
-  const { user: data } = useContextProvider();
   const { data: offerList, loading: offerListLoading } =
-    useQuery<any>("/offers");
+  useQuery<any>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
-    useQuery<any>("/product/bestselling");
+  useQuery<any>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
-    useQuery<any>("/product/randomproducts");
+  useQuery<any>("/product/randomproducts");
+  let { data } = useAuth()
+  data=data as UserType
 
   return (
     <>

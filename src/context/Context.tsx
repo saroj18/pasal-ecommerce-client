@@ -18,6 +18,8 @@ type ProvideProps = {
   socketServer: WebSocket | null;
   cart: number;
   setCart: React.Dispatch<React.SetStateAction<number>>;
+  wishList: number
+  setWishList:React.Dispatch<React.SetStateAction<number>>
   // rtcConnection: RTCPeerConnection | null;
   // setRtcConnection: React.Dispatch<
   //   React.SetStateAction<RTCPeerConnection | null>
@@ -35,6 +37,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [zodError, setZodError] = useState<{ [key: string]: string }>({});
   const [socketServer, setSocketServer] = useState<WebSocket | null>(null);
   const [cart, setCart] = useState(0);
+  const [wishList, setWishList] = useState(0);
   // const [rtcConnection, setRtcConnection] = useState<RTCPeerConnection | null>(
   //   null,
   // );
@@ -79,6 +82,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
         socketServer,
         setCart,
         cart,
+        wishList,
+        setWishList,
         // rtcConnection,
         // setRtcConnection,
         // rtcOffer,

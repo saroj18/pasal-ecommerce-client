@@ -15,7 +15,7 @@ import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
 import { useContextProvider } from "../../context/Context";
@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
-  const { setCart } = useContextProvider();
+  const { setCart,setWishList } = useContextProvider();
   let { data: user } = useAuth();
   user = user as UserType;
 
@@ -63,7 +63,18 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (response?.success) {
-      setCart((prv) => prv + 1);
+      const flag = response.message.split(' ')[3]
+      if (flag == 'cart') {
+        
+        setCart((prv) => prv + 1);
+      } else if(flag=='wishlist') {
+        if (response.message.split(' ')[1] == 'remove') {
+          setWishList(prv=>prv-1)
+        } else {
+          
+          setWishList((prv)=>prv+1)
+        }
+      }
     }
   }, [response]);
 

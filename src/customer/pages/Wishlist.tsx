@@ -3,6 +3,7 @@ import ProductCard from "../../components/ProductCard";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import { useQuery } from "../../hooks/useQuery";
 import Shimmer from "../../components/common/Shimmer";
+import { useNavigate } from "react-router-dom";
 
 type barProps = {
   heading: string;
@@ -10,10 +11,11 @@ type barProps = {
 };
 
 export const HeaderBar = ({ heading, btnText }: barProps) => {
+  const navigate=useNavigate()
   return (
     <div className="flex justify-between items-center my-4">
       <HeadingTypo className="text-xl font-semibold">{heading}</HeadingTypo>
-      <Button className="border-2 p-2 px-6 bg-red-500 text-white">
+      <Button onClick={()=>navigate('/allproducts')} className="border-2 p-2 px-6 bg-red-500 text-white">
         {btnText}
       </Button>
     </div>
@@ -21,7 +23,7 @@ export const HeaderBar = ({ heading, btnText }: barProps) => {
 };
 
 const Wishlist = () => {
-  const { data, loading } = useQuery<any>("/product/wishlist");
+  const { data, loading,refetch } = useQuery<any>("/product/wishlist",false);
   const { data: randomProducts, loading: randomProductsLoading } =
     useQuery<any>("/product/randomproducts");
   console.log(randomProducts);
@@ -33,7 +35,7 @@ const Wishlist = () => {
           <Shimmer shape="rectange" height="300px" count={4} />
         ) : (
           data?.map((ele: any, index: number) => (
-            <ProductCard key={index} remove={true} product={ele.product} />
+            <ProductCard key={index} refetch={refetch} remove={true} product={ele.product} />
           ))
         )}
       </div>

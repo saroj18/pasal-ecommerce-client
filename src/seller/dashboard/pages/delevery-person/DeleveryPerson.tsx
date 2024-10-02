@@ -41,7 +41,7 @@ const DeleveryPerson = () => {
               data.map((ele: any, index: number) => {
                 return (
                   <tr
-                    onClick={() => setOpen(true)}
+                    // onClick={() => setOpen(true)}
                     key={index}
                     className=" border-gray-300 capitalize border-t-2 border-b-2 border-l-0 border-r-0 cursor-pointer"
                   >

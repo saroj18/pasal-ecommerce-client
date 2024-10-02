@@ -31,6 +31,10 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
   const billing: any[] = [];
   const { data, loading } = useQuery<any>("/user/address");
 
+  const deleveryAddressHandler = () => {
+    setOpen((prv) => ({ ...prv, delevery: false }))
+  }
+
   data &&
     data.forEach((ele: any) => {
       if (
@@ -64,12 +68,11 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
     setAddress((prv) => ({ ...prv, billingAddress: e.target.title }));
   };
   const deleveryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target);
-    setOrderDetails((prv) => ({ ...prv, deleveryAddress: e.target.value }));
-    setAddress((prv) => ({ ...prv, deleveryAddress: e.target.title }));
+    const value=JSON.parse(e.target.value)
+    setOrderDetails((prv) => ({ ...prv, deleveryAddress: value.id }));
+    setAddress((prv) => ({ ...prv, deleveryAddress:value.address}));
   };
 
-  console.log(data);
   return (
     <div className="p-2 border-2 border-gray-200 shadow-md mb-2">
       <div className="border-2 p-2 rounded-md shadow-md">
@@ -101,8 +104,7 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
                   (ele.defaultAddress == "delevery" ||
                     ele.defaultAddress == "deleveryandbilling") && (
                     <Option
-                      title={address}
-                      value={ele._id}
+                      value={JSON.stringify({address,id:ele._id})}
                       key={index}
                       className="capitalize"
                     >
@@ -113,7 +115,7 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
               })}
             </Select>
             <Button
-              onClick={() => setOpen((prv) => ({ ...prv, delevery: false }))}
+              onClick={deleveryAddressHandler}
               className="bg-blue-500 px-4 text-white my-2 py-2 rounded-md"
             >
               Set

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthProvider";
 
 type dropdownProps = {
   className: string;
@@ -23,7 +24,7 @@ type dropdownProps = {
 const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
   ({ className, cartCount, wishListCount, setDropdown }, ref) => {
     const navigate = useNavigate();
-    // const { setUser } = useContextProvider();
+    const { data } = useAuth();
     const dropDownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -103,12 +104,12 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
           </Link>
           <ParaTypo className="text-red-500">{cartCount}</ParaTypo>
         </div>
-        <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+      {!data&&  <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
           <LogIn opacity={0.6} />
           <Link to={"/account/myreview"}>
             <ParaTypo className="">Login</ParaTypo>
           </Link>
-        </div>
+        </div>}
         <div
           onClick={logOutHandler}
           className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer"

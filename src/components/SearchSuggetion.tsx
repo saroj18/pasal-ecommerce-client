@@ -69,7 +69,7 @@ const SearchSuggetion = React.forwardRef<HTMLDivElement, SearchSuggetionProps>(
       >
         {!search ? (
           <div>
-            {searchHistory?.map((ele, index) => {
+            {searchHistory.length==0?<ParaTypo className="text-center p-2">Find Your Produt</ParaTypo>:searchHistory?.map((ele, index) => {
               return (
                 <div
                   key={index}

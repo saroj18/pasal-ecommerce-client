@@ -19,7 +19,7 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const navigate = useNavigate();
   const { data } = useQuery<any>("/product/cartandwishlist/count");
-  const { cart, setCart } = useContextProvider();
+  const { cart, setCart,setWishList,wishList } = useContextProvider();
   let { data: user } = useAuth();
   user = user as UserType;
   const [focus, setFocus] = useState(false);
@@ -28,6 +28,7 @@ const Navbar = () => {
   useEffect(() => {
     if (data) {
       setCart(data?.cartCount);
+      setWishList(data?.wishListCount)
     }
   }, [data]);
 
@@ -82,7 +83,7 @@ const Navbar = () => {
                       opacity={0.7}
                     />
                     <ParaTypo className="absolute hidden lg:block left-[90%] -top-[70%] text-red-500">
-                      {data?.wishListCount}
+                      {wishList}
                     </ParaTypo>
                   </div>
                   <div className="relative">
@@ -107,8 +108,8 @@ const Navbar = () => {
                 />
                 {dropdown && (
                   <AccountDropdown
-                    cartCount={data?.cartCount}
-                    wishListCount={data?.wishListCount}
+                    cartCount={cart}
+                    wishListCount={wishList}
                     className="absolute -left-[212px]  top-10 z-10"
                     setDropdown={setDropdown}
                   />

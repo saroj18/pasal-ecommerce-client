@@ -1,7 +1,6 @@
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import Button from "../../../../components/common/Button";
-import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import { Star,  } from "lucide-react";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 
@@ -12,7 +11,6 @@ export const ReviewComponent = ({
   info: any;
   flag?: boolean;
 }) => {
-  console.log(info);
   return (
     <div className=" rounded-md shadow-md border-2 border-neutral-200 p-2 my-4">
       <HeadingTypo>{info?.reviewProduct?.addedBy?.shopName}</HeadingTypo>

@@ -136,7 +136,7 @@ const SearchBox = ({ className, focus, setFocus }: SearchBoxTypeProps) => {
         size={22}
         className={`absolute ${focus ? "left-[92%]" : "left-[80%]"} top-2`}
       />
-      {searchHistory.length > 0 && (
+      {focus && (
         <SearchSuggetion
           ref={suggetionRef}
           search={search}

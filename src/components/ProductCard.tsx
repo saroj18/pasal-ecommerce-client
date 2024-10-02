@@ -1,18 +1,21 @@
 import { Star, Trash } from "lucide-react";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import ParaTypo from "./common/ParaTypo";
 import { Link } from "react-router-dom";
 import { useMutation } from "../hooks/useMutation";
+import { useContextProvider } from "../context/Context";
 
 type cardProps = {
   hideBtn?: string;
   icon?: React.ReactNode;
   product: any;
   remove?: boolean;
+  refetch?:()=>void
 };
 
-const ProductCard = ({ remove = false, icon, product }: cardProps) => {
-  const { mutate } = useMutation();
+const ProductCard = ({ remove = false, icon, product,refetch }: cardProps) => {
+  const { mutate, response } = useMutation();
+  const{setWishList}=useContextProvider()
 
   const deleteHandler = useCallback(
     (e: React.MouseEvent<SVGSVGElement>, id: string) => {
@@ -21,6 +24,13 @@ const ProductCard = ({ remove = false, icon, product }: cardProps) => {
     },
     [],
   );
+
+  useEffect(() => {
+    if (response?.success) {
+      setWishList(prv => prv - 1)
+      refetch&&refetch()
+    }
+  },[response])
 
   return (
     <>
