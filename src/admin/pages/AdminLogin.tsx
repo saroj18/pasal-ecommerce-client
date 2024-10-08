@@ -29,7 +29,7 @@ const AdminLogin = () => {
 
   const onSubmit = (info: LoginInput) => {
     const { email, password } = info;
-    mutate("/user/login", "POST", { email, password, role: "admin" });
+    mutate("/admin/adminlogin", "POST", { email, password, role: "admin" });
   };
 
   useEffect(() => {
@@ -37,6 +37,7 @@ const AdminLogin = () => {
     if (response && response?.data?.role=="admin") {
       navigate("/admin/dashboard");
       localStorage.setItem("role", "ADMIN");
+      window.location.reload()
     }
   }, [response]);
 

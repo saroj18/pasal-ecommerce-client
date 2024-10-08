@@ -12,6 +12,7 @@ const PublicRoute = ({
 }) => {
   const navigate = useNavigate();
   const { loading, data } = useAuth();
+  console.log(data)
 
   useLayoutEffect(() => {
     const checkUser = () => {

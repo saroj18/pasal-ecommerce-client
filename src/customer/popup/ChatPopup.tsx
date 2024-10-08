@@ -126,7 +126,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
               return (
                 <MessageCard
                   key={index}
-                  user={msg.sender.fullname}
+                  user={msg.sender?.fullname}
                   message={msg.message}
                   messageType={userId}
                   msg={msg}

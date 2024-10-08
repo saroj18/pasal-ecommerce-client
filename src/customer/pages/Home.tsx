@@ -19,14 +19,11 @@ const Home = () => {
   const { data: offerList, loading: offerListLoading } =
   useQuery<OfferType>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
-  useQuery<BestSellingType>("/product/bestselling");
+  useQuery<BestSellingType|ProductType>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
   useQuery<ProductType>("/product/randomproducts");
   let { data } = useAuth()
   data = data as UserType
-  console.log(bestSellingProducts)
-  console.log(randomProducts)
-  console.log(offerList)
 
   return (
     <>
@@ -63,7 +60,7 @@ const Home = () => {
      {data&&<> <ProductSectionBar option={false} heading="Best Selling Products" />
       <Slider
         loadingState={bestSellingProductLoading}
-        productList={ (bestSellingProducts as BestSellingType)?.product}
+        productList={ (bestSellingProducts as BestSellingType)?.product||bestSellingProducts as ProductType[]}
         />
       </>}
 
@@ -78,7 +75,7 @@ const Home = () => {
           productList={randomProducts as ProductType[]}
         />
 
-        {data && !data?.verify && <VerifyPopup />}
+        {data && !data?.verify && data.role!='admin'&& <VerifyPopup />}
       </section>
     </>
   );
