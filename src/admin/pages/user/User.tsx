@@ -41,7 +41,7 @@ const User = () => {
         <Table>
           <TableHead tableHeadData={tableHeadData} />
           <TableBody>
-            {(data as UserType[]).map((ele: any) => {
+            {(data as UserType[]).map((ele: UserType) => {
               return (
                 <TableRow
                   className="cursor-pointer hover:bg-slate-50"
@@ -77,7 +77,7 @@ const User = () => {
                   <TableData className="p-4 capitalize">
                     {ele.signUpAs}
                   </TableData>
-                  <TableData className="p-4 capitalize">
+                 {ele.role!='admin' &&<TableData className="p-4 capitalize">
                     {ele.block ? (
                       <Button
                         onClick={(e) => unBlockHandler(e, ele._id)}
@@ -93,7 +93,7 @@ const User = () => {
                         Block
                       </Button>
                     )}
-                  </TableData>
+                  </TableData>}
                 </TableRow>
               );
             })}

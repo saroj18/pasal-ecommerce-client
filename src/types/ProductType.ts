@@ -11,7 +11,7 @@ export type ProductType = {
   brand: string;
   chating: string;
   barganing: string;
-  discount: string;
+  discount: number;
   features: string[];
   addedBy: ShopType
   images: string[];

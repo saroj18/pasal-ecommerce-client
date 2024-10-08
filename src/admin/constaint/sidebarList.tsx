@@ -6,6 +6,7 @@ import {
   Store,
   Truck,
   User,
+  UserCircle2,
   View,
 } from "lucide-react";
 
@@ -49,6 +50,11 @@ export const generalSideBarList = [
     name: "User",
     url: "user",
     icon: <User />,
+  },
+  {
+    name: "Add Admin",
+    url: "addadmin",
+    icon: <UserCircle2 />,
   },
   // {
   //   name: "Notification",

@@ -133,7 +133,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              (topList as TopListType).topCategory?.map((ele: any) => {
+              (topList as TopListType|null)?.topCategory?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -154,7 +154,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              (topList as TopListType).topExpensiveProduct?.map((ele: any) => {
+              (topList as TopListType|null)?.topExpensiveProduct?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}

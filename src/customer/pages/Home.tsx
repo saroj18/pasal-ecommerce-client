@@ -10,16 +10,23 @@ import { useAuth, UserType } from "../../context/AuthProvider";
 import { OfferType } from "../../types/OfferType";
 import { ProductType } from "../../types/ProductType";
 
+type BestSellingType = {
+  product: ProductType[]
+  topCategory:ProductType[]
+}
+
 const Home = () => {
   const { data: offerList, loading: offerListLoading } =
   useQuery<OfferType>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
-  useQuery<ProductType>("/product/bestselling");
+  useQuery<BestSellingType>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
   useQuery<ProductType>("/product/randomproducts");
   let { data } = useAuth()
   data = data as UserType
-  // console.log(bestSellingProducts)
+  console.log(bestSellingProducts)
+  console.log(randomProducts)
+  console.log(offerList)
 
   return (
     <>
@@ -41,7 +48,7 @@ const Home = () => {
                 heading={ele.name + ` (with extra % off)`}
                 option={false}
               />
-              <Slider productList={ele.product} />
+              <Slider productList={ele?.product} />
             </Fragment>
           );
         })
@@ -56,7 +63,7 @@ const Home = () => {
      {data&&<> <ProductSectionBar option={false} heading="Best Selling Products" />
       <Slider
         loadingState={bestSellingProductLoading}
-        productList={ bestSellingProducts as ProductType[]}
+        productList={ (bestSellingProducts as BestSellingType)?.product}
         />
       </>}
 

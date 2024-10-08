@@ -7,7 +7,7 @@ import { useAuth, UserType } from "../../../context/AuthProvider";
 const SideBar = () => {
   const { accountSideBar, setAccountSideBar } = useContextProvider();
   let { data: user } = useAuth();
-  user = user as UserType;
+  user = user as UserType|null;
 
   return (
     <aside
@@ -29,7 +29,7 @@ const SideBar = () => {
         <Link to={"/account/addressbook"}>
           <li className="cursor-pointer">Address Book</li>
         </Link>
-        {!user.verify && (
+        {!user?.verify && (
           <Link to={"/account/verify"}>
             <li className="cursor-pointer">Verify Yourself</li>
           </Link>

@@ -21,7 +21,7 @@ const AdminLogin = () => {
   } = useForm<LoginInput>({
     resolver: zodResolver(UserLoginZodSchema),
     defaultValues: {
-      email: "saroj@gmail.com",
+      email: "admin@gmail.com",
       password: "password",
     },
   });
@@ -33,18 +33,9 @@ const AdminLogin = () => {
   };
 
   useEffect(() => {
-    if (response && response?.data.verify) {
-      if (!response.data.shopVerify) {
-        navigate("/otp");
-      } else {
-        // setUser(response.data);
-        navigate("/admin/dashboard");
-        window.location.reload();
-      }
-      localStorage.setItem("role", "ADMIN");
-    }
-    if (response && !response?.data.verify) {
-      navigate("/account/verify");
+    
+    if (response && response?.data?.role=="admin") {
+      navigate("/admin/dashboard");
       localStorage.setItem("role", "ADMIN");
     }
   }, [response]);
@@ -101,19 +92,19 @@ const AdminLogin = () => {
                 </ParaTypo>
               )}
             </div>
-            <ParaTypo className="text-right cursor-pointer">
+            {/* <ParaTypo className="text-right cursor-pointer">
               Forgot Password
-            </ParaTypo>
+            </ParaTypo> */}
             <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
               Login as a Admin
             </Button>
           </form>
-          <ParaTypo
+          {/* <ParaTypo
             onClick={() => navigate("/adminsignup")}
             className="text-center text-blue-500 cursor-pointer my-5"
           >
             Go to SignUp
-          </ParaTypo>
+          </ParaTypo> */}
         </div>
       </div>
     </div>

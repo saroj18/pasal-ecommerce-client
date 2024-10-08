@@ -19,7 +19,7 @@ export type VerifyInfoTyype = VerifyForm & AddressForm;
 const VerifyForm = () => {
   const [open, setOpen] = useState<boolean>(false);
   let { data } = useAuth();
-  data = data as UserType;
+  data = data as UserType|null;
   const [verifyInfo, setVerifyInfo] = useState<
     VerifyInfoTyype | VerifyForm | AddressForm
   >({
@@ -50,8 +50,8 @@ const VerifyForm = () => {
   } = useForm<VerifyForm>({
     resolver: zodResolver(UserVefifyZodSchema),
     defaultValues: {
-      fullname: data.fullname,
-      email: data.email,
+      fullname: data?.fullname,
+      email: data?.email,
       dob: "2000-01-05",
       gender: "male",
       mobile: "9876543210",

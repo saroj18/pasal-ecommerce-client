@@ -4,11 +4,12 @@ import ParaTypo from "./common/ParaTypo";
 import { Link } from "react-router-dom";
 import { useMutation } from "../hooks/useMutation";
 import { useContextProvider } from "../context/Context";
+import { ProductType } from "../types/ProductType";
 
 type cardProps = {
   hideBtn?: string;
   icon?: React.ReactNode;
-  product: any;
+  product: ProductType;
   remove?: boolean;
   refetch?:()=>void
 };

@@ -14,7 +14,8 @@ const Slider = ({
 }: {
   productList: ProductType[];
   loadingState?: boolean;
-}) => {
+  }) => {
+  console.log(productList)
   return (
     <>
       <Swiper
@@ -43,7 +44,7 @@ const Slider = ({
           {loadingState ? (
             <Shimmer shape="rectange" width="300px" height="300px" count={4} />
           ) : (
-            productList?.map((ele: any) => {
+            productList?.map((ele: ProductType) => {
               return (
                 <SwiperSlide key={ele._id} className="">
                   <ProductCard key={ele._id} product={ele} />
