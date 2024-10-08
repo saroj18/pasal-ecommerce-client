@@ -1,15 +1,16 @@
-import { Edit, Layers, Trash } from "lucide-react";
+import {  Layers, Trash } from "lucide-react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useMutation } from "../../../../hooks/useMutation";
 import { useQuery } from "../../../../hooks/useQuery";
 import { useParams } from "react-router-dom";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ProductType } from "../../../../types/ProductType";
 
 const Products = () => {
   const { mutate } = useMutation();
   const { id } = useParams();
 
-  const { data, refetch, loading } = useQuery<any>(
+  const { data, refetch, loading } = useQuery<ProductType>(
     "/product/myproduct?id=" + id,
   );
 
@@ -40,7 +41,7 @@ const Products = () => {
 
             <tbody>
               {data &&
-                data.map((product: any) => (
+                (data as ProductType[]).map((product: any) => (
                   <tr className="border-2 border-gray-300  text-base">
                     <td className="flex flex-col items-center p-2">
                       <img
@@ -69,7 +70,7 @@ const Products = () => {
                         className="cursor-pointer size-4 md:size-5"
                       />
                       <Layers
-                        color={`${data?.stock === 0 ? "red" : "green"}`}
+                        color={`${(data as ProductType)?.stock === 0 ? "red" : "green"}`}
                         strokeWidth={0.9}
                         className="cursor-pointer size-4 md:size-5"
                       />

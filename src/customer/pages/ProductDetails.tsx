@@ -4,7 +4,7 @@ import {
   Heart,
   MessageCircle,
   StarIcon,
-  Video,
+  // Video,
 } from "lucide-react";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
@@ -20,6 +20,7 @@ import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
 import { useContextProvider } from "../../context/Context";
 import { useAuth, UserType } from "../../context/AuthProvider";
+import { ProductType } from "../../types/ProductType";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +36,8 @@ const ProductDetails = () => {
     data,
     refetch,
     loading: productLoading,
-  } = useQuery<any>(`/product/${id}`);
+  } = useQuery<ProductType>(`/product/${id}`);
+  data=data as ProductType
 
   const addToCartHandler = (id: string) => {
     mutate(`/product/cart`, "POST", { productId: id, count });
@@ -283,7 +285,7 @@ const ProductDetails = () => {
         {productLoading ? (
           <Shimmer count={4} height="300px" shape="rectange" />
         ) : (
-          data?.ourOtherProducts?.map((ele: any) => {
+          data?.ourOtherProducts?.map((ele: ProductType) => {
             return <ProductCard key={ele._id} product={ele} />;
           })
         )}
@@ -293,7 +295,7 @@ const ProductDetails = () => {
         {productLoading ? (
           <Shimmer count={4} height="300px" shape="rectange" />
         ) : (
-          data?.relatedProducts?.map((ele: any) => {
+          data?.relatedProducts?.map((ele: ProductType) => {
             return <ProductCard key={ele._id} product={ele} />;
           })
         )}

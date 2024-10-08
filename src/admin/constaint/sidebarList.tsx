@@ -1,7 +1,5 @@
 import {
   BarChart4,
-  Bell,
-  DollarSignIcon,
   HandCoins,
   Home,
   LayoutDashboard,

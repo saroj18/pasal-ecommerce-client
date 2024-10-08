@@ -4,7 +4,6 @@ import Popup from "reactjs-popup";
 import { Edit, Trash, X } from "lucide-react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import ParaTypo from "../../../components/common/ParaTypo";
-import SearchBox from "../../../components/common/Search";
 import Label from "../../../components/common/Label";
 import AddDeleveryPerson from "./AddDeleveryPerson";
 import { useQuery } from "../../../hooks/useQuery";
@@ -32,7 +31,7 @@ const DeliveryPage = () => {
           <HeadingTypo className="text-2xl font-semibold  mt-6">
             All Delevery Person
           </HeadingTypo>
-          <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
+          {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
         </div>
       </div>
       {loading ? <Shimmer shape="rectange" height="60px" count={5} /> : null}

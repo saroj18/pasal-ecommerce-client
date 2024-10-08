@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
-import jacket from "../../../../assets/jacket.png";
-import Button from "../../../../components/common/Button";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Popup from "reactjs-popup";
-import { Cross, X } from "lucide-react";
-import SearchBox from "../../../../components/common/Search";
+import {  X } from "lucide-react";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ReviewType } from "../../../../types/ReviewType";
 
 const Review = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [info, setInfo] = useState<any>();
-  const { data, loading } = useQuery<any>("/review/myreview");
+  const { data, loading } = useQuery<ReviewType>("/review/myreview");
 
   const clickHandler = (data: any) => {
     setOpen(!open);
@@ -31,7 +29,7 @@ const Review = () => {
       </div>
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
       <div>
-        {data?.length < 1 ? (
+        {(data as ReviewType[])?.length < 1 ? (
           <HeadingTypo className="text-center font-semibold text-xl">
             0 Review Found
           </HeadingTypo>
@@ -51,7 +49,7 @@ const Review = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((ele: any) => {
+              {(data as ReviewType[])?.map((ele: any) => {
                 return (
                   <tr
                     onClick={() => clickHandler(ele)}

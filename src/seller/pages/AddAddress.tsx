@@ -1,5 +1,4 @@
-import React from "react";
-import Label from "../../components/common/Label";
+
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";

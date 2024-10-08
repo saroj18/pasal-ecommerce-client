@@ -4,21 +4,22 @@ import TableData from "../../../components/common/TableData";
 import TableHead from "../../../components/common/TableHead";
 import TableRow from "../../../components/common/TableRow";
 import { useQuery } from "../../../hooks/useQuery";
+import { PaymentType } from "../../../types/PaymentType";
 import { tableHeadDataForPayment } from "./constant";
 
 const Payment = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data, loading } = useQuery<any>(`/payment/history?id=${id}`);
+  const { data, loading } = useQuery<PaymentType>(`/payment/history?id=${id}`);
   return (
     <div>
       {loading ? (
         <Shimmer height="50px" count={9} shape="rectange" />
       ) : (
-        data?.length > 0 && (
+        (data as PaymentType[])?.length > 0 && (
           <Table>
             <TableHead tableHeadData={tableHeadDataForPayment} />
             {data &&
-              data.map((ele: any, index: number) => {
+              (data as PaymentType[]).map((ele: any, index: number) => {
                 return (
                   <TableRow key={ele._id + index}>
                     <TableData title={ele._id} className="p-2">

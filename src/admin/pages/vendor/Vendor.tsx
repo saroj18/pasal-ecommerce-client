@@ -6,21 +6,21 @@ import TableBody from "../../../components/common/TableBody";
 import TableData from "../../../components/common/TableData";
 import { tableHeadData } from "./tableData";
 import Button from "../../../components/common/Button";
-import SearchBox from "../../../components/common/Search";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "../../../hooks/useQuery";
 import TableRow from "../../../components/common/TableRow";
 import Shimmer from "../../../components/common/Shimmer";
+import { ShopType } from "../../../types/ShopType";
 
 const Vendor = () => {
   const navigate = useNavigate();
-  const [vendorList, setVendorList] = useState([]);
+  const [vendorList, setVendorList] = useState<ShopType[]>([]);
 
-  const { data, loading } = useQuery<any>("/vendor");
+  const { data, loading } = useQuery<ShopType>("/vendor");
 
   useEffect(() => {
     if (data) {
-      setVendorList(data);
+      setVendorList(data as ShopType[]);
     }
   }, [data]);
 
@@ -28,7 +28,7 @@ const Vendor = () => {
     <div className="w-full overflow-auto">
       <div className="flex flex-col md:flex-row items-center justify-between sticky left-0 top-0">
         <HeadingTypo className="text-3xl my-4">Vendor Lists</HeadingTypo>
-        <SearchBox className="sm:w-[45%] md:w-[25%] w-full" />
+        {/* <SearchBox className="sm:w-[45%] md:w-[25%] w-full" /> */}
       </div>
       {loading ? <Shimmer height="60px" count={7} shape="rectange" /> : null}
       {vendorList?.length > 0 && (

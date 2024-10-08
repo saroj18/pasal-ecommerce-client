@@ -4,11 +4,12 @@ import TableData from "../../../../components/common/TableData";
 import TableHead from "../../../../components/common/TableHead";
 import TableRow from "../../../../components/common/TableRow";
 import { useQuery } from "../../../../hooks/useQuery";
+import { PaymentType } from "../../../../types/PaymentType";
 import { tableHeadDataForPaymentHistory } from "../tableData";
 
 const PaymentHistory = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data, loading } = useQuery<any>(`/payment/vendorhistory?id=${id}`);
+  const { data, loading } = useQuery<PaymentType>(`/payment/vendorhistory?id=${id}`);
   console.log(data);
   return (
     <div>
@@ -18,7 +19,7 @@ const PaymentHistory = () => {
         <Table>
           <TableHead tableHeadData={tableHeadDataForPaymentHistory} />
           {data &&
-            data.map((ele: any, index: number) => {
+            (data as PaymentType[]).map((ele: any, index: number) => {
               return (
                 <TableRow key={ele._id + index}>
                   <TableData title={ele._id} className="p-2">

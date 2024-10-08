@@ -7,34 +7,41 @@ import Slider from "../../customer/pages/account/component/Slider";
 import Shimmer from "../../components/common/Shimmer";
 import { Fragment } from "react/jsx-runtime";
 import { useAuth, UserType } from "../../context/AuthProvider";
+import { OfferType } from "../../types/OfferType";
+import { ProductType } from "../../types/ProductType";
 
 const Home = () => {
   const { data: offerList, loading: offerListLoading } =
-  useQuery<any>("/offers");
+  useQuery<OfferType>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
-  useQuery<any>("/product/bestselling");
+  useQuery<ProductType>("/product/bestselling");
   const { data: randomProducts, loading: randomProductsLoading } =
-  useQuery<any>("/product/randomproducts");
+  useQuery<ProductType>("/product/randomproducts");
   let { data } = useAuth()
-  data=data as UserType
+  data = data as UserType
+  // console.log(bestSellingProducts)
 
   return (
     <>
-      <section className="flex flex-col-reverse lg:flex-row gap-2 mt-5 p-3">
-        {/* <CategorySideBar /> */}
-        <Crousel />
+      <section>
+        <ProductSectionBar option={false} heading=" Products" />
+        <Slider
+          loadingState={randomProductsLoading}
+          productList={randomProducts as ProductType[]}
+        />
+
       </section>
       {offerListLoading ? (
         <Shimmer height="350px" count={5} shape="rectange" />
       ) : (
-        offerList?.map((ele: any) => {
+        (offerList as OfferType[])?.map((ele) => {
           return (
             <Fragment key={ele._id}>
               <ProductSectionBar
                 heading={ele.name + ` (with extra % off)`}
                 option={false}
               />
-              <Slider productList={ele?.product} />
+              <Slider productList={ele.product} />
             </Fragment>
           );
         })
@@ -46,11 +53,12 @@ const Home = () => {
           category="Phones"
         />
       </div> */}
-      <ProductSectionBar option={false} heading="Best Selling Products" />
+     {data&&<> <ProductSectionBar option={false} heading="Best Selling Products" />
       <Slider
         loadingState={bestSellingProductLoading}
-        productList={bestSellingProducts?.product || bestSellingProducts}
-      />
+        productList={ bestSellingProducts as ProductType[]}
+        />
+      </>}
 
       <section className="mt-7">
         <Crousel />
@@ -60,7 +68,7 @@ const Home = () => {
         <ProductSectionBar option={false} heading="Explore Our Products" />
         <Slider
           loadingState={randomProductsLoading}
-          productList={randomProducts}
+          productList={randomProducts as ProductType[]}
         />
 
         {data && !data?.verify && <VerifyPopup />}

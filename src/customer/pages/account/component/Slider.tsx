@@ -6,12 +6,13 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ProductType } from "../../../../types/ProductType";
 
 const Slider = ({
   productList,
   loadingState,
 }: {
-  productList: any[];
+  productList: ProductType[];
   loadingState?: boolean;
 }) => {
   return (

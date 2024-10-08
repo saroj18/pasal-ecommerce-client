@@ -4,9 +4,11 @@ import Button from "../../../../components/common/Button";
 import { useMutation } from "../../../../hooks/useMutation";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
+import { OrderType } from "../../../../types/OrderType";
+import { ProductType } from "../../../../types/ProductType";
 
 const Order = () => {
-  const { data, refetch, loading } = useQuery<any>("/order/sellerorder", false);
+  const { data, refetch, loading } = useQuery<OrderType>("/order/sellerorder", false);
   const { mutate, loading: orderLoading } = useMutation<any>();
   console.log(data);
 
@@ -30,7 +32,7 @@ const Order = () => {
         {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
       </div>
       {loading ? <Shimmer height="70px" count={9} shape="rectange" /> : null}
-      {data?.length < 1 ? (
+      {(data as OrderType[])?.length < 1 ? (
         <HeadingTypo className="text-center font-semibold text-xl">
           0 Orders Found{" "}
         </HeadingTypo>
@@ -52,7 +54,7 @@ const Order = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((ele: any, index: number) => {
+            {(data as OrderType[])?.map((ele: OrderType, index: number) => {
               return (
                 <tr key={index} className="border-b-2 border-t-2 capitalize ">
                   <td
@@ -65,8 +67,8 @@ const Order = () => {
                     />{" "}
                     {ele.orderProducts?.name.slice(0, 20)}
                   </td>
-                  <td title={ele.product} className="p-2">
-                    {ele.product.slice(15)}
+                  <td title={ele.product.toString()} className="p-2">
+                    {(ele.product as ProductType[]).slice(15).toString()}
                   </td>
                   <td title={ele.customer[0]._id} className="p-2">
                     {ele.customer[0].fullname}
@@ -80,10 +82,10 @@ const Order = () => {
                   <td className="p-2">Rs {ele.orderProducts.price}</td>
                   <td className="p-2">{ele.payMethod}</td>
                   <td className="p-2">{ele.orderProducts?.discount}%</td>
-                  <td className="p-2">{ele.cartInfo[0]?.productCount}</td>
+                  <td className="p-2">{ele.cartInfo[0]?.productCount.toString()}</td>
                   <td className="p-2">
                     Rs{" "}
-                    {ele.cartInfo[0]?.productCount *
+                    {ele.cartInfo[0]?.productCount as number *
                       ele.orderProducts?.priceAfterDiscount}
                   </td>
                   <td className="p-2 flex gap-1 flex-col items-center">

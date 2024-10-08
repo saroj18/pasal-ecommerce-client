@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { UserType } from "../../context/Context";
 import React, { useLayoutEffect } from "react";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth, UserType } from "../../context/AuthProvider";
 import dd from "../../../src/assets/loading.gif";
 
 const PublicRoute = ({

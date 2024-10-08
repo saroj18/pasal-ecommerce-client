@@ -3,10 +3,11 @@ import ParaTypo from "../../components/common/ParaTypo";
 import jacket from "../../assets/jacket.png";
 import Input from "../../components/common/Input";
 import { Send } from "lucide-react";
-import MessageCard, { message } from "./MessageCard";
+import MessageCard from "./MessageCard";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../context/Context";
 import { useQuery } from "../../hooks/useQuery";
+import { ChatType } from "../../types/ChatType";
 
 type ChatPopupProps = {
   open: boolean;
@@ -29,7 +30,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const messageBodyRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useQuery<any[]>("/chats?id=" + userId);
+  const { data } = useQuery<ChatType>("/chats?id=" + userId);
   console.log("sora", userId);
 
   const clickhandler = () => {
@@ -94,10 +95,9 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
 
   useEffect(() => {
     if (data) {
-      setChat([...data]);
+      setChat([...data as ChatType[]]);
     }
   }, [data]);
-  console.log(chat);
 
   return (
     <Popup

@@ -8,13 +8,14 @@ import DetailsCard from "./DetailsCard";
 import { useQuery } from "../../../hooks/useQuery";
 import { shopDataFormatter } from "../../../utils/shopDataFormatter";
 import Shimmer from "../../../components/common/Shimmer";
+import { ShopType } from "../../../types/ShopType";
 
 const VendorDetails = () => {
   const navigate = useNavigate();
   const [vendor, setVendor] = useState<any>();
   const [shop, setShop] = useState<{ [key: string]: string }>({});
   const { id } = useParams();
-  const { data, loading } = useQuery(`/vendor/${id}`);
+  const { data, loading } = useQuery<ShopType>(`/vendor/${id}`);
 
   useEffect(() => {
     if (data) {

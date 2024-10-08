@@ -1,6 +1,4 @@
-import React from "react";
-import Input from "./common/Input";
-import { Send } from "lucide-react";
+
 
 const Footer = () => {
   return (

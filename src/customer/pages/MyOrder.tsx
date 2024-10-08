@@ -5,16 +5,17 @@ import OrderCard from "../../components/OrderCard";
 import Button from "../../components/common/Button";
 import { useQuery } from "../../hooks/useQuery";
 import Shimmer from "../../components/common/Shimmer";
+import { OrderType } from "../../types/OrderType";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data, loading } = useQuery<any>("/order/myorder", false);
+  const { data, loading } = useQuery<OrderType>("/order/myorder", false);
 
   const clickHandler = (params: string) => {
     setOrderState(params);
   };
 
-  if (data?.length < 1) {
+  if ((data as OrderType[])?.length < 1) {
     return (
       <ParaTypo className="text-center text-4xl font-semibold my-3">
         0 Orders Found
@@ -59,7 +60,7 @@ const MyOrder = () => {
       ) : (
         orderState == "shipping" && (
           <div className="mt-7 flex flex-wrap justify-center gap-5">
-            {data?.map((ele: any, index: number) => {
+            {(data as OrderType[])?.map((ele: OrderType, index: number) => {
               return (
                 ele?._id == "pending" && (
                   <OrderCard
@@ -80,7 +81,7 @@ const MyOrder = () => {
       ) : (
         orderState == "arrived" && (
           <div className="mt-7 flex flex-wrap justify-center gap-5">
-            {data?.map((ele: any, index: number) => {
+            {(data as OrderType[])?.map((ele:OrderType, index: number) => {
               return (
                 ele?._id == "complete" && (
                   <OrderCard
@@ -101,7 +102,7 @@ const MyOrder = () => {
       ) : (
         orderState == "canceled" && (
           <div className="mt-7 flex flex-wrap justify-center gap-5">
-            {data?.map((ele: any, index: number) => {
+            {(data as OrderType[])?.map((ele: any, index: number) => {
               return (
                 ele?._id == "cancled" && (
                   <OrderCard

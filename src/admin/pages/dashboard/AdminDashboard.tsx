@@ -6,13 +6,17 @@ import Shimmer from "../../../components/common/Shimmer";
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AdminDashboardDataType } from "../../../types/AdminDashboardDataType";
+import { TopListType } from "../../../types/TopListType";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
-  const { data, loading: dashBoardLoading } = useQuery<any>("/admin/dashboard");
+  let { data, loading: dashBoardLoading } = useQuery<AdminDashboardDataType>("/admin/dashboard");
+  data = data as AdminDashboardDataType
+  
   const { data: topList, loading: listLoading } =
-    useQuery<any>("/admin/toplist");
+    useQuery<TopListType>("/admin/toplist");
   const logOutHandler = async () => {
     try {
       const resp = await fetch(import.meta.env.VITE_HOST + "/user/logout", {
@@ -85,7 +89,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              topList?.topVender?.map((ele: any) => {
+              (topList as TopListType)?.topVender?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -107,7 +111,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              topList?.topSellingProduct?.map((ele: any) => {
+              (topList as TopListType)?.topSellingProduct?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -129,7 +133,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              topList?.topCategory?.map((ele: any) => {
+              (topList as TopListType).topCategory?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -150,7 +154,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              topList?.topExpensiveProduct?.map((ele: any) => {
+              (topList as TopListType).topExpensiveProduct?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}

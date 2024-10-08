@@ -7,7 +7,7 @@ interface optionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
 }
 
 const Option = React.forwardRef<HTMLOptionElement, optionProps>(
-  ({ value, className, children }, ref) => {
+  ({ value, className, children }) => {
     return (
       <option className={className} value={value}>
         {children}

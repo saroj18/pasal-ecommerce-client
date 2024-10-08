@@ -6,6 +6,7 @@ import Select from "../../../../components/common/Select";
 import { useQuery } from "../../../../hooks/useQuery";
 import { OrderType } from "../../OrderCheckout";
 import Shimmer from "../../../../components/common/Shimmer";
+import { UserLocationType } from "../../../../types/UserLocationType";
 
 type addressProps = {
   delevery: boolean;
@@ -29,14 +30,14 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
 
   const delevery: any[] = [];
   const billing: any[] = [];
-  const { data, loading } = useQuery<any>("/user/address");
+  const { data, loading } = useQuery<UserLocationType>("/user/address");
 
   const deleveryAddressHandler = () => {
     setOpen((prv) => ({ ...prv, delevery: false }))
   }
 
   data &&
-    data.forEach((ele: any) => {
+    (data as UserLocationType[]).forEach((ele:UserLocationType ) => {
       if (
         ele.defaultAddress == "delevery" ||
         ele.defaultAddress == "deleveryandbilling"
@@ -98,7 +99,7 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
               onChange={deleveryHandler}
               className="w-full mt-4 capitalize"
             >
-              {data.map((ele: any, index: number) => {
+              {(data as UserLocationType[]).map((ele: any, index: number) => {
                 const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
                 return (
                   (ele.defaultAddress == "delevery" ||
@@ -146,7 +147,7 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
               onChange={billingHandler}
               className="w-full mt-4 capitalize"
             >
-              {data.map((ele: any, index: number) => {
+              {(data as UserLocationType[]).map((ele: any, index: number) => {
                 const address = `${ele.state} Province,${ele.district} District,${ele.city}-${ele.ward},${ele.tole} Tole,NearBy ${ele.nearBy}`;
                 return (
                   (ele.defaultAddress == "billing" ||

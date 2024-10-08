@@ -20,7 +20,7 @@ const SetChart = ({
   chartType,
   heading,
   className,
-  showLabels = true,
+  // showLabels = true,
   graphData,
   label,
   color,

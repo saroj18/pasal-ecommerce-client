@@ -6,10 +6,12 @@ import Shimmer from "../../../components/common/Shimmer";
 import CoupenPopup from "./CoupenPopup";
 import { useState } from "react";
 import ParaTypo from "../../../components/common/ParaTypo";
+import { OfferType } from "../../../types/OfferType";
+import { CoupenType } from "../../../types/CoupenType";
 
 const Offers = () => {
-  const { data, refetch, loading } = useQuery<any>("/offers");
-  const { data:coupenData, loading:coupenLoading } = useQuery<any>("/coupen");
+  const { data, refetch, loading } = useQuery<OfferType>("/offers");
+  const { data:coupenData, loading:coupenLoading } = useQuery<CoupenType>("/coupen");
   const [open, setOpen] = useState(false)
   
   return (
@@ -37,7 +39,7 @@ const Offers = () => {
         {loading ? (
           <Shimmer height="300px" count={6} shape="rectange" />
         ) : (
-          data?.map((ele: any) => {
+          (data as OfferType[])?.map((ele: any) => {
             return <OffersCard key={ele._id} flag='offer' data={ele} refetch={refetch} />;
           })
         )}
@@ -47,7 +49,7 @@ const Offers = () => {
         {coupenLoading ? (
           <Shimmer height="300px" count={6} shape="rectange" />
         ) : (
-          coupenData?.map((ele: any) => {
+          (coupenData as CoupenType[])?.map((ele: any) => {
             return <OffersCard key={ele._id} flag='coupen' data={ele} refetch={refetch} />;
           })
         )}

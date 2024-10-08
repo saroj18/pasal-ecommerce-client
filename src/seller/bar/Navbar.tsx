@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "../../assets/logo.jpg";
 import HeadingTypo from "../../components/common/HeadingTypo";
 

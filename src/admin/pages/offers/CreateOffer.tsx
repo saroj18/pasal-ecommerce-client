@@ -8,7 +8,7 @@ import { useQuery } from "../../../hooks/useQuery";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
 import { useMutation } from "../../../hooks/useMutation";
-import CoupenPopup from "./CoupenPopup";
+import { ProductType } from "../../../types/ProductType";
 
 type OfferType = {
   name: string;
@@ -17,9 +17,9 @@ type OfferType = {
 };
 
 const CreateOffer = () => {
-  const { data } = useQuery<any>("/product?skip=0");
+  const { data } = useQuery<ProductType>("/product?skip=0");
   const { mutate } = useMutation();
-  console.log(data);
+  
   const [offer, setOffer] = useState<OfferType>({
     name: "",
     products: [],
@@ -44,7 +44,7 @@ const CreateOffer = () => {
         ...offer,
         products: [...offer.products, selectRef.current.value],
       });
-      const value = data.find(
+      const value = (data as ProductType[]).find(
         (ele: any) => ele._id === selectRef.current?.value,
       );
       setProducts([...products, value]);
@@ -87,7 +87,7 @@ const CreateOffer = () => {
                 Select Product
               </Option>
               {data &&
-                data.map((ele: any) => {
+                (data as ProductType[]).map((ele: any) => {
                   return (
                     <Option key={ele._id} value={ele._id}>
                       {ele.name}

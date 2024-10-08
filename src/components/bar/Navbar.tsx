@@ -10,15 +10,15 @@ import { useQuery } from "../../hooks/useQuery";
 import { useContextProvider } from "../../context/Context";
 import { useAuth, UserType } from "../../context/AuthProvider";
 
-// type CountType={
-//   wishListCount:number
-//   cartCount:number
-// }
+export type CountType={
+  wishListCount:number
+  cartCount:number
+}
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { data } = useQuery<any>("/product/cartandwishlist/count");
+  const { data } = useQuery<CountType>("/product/cartandwishlist/count");
   const { cart, setCart,setWishList,wishList } = useContextProvider();
   let { data: user } = useAuth();
   user = user as UserType;
@@ -27,8 +27,8 @@ const Navbar = () => {
 
   useEffect(() => {
     if (data) {
-      setCart(data?.cartCount);
-      setWishList(data?.wishListCount)
+      setCart((data as CountType)?.cartCount);
+      setWishList((data as CountType)?.wishListCount)
     }
   }, [data]);
 

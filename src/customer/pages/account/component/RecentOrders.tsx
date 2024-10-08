@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 
 const RecentOrders = () => {

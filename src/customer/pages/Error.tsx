@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import Button from "../../components/common/Button";

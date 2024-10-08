@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { StarIcon } from "lucide-react";

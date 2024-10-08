@@ -1,4 +1,3 @@
-import React from "react";
 import Label from "../../../components/common/Label";
 import Input from "../../../components/common/Input";
 import Select from "../../../components/common/Select";

@@ -12,7 +12,6 @@ type AddressBookProps = {
 const AddressBookComponent = ({
   setOpen,
   userInfo,
-  loading,
 }: AddressBookProps) => {
   return (
     <div className="p-4 rounded-md border-2 border-gray-500 flex flex-col gap-y-3">

@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import { Menu } from "lucide-react";
 import { useContextProvider } from "../../../../context/Context";

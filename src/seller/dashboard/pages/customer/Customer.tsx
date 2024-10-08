@@ -10,13 +10,14 @@ import TableRow from "../../../../components/common/TableRow";
 import dayjs from "dayjs";
 import { formatDistanceToNow } from "date-fns";
 import Shimmer from "../../../../components/common/Shimmer";
+import { UserType } from "../../../../types/userType";
 
 const Customer = () => {
-  const { data, loading } = useQuery<any>("/user/allmycustomer");
+  const { data, loading } = useQuery<UserType>("/user/allmycustomer");
 
   console.log(data);
 
-  const value = dayjs(data?.[0]?.createdAt).format("YYYY//MM/DD");
+  const value = dayjs((data as UserType[])?.[0]?.createdAt).format("YYYY//MM/DD");
   console.log(value);
   return (
     <div>
@@ -27,7 +28,7 @@ const Customer = () => {
         </ParaTypo>
       </div>
       {loading ? <Shimmer height="50px" count={8} shape="rectange" /> : null}
-      {data?.length < 1 ? (
+      {(data as UserType[])?.length < 1 ? (
         <HeadingTypo className="text-center font-semibold text-xl">
           0 Customer Found
         </HeadingTypo>
@@ -36,7 +37,7 @@ const Customer = () => {
           <Table>
             <TableHead tableHeadData={tableHeadData} />
             <TableBody>
-              {data?.map((ele: any) => {
+              {(data as UserType[])?.map((ele: any) => {
                 return (
                   <TableRow key={ele._id}>
                     <TableData title={ele._id} className="p-2">

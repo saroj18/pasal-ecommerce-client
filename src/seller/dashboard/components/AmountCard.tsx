@@ -1,11 +1,10 @@
-import React from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import ParaTypo from "../../../components/common/ParaTypo";
 import { twMerge } from "tailwind-merge";
 
 type amountCardProps = {
   heading: string;
-  amount: string;
+  amount: number|string;
   className: string;
 };
 

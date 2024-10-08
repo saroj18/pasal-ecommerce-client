@@ -25,7 +25,7 @@ export type AddressForm = z.infer<typeof AddressZodSchema>;
 type formProps = {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   close?: boolean;
-  verifyInfo: VerifyInfoTyype | VerifyForm | AddressForm;
+  verifyInfo?: VerifyInfoTyype | VerifyForm | AddressForm;
 };
 
 const AddAddressForm = ({ setOpen, close = false, verifyInfo }: formProps) => {

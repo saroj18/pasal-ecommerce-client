@@ -1,7 +1,6 @@
-import React from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import SearchBox from "../../../../components/common/Search";
+// import SearchBox from "../../../../components/common/Search";
 import jacket from "../../../../assets/jacket.png";
 import Button from "../../../../components/common/Button";
 
@@ -15,7 +14,7 @@ const Delevery = () => {
             All delevery list
           </ParaTypo>
         </div>
-        <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" />
+        {/* <SearchBox className="w-full md:max-w-[45%] lg:max-w-[30%]" /> */}
       </div>
 
       <table className="w-full text-sm md:text-base text-center mt-5 bg-white shadow-md">

@@ -9,12 +9,14 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "../../../hooks/useMutation";
 import { shopDataFormatter } from "../../../utils/shopDataFormatter";
+import { ShopType } from "../../../types/ShopType";
 
 const VendorDetail = () => {
   const { id } = useParams();
   const [report, setReport] = useState("");
   const [shop, setShop] = useState<{ [key: string]: string }>();
-  const { data, refetch } = useQuery<any>(`/vendor/${id}`);
+  let { data, refetch } = useQuery<ShopType>(`/vendor/${id}`);
+  data=data as ShopType
   const { mutate } = useMutation();
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

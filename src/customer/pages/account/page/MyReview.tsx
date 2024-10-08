@@ -7,13 +7,14 @@ import Popup from "reactjs-popup";
 import ReviewForm from "./ReviewForm";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ReviewType } from "../../../../types/ReviewType";
 
 const ReviewComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [reviewInfo, setReviewInfo] = useState<any>({});
-  const { data, loading } = useQuery<any>("/review/reviewneed");
+  const [reviewInfo, setReviewInfo] = useState<ReviewType>();
+  const { data, loading } = useQuery<ReviewType>("/review/reviewneed");
   console.log(data);
-  const clickHandler = (info: any) => {
+  const clickHandler = (info: ReviewType) => {
     setOpen(true);
     setReviewInfo(info);
   };
@@ -22,7 +23,7 @@ const ReviewComponent = () => {
       {loading ? (
         <Shimmer height="150px" count={3} shape="rectange" />
       ) : (
-        data?.map((ele: any) => {
+        (data as ReviewType[])?.map((ele: ReviewType) => {
           return (
             <div
               key={ele._id}

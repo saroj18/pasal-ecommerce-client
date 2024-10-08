@@ -188,6 +188,7 @@ const CheckoutBox = ({
       </div>
       <ParaTypo className="text-red-500 text-sm">{discount?`Applied Coupen with ${data?.coupenDiscount}% Discount`:null }</ParaTypo>
       <Button
+        disabled={orderDetails.product.length==0}
         onClick={clickHandler}
         className="w-full bg-red-500 text-white rounded-md py-3 px-5 mt-4"
       >

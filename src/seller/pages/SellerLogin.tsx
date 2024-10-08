@@ -10,7 +10,6 @@ import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect } from "react";
-import { useContextProvider } from "../../context/Context";
 
 const SellerLogin = () => {
   const navigate = useNavigate();

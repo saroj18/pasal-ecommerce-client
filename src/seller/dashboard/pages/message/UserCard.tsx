@@ -8,7 +8,6 @@ const UserCard = ({
   onClick,
   info,
   sender,
-  receiver,
   lastmessage,
   className,
 }: {

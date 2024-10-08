@@ -6,6 +6,7 @@ import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect, useState } from "react";
 import Shimmer from "../../components/common/Shimmer";
+import { CartType } from "../../types/CartType";
 
 export type OrderType = {
   product: string[];
@@ -17,12 +18,7 @@ export type OrderType = {
   cartInfo: any;
 };
 
-type Product = {
-  id?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-};
+
 
 const OrderCheckout = () => {
   const { mutate, loading } = useMutation();
@@ -30,7 +26,7 @@ const OrderCheckout = () => {
     data: productData,
     refetch,
     loading: cartLoading,
-  } = useQuery<Product[]>("/product/cart", false);
+  } = useQuery<CartType>("/product/cart", false);
   const deleteFromCart = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };
@@ -49,7 +45,7 @@ const OrderCheckout = () => {
   useEffect(() => {
     let products: string[] = [];
     productData &&
-      productData.forEach((ele: any) => {
+      (productData as CartType[]).forEach((ele: CartType) => {
         products.push(ele.product._id);
       });
     setOrderDetails((prv) => ({
@@ -66,7 +62,7 @@ const OrderCheckout = () => {
       ) : (
         <div className="w-full  flex items-start gap-3  border-2 border-gray-400 max-h-[200px]  md:h-fit flex-wrap overflow-y-scroll rounded-md p-4 shadow-md ">
           {productData &&
-            productData?.map((ele: any, index: number) => {
+            (productData as CartType[])?.map((ele: any, index: number) => {
               return (
                 <div
                   title={ele.product.name}

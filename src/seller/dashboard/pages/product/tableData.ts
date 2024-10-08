@@ -1,4 +1,4 @@
-import jacket from "../../../../assets/jacket.png";
+// import jacket from "../../../../assets/jacket.png";
 
 // export const tableHeadData=['Product ID','Product Name','Category','Stock','Added Date','Price','Discount','Brand','Total Sale','Total Sale Amount']
 // export const tableHeadData=['Product','Price','Brand','Category','Review','Total Sale','Added Date','Action']

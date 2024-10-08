@@ -1,11 +1,12 @@
 import ParaTypo from "../../../components/common/ParaTypo";
 import Shimmer from "../../../components/common/Shimmer";
 import { useQuery } from "../../../hooks/useQuery";
+import { UserType } from "../../../types/userType";
 
 const Info = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data, loading } = useQuery<any>(`/user/${id}`);
-  console.log(data);
+  let { data, loading } = useQuery<UserType>(`/user/${id}`);
+  data=data as UserType
 
   return (
     <>

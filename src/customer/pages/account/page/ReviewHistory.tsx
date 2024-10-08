@@ -3,10 +3,11 @@ import ParaTypo from "../../../../components/common/ParaTypo";
 import { Star,  } from "lucide-react";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ReviewType } from "../../../../types/ReviewType";
 
 export const ReviewComponent = ({
   info,
-  flag = true,
+  // flag = true,
 }: {
   info: any;
   flag?: boolean;
@@ -59,13 +60,13 @@ export const ReviewComponent = ({
 };
 
 const ReviewHistory = () => {
-  const { data, loading } = useQuery<any>("/review");
+  const { data, loading } = useQuery<ReviewType>("/review");
   return (
     <div>
       {loading ? (
         <Shimmer count={2} shape="rectange" />
       ) : (
-        data?.map((ele: any) => {
+        (data as ReviewType[])?.map((ele: any) => {
           return <ReviewComponent info={ele} key={ele._id} />;
         })
       )}

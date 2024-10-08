@@ -4,6 +4,7 @@ import HeadingTypo from "../../components/common/HeadingTypo";
 import { useQuery } from "../../hooks/useQuery";
 import Shimmer from "../../components/common/Shimmer";
 import { useNavigate } from "react-router-dom";
+import { ProductType } from "../../types/ProductType";
 
 type barProps = {
   heading: string;
@@ -23,18 +24,18 @@ export const HeaderBar = ({ heading, btnText }: barProps) => {
 };
 
 const Wishlist = () => {
-  const { data, loading,refetch } = useQuery<any>("/product/wishlist",false);
+  const { data, loading,refetch } = useQuery<ProductType>("/product/wishlist",false);
   const { data: randomProducts, loading: randomProductsLoading } =
-    useQuery<any>("/product/randomproducts");
+    useQuery<ProductType>("/product/randomproducts");
   console.log(randomProducts);
   return (
     <div>
-      <HeaderBar btnText="See All" heading={`Wishlist(${data?.length})`} />
+      <HeaderBar btnText="See All" heading={`Wishlist(${(data as ProductType[])?.length})`} />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 mb-10">
         {loading ? (
           <Shimmer shape="rectange" height="300px" count={4} />
         ) : (
-          data?.map((ele: any, index: number) => (
+          (data as ProductType[])?.map((ele: any, index: number) => (
             <ProductCard key={index} refetch={refetch} remove={true} product={ele.product} />
           ))
         )}
@@ -45,7 +46,7 @@ const Wishlist = () => {
         {randomProductsLoading ? (
           <Shimmer shape="rectange" height="300px" count={4} />
         ) : (
-          randomProducts?.map((ele: any) => (
+          (randomProducts as ProductType[])?.map((ele: any) => (
             <ProductCard key={ele._id} product={ele} />
           ))
         )}

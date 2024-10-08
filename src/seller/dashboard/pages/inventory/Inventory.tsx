@@ -1,7 +1,5 @@
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import SearchBox from "../../../../components/common/Search";
-import Button from "../../../../components/common/Button";
 import TableHead from "../../../../components/common/TableHead";
 import Table from "../../../../components/common/Table";
 import { tableHeadData } from "./tableData";
@@ -10,9 +8,10 @@ import TableBody from "../../../../components/common/TableBody";
 import { useQuery } from "../../../../hooks/useQuery";
 import TableRow from "../../../../components/common/TableRow";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ProductType } from "../../../../types/ProductType";
 
 const Inventory = () => {
-  const { data, loading } = useQuery<any>("/product/inventory");
+  const { data, loading } = useQuery<ProductType>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">
@@ -36,7 +35,7 @@ const Inventory = () => {
         </div>
       </div>
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
-      {data?.length < 1 ? (
+      {(data as ProductType[])?.length < 1 ? (
         <HeadingTypo className="text-center font-semibold text-xl">
           0 Product Found
         </HeadingTypo>
@@ -49,7 +48,7 @@ const Inventory = () => {
               tableHeadData={tableHeadData}
             />
             <TableBody>
-              {data?.map((ele: any, index: number) => {
+              {(data as ProductType[])?.map((ele: any, index: number) => {
                 return (
                   <TableRow
                     key={index}

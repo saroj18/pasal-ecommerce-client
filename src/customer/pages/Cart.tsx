@@ -8,13 +8,14 @@ import { useMutation } from "../../hooks/useMutation";
 import Shimmer from "../../components/common/Shimmer";
 import { useEffect } from "react";
 import { useContextProvider } from "../../context/Context";
+import { CartType } from "../../types/CartType";
 
 const Cart = () => {
   const {
     data,
     refetch,
     loading: cartLoading,
-  } = useQuery<any>("/product/cart", false);
+  } = useQuery<CartType>("/product/cart", false);
   const { mutate, data: cartData } = useMutation();
   const { setCart } = useContextProvider();
 
@@ -46,7 +47,7 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((ele: any, index: number) => (
+            {(data as CartType[])?.map((ele: any, index: number) => (
               <tr key={index} className=" my-8 border-b-2 border-t-2 ">
                 <td className="p-4 ">
                   <img

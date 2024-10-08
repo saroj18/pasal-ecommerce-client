@@ -1,4 +1,3 @@
-import React from "react";
 import NotificationCard from "../../components/NotificationCard";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 

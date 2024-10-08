@@ -7,30 +7,15 @@ import Shimmer from "../../components/common/Shimmer";
 import Button from "../../components/common/Button";
 import { useThrottle } from "../../hooks/useThrottle";
 import ParaTypo from "../../components/common/ParaTypo";
+import { ProductType } from "../../types/ProductType";
 
-export type ElementType = {
-  addedBy: { [key: string]: string };
-  category: string;
-  description: string;
-  discount: string;
-  chat: string;
-  features: string[];
-  images: string[];
-  name: string;
-  price: number;
-  stock: number;
-  brand: string;
-  barganing: string;
-  _id: string;
-  review: [];
-};
 
 const AllProducts = () => {
-  const [product, setProduct] = useState<any[]>([]);
+  const [product, setProduct] = useState<ProductType[]>([]);
   const [skip, setSkip] = useState(0);
   const [open, setOpen] = useState(false);
   const [end,setEnd]=useState(false)
-  const { data, loading } = useQuery<any>(
+  const { data, loading } = useQuery<ProductType>(
     `/product?skip=${skip}&limit=8`,
     false,
   );
@@ -41,10 +26,10 @@ const AllProducts = () => {
       window.scrollTo({ top: 0 });
     }, 0);
     }
-    if (data && data.length <= 8) {
-      setProduct((prv) => [...prv, ...data]);
+    if (data && (data as ProductType[]).length <= 8) {
+      setProduct((prv) => [...prv, ...data as ProductType[]]);
     }
-    if (data&&data.length < 8) {
+    if (data&&(data as ProductType[]).length < 8) {
       setEnd(true)
     }
   }, [data]);
@@ -92,7 +77,7 @@ const AllProducts = () => {
           {loading&&!data ? (
             <Shimmer count={6} width="320px" height="300px" shape="rectange" />
           ) : (
-            product?.map((ele: ElementType, index: number) => {
+            product?.map((ele: ProductType, index: number) => {
               return <ProductCard product={ele} key={index} />;
             })
           )}

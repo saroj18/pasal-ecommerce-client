@@ -9,15 +9,16 @@ import Button from "../../../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "../../../hooks/useQuery";
 import TableRow from "../../../components/common/TableRow";
+import { ShopType } from "../../../types/ShopType";
 
 const VendorApprove = () => {
   const navigate = useNavigate();
-  const [vendor, setVendor] = useState<any>([]);
-  const { data } = useQuery<any>("/vendor/unverified");
+  const [vendor, setVendor] = useState<ShopType[]>([]);
+  const { data } = useQuery<ShopType>("/vendor/unverified");
 
   useEffect(() => {
     if (data) {
-      setVendor(data);
+      setVendor(data as ShopType[]);
     }
   }, [data]);
 

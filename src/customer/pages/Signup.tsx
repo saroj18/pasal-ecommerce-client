@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";

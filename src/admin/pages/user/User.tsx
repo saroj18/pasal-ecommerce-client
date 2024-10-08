@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "../../../hooks/useMutation";
 import React from "react";
 import Shimmer from "../../../components/common/Shimmer";
+import { UserType } from "../../../types/userType";
 
 const User = () => {
-  const { data, refetch, loading } = useQuery<any>("/user/allcustomer");
+  const { data, refetch, loading } = useQuery<UserType>("/user/allcustomer");
   const { mutate } = useMutation();
   const navigate = useNavigate();
 
@@ -36,11 +37,11 @@ const User = () => {
       </div>
       <hr />
       {loading ? <Shimmer height="60px" count={8} shape="rectange" /> : null}
-      {data?.length > 0 && (
+      {(data as UserType[])?.length > 0 && (
         <Table>
           <TableHead tableHeadData={tableHeadData} />
           <TableBody>
-            {data.map((ele: any) => {
+            {(data as UserType[]).map((ele: any) => {
               return (
                 <TableRow
                   className="cursor-pointer hover:bg-slate-50"

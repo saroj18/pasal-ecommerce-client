@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import person from "../../../../assets/person.avif";
-import SearchBox from "../../../../components/common/Search";
 import Popup from "reactjs-popup";
 import Label from "../../../../components/common/Label";
 import { X } from "lucide-react";

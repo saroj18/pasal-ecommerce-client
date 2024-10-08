@@ -5,6 +5,8 @@ import { MapPin, Truck } from "lucide-react";
 import Button from "./common/Button";
 import { useMutation } from "../hooks/useMutation";
 import { useAuth, UserType } from "../context/AuthProvider";
+import { OrderType } from "../types/OrderType";
+import { ProductType } from "../types/ProductType";
 
 const OrderCard = ({
   background,
@@ -12,7 +14,7 @@ const OrderCard = ({
   element,
 }: {
   background: string;
-  info: any;
+  info: OrderType[];
   date: string;
   element?: any;
 }) => {
@@ -24,7 +26,7 @@ const OrderCard = ({
   };
   return (
     <>
-      {info?.map((ele: any, index: number) => {
+      {info?.map((ele, index: number) => {
         return (
           <Fragment key={index}>
             <div className="w-full relative text-xs sm:text-xl max-w-[600px] p-2 border-2 border-gray-300 rounded-md shadow-md">
@@ -61,18 +63,18 @@ const OrderCard = ({
               <div className="flex h-[100px] items-center justify-around">
                 <img
                   className="w-[100px]"
-                  src={ele?.product.images?.[0]}
+                  src={(ele?.product as ProductType).images?.[0]}
                   alt=""
                 />
                 <div className="w-full max-w-[60%] ">
                   <HeadingTypo
-                    title={ele.product.name}
+                    title={(ele.product as ProductType).name}
                     className="text-base  w-full truncate"
                   >
-                    {ele.product.name}
+                    {(ele.product as ProductType).name}
                   </HeadingTypo>
                   <ParaTypo className="opacity-80">
-                    Rs {ele.product.priceAfterDiscount}
+                    Rs {(ele.product as ProductType).priceAfterDiscount}
                   </ParaTypo>
                 </div>
               </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import HeadingTypo from "../../components/common/HeadingTypo";
 import Label from "../../components/common/Label";
 import Input from "../../components/common/Input";

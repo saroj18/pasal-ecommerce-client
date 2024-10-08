@@ -14,6 +14,7 @@ import { useMutation } from "../../../../hooks/useMutation";
 import { useQuery } from "../../../../hooks/useQuery";
 import { useEffect, useState } from "react";
 import Shimmer from "../../../../components/common/Shimmer";
+import { ProductTypeForApi } from "../../../../types";
 
 export type ProductType = z.infer<typeof productZodSchema>;
 export type FormProps = {
@@ -26,7 +27,7 @@ const Product = () => {
   const [edit, setEdit] = useState(false);
   const [updateData, setUpdateData] = useState<any>();
 
-  const { data, refetch, loading } = useQuery<any>("/product/myproduct");
+  const { data, refetch, loading } = useQuery<ProductTypeForApi>("/product/myproduct");
   const { mutate, data: mutateData, loading: mutateLoading } = useMutation();
 
   console.log(mutateData);
@@ -188,7 +189,7 @@ const Product = () => {
       </div>
       <hr />
       {loading ? <Shimmer height="100px" count={5} shape="rectange" /> : null}
-      {data?.length < 1 ? (
+      {(data as ProductTypeForApi[])?.length < 1 ? (
         <HeadingTypo className="text-center font-semibold text-xl">
           0 Product Found
         </HeadingTypo>
@@ -213,7 +214,7 @@ const Product = () => {
 
             <tbody>
               {data &&
-                data.map((product: any) => (
+                (data as ProductTypeForApi[]).map((product: ProductTypeForApi) => (
                   <tr
                     key={product?._id}
                     className="border-2 border-gray-300  text-base"

@@ -1,20 +1,12 @@
 import {
-  Bell,
-  BookHeart,
-  DollarSign,
-  HelpCircle,
   Home,
   Layers,
   LayoutDashboard,
-  LineChart,
   ListOrdered,
-  MoveDiagonal,
   PersonStanding,
   Send,
-  Settings,
   ShoppingBasket,
   Star,
-  Truck,
   User,
 } from "lucide-react";
 

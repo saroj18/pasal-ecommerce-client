@@ -1,4 +1,3 @@
-import React from "react";
 import ParaTypo from "../../../components/common/ParaTypo";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import { AlarmClock } from "lucide-react";
