@@ -1,45 +1,34 @@
+import { useNavigate } from "react-router-dom";
 
 
 const Footer = () => {
+  const navigate=useNavigate()
   return (
     <section className=" bg-black  text-white mt-7 max-h-fit ">
-      <div className="container flex flex-wrap gap-y-6 justify-center py-6">
-        <div className="relative grow w-full max-w-[250px]">
-          <h1 className="text-xl">Exclusive</h1>
-          <p className="my-3">Subscribe</p>
-          <p className="my-3">Get 10% off your first order</p>
-        </div>
+      <div className="container flex flex-wrap gap-y-6 justify-center md:justify-between py-6">
+       
         <div className="grow w-full max-w-[250px] ">
           <h1 className="text-xl my-2">Support</h1>
-          <p className="my-3">111 Bijoy sarani, Nepal</p>
-          <p className="my-3">exclusive@gmail.com</p>
-          <p className="my-3">+88015-88888-9999</p>
+          <p className="my-3">Kathmandu, Nepal</p>
+          <p className="my-3">pasal@gmail.com</p>
+          <p className="my-3">+997-9876543210</p>
+        </div>
+         <div className="relative grow w-full max-w-[250px]">
+          <h1 className="text-xl">Exclusive</h1>
+          <p className="my-3">Get discount on your every order</p>
         </div>
         <div className="grow w-full max-w-[250px]">
           <h1 className="text-xl my-2">Account</h1>
-          <p className="my-3">My Account</p>
-          <p className="my-3">Login/Register</p>
-          <p className="my-3">Cart</p>
-          <p className="my-3">Wishlist</p>
-          <p className="my-3">Shop</p>
+          <p onClick={()=>navigate('/account')} className="my-3 cursor-pointer">My Account</p>
+          <p onClick={()=>navigate('/cart')} className="my-3 cursor-pointer">Cart</p>
+          <p onClick={()=>navigate('/wishlist')} className="my-3 cursor-pointer">Wishlist</p>
+          <p onClick={()=>navigate('/allproducts')} className="my-3 cursor-pointer">Products</p>
         </div>
-        <div className="grow w-full max-w-[250px]">
-          <h1 className="text-xl my-2">Quick Link</h1>
-          <p className="my-3">Privacy Policy</p>
-          <p className="my-3">Terms of Use</p>
-          <p className="my-3">FAQ</p>
-          <p className="my-3">Contact</p>
-        </div>
-        <div className="grow w-full max-w-[250px]">
-          <h1 className="text-xl my-2">Download App</h1>
-          <p>Privacy Policy</p>
-          <p>Terms of Use</p>
-          <p>FAQ</p>
-          <p>Contact</p>
-        </div>
+        
+        
       </div>
       <p className="text-center">
-        &copy; Copyright Rimel 2022. All right reserved
+        &copy; Copyright Reserve 2024. All right reserved
       </p>
     </section>
   );
