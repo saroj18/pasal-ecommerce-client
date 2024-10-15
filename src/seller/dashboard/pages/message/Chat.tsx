@@ -7,6 +7,7 @@ import jacket from "../../../../assets/jacket.png";
 import { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
+import { useAuth, UserType } from "../../../../context/AuthProvider";
 // import VideoCallPopup from "../../../components/VideoCallPopup";
 
 const Chat = () => {
@@ -23,6 +24,7 @@ const Chat = () => {
     sender: "",
     product: "",
   });
+  const {data}=useAuth()
 
   useEffect(() => {
     if (id) {
@@ -50,6 +52,7 @@ const Chat = () => {
     const value = {
       receiver: id,
       message: text,
+      sender:(data as UserType)._id,
       type: "customer_and_vendor_chat",
     };
     setChat((prv) => [...prv, value]);
@@ -168,11 +171,11 @@ const Chat = () => {
         >
           {chat.map(
             (msg, index) =>
-              (msg.receiver._id == id || msg.sender._id == id) &&
+              (msg.receiver?._id == id || msg.sender?._id == id||msg.sender == id||msg.receiver == id) &&
               msg.message && (
                 <MessageCard
                   key={index}
-                  user={msg.sender.fullname}
+                  user={msg.sender?.fullname}
                   message={msg.message}
                   messageType={id}
                   msg={msg}

@@ -3,6 +3,7 @@ import { useQuery } from "../hooks/useQuery";
 import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
 
 export interface UserType {
+  _id:string
   fullname: string;
   role: "customer" | "admin" | "seller";
   verify: boolean;
