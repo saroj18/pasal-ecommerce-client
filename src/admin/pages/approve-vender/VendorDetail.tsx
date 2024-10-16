@@ -16,7 +16,7 @@ const VendorDetail = () => {
   const [report, setReport] = useState("");
   const [shop, setShop] = useState<{ [key: string]: string }>();
   let { data, refetch } = useQuery<ShopType>(`/vendor/${id}`);
-  data=data as ShopType
+  data = data as ShopType;
   const { mutate } = useMutation();
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -13,11 +13,13 @@ import Shimmer from "../../../../components/common/Shimmer";
 import { UserType } from "../../../../types/userType";
 
 const Customer = () => {
-  const { data, loading } = useQuery<UserType>("/user/allmycustomer");
+  const { data, loading } = useQuery<UserType[]>("/user/allmycustomer");
 
   console.log(data);
 
-  const value = dayjs((data as UserType[])?.[0]?.createdAt).format("YYYY//MM/DD");
+  const value = dayjs((data as UserType[])?.[0]?.createdAt).format(
+    "YYYY//MM/DD",
+  );
   console.log(value);
   return (
     <div>

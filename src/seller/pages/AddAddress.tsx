@@ -1,4 +1,3 @@
-
 import HeadingTypo from "../../components/common/HeadingTypo";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";

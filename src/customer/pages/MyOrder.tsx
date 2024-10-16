@@ -9,7 +9,7 @@ import { OrderType } from "../../types/OrderType";
 
 const MyOrder = () => {
   const [orderState, setOrderState] = useState("shipping");
-  const { data, loading } = useQuery<OrderType>("/order/myorder", false);
+  const { data, loading } = useQuery<OrderType[]>("/order/myorder", false);
 
   const clickHandler = (params: string) => {
     setOrderState(params);
@@ -81,7 +81,7 @@ const MyOrder = () => {
       ) : (
         orderState == "arrived" && (
           <div className="mt-7 flex flex-wrap justify-center gap-5">
-            {(data as OrderType[])?.map((ele:OrderType, index: number) => {
+            {(data as OrderType[])?.map((ele: OrderType, index: number) => {
               return (
                 ele?._id == "complete" && (
                   <OrderCard

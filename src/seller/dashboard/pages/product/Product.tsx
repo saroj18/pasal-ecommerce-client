@@ -27,7 +27,8 @@ const Product = () => {
   const [edit, setEdit] = useState(false);
   const [updateData, setUpdateData] = useState<any>();
 
-  const { data, refetch, loading } = useQuery<ProductTypeForApi>("/product/myproduct");
+  const { data, refetch, loading } =
+    useQuery<ProductTypeForApi[]>("/product/myproduct");
   const { mutate, data: mutateData, loading: mutateLoading } = useMutation();
 
   console.log(mutateData);
@@ -214,56 +215,58 @@ const Product = () => {
 
             <tbody>
               {data &&
-                (data as ProductTypeForApi[]).map((product: ProductTypeForApi) => (
-                  <tr
-                    key={product?._id}
-                    className="border-2 border-gray-300  text-base"
-                  >
-                    <td className="flex flex-col items-center p-2 whitespace-nowrap">
-                      <img
-                        className="lg:h-[80px] h-[40px] rounded-md"
-                        src={product.images[0]}
-                        alt=""
-                      />
-                      <ParaTypo
-                        title={product.name}
-                        className="text-sm lg:text-base max-w-xs truncate"
-                      >
-                        {product.name.slice(0, 30)}
-                      </ParaTypo>
-                    </td>
-                    <td title={product._id}>{product._id.slice(15)}</td>
-                    <td className="whitespace-nowrap">Rs {product.price}</td>
-                    <td>{product.discount}%</td>
-                    <td className="whitespace-nowrap">
-                      Rs {product.priceAfterDiscount}
-                    </td>
-                    <td className="whitespace-nowrap">{product.brand}</td>
-                    <td className="whitespace-nowrap">{product.category}</td>
-                    <td className="whitespace-nowrap">
-                      {product?.review?.length}
-                    </td>
-                    <td className="whitespace-nowrap">{product.totalSale}</td>
-                    <td className="whitespace-nowrap">2024-03-11</td>
-                    <td className="flex justify-around items-start gap-x-1 px-3">
-                      <Trash
-                        onClick={() => productDeleteHandler(product._id)}
-                        strokeWidth={0.9}
-                        className="cursor-pointer size-4 md:size-5"
-                      />
-                      <Edit
-                        onClick={() => editHandler(product._id)}
-                        strokeWidth={0.9}
-                        className="cursor-pointer size-4 md:size-5"
-                      />
-                      <Layers
-                        color={`${product.stock === 0 ? "red" : "green"}`}
-                        strokeWidth={0.9}
-                        className="cursor-pointer size-4 md:size-5"
-                      />
-                    </td>
-                  </tr>
-                ))}
+                (data as ProductTypeForApi[]).map(
+                  (product: ProductTypeForApi) => (
+                    <tr
+                      key={product?._id}
+                      className="border-2 border-gray-300  text-base"
+                    >
+                      <td className="flex flex-col items-center p-2 whitespace-nowrap">
+                        <img
+                          className="lg:h-[80px] h-[40px] rounded-md"
+                          src={product.images[0]}
+                          alt=""
+                        />
+                        <ParaTypo
+                          title={product.name}
+                          className="text-sm lg:text-base max-w-xs truncate"
+                        >
+                          {product.name.slice(0, 30)}
+                        </ParaTypo>
+                      </td>
+                      <td title={product._id}>{product._id.slice(15)}</td>
+                      <td className="whitespace-nowrap">Rs {product.price}</td>
+                      <td>{product.discount}%</td>
+                      <td className="whitespace-nowrap">
+                        Rs {product.priceAfterDiscount}
+                      </td>
+                      <td className="whitespace-nowrap">{product.brand}</td>
+                      <td className="whitespace-nowrap">{product.category}</td>
+                      <td className="whitespace-nowrap">
+                        {product?.review?.length}
+                      </td>
+                      <td className="whitespace-nowrap">{product.totalSale}</td>
+                      <td className="whitespace-nowrap">2024-03-11</td>
+                      <td className="flex justify-around items-start gap-x-1 px-3">
+                        <Trash
+                          onClick={() => productDeleteHandler(product._id)}
+                          strokeWidth={0.9}
+                          className="cursor-pointer size-4 md:size-5"
+                        />
+                        <Edit
+                          onClick={() => editHandler(product._id)}
+                          strokeWidth={0.9}
+                          className="cursor-pointer size-4 md:size-5"
+                        />
+                        <Layers
+                          color={`${product.stock === 0 ? "red" : "green"}`}
+                          strokeWidth={0.9}
+                          className="cursor-pointer size-4 md:size-5"
+                        />
+                      </td>
+                    </tr>
+                  ),
+                )}
             </tbody>
           </table>
         </div>

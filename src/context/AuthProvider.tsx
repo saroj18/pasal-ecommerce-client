@@ -3,7 +3,7 @@ import { useQuery } from "../hooks/useQuery";
 import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
 
 export interface UserType {
-  _id:string
+  _id: string;
   fullname: string;
   role: "customer" | "admin" | "seller";
   verify: boolean;
@@ -15,12 +15,14 @@ export interface UserType {
   oAuthLogin: boolean;
 }
 
-interface ContextType {
-  data: UserType | UserType[] | null;
+interface ContextType<T> {
+  data: T | null;
   loading: boolean;
 }
 
-const Provider = createContext<ContextType | null>(null);
+const Provider = createContext<ContextType<
+  UserType | UserType[] | null
+> | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, loading } = useQuery<UserType>("/user", false);
@@ -29,11 +31,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useAuth = () => {
+export const useAuth = <T extends UserType | UserType[]>() => {
   const context = useContext(Provider);
 
   if (!context) {
     throw new Error("your are outside from provider");
   }
-  return context;
+  return context as ContextType<T>;
 };

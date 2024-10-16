@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import person from "../../../../assets/person.avif";

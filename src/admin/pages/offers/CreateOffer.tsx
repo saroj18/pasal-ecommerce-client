@@ -17,16 +17,15 @@ type OfferType = {
 };
 
 const CreateOffer = () => {
-  const { data } = useQuery<ProductType>("/product?skip=0");
+  const { data } = useQuery<ProductType[]>("/product?skip=0");
   const { mutate } = useMutation();
-  
+
   const [offer, setOffer] = useState<OfferType>({
     name: "",
     products: [],
     discount: "",
   });
   const [products, setProducts] = useState<any[]>([]);
-  
 
   const selectRef = useRef<HTMLSelectElement | null>(null);
 
@@ -137,7 +136,6 @@ const CreateOffer = () => {
               );
             })}
         </div>
-        
       </div>
     </>
   );

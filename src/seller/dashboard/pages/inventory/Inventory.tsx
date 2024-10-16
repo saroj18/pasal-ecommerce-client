@@ -11,7 +11,7 @@ import Shimmer from "../../../../components/common/Shimmer";
 import { ProductType } from "../../../../types/ProductType";
 
 const Inventory = () => {
-  const { data, loading } = useQuery<ProductType>("/product/inventory");
+  const { data, loading } = useQuery<ProductType[]>("/product/inventory");
   console.log(data);
   return (
     <div className="overflow-auto">

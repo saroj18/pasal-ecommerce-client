@@ -1,8 +1,8 @@
-import  { useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Popup from "reactjs-popup";
-import {  X } from "lucide-react";
+import { X } from "lucide-react";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 import { ReviewType } from "../../../../types/ReviewType";
@@ -10,7 +10,7 @@ import { ReviewType } from "../../../../types/ReviewType";
 const Review = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [info, setInfo] = useState<any>();
-  const { data, loading } = useQuery<ReviewType>("/review/myreview");
+  const { data, loading } = useQuery<ReviewType[]>("/review/myreview");
 
   const clickHandler = (data: any) => {
     setOpen(!open);

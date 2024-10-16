@@ -1,4 +1,3 @@
-
 const Timmer = () => {
   return (
     <div className="lg:flex gap-3 border-2 px-2 border-red-50 rounded-sm hidden">

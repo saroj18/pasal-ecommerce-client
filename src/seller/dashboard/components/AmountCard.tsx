@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 type amountCardProps = {
   heading: string;
-  amount: number|string;
+  amount: number | string;
   className: string;
 };
 

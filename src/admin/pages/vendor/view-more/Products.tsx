@@ -1,4 +1,4 @@
-import {  Layers, Trash } from "lucide-react";
+import { Layers, Trash } from "lucide-react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import { useMutation } from "../../../../hooks/useMutation";
 import { useQuery } from "../../../../hooks/useQuery";
@@ -10,7 +10,7 @@ const Products = () => {
   const { mutate } = useMutation();
   const { id } = useParams();
 
-  const { data, refetch, loading } = useQuery<ProductType>(
+  const { data, refetch, loading } = useQuery<ProductType | ProductType[]>(
     "/product/myproduct?id=" + id,
   );
 

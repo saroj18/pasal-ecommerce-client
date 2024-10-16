@@ -278,7 +278,9 @@ const ShopDetails = () => {
         </div>
         <Button className="w-full my-4 bg-red-500 text-white">Submit</Button>
       </form>
-      <ParaTypo className="text-center text-base">If you already submit this form,then please check your mail.thank you</ParaTypo>
+      <ParaTypo className="text-center text-base">
+        If you already submit this form,then please check your mail.thank you
+      </ParaTypo>
     </div>
   );
 };

@@ -33,11 +33,10 @@ const AdminLogin = () => {
   };
 
   useEffect(() => {
-    
-    if (response && response?.data?.role=="admin") {
+    if (response && response?.data?.role == "admin") {
       navigate("/admin/dashboard");
       localStorage.setItem("role", "ADMIN");
-      window.location.reload()
+      window.location.reload();
     }
   }, [response]);
 

@@ -28,8 +28,8 @@ const CheckoutBox = ({
   const { mutate, data, loading, response } = useMutation<{
     [key: string]: string;
   }>();
-  const [coupen, setCoupen] = useState('')
-  const[discount,setDiscount]=useState(0)
+  const [coupen, setCoupen] = useState("");
+  const [discount, setDiscount] = useState(0);
   let totalPrice = 0;
   const navigate = useNavigate();
   const { setCart } = useContextProvider();
@@ -49,11 +49,11 @@ const CheckoutBox = ({
 
   const coupenHandler = () => {
     if (!coupen) {
-      toast.error("please enter coupen first")
-      return
+      toast.error("please enter coupen first");
+      return;
     }
-    mutate('/coupen/checkcoupen','POST',{coupen})
-  }
+    mutate("/coupen/checkcoupen", "POST", { coupen });
+  };
 
   const walletHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setWallet(e.target.value);
@@ -80,17 +80,28 @@ const CheckoutBox = ({
   }, [wallet]);
 
   useEffect(() => {
-    if (response && response.success && orderDetails.payMethod == "cash"&&!data?.coupenCode) {
+    if (
+      response &&
+      response.success &&
+      orderDetails.payMethod == "cash" &&
+      !data?.coupenCode
+    ) {
       setCart(0);
       navigate("/myorder");
     }
 
     if (data && data.coupenDiscount) {
       if (!discount) {
-        
-        setOrderDetails(prv => ({ ...prv, totalPrice: prv.totalPrice - ((prv.totalPrice * Number(data.coupenDiscount)) / 100) }))
-        setDiscount(orderDetails.totalPrice * Number(data.coupenDiscount) / 100)
-        setCoupen('')
+        setOrderDetails((prv) => ({
+          ...prv,
+          totalPrice:
+            prv.totalPrice -
+            (prv.totalPrice * Number(data.coupenDiscount)) / 100,
+        }));
+        setDiscount(
+          (orderDetails.totalPrice * Number(data.coupenDiscount)) / 100,
+        );
+        setCoupen("");
       }
     }
   }, [response]);
@@ -111,9 +122,12 @@ const CheckoutBox = ({
   };
 
   const removeCoupenHandler = () => {
-    setOrderDetails(prv => ({ ...prv, totalPrice: prv.totalPrice + discount }))
-    setDiscount(0)
-  }
+    setOrderDetails((prv) => ({
+      ...prv,
+      totalPrice: prv.totalPrice + discount,
+    }));
+    setDiscount(0);
+  };
 
   return (
     <div className="rounded-md  border-2 border-gray-200 shadow-md  p-4 ">
@@ -122,7 +136,7 @@ const CheckoutBox = ({
       </HeadingTypo>
       <div className="flex items-center justify-between my-3 pb-3 border-b-2">
         <ParaTypo>Total</ParaTypo>
-        <ParaTypo>Rs {orderDetails.totalPrice+discount}</ParaTypo>
+        <ParaTypo>Rs {orderDetails.totalPrice + discount}</ParaTypo>
       </div>
       <div className="flex items-center justify-between my-2 pb-3 border-b-2">
         <ParaTypo>Delevery Charge</ParaTypo>
@@ -130,7 +144,7 @@ const CheckoutBox = ({
       </div>
       <div className="flex items-center justify-between my-2 pb-3 border-b-2">
         <ParaTypo>Discount</ParaTypo>
-        <ParaTypo>-Rs { discount}</ParaTypo>
+        <ParaTypo>-Rs {discount}</ParaTypo>
       </div>
       <div className="flex items-center justify-between my-2 pb-3 border-b-2">
         <ParaTypo className="font-semibold">Sub Total</ParaTypo>
@@ -170,25 +184,37 @@ const CheckoutBox = ({
       </div>
       <div className="flex justify-between items-center">
         <HeadingTypo className="my-3 text-xl font-semibold">
-        Apply Coupen Code
+          Apply Coupen Code
         </HeadingTypo>
-        <ParaTypo onClick={removeCoupenHandler} className="text-blue-500 text-sm cursor-pointer">{ discount>0?'Remove Coupen':null}</ParaTypo>
+        <ParaTypo
+          onClick={removeCoupenHandler}
+          className="text-blue-500 text-sm cursor-pointer"
+        >
+          {discount > 0 ? "Remove Coupen" : null}
+        </ParaTypo>
       </div>
       <div className="flex items-center w-full">
         <Input
-          onChange={(e)=>setCoupen(e.target.value)}
+          onChange={(e) => setCoupen(e.target.value)}
           className="w-full max-w-[75%] rounded-none h-[50px]"
           placeholder="enter your COUPEN CODE"
           type="text"
           value={coupen}
         />
-        <Button onClick={coupenHandler} className="bg-green-500 grow  text-white px-3 h-[50px] py-2 ">
+        <Button
+          onClick={coupenHandler}
+          className="bg-green-500 grow  text-white px-3 h-[50px] py-2 "
+        >
           Apply
         </Button>
       </div>
-      <ParaTypo className="text-red-500 text-sm">{discount?`Applied Coupen with ${data?.coupenDiscount}% Discount`:null }</ParaTypo>
+      <ParaTypo className="text-red-500 text-sm">
+        {discount
+          ? `Applied Coupen with ${data?.coupenDiscount}% Discount`
+          : null}
+      </ParaTypo>
       <Button
-        disabled={orderDetails.product.length==0}
+        disabled={orderDetails.product.length == 0}
         onClick={clickHandler}
         className="w-full bg-red-500 text-white rounded-md py-3 px-5 mt-4"
       >

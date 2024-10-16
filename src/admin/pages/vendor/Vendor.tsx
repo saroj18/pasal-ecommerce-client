@@ -16,7 +16,7 @@ const Vendor = () => {
   const navigate = useNavigate();
   const [vendorList, setVendorList] = useState<ShopType[]>([]);
 
-  const { data, loading } = useQuery<ShopType>("/vendor");
+  const { data, loading } = useQuery<ShopType[]>("/vendor");
 
   useEffect(() => {
     if (data) {

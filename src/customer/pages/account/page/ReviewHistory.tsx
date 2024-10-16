@@ -1,6 +1,6 @@
 import HeadingTypo from "../../../../components/common/HeadingTypo";
 import ParaTypo from "../../../../components/common/ParaTypo";
-import { Star,  } from "lucide-react";
+import { Star } from "lucide-react";
 import { useQuery } from "../../../../hooks/useQuery";
 import Shimmer from "../../../../components/common/Shimmer";
 import { ReviewType } from "../../../../types/ReviewType";
@@ -60,7 +60,7 @@ export const ReviewComponent = ({
 };
 
 const ReviewHistory = () => {
-  const { data, loading } = useQuery<ReviewType>("/review");
+  const { data, loading } = useQuery<ReviewType[]>("/review");
   return (
     <div>
       {loading ? (

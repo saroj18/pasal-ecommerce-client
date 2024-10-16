@@ -1,13 +1,13 @@
 import { UserLocationType } from "./UserLocationType";
 
 export type UserType = {
-    _id:string
-    fullname: string;
+  _id: string;
+  fullname: string;
   email: string;
   password: string;
   role: string;
   refreshToken: string;
-  address:UserLocationType;
+  address: UserLocationType;
   gender: string;
   username: string;
   verify: Boolean;
@@ -24,6 +24,6 @@ export type UserType = {
   online: boolean;
   oAuthLogin: boolean;
   verifyToken: null | string;
-    verifyTokenExpiry: number | null;
-  createdAt:string
-}
+  verifyTokenExpiry: number | null;
+  createdAt: string;
+};

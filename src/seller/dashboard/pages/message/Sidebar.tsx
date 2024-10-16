@@ -1,6 +1,6 @@
 import UserCard from "./UserCard";
 import { useQuery } from "../../../../hooks/useQuery";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import ParaTypo from "../../../../components/common/ParaTypo";
 import Shimmer from "../../../../components/common/Shimmer";
 import HeadingTypo from "../../../../components/common/HeadingTypo";
@@ -13,7 +13,7 @@ const Sidebar = ({
   setId: React.Dispatch<React.SetStateAction<string>>;
   setClient: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  let { data, loading } = useQuery<ChatType>("/chats/getallcustomer");
+  let { data, loading } = useQuery<ChatType[]>("/chats/getallcustomer");
   // data=data as ChatType
   const [current, setCurrent] = useState("");
   console.log(data);
@@ -36,7 +36,7 @@ const Sidebar = ({
           0 User Found
         </HeadingTypo>
       ) : (
-        (data as ChatType[])?.map((ele:ChatType) => {
+        (data as ChatType[])?.map((ele: ChatType) => {
           return (
             <UserCard
               className={ele._id == current ? "bg-green-200" : ""}

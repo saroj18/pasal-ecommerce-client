@@ -10,15 +10,15 @@ type MessageCardProps = {
 const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
   return (
     <div
-      className={`flex gap-x-2 ${messageType == msg?.receiver?._id||messageType == msg?.receiver ? " self-end" : "self-start"}`}
+      className={`flex gap-x-2 ${messageType == msg?.receiver?._id || messageType == msg?.receiver ? " self-end" : "self-start"}`}
     >
       <div
-        className={`w-10 h-10 bg-gray-300 rounded-full ${messageType == msg?.receiver?._id||messageType == msg?.receiver ? "hidden" : "block"}`}
+        className={`w-10 h-10 bg-gray-300 rounded-full ${messageType == msg?.receiver?._id || messageType == msg?.receiver ? "hidden" : "block"}`}
       ></div>
       <div className="flex flex-col gap-y-1">
         <p className="text-sm">{user}</p>
         <p
-          className={` p-2 rounded-lg ${messageType == msg?.receiver?._id||messageType == msg?.receiver ? "bg-blue-500 text-white" : "bg-gray-500 text-white"}`}
+          className={` p-2 rounded-lg ${messageType == msg?.receiver?._id || messageType == msg?.receiver ? "bg-blue-500 text-white" : "bg-gray-500 text-white"}`}
           title={new Date(msg!.createdAt as string).toLocaleTimeString()}
         >
           {message}

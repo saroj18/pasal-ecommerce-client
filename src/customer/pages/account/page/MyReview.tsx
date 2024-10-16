@@ -12,7 +12,7 @@ import { ReviewType } from "../../../../types/ReviewType";
 const ReviewComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [reviewInfo, setReviewInfo] = useState<ReviewType>();
-  const { data, loading } = useQuery<ReviewType>("/review/reviewneed");
+  const { data, loading } = useQuery<ReviewType[]>("/review/reviewneed");
   console.log(data);
   const clickHandler = (info: ReviewType) => {
     setOpen(true);

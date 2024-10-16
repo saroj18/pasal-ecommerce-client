@@ -6,7 +6,9 @@ import { ReviewType } from "../../../../types/ReviewType";
 
 const Reviews = () => {
   const { id } = useParams();
-  const { data, loading } = useQuery<ReviewType>(`/review/vendorreview?id=${id}`);
+  const { data, loading } = useQuery<ReviewType[]>(
+    `/review/vendorreview?id=${id}`,
+  );
   return (
     <div>
       {loading ? (

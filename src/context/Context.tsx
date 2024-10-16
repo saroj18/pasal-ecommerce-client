@@ -18,8 +18,8 @@ type ProvideProps = {
   socketServer: WebSocket | null;
   cart: number;
   setCart: React.Dispatch<React.SetStateAction<number>>;
-  wishList: number
-  setWishList:React.Dispatch<React.SetStateAction<number>>
+  wishList: number;
+  setWishList: React.Dispatch<React.SetStateAction<number>>;
   // rtcConnection: RTCPeerConnection | null;
   // setRtcConnection: React.Dispatch<
   //   React.SetStateAction<RTCPeerConnection | null>

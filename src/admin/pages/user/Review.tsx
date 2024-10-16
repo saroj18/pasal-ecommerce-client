@@ -5,7 +5,7 @@ import { ReviewType } from "../../../types/ReviewType";
 
 const Review = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data, loading } = useQuery<ReviewType>("/review/" + id);
+  const { data, loading } = useQuery<ReviewType[]>("/review/" + id);
   return (
     <div>
       {loading ? (

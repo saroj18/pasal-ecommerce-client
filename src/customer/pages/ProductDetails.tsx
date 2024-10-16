@@ -15,7 +15,7 @@ import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
 import { useContextProvider } from "../../context/Context";
@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [image, setImage] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
-  const { setCart,setWishList } = useContextProvider();
+  const { setCart, setWishList } = useContextProvider();
   let { data: user } = useAuth();
   user = user as UserType;
 
@@ -37,7 +37,7 @@ const ProductDetails = () => {
     refetch,
     loading: productLoading,
   } = useQuery<ProductType>(`/product/${id}`);
-  data=data as ProductType
+  data = data as ProductType;
 
   const addToCartHandler = (id: string) => {
     mutate(`/product/cart`, "POST", { productId: id, count });
@@ -65,16 +65,14 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (response?.success) {
-      const flag = response.message.split(' ')[3]
-      if (flag == 'cart') {
-        
+      const flag = response.message.split(" ")[3];
+      if (flag == "cart") {
         setCart((prv) => prv + 1);
-      } else if(flag=='wishlist') {
-        if (response.message.split(' ')[1] == 'remove') {
-          setWishList(prv=>prv-1)
+      } else if (flag == "wishlist") {
+        if (response.message.split(" ")[1] == "remove") {
+          setWishList((prv) => prv - 1);
         } else {
-          
-          setWishList((prv)=>prv+1)
+          setWishList((prv) => prv + 1);
         }
       }
     }

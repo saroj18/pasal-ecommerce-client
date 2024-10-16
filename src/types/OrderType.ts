@@ -4,10 +4,10 @@ import { UserLocationType } from "./UserLocationType";
 import { UserType } from "./userType";
 
 export type OrderType = {
-    _id:string
-    product: ProductType[]|ProductType;
-  purchaseBy:UserType;
-  deleveryAddress:UserLocationType;
+  _id: string;
+  product: ProductType[] | ProductType;
+  purchaseBy: UserType;
+  deleveryAddress: UserLocationType;
   paymentStatus: string;
   payMethod: string;
   status: string;
@@ -17,10 +17,10 @@ export type OrderType = {
   deleveryCharge: number;
   reviewed: boolean;
   productQty: number;
-    cartInfo: CartType[];
-    updatedAt: string
-    createdAt: string
-    info: OrderType[]
-    orderProducts: ProductType
-  customer:UserType[]
-}
+  cartInfo: CartType[];
+  updatedAt: string;
+  createdAt: string;
+  info: OrderType[];
+  orderProducts: ProductType;
+  customer: UserType[];
+};

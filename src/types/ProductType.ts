@@ -1,8 +1,8 @@
 import { ShopType } from "./ShopType";
 
 export type ProductType = {
-    _id:string
-    name: string;
+  _id: string;
+  name: string;
   description: string;
   price: number;
   stock: number;
@@ -13,7 +13,7 @@ export type ProductType = {
   barganing: string;
   discount: number;
   features: string[];
-  addedBy: ShopType
+  addedBy: ShopType;
   images: string[];
   review: string[];
   starArray: Number[];
@@ -22,8 +22,8 @@ export type ProductType = {
   priceAfterDiscount: number;
   userDiscount: number;
   offer: boolean;
-    visitDate: Date[];
-    rating: number
-    relatedProducts: ProductType[]
-  ourOtherProducts:ProductType[]
-}
+  visitDate: Date[];
+  rating: number;
+  relatedProducts: ProductType[];
+  ourOtherProducts: ProductType[];
+};

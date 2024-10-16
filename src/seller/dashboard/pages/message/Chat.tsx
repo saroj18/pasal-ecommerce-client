@@ -24,7 +24,7 @@ const Chat = () => {
     sender: "",
     product: "",
   });
-  const {data}=useAuth()
+  const { data } = useAuth();
 
   useEffect(() => {
     if (id) {
@@ -41,28 +41,31 @@ const Chat = () => {
     }
   }, [id]);
 
-  const clickhandler = (e: React.MouseEvent<HTMLOrSVGElement> | React.KeyboardEvent<HTMLInputElement>) => {
+  const clickhandler = (
+    e:
+      | React.MouseEvent<HTMLOrSVGElement>
+      | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (e.nativeEvent instanceof KeyboardEvent) {
-      if (e.nativeEvent.key == 'Enter') {
-          socketServer?.send(
-        JSON.stringify({
+      if (e.nativeEvent.key == "Enter") {
+        socketServer?.send(
+          JSON.stringify({
+            receiver: id,
+            message: text,
+            type: "customer_and_vendor_chat",
+          }),
+        );
+        const value = {
           receiver: id,
           message: text,
+          sender: (data as UserType)._id,
           type: "customer_and_vendor_chat",
-        }),
-      );
-      const value = {
-        receiver: id,
-        message: text,
-        sender:(data as UserType)._id,
-        type: "customer_and_vendor_chat",
-      };
-      setChat((prv) => [...prv, value]);
-      setText('')
-      return
+        };
+        setChat((prv) => [...prv, value]);
+        setText("");
+        return;
       }
     } else {
-      
       socketServer?.send(
         JSON.stringify({
           receiver: id,
@@ -73,11 +76,11 @@ const Chat = () => {
       const value = {
         receiver: id,
         message: text,
-        sender:(data as UserType)._id,
+        sender: (data as UserType)._id,
         type: "customer_and_vendor_chat",
       };
       setChat((prv) => [...prv, value]);
-      setText('')
+      setText("");
     }
   };
 
@@ -194,7 +197,10 @@ const Chat = () => {
         >
           {chat.map(
             (msg, index) =>
-              (msg.receiver?._id == id || msg.sender?._id == id||msg.sender == id||msg.receiver == id) &&
+              (msg.receiver?._id == id ||
+                msg.sender?._id == id ||
+                msg.sender == id ||
+                msg.receiver == id) &&
               msg.message && (
                 <MessageCard
                   key={index}

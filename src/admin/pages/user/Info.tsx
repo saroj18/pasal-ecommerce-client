@@ -6,7 +6,7 @@ import { UserType } from "../../../types/userType";
 const Info = () => {
   const id = window.location.pathname.split("/")[3];
   let { data, loading } = useQuery<UserType>(`/user/${id}`);
-  data=data as UserType
+  data = data as UserType;
 
   return (
     <>

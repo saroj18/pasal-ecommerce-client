@@ -14,8 +14,8 @@ const Slider = ({
 }: {
   productList: ProductType[];
   loadingState?: boolean;
-  }) => {
-  console.log(productList)
+}) => {
+  console.log(productList);
   return (
     <>
       <Swiper

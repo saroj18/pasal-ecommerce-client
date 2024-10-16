@@ -40,7 +40,6 @@ const AddAdmin = () => {
       >
         <div className=" border-r-2 border-gray-200  w-full lg:max-w-[50%] p-2 ">
           <div className="my-10">
-           
             <ParaTypo className="text-center text-4xl text-blue-500 my-2">
               Admin Account
             </ParaTypo>
@@ -106,12 +105,11 @@ const AddAdmin = () => {
                 </ParaTypo>
               )}
             </div>
-            
+
             <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
               Create a Admin
             </Button>
           </form>
-          
         </div>
       </div>
     </div>

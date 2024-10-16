@@ -11,19 +11,19 @@ import { OfferType } from "../../types/OfferType";
 import { ProductType } from "../../types/ProductType";
 
 type BestSellingType = {
-  product: ProductType[]
-  topCategory:ProductType[]
-}
+  product: ProductType[];
+  topCategory: ProductType[];
+};
 
 const Home = () => {
   const { data: offerList, loading: offerListLoading } =
-  useQuery<OfferType>("/offers");
+    useQuery<OfferType[]>("/offers");
   const { data: bestSellingProducts, loading: bestSellingProductLoading } =
-  useQuery<BestSellingType|ProductType>("/product/bestselling");
-  const { data: randomProducts, loading: randomProductsLoading } =
-  useQuery<ProductType>("/product/randomproducts");
-  let { data } = useAuth()
-  data = data as UserType
+    useQuery<BestSellingType | ProductType[]>("/product/bestselling");
+  const { data: randomProducts, loading: randomProductsLoading } = useQuery<
+    ProductType[]
+  >("/product/randomproducts");
+  const { data } = useAuth<UserType>();
 
   return (
     <>
@@ -33,7 +33,6 @@ const Home = () => {
           loadingState={randomProductsLoading}
           productList={randomProducts as ProductType[]}
         />
-
       </section>
       {offerListLoading ? (
         <Shimmer height="350px" count={5} shape="rectange" />
@@ -57,12 +56,19 @@ const Home = () => {
           category="Phones"
         />
       </div> */}
-     {data&&<> <ProductSectionBar option={false} heading="Best Selling Products" />
-      <Slider
-        loadingState={bestSellingProductLoading}
-        productList={ (bestSellingProducts as BestSellingType)?.product||bestSellingProducts as ProductType[]}
-        />
-      </>}
+      {data && (
+        <>
+          {" "}
+          <ProductSectionBar option={false} heading="Best Selling Products" />
+          <Slider
+            loadingState={bestSellingProductLoading}
+            productList={
+              (bestSellingProducts as BestSellingType)?.product ||
+              (bestSellingProducts as ProductType[])
+            }
+          />
+        </>
+      )}
 
       <section className="mt-7">
         <Crousel />
@@ -75,7 +81,7 @@ const Home = () => {
           productList={randomProducts as ProductType[]}
         />
 
-        {data && !data?.verify && data.role!='admin'&& <VerifyPopup />}
+        {data && !data?.verify && data.role != "admin" && <VerifyPopup />}
       </section>
     </>
   );

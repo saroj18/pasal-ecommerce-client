@@ -9,7 +9,9 @@ import { tableHeadDataForPaymentHistory } from "../tableData";
 
 const PaymentHistory = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data, loading } = useQuery<PaymentType>(`/payment/vendorhistory?id=${id}`);
+  const { data, loading } = useQuery<PaymentType[]>(
+    `/payment/vendorhistory?id=${id}`,
+  );
   console.log(data);
   return (
     <div>

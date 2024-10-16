@@ -19,7 +19,7 @@ export type VerifyInfoTyype = VerifyForm & AddressForm;
 const VerifyForm = () => {
   const [open, setOpen] = useState<boolean>(false);
   let { data } = useAuth();
-  data = data as UserType|null;
+  data = data as UserType | null;
   const [verifyInfo, setVerifyInfo] = useState<
     VerifyInfoTyype | VerifyForm | AddressForm
   >({

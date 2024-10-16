@@ -30,14 +30,14 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
 
   const delevery: any[] = [];
   const billing: any[] = [];
-  const { data, loading } = useQuery<UserLocationType>("/user/address");
+  const { data, loading } = useQuery<UserLocationType[]>("/user/address");
 
   const deleveryAddressHandler = () => {
-    setOpen((prv) => ({ ...prv, delevery: false }))
-  }
+    setOpen((prv) => ({ ...prv, delevery: false }));
+  };
 
   data &&
-    (data as UserLocationType[]).forEach((ele:UserLocationType ) => {
+    (data as UserLocationType[]).forEach((ele: UserLocationType) => {
       if (
         ele.defaultAddress == "delevery" ||
         ele.defaultAddress == "deleveryandbilling"
@@ -69,9 +69,9 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
     setAddress((prv) => ({ ...prv, billingAddress: e.target.title }));
   };
   const deleveryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value=JSON.parse(e.target.value)
+    const value = JSON.parse(e.target.value);
     setOrderDetails((prv) => ({ ...prv, deleveryAddress: value.id }));
-    setAddress((prv) => ({ ...prv, deleveryAddress:value.address}));
+    setAddress((prv) => ({ ...prv, deleveryAddress: value.address }));
   };
 
   return (
@@ -105,7 +105,7 @@ const SelectAndViewAddress = ({ setOrderDetails }: AddressProps) => {
                   (ele.defaultAddress == "delevery" ||
                     ele.defaultAddress == "deleveryandbilling") && (
                     <Option
-                      value={JSON.stringify({address,id:ele._id})}
+                      value={JSON.stringify({ address, id: ele._id })}
                       key={index}
                       className="capitalize"
                     >

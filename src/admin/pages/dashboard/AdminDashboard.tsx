@@ -12,9 +12,10 @@ import { TopListType } from "../../../types/TopListType";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
-  let { data, loading: dashBoardLoading } = useQuery<AdminDashboardDataType>("/admin/dashboard");
-  data = data as AdminDashboardDataType
-  
+  let { data, loading: dashBoardLoading } =
+    useQuery<AdminDashboardDataType>("/admin/dashboard");
+  data = data as AdminDashboardDataType;
+
   const { data: topList, loading: listLoading } =
     useQuery<TopListType>("/admin/toplist");
   const logOutHandler = async () => {
@@ -133,7 +134,7 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              (topList as TopListType|null)?.topCategory?.map((ele: any) => {
+              (topList as TopListType | null)?.topCategory?.map((ele: any) => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
@@ -154,17 +155,19 @@ const AdminDashboard = () => {
             {listLoading ? (
               <Shimmer count={5} height="50px" shape="rectange" />
             ) : (
-              (topList as TopListType|null)?.topExpensiveProduct?.map((ele: any) => {
-                return (
-                  <MostSellingProductCard
-                    key={ele._id}
-                    name={ele.name}
-                    id={ele?._id}
-                    result={`Rs ${ele.priceAfterDiscount}`}
-                    image={ele.images[0]}
-                  />
-                );
-              })
+              (topList as TopListType | null)?.topExpensiveProduct?.map(
+                (ele: any) => {
+                  return (
+                    <MostSellingProductCard
+                      key={ele._id}
+                      name={ele.name}
+                      id={ele?._id}
+                      result={`Rs ${ele.priceAfterDiscount}`}
+                      image={ele.images[0]}
+                    />
+                  );
+                },
+              )
             )}
           </div>
         </div>

@@ -7,7 +7,7 @@ import { useAuth, UserType } from "../../../context/AuthProvider";
 const SideBar = () => {
   const { accountSideBar, setAccountSideBar } = useContextProvider();
   let { data: user } = useAuth();
-  user = user as UserType|null;
+  user = user as UserType | null;
 
   return (
     <aside

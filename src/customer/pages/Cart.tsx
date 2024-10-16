@@ -15,7 +15,7 @@ const Cart = () => {
     data,
     refetch,
     loading: cartLoading,
-  } = useQuery<CartType>("/product/cart", false);
+  } = useQuery<CartType[]>("/product/cart", false);
   const { mutate, data: cartData } = useMutation();
   const { setCart } = useContextProvider();
 

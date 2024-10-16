@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import ParaTypo from "../../components/common/ParaTypo";
 import Input from "../../components/common/Input";

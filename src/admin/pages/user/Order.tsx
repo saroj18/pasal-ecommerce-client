@@ -4,7 +4,7 @@ import { useQuery } from "../../../hooks/useQuery";
 
 const Order = () => {
   const id = window.location.pathname.split("/")[3];
-  const { data } = useQuery<OrderType>(`/order/${id}`);
+  const { data } = useQuery<OrderType[]>(`/order/${id}`);
   console.log(data);
   return (
     <div className="grid lg:grid-cols-2 gap-3 p-3">

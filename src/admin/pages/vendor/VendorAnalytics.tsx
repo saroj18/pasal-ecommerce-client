@@ -5,7 +5,7 @@ import Option from "../../../components/common/Option";
 import { ArrowLeftIcon } from "lucide-react";
 import SetChart from "./SetChart";
 import { useMutation } from "../../../hooks/useMutation";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Shimmer from "../../../components/common/Shimmer";
 
 const VendorAnalytics = () => {

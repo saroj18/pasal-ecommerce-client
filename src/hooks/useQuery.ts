@@ -8,14 +8,14 @@ type ApiResponse<T> = {
 };
 
 type UseQueryResult<T> = {
-  data: T | T[] | null;
+  data: T | null;
   error: boolean;
   loading: boolean;
   refetch: () => void;
 };
 
 export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
-  const [data, setData] = useState<T | T[] | any>(null);
+  const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -39,7 +39,7 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
         signal,
       });
       const respData: ApiResponse<T> = await resp.json();
-      setData(respData.data ?? null);
+      setData((respData.data as T) ?? null);
       if (cache) {
         addOnCache(url as string, respData.data);
       }

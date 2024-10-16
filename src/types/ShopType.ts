@@ -5,10 +5,9 @@ export type LocationType = {
   lng: number;
 };
 
-
 export type ShopType = {
-    _id:string
-    shopName: string;
+  _id: string;
+  shopName: string;
   owner: UserType;
   location: LocationType;
   category: string;
@@ -21,4 +20,4 @@ export type ShopType = {
   verified: boolean;
   citiNumber: string;
   createdAt?: string;
-}
+};

@@ -6,7 +6,7 @@ import { OrderType } from "../../../../customer/pages/OrderCheckout";
 
 const OrderHistory = () => {
   const { id } = useParams();
-  const { data, loading } = useQuery<OrderType>(`/order/history?id=${id}`);
+  const { data, loading } = useQuery<OrderType[]>(`/order/history?id=${id}`);
   console.log(data);
   return (
     <div className="grid lg:grid-cols-2 gap-3 p-3">

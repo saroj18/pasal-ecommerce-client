@@ -69,21 +69,25 @@ const SearchSuggetion = React.forwardRef<HTMLDivElement, SearchSuggetionProps>(
       >
         {!search ? (
           <div>
-            {searchHistory.length==0?<ParaTypo className="text-center p-2">Find Your Produt</ParaTypo>:searchHistory?.map((ele, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={(e) => {
-                    e.stopPropagation(), setSearch(ele);
-                  }}
-                  id="history"
-                  className={`flex items-center gap-x-2 cursor-pointer  hover:bg-gray-100 p-2 ${highlightProduct[index] ? "bg-gray-100" : ""}`}
-                >
-                  <RotateCcw opacity={0.5} />
-                  <ParaTypo key={index}>{ele}</ParaTypo>
-                </div>
-              );
-            })}
+            {searchHistory.length == 0 ? (
+              <ParaTypo className="text-center p-2">Find Your Produt</ParaTypo>
+            ) : (
+              searchHistory?.map((ele, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation(), setSearch(ele);
+                    }}
+                    id="history"
+                    className={`flex items-center gap-x-2 cursor-pointer  hover:bg-gray-100 p-2 ${highlightProduct[index] ? "bg-gray-100" : ""}`}
+                  >
+                    <RotateCcw opacity={0.5} />
+                    <ParaTypo key={index}>{ele}</ParaTypo>
+                  </div>
+                );
+              })
+            )}
           </div>
         ) : !product ? (
           <ParaTypo className="text-center p-2">Loading..........</ParaTypo>

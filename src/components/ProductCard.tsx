@@ -11,12 +11,12 @@ type cardProps = {
   icon?: React.ReactNode;
   product: ProductType;
   remove?: boolean;
-  refetch?:()=>void
+  refetch?: () => void;
 };
 
-const ProductCard = ({ remove = false, icon, product,refetch }: cardProps) => {
+const ProductCard = ({ remove = false, icon, product, refetch }: cardProps) => {
   const { mutate, response } = useMutation();
-  const{setWishList}=useContextProvider()
+  const { setWishList } = useContextProvider();
 
   const deleteHandler = useCallback(
     (e: React.MouseEvent<SVGSVGElement>, id: string) => {
@@ -28,10 +28,10 @@ const ProductCard = ({ remove = false, icon, product,refetch }: cardProps) => {
 
   useEffect(() => {
     if (response?.success) {
-      setWishList(prv => prv - 1)
-      refetch&&refetch()
+      setWishList((prv) => prv - 1);
+      refetch && refetch();
     }
-  },[response])
+  }, [response]);
 
   return (
     <>

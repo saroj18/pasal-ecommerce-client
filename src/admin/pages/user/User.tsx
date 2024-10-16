@@ -14,7 +14,7 @@ import Shimmer from "../../../components/common/Shimmer";
 import { UserType } from "../../../types/userType";
 
 const User = () => {
-  const { data, refetch, loading } = useQuery<UserType>("/user/allcustomer");
+  const { data, refetch, loading } = useQuery<UserType[]>("/user/allcustomer");
   const { mutate } = useMutation();
   const navigate = useNavigate();
 
@@ -77,23 +77,25 @@ const User = () => {
                   <TableData className="p-4 capitalize">
                     {ele.signUpAs}
                   </TableData>
-                 {ele.role!='admin' &&<TableData className="p-4 capitalize">
-                    {ele.block ? (
-                      <Button
-                        onClick={(e) => unBlockHandler(e, ele._id)}
-                        className="bg-green-500 px-4 py-1 border-none"
-                      >
-                        UnBlock
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={(e) => blockHandler(e, ele._id)}
-                        className="bg-red-500 px-4 py-1 border-none"
-                      >
-                        Block
-                      </Button>
-                    )}
-                  </TableData>}
+                  {ele.role != "admin" && (
+                    <TableData className="p-4 capitalize">
+                      {ele.block ? (
+                        <Button
+                          onClick={(e) => unBlockHandler(e, ele._id)}
+                          className="bg-green-500 px-4 py-1 border-none"
+                        >
+                          UnBlock
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={(e) => blockHandler(e, ele._id)}
+                          className="bg-red-500 px-4 py-1 border-none"
+                        >
+                          Block
+                        </Button>
+                      )}
+                    </TableData>
+                  )}
                 </TableRow>
               );
             })}

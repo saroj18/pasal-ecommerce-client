@@ -18,15 +18,13 @@ export type OrderType = {
   cartInfo: any;
 };
 
-
-
 const OrderCheckout = () => {
   const { mutate, loading } = useMutation();
   const {
     data: productData,
     refetch,
     loading: cartLoading,
-  } = useQuery<CartType>("/product/cart", false);
+  } = useQuery<CartType[]>("/product/cart", false);
   const deleteFromCart = (id: string) => {
     mutate("/product/cart", "DELETE", { productId: id }, refetch);
   };

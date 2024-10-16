@@ -104,12 +104,14 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
           </Link>
           <ParaTypo className="text-red-500">{cartCount}</ParaTypo>
         </div>
-      {!data&&  <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
-          <LogIn opacity={0.6} />
-          <Link to={"/account/myreview"}>
-            <ParaTypo className="">Login</ParaTypo>
-          </Link>
-        </div>}
+        {!data && (
+          <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+            <LogIn opacity={0.6} />
+            <Link to={"/account/myreview"}>
+              <ParaTypo className="">Login</ParaTypo>
+            </Link>
+          </div>
+        )}
         <div
           onClick={logOutHandler}
           className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer"

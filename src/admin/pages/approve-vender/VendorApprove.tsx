@@ -14,7 +14,7 @@ import { ShopType } from "../../../types/ShopType";
 const VendorApprove = () => {
   const navigate = useNavigate();
   const [vendor, setVendor] = useState<ShopType[]>([]);
-  const { data } = useQuery<ShopType>("/vendor/unverified");
+  const { data } = useQuery<ShopType[]>("/vendor/unverified");
 
   useEffect(() => {
     if (data) {

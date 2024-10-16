@@ -9,10 +9,7 @@ type AddressBookProps = {
   loading: boolean;
 };
 
-const AddressBookComponent = ({
-  setOpen,
-  userInfo,
-}: AddressBookProps) => {
+const AddressBookComponent = ({ setOpen, userInfo }: AddressBookProps) => {
   return (
     <div className="p-4 rounded-md border-2 border-gray-500 flex flex-col gap-y-3">
       <div className="flex justify-between">

@@ -30,31 +30,34 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const messageBodyRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useQuery<ChatType>("/chats?id=" + userId);
+  const { data } = useQuery<ChatType[]>("/chats?id=" + userId);
   console.log("sora", userId);
 
-  const clickhandler = (e:React.MouseEvent<HTMLOrSVGElement>|React.KeyboardEvent<HTMLInputElement>) => {
+  const clickhandler = (
+    e:
+      | React.MouseEvent<HTMLOrSVGElement>
+      | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (e.nativeEvent instanceof KeyboardEvent) {
-      if (e.nativeEvent.key == 'Enter') {
+      if (e.nativeEvent.key == "Enter") {
         socketServer?.send(
-        JSON.stringify({
+          JSON.stringify({
+            receiver: userId,
+            message: text,
+            type: "customer_and_vendor_chat",
+            product,
+          }),
+        );
+        const value = {
           receiver: userId,
           message: text,
           type: "customer_and_vendor_chat",
-          product,
-        }),
-      );
-      const value = {
-        receiver: userId,
-        message: text,
-        type: "customer_and_vendor_chat",
-      };
-      setChat((prv) => [...prv, value]);
-      setText('')
-      return
+        };
+        setChat((prv) => [...prv, value]);
+        setText("");
+        return;
       }
     } else {
-      
       socketServer?.send(
         JSON.stringify({
           receiver: userId,
@@ -69,9 +72,8 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
         type: "customer_and_vendor_chat",
       };
       setChat((prv) => [...prv, value]);
-    setText('')
+      setText("");
     }
-      
   };
 
   const focusHandler = () => {
@@ -119,7 +121,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
 
   useEffect(() => {
     if (data) {
-      setChat([...data as ChatType[]]);
+      setChat([...(data as ChatType[])]);
     }
   }, [data]);
 

@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import HeadingTypo from "../../../components/common/HeadingTypo";
 import Input from "../../../components/common/Input";
 import TextArea from "../../../components/common/TextArea";
