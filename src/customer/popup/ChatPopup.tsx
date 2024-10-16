@@ -4,7 +4,7 @@ import jacket from "../../assets/jacket.png";
 import Input from "../../components/common/Input";
 import { Send } from "lucide-react";
 import MessageCard from "./MessageCard";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../context/Context";
 import { useQuery } from "../../hooks/useQuery";
 import { ChatType } from "../../types/ChatType";
@@ -33,21 +33,45 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
   const { data } = useQuery<ChatType>("/chats?id=" + userId);
   console.log("sora", userId);
 
-  const clickhandler = () => {
-    socketServer?.send(
-      JSON.stringify({
+  const clickhandler = (e:React.MouseEvent<HTMLOrSVGElement>|React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent instanceof KeyboardEvent) {
+      if (e.nativeEvent.key == 'Enter') {
+        socketServer?.send(
+        JSON.stringify({
+          receiver: userId,
+          message: text,
+          type: "customer_and_vendor_chat",
+          product,
+        }),
+      );
+      const value = {
         receiver: userId,
         message: text,
         type: "customer_and_vendor_chat",
-        product,
-      }),
-    );
-    const value = {
-      receiver: userId,
-      message: text,
-      type: "customer_and_vendor_chat",
-    };
-    setChat((prv) => [...prv, value]);
+      };
+      setChat((prv) => [...prv, value]);
+      setText('')
+      return
+      }
+    } else {
+      
+      socketServer?.send(
+        JSON.stringify({
+          receiver: userId,
+          message: text,
+          type: "customer_and_vendor_chat",
+          product,
+        }),
+      );
+      const value = {
+        receiver: userId,
+        message: text,
+        type: "customer_and_vendor_chat",
+      };
+      setChat((prv) => [...prv, value]);
+    setText('')
+    }
+      
   };
 
   const focusHandler = () => {
@@ -142,6 +166,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
 
         <div className="flex items-center gap-x-1">
           <Input
+            onKeyUp={clickhandler}
             onBlur={blurHandler}
             onFocus={focusHandler}
             onChange={(e) => setText(e.target.value)}
