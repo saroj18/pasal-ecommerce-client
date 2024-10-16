@@ -1,13 +1,13 @@
 import Popup from "reactjs-popup";
 import ParaTypo from "../../components/common/ParaTypo";
 import jacket from "../../assets/jacket.png";
-import Input from "../../components/common/Input";
 import { Send } from "lucide-react";
 import MessageCard from "./MessageCard";
 import React, { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../context/Context";
 import { useQuery } from "../../hooks/useQuery";
 import { ChatType } from "../../types/ChatType";
+import Input from "@/components/common/Input";
 
 type ChatPopupProps = {
   open: boolean;

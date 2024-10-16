@@ -45,7 +45,6 @@ import ApproveVendorLayout from "./admin/pages/approve-vender/ApproveVendorLayou
 import VendorDetail from "./admin/pages/approve-vender/VendorDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AdminSignup from "./admin/pages/AdminSignup";
 import AdminLogin from "./admin/pages/AdminLogin";
 import VerifyForm from "./customer/pages/account/component/VerifyForm";
 import EsewaSuccess from "./customer/pages/EsewaSuccess";
