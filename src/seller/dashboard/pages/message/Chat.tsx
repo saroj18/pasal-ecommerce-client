@@ -14,6 +14,8 @@ const Chat = () => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
+  const[error,setError]=useState('')
+  const[loading,setLoading]=useState(false)
   const { socketServer } = useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
   // const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -31,13 +33,21 @@ const Chat = () => {
       getUser();
     }
     async function getUser() {
-      const resp = await fetch(import.meta.env.VITE_HOST + "/chats?id=" + id, {
-        method: "GET",
-        credentials: "include",
-      });
-      const info = await resp.json();
-      console.log(info);
-      setChat([...info.data]);
+      try {
+        setLoading(true)
+        const resp = await fetch(import.meta.env.VITE_HOST + "/chats?id=" + id, {
+          method: "GET",
+          credentials: "include",
+        });
+        const info = await resp.json();
+        console.log(info);
+        setChat([...info.data]);
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
     }
   }, [id]);
 
@@ -106,7 +116,6 @@ const Chat = () => {
 
   useEffect(() => {
     const handleMessage = async (info: MessageEvent) => {
-      console.log(info);
       const serverData = JSON.parse(info.data);
       if (serverData.type == "typing") {
         setTyping(serverData.message);
@@ -136,6 +145,9 @@ const Chat = () => {
             sender: serverData.sender,
           });
         }
+      }
+      if (serverData.type == "error"&&serverData.errorName=='chatWithVendorAndCustomer') {
+        setError(serverData.message)
       }
       // }
     };
@@ -178,8 +190,8 @@ const Chat = () => {
     <div className="flex gap-x-2">
       {/* <VideoCallPopup open={open} setOpen={setOpen} /> */}
       <Sidebar setId={setId} setClient={setClient} />
-      <div className="rounded-md p-1 w-full">
-        <div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
+      <div className="rounded-md p-1 w-full border-2">
+        {id&&<div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
           <img className="w-[40px] h-[40px] rounded-full" src={jacket} alt="" />
           <div>
             <ParaTypo className="text-sm">{client}</ParaTypo>
@@ -189,13 +201,13 @@ const Chat = () => {
               </ParaTypo>
             )}
           </div>
-        </div>
+        </div>}
 
         <div
           ref={chatBodyRef}
           className="flex flex-col w-full h-[550px] overflow-y-auto"
         >
-          {chat.map(
+          {loading?<ParaTypo className="text-3xl text-red-500 text-center">Loading....</ParaTypo>:chat.map(
             (msg, index) =>
               (msg.receiver?._id == id ||
                 msg.sender?._id == id ||
@@ -208,6 +220,7 @@ const Chat = () => {
                   message={msg.message}
                   messageType={id}
                   msg={msg}
+                  error={error}
                 />
               ),
           )}
@@ -236,7 +249,7 @@ const Chat = () => {
           )}
         </div>
 
-        <div className="flex items-center gap-x-1">
+        {id&&<div className="flex items-center gap-x-1">
           <Input
             onKeyUp={clickhandler}
             onBlur={blurHandler}
@@ -248,7 +261,7 @@ const Chat = () => {
             className="w-full rounded-none mt-3"
           />
           <Send onClick={clickhandler} className="cursor-pointer" />
-        </div>
+        </div>}
       </div>
     </div>
   );

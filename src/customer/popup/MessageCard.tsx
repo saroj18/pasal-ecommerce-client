@@ -5,9 +5,10 @@ type MessageCardProps = {
   messageType: string | undefined;
   user: string;
   msg?: MessageProps;
+  error:string
 };
 
-const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
+const MessageCard = ({ message, messageType, user, msg,error }: MessageCardProps) => {
   return (
     <div
       className={`flex gap-x-2 ${messageType == msg?.receiver?._id || messageType == msg?.receiver ? " self-end" : "self-start"}`}
@@ -23,6 +24,7 @@ const MessageCard = ({ message, messageType, user, msg }: MessageCardProps) => {
         >
           {message}
         </p>
+        {error==message&&<p className="text-red-500 text-sm">not sent!</p>}
       </div>
     </div>
   );
