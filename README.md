@@ -15,6 +15,7 @@ A full-featured multi-vendor eCommerce platform that allows multiple sellers to 
 - **Analytics & Reports:** 📊 View sales and traffic analytics with interactive graphs and detailed reports to track performance.
 - **Responsive Design:** 📱 A mobile-friendly and responsive UI for a seamless shopping experience on any device.
 - **Security:** 🔒 Robust security features including data validation, secure payments, and user authentication.
+- **Chat Features:** 💬 Real-time chat functionality for direct communication between customers and vendors, allowing for quick inquiries.
 - **Others:** 🛠 Additional features such as wish lists, product reviews, and more to enhance the shopping experience.
 
 ## 🛠️ Tech Stack
