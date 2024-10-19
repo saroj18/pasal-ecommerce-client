@@ -5,7 +5,7 @@ type MessageCardProps = {
   messageType: string | undefined;
   user: string;
   msg?: MessageProps;
-  error:string
+  error?:string
 };
 
 const MessageCard = ({ message, messageType, user, msg,error }: MessageCardProps) => {
