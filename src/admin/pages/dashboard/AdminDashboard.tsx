@@ -8,9 +8,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AdminDashboardDataType } from "../../../types/AdminDashboardDataType";
 import { TopListType } from "../../../types/TopListType";
+import { useAuth } from "@/context/AuthProvider";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { setData } = useAuth();
 
   let { data, loading: dashBoardLoading } =
     useQuery<AdminDashboardDataType>("/admin/dashboard");
@@ -26,9 +28,9 @@ const AdminDashboard = () => {
       });
       const data = await resp.json();
       if (data.success) {
+        setData(null);
         toast.success(data.message);
         navigate("/", { replace: true });
-        window.location.reload();
       } else {
         toast.error(data.error);
       }

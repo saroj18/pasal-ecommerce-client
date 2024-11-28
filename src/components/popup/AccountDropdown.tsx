@@ -24,7 +24,7 @@ type dropdownProps = {
 const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
   ({ className, cartCount, wishListCount, setDropdown }, ref) => {
     const navigate = useNavigate();
-    const { data } = useAuth();
+    const { data, setData } = useAuth();
     const dropDownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -53,9 +53,8 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
         const data = await resp.json();
         if (data.success) {
           toast.success(data.message);
-          // setUser(null);
+          setData(null);
           navigate("/login", { replace: true });
-          window.location.reload();
         } else {
           toast.error(data.error);
         }

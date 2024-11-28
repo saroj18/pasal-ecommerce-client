@@ -1,42 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import React, { useLayoutEffect } from "react";
 import { useAuth, UserType } from "../../context/AuthProvider";
-import dd from "../../../src/assets/loading.gif";
+import Loading from "../Loading";
 
-const PublicRoute = ({
-  children,
-  role,
-}: {
+interface PublicRouteProps {
   children: React.ReactNode;
   role: string[];
-}) => {
+}
+
+const PublicRoute: React.FC<PublicRouteProps> = ({ children, role }) => {
   const navigate = useNavigate();
   const { loading, data } = useAuth();
-  console.log(data);
+  const user = data as UserType | null;
 
   useLayoutEffect(() => {
-    const checkUser = () => {
-      if (data && role.includes((data as UserType).role)) {
-        if ((data as UserType).role == "customer") {
-          navigate("/", { replace: true });
-        }
-        if ((data as UserType).role == "seller") {
-          navigate("/dashboard", { replace: true });
-        }
-        if ((data as UserType).role == "admin") {
-          navigate("/admin/dashboard", { replace: true });
-        }
-      }
-    };
+    if (user && role.includes(user.role)) {
+      // Centralized navigation logic based on role
+      const redirectPath =
+        user.role === "customer"
+          ? "/"
+          : user.role === "seller"
+            ? "/dashboard"
+            : "/admin/dashboard";
 
-    checkUser();
-  }, [data]);
+      navigate(redirectPath, { replace: true });
+    }
+  }, [user, role, navigate]);
 
   if (loading) {
-    return <img className="mx-auto w-[350px]" src={dd} alt="" />;
+    return <Loading />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default PublicRoute;

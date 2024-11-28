@@ -8,16 +8,17 @@ type ApiResponse<T> = {
 };
 
 type UseQueryResult<T> = {
-  data: T | null;
+  data: T | T[] | null;
   error: boolean;
   loading: boolean;
   refetch: () => void;
+  setData: React.Dispatch<React.SetStateAction<T | T[] | null>>;
 };
 
 export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T |T[]| null>(null);
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = useCallback(async () => {
@@ -75,5 +76,6 @@ export const useQuery = <T>(url?: string, cache = true): UseQueryResult<T> => {
     error,
     loading,
     refetch: fetchData,
+    setData,
   };
 };

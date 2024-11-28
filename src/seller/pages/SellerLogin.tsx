@@ -10,11 +10,12 @@ import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect } from "react";
+import { useAuth } from "@/context/AuthProvider";
 
 const SellerLogin = () => {
   const navigate = useNavigate();
   const { mutate, response } = useMutation<any>();
-  // const { setUser } = useContextProvider();
+  const { setData } = useAuth();
   const {
     register,
     handleSubmit,
@@ -38,9 +39,8 @@ const SellerLogin = () => {
       if (!response.data.shopVerify) {
         navigate("/otp");
       } else {
-        // setUser(response.data);
+        setData(response.data);
         navigate("/dashboard");
-        window.location.reload();
       }
       localStorage.setItem("role", "SELLER");
     }

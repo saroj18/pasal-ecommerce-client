@@ -15,27 +15,32 @@ export interface UserType {
   oAuthLogin: boolean;
 }
 
-interface ContextType<T> {
-  data: T | null;
+interface ContextType {
+  data: UserType | UserType[] | null;
   loading: boolean;
+  refetch: () => void;
+  setData: React.Dispatch<React.SetStateAction<UserType | UserType[] | null>>;
 }
 
-const Provider = createContext<ContextType<
-  UserType | UserType[] | null
-> | null>(null);
+const Provider = createContext<ContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data, loading } = useQuery<UserType>("/user", false);
+  const { data, loading, refetch, setData } = useQuery<UserType>(
+    "/user",
+    false,
+  );
   return (
-    <Provider.Provider value={{ data, loading }}>{children}</Provider.Provider>
+    <Provider.Provider value={{ data, loading, refetch, setData }}>
+      {children}
+    </Provider.Provider>
   );
 };
 
-export const useAuth = <T extends UserType | UserType[]>() => {
+export const useAuth = () => {
   const context = useContext(Provider);
 
   if (!context) {
     throw new Error("your are outside from provider");
   }
-  return context as ContextType<T>;
+  return context as ContextType;
 };

@@ -10,6 +10,8 @@ import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect } from "react";
+import { useContextProvider } from "@/context/Context";
+import { useAuth } from "@/context/AuthProvider";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -25,8 +27,7 @@ const AdminLogin = () => {
       password: "password",
     },
   });
-  // const { setUser } = useContextProvider();
-
+  const { setData } = useAuth();
   const onSubmit = (info: LoginInput) => {
     const { email, password } = info;
     mutate("/admin/adminlogin", "POST", { email, password, role: "admin" });
@@ -34,11 +35,12 @@ const AdminLogin = () => {
 
   useEffect(() => {
     if (response && response?.data?.role == "admin") {
+      console.log(response?.data?.role);
+      setData(response?.data);
       navigate("/admin/dashboard");
       localStorage.setItem("role", "ADMIN");
-      window.location.reload();
     }
-  }, [response]);
+  }, [response, navigate]);
 
   return (
     <div className="bg-gray-100 h-screen px-4">
