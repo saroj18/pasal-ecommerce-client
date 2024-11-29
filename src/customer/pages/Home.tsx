@@ -23,7 +23,7 @@ const Home = () => {
   const { data: randomProducts, loading: randomProductsLoading } = useQuery<
     ProductType[]
   >("/product/randomproducts");
-  const { data } = useAuth<UserType>();
+  const { data } = useAuth();
 
   return (
     <>
@@ -81,7 +81,9 @@ const Home = () => {
           productList={randomProducts as ProductType[]}
         />
 
-        {data && !data?.verify && data.role != "admin" && <VerifyPopup />}
+        {data &&
+          !(data as UserType)?.verify &&
+          (data as UserType).role != "admin" && <VerifyPopup />}
       </section>
     </>
   );

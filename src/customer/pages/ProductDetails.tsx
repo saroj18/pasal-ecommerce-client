@@ -4,6 +4,7 @@ import {
   Heart,
   MessageCircle,
   StarIcon,
+  Video,
   // Video,
 } from "lucide-react";
 import ParaTypo from "../../components/common/ParaTypo";
@@ -15,7 +16,7 @@ import ProductDescription from "./account/component/ProductDescription";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 import { useMutation } from "../../hooks/useMutation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ChatPopup from "../popup/ChatPopup";
 import Shimmer from "../../components/common/Shimmer";
 import { useContextProvider } from "../../context/Context";
@@ -78,13 +79,13 @@ const ProductDetails = () => {
     }
   }, [response]);
 
-  // const openWindow = useCallback(async (id: string) => {
-  //   window.open(
-  //     `http://localhost:5173/call?user=${id}`,
-  //     "popupWindow",
-  //     "width=" + screen.width + ",height=" + screen.height + ",scrollbars=yes",
-  //   );
-  // }, []);
+  const openWindow = useCallback(async (id: string) => {
+    window.open(
+      `http://localhost:5173/call?user=${id}`,
+      "popupWindow",
+      "width=" + screen.width + ",height=" + screen.height + ",scrollbars=yes",
+    );
+  }, []);
 
   return (
     <>
@@ -242,12 +243,12 @@ const ProductDetails = () => {
             <Shimmer height="100px" shape="rectange" />
           ) : (
             <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
-              {/* <Button
+              <Button
                 onClick={() => openWindow(data?.addedBy?.owner?._id)}
                 className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4"
               >
                 Bargaining On Video Call <Video fill="white" color="white" />{" "}
-              </Button> */}
+              </Button>
               {user?.verify && user.role == "customer" && (
                 <Button
                   onClick={() => setOpen(true)}

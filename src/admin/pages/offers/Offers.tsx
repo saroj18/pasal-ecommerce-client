@@ -34,6 +34,12 @@ const Offers = () => {
           >
             + Create Coupen
           </ParaTypo>
+          <ParaTypo
+            onClick={() => setOpen(true)}
+            className="bg-blue-500 text-white p-2 rounded-md cursor-pointer text-md"
+          >
+            + Create Crousel
+          </ParaTypo>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">

@@ -89,7 +89,7 @@ const Cart = () => {
           0 Item on Cart
         </ParaTypo>
       )}
-      {data && (
+      {data && data.length < 1 ?<p className="text-3xl font-semibold text-center">0 Cart Item found</p>: (
         <Link className="sm:place-self-end place-self-start" to={"/checkout"}>
           <Button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-4  ">
             Go to Checkout

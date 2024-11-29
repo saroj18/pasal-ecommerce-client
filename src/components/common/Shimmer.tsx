@@ -15,7 +15,7 @@ const Shimmer = ({ shape, height, width, count = 1 }: ShimmerShapType) => {
             <div
               key={index}
               style={{ height, width }}
-              className="shimmer-effect h-48 w-full rounded-lg my-4 "
+              className="shimmer-effect h-48 w-full rounded-lg my-4 mx-2 "
             ></div>
           );
         })}

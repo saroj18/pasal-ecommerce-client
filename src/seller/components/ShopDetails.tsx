@@ -76,10 +76,10 @@ const ShopDetails = () => {
   useEffect(() => {
     console.log(response);
 
-    if (response && response?.data.verify) {
+    if (response && response?.data?.verify) {
       navigate("/dashboard");
     }
-    if (response && !response?.data.verify) {
+    if (response && !response?.data?.verify) {
       navigate("/account/verify");
     }
   }, [response]);

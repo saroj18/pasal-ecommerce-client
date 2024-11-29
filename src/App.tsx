@@ -61,16 +61,16 @@ import PublicRoute from "./components/private/PublicRoute";
 import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
 import ResetPassword from "./customer/pages/ResetPassword";
 import AddAdmin from "./admin/pages/addAdmin/AddAdmin";
-import VideoCall from "./customer/pages/account/page/VideoCall";
+// import VideoCall from "./customer/pages/account/page/VideoCall";
 import VideoChats from "./seller/components/VideoChats";
 // import VideoCall from "./customer/pages/account/page/VideoCall";
 
 const App = () => {
   const route = createBrowserRouter([
-    {
-      path: "/call",
-      element: <VideoCall />,
-    },
+    // {
+    //   path: "/call",
+    //   element: <VideoCall />,
+    // },
     {
       path: "/seller_video_call",
       element: <VideoChats />,

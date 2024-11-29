@@ -23,8 +23,8 @@ const AdminLogin = () => {
   } = useForm<LoginInput>({
     resolver: zodResolver(UserLoginZodSchema),
     defaultValues: {
-      email: "admin@gmail.com",
-      password: "password",
+      email: "adminyadav@gmail.com",
+      password: "P@ssw0rd",
     },
   });
   const { setData } = useAuth();

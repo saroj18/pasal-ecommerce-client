@@ -25,7 +25,16 @@ const passwordZodSchema = z
     {
       message: "Password must be between 8 and 15 characters long",
     },
-  );
+  )
+  .refine((val) => /[A-Z]/.test(val), {
+    message: "Password must contain at least one uppercase letter",
+  })
+  .refine((val) => /[a-z]/.test(val), {
+    message: "Password must contain at least one lowercase letter",
+  })
+  .refine((val) => /[0-9]/.test(val), {
+    message: "Password must contain at least one number",
+  });
 
 const roleZodeSchema = z
   .string({
@@ -41,7 +50,15 @@ const dobZodSchema = z
     invalid_type_error: "dob must be string",
   })
   .trim()
-  .min(1, { message: "dob must be 1 letter" });
+  .min(1, { message: "dob must be 1 letter" })
+  .refine((val) => {
+    const inputDate = new Date(val);
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return inputDate <= yesterday;
+  }, {
+    message: "dob cannot be after yesterday",
+  });
 
 const genderZodSchema = z
   .string({
@@ -57,7 +74,10 @@ const mobileZodSchema = z
     invalid_type_error: "mobile must be string",
   })
   .trim()
-  .min(1, { message: "mobile must be 1 letter" });
+  .min(1, { message: "mobile must be 1 letter" })
+  .regex(/^(98|97)\d{8}$/, {
+    message: "mobile must start with 98 or 97 and be 10 digits long",
+  });
 
 const fullnameZodSchema = z
   .string({
@@ -65,9 +85,9 @@ const fullnameZodSchema = z
     invalid_type_error: "name must be string",
   })
   .trim()
-  .regex(/^[a-zA-Z0-9 ]+$/, { message: "invalid name format" })
-  .min(4, { message: "name must be 4 character" })
-  .max(25, { message: "name must be less than 25 character" });
+  .regex(/^[a-zA-Z ]+$/, { message: "invalid name format" })
+  .min(4, { message: "name must be 4 characters" })
+  .max(25, { message: "name must be less than 25 characters" });
 
 export const UserSignUpZodSchema = z.object({
   fullname: fullnameZodSchema,

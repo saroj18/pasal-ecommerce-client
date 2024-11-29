@@ -23,8 +23,8 @@ const SellerLogin = () => {
   } = useForm<LoginInput>({
     resolver: zodResolver(UserLoginZodSchema),
     defaultValues: {
-      email: "saroj@gmail.com",
-      password: "password",
+      email: "sarojaryal2003@gmail.com",
+      password: "P@ssw0rd",
     },
   });
 
