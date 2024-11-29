@@ -1,10 +1,11 @@
 import SideBar from "./components/SideBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import { accountList, dashboardList } from "./constaints/sidebarList";
 import { Menu } from "lucide-react";
 import { useContextProvider } from "../../context/Context";
 import VideoCallPopup from "../components/VideoCallPopup";
 import { useEffect } from "react";
+import Loading from "@/components/Loading";
 
 const SellerLayout = () => {
   const {
@@ -16,6 +17,11 @@ const SellerLayout = () => {
     rtcConnection,
     setRtcOffer,
   } = useContextProvider();
+  const navigator = useNavigation();
+
+  if (navigator.state == "loading") {
+    return <Loading />;
+  }
 
   // useEffect(() => {
   //   if (rtcOffer?.sdp) {
