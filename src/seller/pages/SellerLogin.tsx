@@ -14,7 +14,7 @@ import { useAuth } from "@/context/AuthProvider";
 
 const SellerLogin = () => {
   const navigate = useNavigate();
-  const { mutate, response } = useMutation<any>();
+  const { mutate, response, loading } = useMutation<any>();
   const { setData } = useAuth();
   const {
     register,
@@ -101,8 +101,11 @@ const SellerLogin = () => {
                 </ParaTypo>
               )}
             </div>
-            <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
-              Login as a Seller
+            <Button
+              disabled={loading}
+              className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5"
+            >
+              {loading ? "Processing...." : " Login as a Seller"}
             </Button>
           </form>
           <ParaTypo

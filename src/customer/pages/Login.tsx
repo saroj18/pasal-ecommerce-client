@@ -17,7 +17,7 @@ export type LoginInput = z.infer<typeof UserLoginZodSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
-  const { mutate, data } = useMutation<any>();
+  const { mutate, data, loading } = useMutation<any>();
   const { setData } = useAuth();
   const [open, setOpen] = useState(false);
 
@@ -80,8 +80,11 @@ const Login = () => {
             {errors.password.message}
           </ParaTypo>
         )}
-        <Button className="w-full bg-red-500 text-white py-3 rounded-md mt-5">
-          Login
+        <Button
+          disabled={loading}
+          className="w-full bg-red-500 text-white py-3 rounded-md mt-5"
+        >
+          {loading ? "Processing..." : "Login"}
         </Button>
         <ParaTypo
           onClick={clickHandler}

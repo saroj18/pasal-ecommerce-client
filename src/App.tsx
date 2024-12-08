@@ -5,11 +5,9 @@ import "./index.css";
 import Login from "./customer/pages/Login";
 import Signup from "./customer/pages/Signup";
 import Wishlist from "./customer/pages/Wishlist";
-import Error from "./customer/pages/Error";
 import Cart from "./customer/pages/Cart";
 import ProductDetails from "./customer/pages/ProductDetails";
 import Account from "./customer/pages/account/Account";
-import AccountLayout from "./customer/pages/account/AccountLayout";
 import MyProfile from "./customer/pages/account/page/MyProfile";
 import AddressBook from "./customer/pages/account/component/AddressBook";
 import MyReview from "./customer/pages/account/page/MyReview";
@@ -17,7 +15,6 @@ import SellerSignUp from "./seller/pages/SellerSignUp";
 import SellerLogin from "./seller/pages/SellerLogin";
 import VerifyYourself from "./seller/pages/VerifyYourself";
 import "./CSS/style.css";
-import SellerLayout from "./seller/dashboard/SellerLayout";
 import Dashboard from "./seller/dashboard/pages/dashboard/Dashboard";
 import Product from "./seller/dashboard/pages/product/Product";
 import Inventory from "./seller/dashboard/pages/inventory/Inventory";
@@ -32,7 +29,6 @@ import AllProducts from "./customer/pages/AllProducts";
 import MyOrder from "./customer/pages/MyOrder";
 import Notification from "./seller/dashboard/pages/notification/Notification";
 import OrderCheckout from "./customer/pages/OrderCheckout";
-import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
 import Vendor from "./admin/pages/vendor/Vendor";
 import VendorDetails from "./admin/pages/vendor/VendorDetails";
@@ -61,9 +57,18 @@ import PublicRoute from "./components/private/PublicRoute";
 import KhaltiPaymentVerify from "./customer/pages/KhaltiPaymentVerify";
 import ResetPassword from "./customer/pages/ResetPassword";
 import AddAdmin from "./admin/pages/addAdmin/AddAdmin";
+import ErrorPage from "./components/ErrorPage";
+import { lazy, Suspense } from "react";
+import Loading from "./components/Loading";
 // import VideoCall from "./customer/pages/account/page/VideoCall";
 // import VideoChats from "./seller/components/VideoChats";
 // import VideoCall from "./customer/pages/account/page/VideoCall";
+
+const AccountLayout = lazy(
+  () => import("./customer/pages/account/AccountLayout"),
+);
+const SellerLayout = lazy(() => import("./seller/dashboard/SellerLayout"));
+const AdminLayout = lazy(() => import("./admin/AdminLayout"));
 
 const App = () => {
   const route = createBrowserRouter([
@@ -78,7 +83,7 @@ const App = () => {
     {
       path: "/",
       element: <Layout />,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -91,7 +96,6 @@ const App = () => {
               <Login />
             </PublicRoute>
           ),
-          
         },
         {
           path: "signup",
@@ -150,7 +154,9 @@ const App = () => {
           path: "account",
           element: (
             <PrivateRoute role={["customer", "seller"]}>
-              <AccountLayout />
+              <Suspense fallback={<Loading />}>
+                <AccountLayout />
+              </Suspense>
             </PrivateRoute>
           ),
           children: [
@@ -218,7 +224,9 @@ const App = () => {
       path: "/dashboard",
       element: (
         <PrivateRoute role={["seller"]}>
-          <SellerLayout />
+          <Suspense fallback={<Loading />}>
+            <SellerLayout />
+          </Suspense>
         </PrivateRoute>
       ),
       children: [
@@ -284,7 +292,9 @@ const App = () => {
       path: "/admin",
       element: (
         <PrivateRoute role={["admin"]}>
-          <AdminLayout />
+          <Suspense fallback={<Loading />}>
+            <AdminLayout />
+          </Suspense>
         </PrivateRoute>
       ),
       children: [

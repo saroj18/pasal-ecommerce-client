@@ -96,10 +96,10 @@ const AdminDashboard = () => {
                 return (
                   <MostSellingProductCard
                     key={ele._id}
-                    name={ele?.addedBy[0].shopName}
-                    id={ele?.addedBy[0]._id}
-                    result={`${ele.totalSale} Sales`}
-                    image={ele?.addedBy[0].shopImage}
+                    name={ele?.addedBy[0]?.shopName}
+                    id={ele?.addedBy[0]?._id}
+                    result={`${ele?.totalSale} Sales`}
+                    image={ele?.addedBy[0]?.shopImage}
                   />
                 );
               })

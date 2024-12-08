@@ -14,6 +14,8 @@ type SideBarProps = {
 const SideBar = ({ accountList, dashboardList }: SideBarProps) => {
   const [sideBar, setSideBars] = useState<boolean>(true);
   const { setSidebar, sidebar } = useContextProvider();
+  const [sidebarName, setSidebarName] = useState("Dashboard");
+
   return (
     <aside
       onClick={() => setSidebar(false)}
@@ -38,10 +40,11 @@ const SideBar = ({ accountList, dashboardList }: SideBarProps) => {
       {dashboardList.map((ele, index) => {
         return (
           <Link
+            onClick={() => setSidebarName(ele.name)}
             to={ele.url}
             title={ele.name}
             key={index}
-            className="flex items-center gap-x-3 cursor-pointer hover:bg-gray-50 p-3 rounded-md"
+            className={`flex items-center gap-x-3 cursor-pointer hover:bg-gray-50 p-3 rounded-md ${ele.name == sidebarName ? "text-green-500" : ""}`}
           >
             <span>{ele.icon}</span>
             <ParaTypo className={`text-[15px] ${!sideBar ? "md:hidden" : ""}`}>

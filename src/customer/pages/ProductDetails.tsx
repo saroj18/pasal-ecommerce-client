@@ -243,12 +243,12 @@ const ProductDetails = () => {
             <Shimmer height="100px" shape="rectange" />
           ) : (
             <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
-              <Button
+              {/* <Button
                 onClick={() => openWindow(data?.addedBy?.owner?._id)}
                 className="bg-green-500 text-white justify-center rounded-md px-3 py-2 flex gap-4"
               >
                 Bargaining On Video Call <Video fill="white" color="white" />{" "}
-              </Button>
+              </Button> */}
               {user?.verify && user.role == "customer" && (
                 <Button
                   onClick={() => setOpen(true)}

@@ -8,24 +8,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { useContextProvider } from "../../../../context/Context";
 import { MessageProps } from "../../../../customer/popup/ChatPopup";
 import { useAuth, UserType } from "../../../../context/AuthProvider";
-// import VideoCallPopup from "../../../components/VideoCallPopup";
 
 const Chat = () => {
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
   const [chat, setChat] = useState<MessageProps[]>([]);
-  const[error,setError]=useState('')
-  const[loading,setLoading]=useState(false)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { socketServer } = useContextProvider();
   const chatBodyRef = useRef<HTMLDivElement | null>(null);
-  // const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
   const [id, setId] = useState("");
   const [client, setClient] = useState("");
-  // const [open, setOpen] = useState(false);
+
   const [product, setProduct] = useState<{ sender: string; product: any }>({
     sender: "",
     product: "",
   });
+
   const { data } = useAuth();
 
   useEffect(() => {
@@ -34,19 +33,22 @@ const Chat = () => {
     }
     async function getUser() {
       try {
-        setLoading(true)
-        const resp = await fetch(import.meta.env.VITE_HOST + "/chats?id=" + id, {
-          method: "GET",
-          credentials: "include",
-        });
+        setLoading(true);
+        const resp = await fetch(
+          import.meta.env.VITE_HOST + "/chats?id=" + id,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
         const info = await resp.json();
         console.log(info);
         setChat([...info.data]);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
   }, [id]);
@@ -120,50 +122,17 @@ const Chat = () => {
       if (serverData.type == "typing") {
         setTyping(serverData.message);
       }
-      // if (rtcConnection) {
-      // if (serverData.type == "rtcOffer") {
-      //   await rtcConnection?.setRemoteDescription(
-      //     new RTCSessionDescription(serverData.sdp),
-      //   );
-      //   setRtcOffer(serverData);
-      // }
-      // if (serverData.type == "ice-candidate") {
-      //   console.log(serverData);
-      //   console.log(new RTCIceCandidate(serverData.candidate));
-      //   if (serverData.candidate) {
-      //     rtcConnection.addIceCandidate(
-      //       new RTCIceCandidate(serverData.candidate),
-      //     );
-      //   }
-      //   console.log("ice fireddddddddddd");
-      // }
-      if (serverData.type == "customer_and_vendor_chat") {
-        setChat((prv) => [...prv, serverData]);
-        if (product?.product?._id !== serverData.product._id) {
-          setProduct({
-            product: serverData.product,
-            sender: serverData.sender,
-          });
-        }
+
+      if (
+        serverData.type == "error" &&
+        serverData.errorName == "chatWithVendorAndCustomer"
+      ) {
+        setError(serverData.message);
       }
-      if (serverData.type == "error"&&serverData.errorName=='chatWithVendorAndCustomer') {
-        setError(serverData.message)
-      }
-      // }
     };
 
     if (socketServer) {
       socketServer.addEventListener("message", handleMessage);
-      // rtcConnection.ontrack = (event) => {
-      //   console.log("video receive");
-
-      //   event.streams[0].getTracks().forEach((track) => {
-      //     (remoteVideoRef.current!.srcObject as MediaStream).addTrack(track);
-      //   });
-      //   if (remoteVideoRef.current) {
-      //     remoteVideoRef.current.srcObject = event.streams[0];
-      //   }
-      // };
     }
 
     return () => {
@@ -182,47 +151,56 @@ const Chat = () => {
     }
   }, [typing, chat]);
 
-  // useEffect(() => {
-  //   setOpen(rtcOffer?.sdp ? true : false);
-  // }, [rtcOffer]);
   console.log(chat);
+
   return (
     <div className="flex gap-x-2">
-      {/* <VideoCallPopup open={open} setOpen={setOpen} /> */}
       <Sidebar setId={setId} setClient={setClient} />
       <div className="rounded-md p-1 w-full border-2">
-        {id&&<div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
-          <img className="w-[40px] h-[40px] rounded-full" src={jacket} alt="" />
-          <div>
-            <ParaTypo className="text-sm">{client}</ParaTypo>
-            {typing && (
-              <ParaTypo className="text-center text-sm text-white-500">
-                typing....
-              </ParaTypo>
-            )}
+        {id && (
+          <div className="flex my-3 items-center gap-x-3 bg-green-500 rounded-md p-1 text-white">
+            <img
+              className="w-[40px] h-[40px] rounded-full"
+              src={jacket}
+              alt=""
+            />
+            <div>
+              <ParaTypo className="text-sm">{client}</ParaTypo>
+              {typing && (
+                <ParaTypo className="text-center text-sm text-white-500">
+                  typing....
+                </ParaTypo>
+              )}
+            </div>
           </div>
-        </div>}
+        )}
 
         <div
           ref={chatBodyRef}
           className="flex flex-col w-full h-[550px] overflow-y-auto"
         >
-          {loading?<ParaTypo className="text-3xl text-red-500 text-center">Loading....</ParaTypo>:chat.map(
-            (msg, index) =>
-              (msg.receiver?._id == id ||
-                msg.sender?._id == id ||
-                msg.sender == id ||
-                msg.receiver == id) &&
-              msg.message && (
-                <MessageCard
-                  key={index}
-                  user={msg.sender?.fullname}
-                  message={msg.message}
-                  messageType={id}
-                  msg={msg}
-                  error={error}
-                />
-              ),
+          {loading ? (
+            <ParaTypo className="text-3xl text-red-500 text-center">
+              Loading....
+            </ParaTypo>
+          ) : (
+            chat.map(
+              (msg, index) =>
+                (msg.receiver?._id == id ||
+                  msg.sender?._id == id ||
+                  msg.sender == id ||
+                  msg.receiver == id) &&
+                msg.message && (
+                  <MessageCard
+                    key={index}
+                    user={msg.sender?.fullname}
+                    message={msg.message}
+                    messageType={id}
+                    msg={msg}
+                    error={error}
+                  />
+                ),
+            )
           )}
           {product.product && product.sender == id && (
             <>
@@ -249,19 +227,21 @@ const Chat = () => {
           )}
         </div>
 
-        {id&&<div className="flex items-center gap-x-1">
-          <Input
-            onKeyUp={clickhandler}
-            onBlur={blurHandler}
-            onFocus={focusHandler}
-            onChange={(e) => setText(e.target.value)}
-            value={text}
-            placeholder="enter your message"
-            type="text"
-            className="w-full rounded-none mt-3"
-          />
-          <Send onClick={clickhandler} className="cursor-pointer" />
-        </div>}
+        {id && (
+          <div className="flex items-center gap-x-1">
+            <Input
+              onKeyUp={clickhandler}
+              onBlur={blurHandler}
+              onFocus={focusHandler}
+              onChange={(e) => setText(e.target.value)}
+              value={text}
+              placeholder="enter your message"
+              type="text"
+              className="w-full rounded-none mt-3"
+            />
+            <Send onClick={clickhandler} className="cursor-pointer" />
+          </div>
+        )}
       </div>
     </div>
   );

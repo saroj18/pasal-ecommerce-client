@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { useContextProvider } from "../../../context/Context";
 import { useAuth, UserType } from "../../../context/AuthProvider";
+import { useState } from "react";
 
 const SideBar = () => {
   const { accountSideBar, setAccountSideBar } = useContextProvider();
   let { data: user } = useAuth();
   user = user as UserType | null;
+  const [sideBarName, setSideBarName] = useState("Manage My Account");
 
   return (
     <aside
@@ -19,24 +21,54 @@ const SideBar = () => {
         onClick={() => setAccountSideBar(false)}
         className="absolute left-[90%] cursor-pointer top-2 md:hidden"
       />
-      <Link to={"/account"}>
-        <HeadingTypo className="text-lg my-2 ">Manage My Account</HeadingTypo>
+      <Link to={"/account"} onClick={() => setSideBarName("Manage My Account")}>
+        <HeadingTypo
+          className={`text-lg my-2 ${sideBarName == "Manage My Account" ? "text-green-500" : ""}`}
+        >
+          Manage My Account
+        </HeadingTypo>
       </Link>
       <ul className="text-lg pl-4 flex flex-col gap-y-3">
-        <Link to={"/account/myprofile"}>
-          <li className="cursor-pointer">My Profile</li>
+        <Link
+          onClick={() => setSideBarName("My Profile")}
+          to={"/account/myprofile"}
+        >
+          <li
+            className={`cursor-pointer ${sideBarName == "My Profile" ? "text-green-500" : ""}`}
+          >
+            My Profile
+          </li>
         </Link>
-        <Link to={"/account/addressbook"}>
-          <li className="cursor-pointer">Address Book</li>
+        <Link
+          onClick={() => setSideBarName("Address Book")}
+          to={"/account/addressbook"}
+        >
+          <li
+            className={`cursor-pointer ${sideBarName == "Address Book" ? "text-green-500" : ""}`}
+          >
+            Address Book
+          </li>
         </Link>
         {!user?.verify && (
-          <Link to={"/account/verify"}>
-            <li className="cursor-pointer">Verify Yourself</li>
+          <Link
+            to={"/account/verify"}
+            onClick={() => setSideBarName("Verify Yourself")}
+          >
+            <li
+              className={`cursor-pointer ${sideBarName == "Verify Yourself" ? "text-green-500" : ""}`}
+            >
+              Verify Yourself
+            </li>
           </Link>
         )}
       </ul>
-      <Link to={"/account/myreview"}>
-        <HeadingTypo className="text-lg cursor-pointer my-2">
+      <Link
+        onClick={() => setSideBarName("My Reviews")}
+        to={"/account/myreview"}
+      >
+        <HeadingTypo
+          className={`text-lg cursor-pointer my-2 ${sideBarName == "My Reviews" ? "text-green-500" : ""}`}
+        >
           My Reviews
         </HeadingTypo>
       </Link>

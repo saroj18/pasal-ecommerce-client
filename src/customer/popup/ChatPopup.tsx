@@ -30,7 +30,7 @@ const ChatPopup = ({ userId, open, setOpen, product }: ChatPopupProps) => {
   const [chat, setChat] = useState<MessageProps[]>([]);
   const { socketServer } = useContextProvider();
   const messageBodyRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useQuery<ChatType[]>("/chats?id=" + userId);
+  const { data } = useQuery<ChatType[]>("/chats?id=" + userId, false);
   console.log("sora", userId);
 
   const clickhandler = (

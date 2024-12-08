@@ -34,14 +34,11 @@ const AddAdmin = () => {
   };
   return (
     <div className="h-screen bg-gray-100 px-3">
-      <div
-        className="flex items-center w-full justify-around md:max-w-[60%] mx-auto border-2 border-gray-300 shadow-md
-    "
-      >
-        <div className=" border-r-2 border-gray-200  w-full lg:max-w-[50%] p-2 ">
+      <div className="flex items-center w-full justify-around max-w-lg mx-auto">
+        <div className=" w-full p-2 ">
           <div className="my-10">
             <ParaTypo className="text-center text-4xl text-blue-500 my-2">
-              Admin Account
+              Add a new Admin
             </ParaTypo>
           </div>
           <form

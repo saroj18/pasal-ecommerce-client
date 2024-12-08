@@ -20,4 +20,5 @@ export type ShopType = {
   verified: boolean;
   citiNumber: string;
   createdAt?: string;
+  addedBy: string[];
 };

@@ -49,7 +49,7 @@ const Navbar = () => {
             <Link key={index} to={ele.path}>
               <li
                 className={
-                  ele.path == "/admin/dashboard" ? "text-green-500" : ""
+                  ele.path == "/adminlogin" && user ? "hidden" : "block"
                 }
               >
                 {ele.name}

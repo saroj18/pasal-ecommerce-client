@@ -3,7 +3,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import { accountList, dashboardList } from "./constaints/sidebarList";
 import { Menu } from "lucide-react";
 import { useContextProvider } from "../../context/Context";
-import VideoCallPopup from "../components/VideoCallPopup";
+// import VideoCallPopup from "../components/VideoCallPopup";
 import { useEffect } from "react";
 import Loading from "@/components/Loading";
 
@@ -54,7 +54,7 @@ const SellerLayout = () => {
           className="cursor-pointer md:hidden"
         />
         <Outlet />
-        <VideoCallPopup open={open} setOpen={setOpen} />
+        {/* <VideoCallPopup open={open} setOpen={setOpen} /> */}
       </div>
     </div>
   );

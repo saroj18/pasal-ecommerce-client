@@ -10,12 +10,11 @@ import { UserLoginZodSchema } from "../../customer/zodschema/user";
 import { LoginInput } from "../../customer/pages/Login";
 import { useMutation } from "../../hooks/useMutation";
 import { useEffect } from "react";
-import { useContextProvider } from "@/context/Context";
 import { useAuth } from "@/context/AuthProvider";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const { mutate, response } = useMutation();
+  const { mutate, response, loading } = useMutation();
   const {
     register,
     handleSubmit,
@@ -97,8 +96,11 @@ const AdminLogin = () => {
             {/* <ParaTypo className="text-right cursor-pointer">
               Forgot Password
             </ParaTypo> */}
-            <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
-              Login as a Admin
+            <Button
+              disabled={loading}
+              className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5"
+            >
+              {loading ? "processing..." : "Login as a Admin"}
             </Button>
           </form>
           {/* <ParaTypo

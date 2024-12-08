@@ -21,7 +21,7 @@ const Signup = () => {
   //   email:'',
   //   role:''
   // })
-  const { mutate } = useMutation();
+  const { mutate,loading } = useMutation();
 
   const {
     register,
@@ -103,11 +103,13 @@ const Signup = () => {
         )}
         <Button
           type="submit"
+          disabled={loading}
           className="w-full bg-red-500 text-white py-3 rounded-md mt-5"
         >
-          Create Account
+          {loading?'Processing...':'Create Account'}
         </Button>
         <ParaTypo
+          disabled={loading}
           onClick={clickHandler}
           className="w-full cursor-pointer select-none py-3 rounded-md mt-3 bg-blue-500 text-center text-white"
         >

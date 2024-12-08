@@ -5,6 +5,7 @@ import Option from "../../../components/common/Option";
 import Button from "../../../components/common/Button";
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import { useAuth, UserType } from "@/context/AuthProvider";
 
 type FilterBarProps = {
   time?: string;
@@ -16,6 +17,7 @@ const FilterBar = ({ setTime, className }: FilterBarProps) => {
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTime(e.target.value);
   };
+  const { data: user } = useAuth();
   return (
     <div
       className={twMerge(
@@ -25,7 +27,7 @@ const FilterBar = ({ setTime, className }: FilterBarProps) => {
     >
       <div>
         <HeadingTypo className="md:text-2xl text-lg w-full">
-          Welcome Back, Saroj
+          Welcome Back, {(user as UserType).fullname}
         </HeadingTypo>
         <ParaTypo className="sm:text-[15px] text-gray-400 text-xs">
           Here's what happening with your store today

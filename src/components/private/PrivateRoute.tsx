@@ -1,6 +1,5 @@
-import { Navigate, useNavigate } from "react-router-dom";
-import React, { useLayoutEffect } from "react";
-import dd from "../../../src/assets/loading.gif";
+import { Navigate } from "react-router-dom";
+import React from "react";
 import { useAuth, UserType } from "../../context/AuthProvider";
 import Loading from "../Loading";
 
@@ -16,7 +15,7 @@ const PrivateRoute = ({
   if (loading) {
     return <Loading />;
   }
- 
+
   return data ? <>{children}</> : <Navigate to="/login" replace={true} />;
 };
 

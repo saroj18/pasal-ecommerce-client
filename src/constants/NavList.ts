@@ -1,8 +1,8 @@
 export const navList = [
-  {
-    name: "Home",
-    path: "/",
-  },
+  // {
+  //   name: "Home",
+  //   path: "/",
+  // },
   {
     name: "Log In",
     path: "login",

@@ -71,38 +71,53 @@ const AccountDropdown = React.forwardRef<HTMLDivElement, dropdownProps>(
           className,
         )}
       >
-        <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+        <Link
+          to={"/account"}
+          className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer"
+        >
           <User opacity={0.6} />
-          <Link to={"/account"}>
+          <div>
             <ParaTypo className="">Manage My Account</ParaTypo>
-          </Link>
-        </div>
-        <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+          </div>
+        </Link>
+        <Link
+          to={"/myorder"}
+          className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer"
+        >
           <ShoppingBag opacity={0.6} />
-          <Link to={"/myorder"}>
+          <div>
             <ParaTypo className="">My Order</ParaTypo>
-          </Link>
-        </div>
-        <div className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+          </div>
+        </Link>
+        <Link
+          to={"/account/myreview"}
+          className="flex items-center gap-4 p-2 hover:bg-neutral-100 cursor-pointer"
+        >
           <StarIcon opacity={0.6} />
-          <Link to={"/account/myreview"}>
+          <div>
             <ParaTypo className="">My Reviews</ParaTypo>
-          </Link>
-        </div>
-        <div className="flex items-center gap-4 p-2 lg:hidden hover:bg-neutral-100 cursor-pointer">
+          </div>
+        </Link>
+        <Link
+          to={"/wishlist"}
+          className="flex items-center gap-4 p-2 lg:hidden hover:bg-neutral-100 cursor-pointer"
+        >
           <Heart opacity={0.6} />
-          <Link to={"/wishlist"}>
+          <div>
             <ParaTypo className="">My WishList</ParaTypo>
-          </Link>
+          </div>
           <ParaTypo className="text-red-500">{wishListCount}</ParaTypo>
-        </div>
-        <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"/cart"}
+          className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer"
+        >
           <ShoppingCart opacity={0.6} />
-          <Link to={"/cart"}>
+          <div>
             <ParaTypo className="">My Cart</ParaTypo>
-          </Link>
+          </div>
           <ParaTypo className="text-red-500">{cartCount}</ParaTypo>
-        </div>
+        </Link>
         {!data && (
           <div className="flex items-center lg:hidden gap-4 p-2 hover:bg-neutral-100 cursor-pointer">
             <LogIn opacity={0.6} />

@@ -12,7 +12,7 @@ import { FormInput } from "../../customer/pages/Signup";
 
 const SellerSignUp = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation();
+  const { mutate, loading } = useMutation();
   const {
     register,
     handleSubmit,
@@ -114,8 +114,11 @@ const SellerSignUp = () => {
             <ParaTypo className="text-right cursor-pointer">
               Forgot Password
             </ParaTypo>
-            <Button className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5">
-              SignUp as a Seller
+            <Button
+              disabled={loading}
+              className="w-full text-white bg-purple-500 py-3 rounded-md text-xl my-5"
+            >
+              {loading ? "Processing..." : "SignUp as a Seller"}
             </Button>
           </form>
           <ParaTypo

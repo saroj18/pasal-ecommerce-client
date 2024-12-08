@@ -18,7 +18,7 @@ const MostSellingProductCard = ({ name, id, result, image }: Card) => {
       />
       <div>
         <ParaTypo title={name} className="text-sm">
-          {name.slice(0, 15)}...
+          {name?.slice(0, 15)}...
         </ParaTypo>
         <ParaTypo title={id} className="text-gray-400 text-xs">
           {id?.slice(0, 15)}
