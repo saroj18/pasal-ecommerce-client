@@ -1,6 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { useQuery } from "../hooks/useQuery";
 import { AddressForm } from "../customer/pages/account/page/AddAddressForm";
+import InitialLoadingPage from "@/components/InitialLoading";
+import ServerFailerError from "@/components/ServerFailerError";
 
 export interface UserType {
   _id: string;
@@ -25,13 +27,16 @@ interface ContextType {
 const Provider = createContext<ContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data, loading, refetch, setData } = useQuery<UserType>(
+  const { data, loading, refetch, setData, error } = useQuery<UserType>(
     "/user",
     false,
   );
+  console.log(error);
   return (
     <Provider.Provider value={{ data, loading, refetch, setData }}>
       {children}
+      {loading && <InitialLoadingPage />}
+      {error && <ServerFailerError />}
     </Provider.Provider>
   );
 };
