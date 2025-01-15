@@ -1,3 +1,4 @@
+import { NoInternetConnection } from "@/components/NoInternetConnection";
 import React, { createContext, useContext, useEffect, useState } from "react";
 type RtcOfferType = {
   sdp: RTCSessionDescriptionInit;
@@ -50,6 +51,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [localStream, setLocalStream] = useState<MediaStream>(
     new MediaStream(),
   );
+  const[isOnline,setIsOnline]=useState(navigator.onLine)
 
   useEffect(() => {
     if (socketServer) return;
@@ -59,22 +61,36 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     });
     setSocketServer(socket);
 
-    return () => socket.close();
+    const offlineHandler = () => setIsOnline(false)
+    const onlineHandler = () => setIsOnline(true)
+
+    window.addEventListener("offline", offlineHandler);
+    window.addEventListener("online", onlineHandler);
+
+    return () => {
+      socket.close();
+      window.removeEventListener("offline", offlineHandler);
+      window.removeEventListener("online", onlineHandler);
+    };
   }, []);
 
-  useEffect(() => {
-    const peer = new RTCPeerConnection({
-      iceServers: [
-        {
-          urls: [
-            "stun:stun.l.google.com:19302",
-            "stun:global.stun.twilio.com:3478",
-          ],
-        },
-      ],
-    });
-    setRtcConnection(peer);
-  }, []);
+  if (!isOnline) {
+    return <NoInternetConnection/>
+  }
+
+  // useEffect(() => {
+  //   const peer = new RTCPeerConnection({
+  //     iceServers: [
+  //       {
+  //         urls: [
+  //           "stun:stun.l.google.com:19302",
+  //           "stun:global.stun.twilio.com:3478",
+  //         ],
+  //       },
+  //     ],
+  //   });
+  //   setRtcConnection(peer);
+  // }, []);
 
   return (
     <ContextProvider.Provider

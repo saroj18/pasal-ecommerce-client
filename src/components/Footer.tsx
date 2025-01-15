@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const Footer = () => {
+const Footer:React.FC = () => {
   const navigate = useNavigate();
   return (
     <section className=" bg-black  text-white mt-7 max-h-fit ">

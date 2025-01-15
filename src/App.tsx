@@ -60,6 +60,7 @@ import AddAdmin from "./admin/pages/addAdmin/AddAdmin";
 import ErrorPage from "./components/ErrorPage";
 import { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
+import { NoInternetConnection } from "./components/NoInternetConnection";
 // import VideoCall from "./customer/pages/account/page/VideoCall";
 // import VideoChats from "./seller/components/VideoChats";
 // import VideoCall from "./customer/pages/account/page/VideoCall";
@@ -80,6 +81,10 @@ const App = () => {
     //   path: "/seller_video_call",
     //   element: <VideoChats />,
     // },
+    {
+      path: "/nointernet",
+      element: <NoInternetConnection />,
+    },
     {
       path: "/",
       element: <Layout />,

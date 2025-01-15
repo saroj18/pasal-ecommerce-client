@@ -16,13 +16,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node"]
   },
-  "include": ["src"],
+  "include": ["src","jest.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
